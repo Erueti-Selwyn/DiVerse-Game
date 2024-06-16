@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 var SPEED = 325
-var normal_speed = 300
+var normal_speed = 325
 var crouch_speed = 200
 
 var dash_speed = 5000
