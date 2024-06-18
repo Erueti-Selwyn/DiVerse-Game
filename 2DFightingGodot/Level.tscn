@@ -28,7 +28,7 @@ sources/0 = SubResource("TileSetAtlasSource_n37u8")
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
-scale = Vector2(4.23949, 4.24304)
+scale = Vector2(9.30225, 9.31003)
 tile_set = SubResource("TileSet_71nb4")
 format = 2
 layer_0/name = "Background"
