@@ -1,15 +1,16 @@
 extends CharacterBody2D
 
 
-var SPEED = 325
-var normal_speed = 325
-var crouch_speed = 200
+var speed = 325
+var normalSpeed = 325
+var crouchSpeed = 200
 
-var dash_speed = 5000
-var dash_duration = 0.2
-var dash_cooldown = 2
-const JUMP_VELOCITY = -600.0
-var extra_jump = true
+var dashDirection = Vector2(1, 0)
+var canDash = false
+var dashing = false
+
+const jumpVelocity = -600.0
+var extraJump = true
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -20,37 +21,50 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta * 1.5
 	else:
-		extra_jump = true
+		extraJump = true
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		velocity.y = jumpVelocity
 	else: 
-		if Input.is_action_just_pressed("jump") and extra_jump:
-			velocity.y = JUMP_VELOCITY
-			extra_jump = false
+		if Input.is_action_just_pressed("jump") and extraJump:
+			velocity.y = jumpVelocity
+			extraJump = false
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("move_left", "move_right")
-	if direction:
-		if Input.is_action_just_pressed("dash"):
-			velocity.x = direction * dash_speed
-		else:
-			velocity.x = direction * SPEED
+	if direction and !dashing:
+		velocity.x = direction * speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, speed)
 
 	move_and_slide()
+	crouch()
+	dash()
 	
+func crouch():
 	if Input.is_action_pressed("move_down"):
 		scale.y = 1.25
 		if is_on_floor():
-			SPEED = crouch_speed
+			speed = crouchSpeed
 		else:
-			SPEED = normal_speed
+			speed = normalSpeed
 	else:
 		scale.y = 2
-		SPEED = normal_speed
-
+		speed = normalSpeed
 		
+func dash():
+	if is_on_floor():
+		canDash = true
+	if Input.is_action_pressed("move_left"):
+		dashDirection = Vector2(-1, 0)
+	if Input.is_action_pressed("move_right"):
+		dashDirection = Vector2(1, 0)
+		
+	if Input.is_action_just_pressed("dash") and canDash:
+		velocity = dashDirection.normalized() * 2000
+		canDash = false
+		dashing = true
+		await get_tree().create_timer(0.2).timeout
+		dashing = false
