@@ -8,6 +8,7 @@ var crouchSpeed = 200
 var dashDirection = Vector2(1, 0)
 var canDash = false
 var dashing = false
+var dashSpeed = 1500
 
 const jumpVelocity = -600.0
 var extraJump = true
@@ -34,10 +35,14 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("move_left", "move_right")
-	if direction and !dashing:
-		velocity.x = direction * speed
+	
+	if dashing:
+		velocity.x = direction * dashSpeed
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
+		if direction:
+			velocity.x = direction * speed
+		else:
+			velocity.x = move_toward(velocity.x, 0, speed)
 
 	move_and_slide()
 	crouch()
@@ -57,14 +62,9 @@ func crouch():
 func dash():
 	if is_on_floor():
 		canDash = true
-	if Input.is_action_pressed("move_left"):
-		dashDirection = Vector2(-1, 0)
-	if Input.is_action_pressed("move_right"):
-		dashDirection = Vector2(1, 0)
 		
-	if Input.is_action_just_pressed("dash") and canDash:
-		velocity = dashDirection.normalized() * 2000
+	if Input.is_action_just_pressed("dash") and canDash and !is_on_floor():
 		canDash = false
 		dashing = true
-		await get_tree().create_timer(0.2).timeout
+		await get_tree().create_timer(0.1).timeout
 		dashing = false
