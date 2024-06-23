@@ -5,6 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2qnwe"]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+position = Vector2(-3, -243)
 scale = Vector2(1, 2)
 script = ExtResource("1_c8uyu")
 
@@ -12,12 +13,9 @@ script = ExtResource("1_c8uyu")
 offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 20)
 scale = Vector2(1.99216, 1.99216)
 shape = SubResource("RectangleShape2D_2qnwe")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, 20)
-position_smoothing_enabled = true
