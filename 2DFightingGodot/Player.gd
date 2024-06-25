@@ -1,18 +1,19 @@
 extends CharacterBody2D
 
 
-var speed = 325
-var normalSpeed = 325
-var crouchSpeed = 200
+var speed = 400
+var normalSpeed = 450
+var crouchSpeed = 300
 
 var dashDirection = Vector2(0, 0)
-var dashAmount = 2
+var dashAmount = 1
+var currentDashAmount = 0
 var canDash = true
 var dashing = false
-var dashSpeed = 1250
+var dashSpeed = 1700
 
 const jumpVelocity = -600.0
-var extraJump = true
+var extraJumpAmount = 2
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -23,20 +24,21 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta * 1.5
 	else:
-		extraJump = true
+		extraJumpAmount = 2
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jumpVelocity
 	else: 
-		if Input.is_action_just_pressed("jump") and extraJump:
+		if Input.is_action_just_pressed("jump") and extraJumpAmount > 0:
 			velocity.y = jumpVelocity
-			extraJump = false
+			extraJumpAmount -= 1
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("move_left", "move_right")
-	dashDirection = direction
+	if Input.is_action_just_pressed("dash") and !dashing:
+		dashDirection = direction
 	if dashing:
 		velocity.x = dashDirection * dashSpeed
 	else:
@@ -64,14 +66,16 @@ func crouch():
 			speed = normalSpeed
 		
 func dash():
+	if dashing:
+		velocity.y = 0
 	if is_on_floor():
-		dashAmount = 2
+		currentDashAmount = dashAmount
 		
-	if Input.is_action_just_pressed("dash") and dashAmount > 0 and !dashing and canDash:
+	if Input.is_action_just_pressed("dash") and currentDashAmount > 0 and !dashing and canDash:
 		dashing = true
 		canDash = false
-		dashAmount -= 1
+		currentDashAmount -= 1
 		await get_tree().create_timer(0.1).timeout
 		dashing = false
-		await get_tree().create_timer(0.2).timeout
+		await get_tree().create_timer(0.5).timeout
 		canDash = true
