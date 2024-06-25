@@ -79,3 +79,11 @@ func dash():
 		dashing = false
 		await get_tree().create_timer(0.5).timeout
 		canDash = true
+
+
+
+
+func _on_area_2d_body_entered(body):
+	print("Hit Boundary")
+	if body.is_in_group("boundary"):
+		print("Hit The Boundary")

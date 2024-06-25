@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfdn4clkj55a4"]
+[gd_scene load_steps=7 format=3 uid="uid://dfdn4clkj55a4"]
 
 [ext_resource type="Texture2D" uid="uid://4smgw32hn4oe" path="res://assets/tilemaps/ScaryDungeonTileMap.png" id="1_cxe34"]
 [ext_resource type="PackedScene" uid="uid://c1kqk2uiq3k8q" path="res://Player.tscn" id="2_ky2sp"]
@@ -27,6 +27,8 @@ texture = ExtResource("1_cxe34")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_n37u8")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hkdtv"]
+
 [node name="Node2D" type="Node2D"]
 position = Vector2(9, -45)
 
@@ -47,9 +49,18 @@ scale = Vector2(1, -2)
 zoom = Vector2(0.4, 0.4)
 
 [node name="TextureRect" type="TextureRect" parent="."]
-z_index = -10
+z_index = -1
 offset_left = -1452.0
 offset_top = -804.0
 offset_right = 1440.0
 offset_bottom = 808.0
 texture = ExtResource("3_0u2hg")
+
+[node name="Area2DBoundary" type="Area2D" parent="." groups=["boundary"]]
+position = Vector2(0, 950)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DBoundary" groups=["boundary"]]
+scale = Vector2(200, 5)
+shape = SubResource("RectangleShape2D_hkdtv")
+
+[connection signal="body_entered" from="Area2DBoundary" to="CharacterBody2D" method="_on_area_2d_body_entered"]
