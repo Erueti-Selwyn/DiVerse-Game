@@ -6,9 +6,10 @@ var normalSpeed = 325
 var crouchSpeed = 200
 
 var dashDirection = Vector2(0, 0)
-var canDash = false
+var dashAmount = 2
+var canDash = true
 var dashing = false
-var dashSpeed = 1500
+var dashSpeed = 1250
 
 const jumpVelocity = -600.0
 var extraJump = true
@@ -52,19 +53,25 @@ func crouch():
 	if Input.is_action_pressed("move_down"):
 		scale.y = -1.5
 		if is_on_floor():
-			speed = crouchSpeed
+			if !dashing:
+				speed = crouchSpeed
 		else:
-			speed = normalSpeed
+			if !dashing:
+				speed = normalSpeed
 	else:
-		scale.y = -2
-		speed = normalSpeed
+		if !dashing:
+			scale.y = -2
+			speed = normalSpeed
 		
 func dash():
 	if is_on_floor():
-		canDash = true
+		dashAmount = 2
 		
-	if Input.is_action_just_pressed("dash") and canDash and !is_on_floor():
-		canDash = false
+	if Input.is_action_just_pressed("dash") and dashAmount > 0 and !dashing and canDash:
 		dashing = true
+		canDash = false
+		dashAmount -= 1
 		await get_tree().create_timer(0.1).timeout
 		dashing = false
+		await get_tree().create_timer(0.2).timeout
+		canDash = true
