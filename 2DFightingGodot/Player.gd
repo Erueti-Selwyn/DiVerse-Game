@@ -4,6 +4,7 @@ extends CharacterBody2D
 var speed = 400
 var normalSpeed = 450
 var crouchSpeed = 300
+var crouching = false
 
 var dashDirection = Vector2(0, 0)
 var dashAmount = 1
@@ -22,7 +23,12 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
-		velocity.y += gravity * delta * 1.5
+		if crouching:
+			velocity.y += 3 * gravity * delta * 1.5
+			if velocity.y > 900:
+				velocity.y = 900
+		else:
+			velocity.y += gravity * delta * 1.5
 	else:
 		extraJumpAmount = 2
 
@@ -54,6 +60,7 @@ func _physics_process(delta):
 func crouch():
 	if Input.is_action_pressed("move_down"):
 		scale.y = -1.5
+		crouching = true
 		if is_on_floor():
 			if !dashing:
 				speed = crouchSpeed
@@ -61,6 +68,7 @@ func crouch():
 			if !dashing:
 				speed = normalSpeed
 	else:
+		crouching = false
 		if !dashing:
 			scale.y = -2
 			speed = normalSpeed
