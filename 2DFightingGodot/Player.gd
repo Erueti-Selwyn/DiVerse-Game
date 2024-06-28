@@ -24,7 +24,7 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		if crouching:
-			velocity.y += 3 * gravity * delta * 1.5
+			velocity.y += 3 * gravity * delta * 1.75
 			if velocity.y > 900:
 				velocity.y = 900
 		else:
@@ -36,7 +36,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jumpVelocity
 	else: 
-		if Input.is_action_just_pressed("jump") and extraJumpAmount > 0:
+		if Input.is_action_just_pressed("jump") and extraJumpAmount > 0 and !crouching:
 			velocity.y = jumpVelocity
 			extraJumpAmount -= 1
 
