@@ -56,11 +56,11 @@ offset_right = 1440.0
 offset_bottom = 808.0
 texture = ExtResource("3_0u2hg")
 
-[node name="Area2DBoundary" type="Area2D" parent="." groups=["boundary"]]
+[node name="Area2DBoundary" type="Area2D" parent="." groups=["boundaries"]]
 position = Vector2(0, 950)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DBoundary" groups=["boundary"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DBoundary" groups=["boundaries"]]
 scale = Vector2(200, 5)
 shape = SubResource("RectangleShape2D_hkdtv")
 
-[connection signal="body_entered" from="Area2DBoundary" to="CharacterBody2D" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Area2DBoundary" to="CharacterBody2D" method="_on_area_2d_boundary_body_entered"]
