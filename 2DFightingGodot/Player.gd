@@ -55,6 +55,8 @@ func _physics_process(delta):
 			
 	if Input.is_action_pressed("move_down"):
 		crouching = true
+		if is_on_floor():
+			position.y += 1
 	else:
 		crouching = false
 
