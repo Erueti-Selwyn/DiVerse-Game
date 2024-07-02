@@ -13,7 +13,7 @@ var canDash = true
 var dashing = false
 var dashSpeed = 1700
 
-const jumpVelocity = -600.0
+const jumpVelocity = -900.0
 var extraJumpAmount = 2
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
