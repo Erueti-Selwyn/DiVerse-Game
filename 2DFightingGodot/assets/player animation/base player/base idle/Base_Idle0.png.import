@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://beegsce4o0xne"
-path="res://.godot/imported/BaseModelPrototype-Idle0.png-6e7cf2b01b73bb19e20e433fd3c62fb9.ctex"
+uid="uid://dlxl582qanxn4"
+path="res://.godot/imported/Base_Idle0.png-9fe7641101e31c02f4369719ad945b0d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player animation/base player/base idle/BaseModelPrototype-Idle0.png"
-dest_files=["res://.godot/imported/BaseModelPrototype-Idle0.png-6e7cf2b01b73bb19e20e433fd3c62fb9.ctex"]
+source_file="res://assets/player animation/base player/base idle/Base_Idle0.png"
+dest_files=["res://.godot/imported/Base_Idle0.png-9fe7641101e31c02f4369719ad945b0d.ctex"]
 
 [params]
 
