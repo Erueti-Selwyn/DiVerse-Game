@@ -43,7 +43,6 @@ layer_1/tile_data = PackedInt32Array(524290, 65536, 0, 524291, 65536, 0, 524292,
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_ky2sp")]
 position = Vector2(161, 59)
-scale = Vector2(1, -2)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.4, 0.4)
