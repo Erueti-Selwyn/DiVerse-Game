@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://4smgw32hn4oe" path="res://assets/tilemaps/ScaryDungeonTileMap.png" id="1_cxe34"]
 [ext_resource type="PackedScene" uid="uid://c1kqk2uiq3k8q" path="res://Player.tscn" id="2_ky2sp"]
-[ext_resource type="Texture2D" uid="uid://8myoar2xeyhc" path="res://assets/castle bckgrnd.jpg" id="3_0u2hg"]
+[ext_resource type="Texture2D" uid="uid://d0kgbntfdy0gb" path="res://assets/image (2).png" id="3_0ou21"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n37u8"]
 texture = ExtResource("1_cxe34")
@@ -53,7 +53,7 @@ offset_left = -1452.0
 offset_top = -804.0
 offset_right = 1440.0
 offset_bottom = 808.0
-texture = ExtResource("3_0u2hg")
+texture = ExtResource("3_0ou21")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["boundary"]]
 position = Vector2(0, 950)
