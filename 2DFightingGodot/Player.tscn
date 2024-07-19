@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://c1kqk2uiq3k8q"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_c8uyu"]
-[ext_resource type="Texture2D" uid="uid://beegsce4o0xne" path="res://assets/player animation/base player/base idle/BaseModelPrototype-Idle0.png" id="2_rj4wl"]
-[ext_resource type="Texture2D" uid="uid://v6stpaar2j3l" path="res://assets/player animation/base player/base idle/BaseModelPrototype-Idle1.png" id="3_ii5vy"]
+[ext_resource type="Texture2D" uid="uid://dlxl582qanxn4" path="res://assets/player animation/base player/base idle/Base_Idle0.png" id="2_ehy6s"]
+[ext_resource type="Texture2D" uid="uid://fjnx6v2dhjld" path="res://assets/player animation/base player/base idle/Base_Idle1.png" id="3_2namn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iea5w"]
 size = Vector2(40, 40)
@@ -11,13 +11,13 @@ size = Vector2(40, 40)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_rj4wl")
+"texture": ExtResource("2_ehy6s")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_ii5vy")
+"texture": ExtResource("3_2namn")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idlebase_ani",
 "speed": 5.0
 }]
 
@@ -39,6 +39,7 @@ shape = SubResource("RectangleShape2D_iea5w")
 position = Vector2(2.25001, 30.25)
 scale = Vector2(3.10938, 3.10938)
 sprite_frames = SubResource("SpriteFrames_fb2fc")
+animation = &"idlebase_ani"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 39.5)
