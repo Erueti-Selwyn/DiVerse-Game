@@ -1,5 +1,18 @@
 extends CharacterBody2D
 
+const MAX_SPEED = 400
+const ACCELERATION = 30
+const JUMP_HIGHT = 600
+const GRAVITY = 30
+const UP = Vector2(0, -1)
+const WALL_SLIDE_ACCELERATION = 10
+const MAX_WALL_SLIDE_SPEED = 120
+
+var jump_was_pressed = false
+var can_jump = false
+var isGravity = true
+var dub_jumps = 0
+var max_num_dub_jumps = 3 
 
 var speed = 400
 var normalSpeed = 450
@@ -13,32 +26,17 @@ var canDash = true
 var dashing = false
 var dashSpeed = 1700
 
-const jumpVelocity = -900.0
-var extraJumpAmount = 2
+
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+func _ready():
+	pass
 
 func _physics_process(delta):
 	# Add the gravity.
-	if not is_on_floor():
-		if crouching:
-			velocity.y += 3 * gravity * delta * 1.75
-			if velocity.y > 900:
-				velocity.y = 900
-		else:
-			velocity.y += gravity * delta * 1.5
-	else:
-		extraJumpAmount = 2
-
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jumpVelocity
-	else: 
-		if Input.is_action_just_pressed("jump") and extraJumpAmount > 0 and !crouching:
-			velocity.y = jumpVelocity
-			extraJumpAmount -= 1
+	
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -59,7 +57,36 @@ func _physics_process(delta):
 			position.y += 1
 	else:
 		crouching = false
-
+	if is_on_floor(): 
+		dub_jumps = max_num_dub_jumps
+		can_jump = true
+		velocity.y = 0
+	if Input.is_action_just_pressed("jump"):
+		if can_jump == true && dub_jumps > 0: 
+			dub_jumps -= 1 
+			velocity.y = -JUMP_HIGHT
+			if is_on_wall() && Input.is_action_pressed("move_right"):
+				velocity.x = -MAX_SPEED 
+			elif is_on_wall() && Input.is_action_pressed("move_left"):
+				velocity.x = MAX_SPEED
+	
+	
+	
+	
+	
+	if is_on_wall() && (Input.is_action_pressed("move_right") || Input.is_action_pressed("move_left")):
+		can_jump = true
+		dub_jumps = max_num_dub_jumps
+		if velocity.y >= 0: 
+			velocity.y = min(velocity.y + WALL_SLIDE_ACCELERATION, MAX_WALL_SLIDE_SPEED)
+		
+		else:
+			velocity.y += GRAVITY
+	elif !is_on_floor():
+		velocity.y += GRAVITY
+	
+	
+		
 	move_and_slide()
 	dash()
 		
