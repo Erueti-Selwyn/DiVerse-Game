@@ -81,7 +81,7 @@ func dash():
 		
 
 
-func _on_area_2d_boundary_body_entered(body):
-	position = Vector2(0, 0)
-	if body.is_in_group("boundaries"):
+func _on_area_2d_body_entered(body):
+	if body.is_in_group("boundary"):
+		position = Vector2(0, 0)
 		print("Hit Boundary")

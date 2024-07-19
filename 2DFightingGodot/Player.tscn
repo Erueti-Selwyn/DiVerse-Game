@@ -1,21 +1,47 @@
-[gd_scene load_steps=3 format=3 uid="uid://c1kqk2uiq3k8q"]
+[gd_scene load_steps=7 format=3 uid="uid://c1kqk2uiq3k8q"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_c8uyu"]
+[ext_resource type="Texture2D" uid="uid://beegsce4o0xne" path="res://assets/player animation/base player/base idle/BaseModelPrototype-Idle0.png" id="2_rj4wl"]
+[ext_resource type="Texture2D" uid="uid://v6stpaar2j3l" path="res://assets/player animation/base player/base idle/BaseModelPrototype-Idle1.png" id="3_ii5vy"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2qnwe"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iea5w"]
+size = Vector2(40, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fb2fc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rj4wl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ii5vy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ptv32"]
+size = Vector2(40, 79)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
-position = Vector2(-3, -243)
-scale = Vector2(1, 2)
 script = ExtResource("1_c8uyu")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 40.0
-metadata/_edit_use_anchors_ = true
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 20)
+scale = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_iea5w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2.25001, 30.25)
+scale = Vector2(3.10938, 3.10938)
+sprite_frames = SubResource("SpriteFrames_fb2fc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 20)
-scale = Vector2(1.99216, 1.99216)
-shape = SubResource("RectangleShape2D_2qnwe")
+position = Vector2(0, 39.5)
+shape = SubResource("RectangleShape2D_ptv32")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
