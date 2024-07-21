@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+const bulletPath = preload("res://Gun/bullet.tscn")
 const MAX_SPEED = 400
 const ACCELERATION = 30
 const JUMP_HIGHT = 600
@@ -32,6 +33,13 @@ var dashSpeed = 1700
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var _animated_sprite = $AnimatedSprite2D
+
+func shoot ():
+	var bullet = bulletPath.instance() 
+	
+	get_parent().odd_child(bullet)
+	bullet.position = $Position2D.global_position
+
 
 func _ready():
 	pass

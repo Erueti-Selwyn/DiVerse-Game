@@ -45,4 +45,7 @@ animation = &"idlebase_ani"
 position = Vector2(0, 39.5)
 shape = SubResource("RectangleShape2D_ptv32")
 
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(45, 32)
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
