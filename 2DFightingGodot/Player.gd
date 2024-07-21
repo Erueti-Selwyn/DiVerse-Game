@@ -7,9 +7,9 @@ const JUMP_HIGHT = 600
 const WALL_SLIDE_ACCELERATION = 10
 const MAX_WALL_SLIDE_SPEED = 120
 
-const GRAVITY = 30
-const CROUCH_GRAVITY = 65
-var CURRENT_GRAVITY = 30
+const GRAVITY = 1080
+const CROUCH_GRAVITY = 2340
+var CURRENT_GRAVITY = 1080
 
 var jump_was_pressed = false
 var can_jump = false
@@ -37,7 +37,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready():
 	pass
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	# Animation
 	if velocity == Vector2(0, 0):
 		_animated_sprite.play("idlebase_ani")
@@ -108,10 +108,10 @@ func _physics_process(_delta):
 		if velocity.y >= 0: 
 			velocity.y = min(velocity.y + WALL_SLIDE_ACCELERATION, MAX_WALL_SLIDE_SPEED)
 		else:
-			velocity.y += CURRENT_GRAVITY
+			velocity.y += CURRENT_GRAVITY * delta
 	elif !is_on_floor():
 		# Adds Gravity
-		velocity.y += CURRENT_GRAVITY
+		velocity.y += CURRENT_GRAVITY * delta
 
 	move_and_slide()
 	dash()
