@@ -27,7 +27,7 @@ texture = ExtResource("1_cxe34")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_n37u8")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bkfd3"]
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_eamtb"]
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(9, -45)
@@ -67,4 +67,4 @@ position = Vector2(0, 950)
 scale = Vector2(200, 10)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" groups=["boundary"]]
-shape = SubResource("RectangleShape2D_bkfd3")
+shape = SubResource("WorldBoundaryShape2D_eamtb")

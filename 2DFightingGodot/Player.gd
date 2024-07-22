@@ -19,7 +19,8 @@ var max_num_dub_jumps = 3
 
 var crouching = false
 
-var dashDirection = Vector2(0, 0)
+var PLAYER_DIRECTION = "right"
+var DASH_DIRECTION = "right"
 var dashAmount = 1
 var currentDashAmount = 0
 var canDash = true
@@ -52,17 +53,15 @@ func _physics_process(delta):
 		
 	# Player Direction
 	var direction = Input.get_axis("move_left", "move_right")
+	if Input.is_action_pressed("move_left") && !Input.is_action_pressed("move_right"):
+		PLAYER_DIRECTION = "left"
+	elif Input.is_action_pressed("move_right") && !Input.is_action_pressed("move_left"):
+		PLAYER_DIRECTION = "right"
 	
-	# Dashing and Movement
-	if Input.is_action_just_pressed("dash") and !dashing and !is_punching:
-		dashDirection = direction
-	if dashing:
-		velocity.x = dashDirection * dashSpeed
+	if direction and !dashing:
+		velocity.x = velocity.x + (direction * ACCELERATION)
 	else:
-		if direction and !dashing:
-			velocity.x = velocity.x + (direction * ACCELERATION)
-		else:
-			velocity.x = move_toward(velocity.x, 0, ACCELERATION)
+		velocity.x = move_toward(velocity.x, 0, ACCELERATION)
 	
 	# Capping Velocity
 	if velocity.x > MAX_SPEED && !dashing:
@@ -71,11 +70,11 @@ func _physics_process(delta):
 		velocity.x = -MAX_SPEED
 	
 	# Flipping Sprite
-	if Input.is_action_pressed("move_right"):
+	if Input.is_action_pressed("move_right") && !is_punching:
 		if !facing_right:
 			facing_right = true
 			scale.x = -1
-	elif Input.is_action_pressed("move_left"):
+	elif Input.is_action_pressed("move_left") && !is_punching:
 		if facing_right:
 			facing_right = false
 			scale.x = -1
@@ -110,6 +109,7 @@ func _physics_process(delta):
 	# Detects If On Wall
 	if is_on_wall() && (Input.is_action_pressed("move_right") || Input.is_action_pressed("move_left")):
 		can_jump = true
+		currentDashAmount = dashAmount
 		dub_jumps = max_num_dub_jumps
 		if velocity.y >= 0: 
 			velocity.y = min(velocity.y + WALL_SLIDE_ACCELERATION, MAX_WALL_SLIDE_SPEED)
@@ -123,12 +123,10 @@ func _physics_process(delta):
 	dash()
 		
 func dash():
-	if dashing:
-		velocity.y = 0
-	if is_on_floor():
-		currentDashAmount = dashAmount
 		
-	if Input.is_action_just_pressed("dash") and currentDashAmount > 0 and !dashing and canDash and !is_punching:
+	
+	if Input.is_action_just_pressed("dash") and currentDashAmount > 0 and !dashing and canDash and !is_punching and velocity.x != 0:
+		DASH_DIRECTION = PLAYER_DIRECTION
 		dashing = true
 		canDash = false
 		currentDashAmount -= 1
@@ -136,9 +134,15 @@ func dash():
 		dashing = false
 		await get_tree().create_timer(0.5).timeout
 		canDash = true
-		
-		
 
+	if dashing:
+		if DASH_DIRECTION == "left":
+			velocity.x = -dashSpeed
+		if DASH_DIRECTION == "right":
+			velocity.x = dashSpeed
+		
+	if is_on_floor():
+		currentDashAmount = dashAmount
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("boundary"):
