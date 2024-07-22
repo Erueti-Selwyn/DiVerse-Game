@@ -25,6 +25,7 @@ var currentDashAmount = 0
 var canDash = true
 var dashing = false
 var dashSpeed = 1700
+var is_punching = false
 
 var facing_right = true
 
@@ -39,16 +40,21 @@ func _ready():
 
 func _physics_process(delta):
 	# Animation
-	if velocity == Vector2(0, 0):
+	if velocity == Vector2(0, 0) && !is_punching:
 		_animated_sprite.play("idlebase_ani")
-	else:
-		_animated_sprite.stop()
 	
+	if Input.is_action_just_released("attack") && !is_punching:
+		is_punching = true
+		_animated_sprite.play("punch")
+		await get_tree().create_timer(0.4).timeout
+		print("finish")
+		is_punching = false
+		
 	# Player Direction
 	var direction = Input.get_axis("move_left", "move_right")
 	
 	# Dashing and Movement
-	if Input.is_action_just_pressed("dash") and !dashing:
+	if Input.is_action_just_pressed("dash") and !dashing and !is_punching:
 		dashDirection = direction
 	if dashing:
 		velocity.x = dashDirection * dashSpeed
@@ -122,7 +128,7 @@ func dash():
 	if is_on_floor():
 		currentDashAmount = dashAmount
 		
-	if Input.is_action_just_pressed("dash") and currentDashAmount > 0 and !dashing and canDash:
+	if Input.is_action_just_pressed("dash") and currentDashAmount > 0 and !dashing and canDash and !is_punching:
 		dashing = true
 		canDash = false
 		currentDashAmount -= 1
