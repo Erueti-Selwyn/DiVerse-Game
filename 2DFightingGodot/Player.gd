@@ -34,17 +34,21 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var _animated_sprite = $AnimatedSprite2D
 
-func shoot ():
-	var bullet = bulletPath.instance() 
-	
-	get_parent().odd_child(bullet)
-	bullet.position = $Position2D.global_position
-
-
 func _ready():
 	pass
+	
+	
 
-func _physics_process(delta):
+func _process(_delta):
+	if Input.is_action_pressed("shoot"):
+		shoot()
+
+func shoot():
+	var bullet = bulletPath.instance(shoot)
+	get_parent().add_child(bullet)
+	bullet.position = $Position2D.global_position
+
+func _physics_process(_delta):
 	if velocity == Vector2(0, 0):
 		_animated_sprite.play("idlebase_ani")
 	else:
