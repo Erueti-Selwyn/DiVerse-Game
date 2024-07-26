@@ -15,7 +15,6 @@ var isGravity = true
 var dub_jumps = 0
 var max_num_dub_jumps = 3 
 
-var speed = 400
 var normalSpeed = 450
 var crouchSpeed = 300
 var crouching = false
@@ -26,6 +25,9 @@ var currentDashAmount = 0
 var canDash = true
 var dashing = false
 var dashSpeed = 1700
+
+#var velocity = Vector2(0, 1)
+var speed = 300
 
 
 
@@ -40,15 +42,19 @@ func _ready():
 	
 
 func _process(_delta):
-	if Input.is_action_pressed("shoot"):
+	if Input.is_action_just_pressed("shoot"):
 		shoot()
 
 func shoot():
-	var bullet = bulletPath.instance(shoot)
+	var bullet = bulletPath.instantiate()
+	bullet.global_position = $Marker2D.global_position
 	get_parent().add_child(bullet)
-	bullet.position = $Position2D.global_position
 
-func _physics_process(_delta):
+func _physics_process(delta):
+	var move_vector = velocity.normalized() * speed * delta
+	
+	move_and_slide()
+	
 	if velocity == Vector2(0, 0):
 		_animated_sprite.play("idlebase_ani")
 	else:
@@ -82,6 +88,7 @@ func _physics_process(_delta):
 				velocity.x = -MAX_SPEED 
 			elif is_on_wall() && Input.is_action_pressed("move_left"):
 				velocity.x = MAX_SPEED
+			
 	
 	
 	

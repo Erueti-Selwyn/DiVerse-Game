@@ -1,17 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://crjct4eacspjk"]
+[gd_scene load_steps=4 format=3 uid="uid://crjct4eacspjk"]
 
 [ext_resource type="Texture2D" uid="uid://cenrsshhy28o5" path="res://Gun/testygun.png" id="1_v2nq4"]
+[ext_resource type="Script" path="res://Gun/gun.gd" id="2_1s1j2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7s8pu"]
 size = Vector2(45, 24)
 
-[node name="Bullet" type="Node2D"]
+[node name="CharacterBody2D" type="Area2D"]
+script = ExtResource("2_1s1j2")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_7s8pu")
 
-[node name="Prototypegun" type="Sprite2D" parent="CharacterBody2D"]
+[node name="Prototypegun" type="Sprite2D" parent="."]
 scale = Vector2(0.100758, 0.117187)
 texture = ExtResource("1_v2nq4")
