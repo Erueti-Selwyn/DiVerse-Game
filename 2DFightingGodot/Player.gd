@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 const bulletPath = preload("res://Gun/bullet.tscn")
-const MAX_SPEED = 200
-const ACCELERATION = 100
+const MAX_SPEED = 300
+const ACCELERATION = 60
 const JUMP_HIGHT = 600
 const GRAVITY = 30
 const UP = Vector2(0, -1)
@@ -29,8 +29,8 @@ var dashSpeed = 1700
 #var velocity = Vector2(0, 1)
 var speed = 300
 
-var facing_right = true
-
+var direction
+var facingRight = true
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -47,6 +47,10 @@ func _process(_delta):
 
 func shoot():
 	var bullet = bulletPath.instantiate()
+	if facingRight:
+		bullet._direction(1)
+	else:
+		bullet._direction(-1)
 	bullet.global_position = $Marker2D.global_position
 	get_parent().add_child(bullet)
 
@@ -56,11 +60,19 @@ func _physics_process(delta):
 		_animated_sprite.play("idlebase_ani")
 	else:
 		_animated_sprite.stop()
-	var direction = Input.get_axis("move_left", "move_right")
+	direction = Input.get_axis("move_left", "move_right")
+	
+	if velocity.x > 0:
+		_animated_sprite.flip_h = false
+		facingRight = true
+	elif velocity.x < 0:
+		_animated_sprite.flip_h = true
+		facingRight = false
+	
 	if Input.is_action_just_pressed("dash") && !dashing:
 		dashDirection = direction
 	if dashing:
-			velocity.x = dashSpeed * direction
+			velocity.x = dashSpeed * dashDirection
 	else:
 		if velocity.x > MAX_SPEED:
 			velocity.x = MAX_SPEED
@@ -86,9 +98,9 @@ func _physics_process(delta):
 			dub_jumps -= 1 
 			velocity.y = -JUMP_HIGHT
 			if is_on_wall() && Input.is_action_pressed("move_right"):
-				velocity.x = -MAX_SPEED 
+				velocity.x = -(MAX_SPEED * 3)
 			elif is_on_wall() && Input.is_action_pressed("move_left"):
-				velocity.x = MAX_SPEED
+				velocity.x = (MAX_SPEED * 3)
 
 	if is_on_wall() && (Input.is_action_pressed("move_right") || Input.is_action_pressed("move_left")):
 		can_jump = true
