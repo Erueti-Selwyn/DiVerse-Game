@@ -1,7 +1,9 @@
 extends CharacterBody2D
 
-const MAX_SPEED = 400
-const ACCELERATION = 30
+const bulletPath = preload("res://Gun/bullet.tscn")
+const MAX_SPEED = 200
+const ACCELERATION = 100
+
 const JUMP_HIGHT = 600
 const GRAVITY = 30
 const UP = Vector2(0, -1)
