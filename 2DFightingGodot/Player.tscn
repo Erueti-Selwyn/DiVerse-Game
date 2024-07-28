@@ -5,9 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://fjnx6v2dhjld" path="res://assets/player animation/base player/base idle/Base_Idle1.png" id="3_2namn"]
 [ext_resource type="PackedScene" uid="uid://crjct4eacspjk" path="res://Gun/bullet.tscn" id="4_wgdru"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ptv32"]
-size = Vector2(40, 79)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iea5w"]
 size = Vector2(40, 40)
 
@@ -25,12 +22,11 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ptv32"]
+size = Vector2(40, 79)
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_c8uyu")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 39.5)
-shape = SubResource("RectangleShape2D_ptv32")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, 20)
@@ -45,6 +41,10 @@ position = Vector2(2.25001, 30.25)
 scale = Vector2(3.10938, 3.10938)
 sprite_frames = SubResource("SpriteFrames_fb2fc")
 animation = &"idlebase_ani"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 39.5)
+shape = SubResource("RectangleShape2D_ptv32")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(45, 32)
