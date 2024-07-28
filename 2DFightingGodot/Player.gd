@@ -3,11 +3,13 @@ extends CharacterBody2D
 const bulletPath = preload("res://Gun/bullet.tscn")
 const MAX_SPEED = 200
 const ACCELERATION = 100
+
 const JUMP_HIGHT = 600
 const GRAVITY = 30
 const UP = Vector2(0, -1)
 const WALL_SLIDE_ACCELERATION = 10
-const MAX_WALL_SLIDE_SPEED = 40
+const MAX_WALL_SLIDE_SPEED = 120
+const bulletPath = preload("res://Gun/bullet.tscn")
 
 var jump_was_pressed = false
 var can_jump = false
@@ -29,7 +31,7 @@ var dashSpeed = 1700
 #var velocity = Vector2(0, 1)
 var speed = 300
 
-var facing_right = true
+
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -52,24 +54,23 @@ func shoot():
 
 func _physics_process(delta):
 	var move_vector = velocity.normalized() * speed * delta
+	
+	move_and_slide()
+	
 	if velocity == Vector2(0, 0):
 		_animated_sprite.play("idlebase_ani")
 	else:
 		_animated_sprite.stop()
 	var direction = Input.get_axis("move_left", "move_right")
-	if Input.is_action_just_pressed("dash") && !dashing:
+	if Input.is_action_just_pressed("dash") and !dashing:
 		dashDirection = direction
 	if dashing:
-			velocity.x = dashSpeed * direction
+		velocity.x = dashDirection * dashSpeed
 	else:
-		if velocity.x > MAX_SPEED:
-			velocity.x = MAX_SPEED
-		elif velocity.x < -MAX_SPEED:
-			velocity.x = -MAX_SPEED
-		if direction != 0 && !dashing:
-			velocity.x = velocity.x + (ACCELERATION * direction)
+		if direction and !dashing:
+			velocity.x = direction * speed
 		else:
-			velocity.x = move_toward(velocity.x, 0, MAX_SPEED)
+			velocity.x = move_toward(velocity.x, 0, speed)
 			
 	if Input.is_action_pressed("move_down"):
 		crouching = true
@@ -89,7 +90,12 @@ func _physics_process(delta):
 				velocity.x = -MAX_SPEED 
 			elif is_on_wall() && Input.is_action_pressed("move_left"):
 				velocity.x = MAX_SPEED
-
+			
+	
+	
+	
+	
+	
 	if is_on_wall() && (Input.is_action_pressed("move_right") || Input.is_action_pressed("move_left")):
 		can_jump = true
 		dub_jumps = max_num_dub_jumps
@@ -102,7 +108,7 @@ func _physics_process(delta):
 		velocity.y += GRAVITY
 	
 	
-	
+		
 	move_and_slide()
 	dash()
 		
