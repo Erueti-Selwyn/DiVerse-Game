@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-const bulletPath = preload("res://Gun/bullet.tscn")
 const MAX_SPEED = 400
 const ACCELERATION = 30
 const JUMP_HIGHT = 600
@@ -8,6 +7,7 @@ const GRAVITY = 30
 const UP = Vector2(0, -1)
 const WALL_SLIDE_ACCELERATION = 10
 const MAX_WALL_SLIDE_SPEED = 120
+const bulletPath = preload("res://Gun/bullet.tscn")
 
 var jump_was_pressed = false
 var can_jump = false
