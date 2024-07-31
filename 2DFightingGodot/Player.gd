@@ -26,25 +26,118 @@ var canDash = true
 var dashing = false
 var dashSpeed = 1700
 
+var joy_jump_pressed = false
+
+var isHoldingGun = false
+var attacking = false
+
 #var velocity = Vector2(0, 1)
 var speed = 300
 
 var direction
+var direction_input
 var facingRight = true
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+@export var DEADZONE = 0.2
+@export var player_index = 0
 @onready var _animated_sprite = $AnimatedSprite2D
 
-func _ready():
-	pass
-	
-	
 
 func _process(_delta):
-	if Input.is_action_just_pressed("shoot"):
-		shoot()
+	if isHoldingGun:
+		if Input.is_joy_button_pressed(player_index, 2):
+			shoot()
+	else:
+		if Input.is_joy_button_pressed(player_index, 2):
+			attack()
+	if velocity == Vector2(0, 0) && !attacking:
+		_animated_sprite.play("idle")
+	if is_on_floor() && !dashing && !attacking:
+		if velocity.x > 0:
+			_animated_sprite.play("walk")
+		elif velocity.x < 0:
+			_animated_sprite.play("walk")
+	if !is_on_floor() && !attacking:
+		_animated_sprite.play("jump")
+	if is_on_wall() && !is_on_floor() && !attacking:
+		_animated_sprite.play("wall")
 
+	if velocity.x > 0:
+		_animated_sprite.flip_h = false
+		facingRight = true
+	elif velocity.x < 0:
+		_animated_sprite.flip_h = true
+		facingRight = false
+	
+	# Detects Dash Input
+	if Input.is_joy_button_pressed(player_index, 1):
+		dash()
+
+func _physics_process(delta):
+	# Gets Controller Joystick Input
+	direction_input = Input.get_joy_axis(player_index, 0)
+	# Adds Deadzone
+	if abs(direction_input) < DEADZONE:
+		direction = 0
+	else:
+		direction = (direction_input - sign(direction_input) * DEADZONE) / (1 - DEADZONE)
+	if dashing && !attacking:
+			velocity.x = dashSpeed * dashDirection
+	elif !attacking:
+		if velocity.x > MAX_SPEED:
+			velocity.x = MAX_SPEED
+		elif velocity.x < -MAX_SPEED:
+			velocity.x = -MAX_SPEED
+		if direction != 0 && !dashing:
+			velocity.x = velocity.x + (ACCELERATION * direction)
+		else:
+			velocity.x = move_toward(velocity.x, 0, MAX_SPEED)
+	if attacking:
+		velocity = Vector2.ZERO
+			
+	if Input.is_action_pressed("move_down"):
+		crouching = true
+		if is_on_floor():
+			position.y += 1
+	else:
+		crouching = false
+
+	if is_on_floor(): 
+		dub_jumps = max_num_dub_jumps
+		velocity.y = 0
+	if Input.is_joy_button_pressed(player_index, 0) && !attacking:
+		if !joy_jump_pressed:
+			joy_jump_pressed = true
+			if dub_jumps > 0: 
+				dub_jumps -= 1
+				velocity.y = -JUMP_HIGHT
+			if is_on_wall() && direction == 1:
+				velocity.x = -(MAX_SPEED * 3)
+			elif is_on_wall() && direction == -1:
+				velocity.x = (MAX_SPEED * 3)
+	else:
+		joy_jump_pressed = false
+
+	if is_on_wall() && (direction == -1 || direction == 1) && !attacking:
+		dub_jumps = max_num_dub_jumps
+		if velocity.y >= 0: 
+			velocity.y = min(velocity.y + WALL_SLIDE_ACCELERATION, MAX_WALL_SLIDE_SPEED)
+		
+		else:
+			velocity.y += GRAVITY
+	elif !is_on_floor() && !attacking:
+		velocity.y += GRAVITY
+		
+	if dashing:
+		velocity.y = 0
+	if is_on_floor():
+		currentDashAmount = dashAmount
+	
+	move_and_slide()
+	
+	
 func shoot():
 	var bullet = bulletPath.instantiate()
 	if facingRight:
@@ -54,77 +147,13 @@ func shoot():
 	bullet.global_position = $Marker2D.global_position
 	get_parent().add_child(bullet)
 
-func _physics_process(delta):
-	var move_vector = velocity.normalized() * speed * delta
-	if velocity == Vector2(0, 0):
-		_animated_sprite.play("idlebase_ani")
-	else:
-		_animated_sprite.stop()
-	direction = Input.get_axis("move_left", "move_right")
-	
-	if velocity.x > 0:
-		_animated_sprite.flip_h = false
-		facingRight = true
-	elif velocity.x < 0:
-		_animated_sprite.flip_h = true
-		facingRight = false
-	
-	if Input.is_action_just_pressed("dash") && !dashing:
-		dashDirection = direction
-	if dashing:
-			velocity.x = dashSpeed * dashDirection
-	else:
-		if velocity.x > MAX_SPEED:
-			velocity.x = MAX_SPEED
-		elif velocity.x < -MAX_SPEED:
-			velocity.x = -MAX_SPEED
-		if direction != 0 && !dashing:
-			velocity.x = velocity.x + (ACCELERATION * direction)
-		else:
-			velocity.x = move_toward(velocity.x, 0, MAX_SPEED)
-			
-	if Input.is_action_pressed("move_down"):
-		crouching = true
-		if is_on_floor():
-			position.y += 1
-	else:
-		crouching = false
-	if is_on_floor(): 
-		dub_jumps = max_num_dub_jumps
-		can_jump = true
-		velocity.y = 0
-	if Input.is_action_just_pressed("jump"):
-		if can_jump == true && dub_jumps > 0: 
-			dub_jumps -= 1 
-			velocity.y = -JUMP_HIGHT
-			if is_on_wall() && Input.is_action_pressed("move_right"):
-				velocity.x = -(MAX_SPEED * 3)
-			elif is_on_wall() && Input.is_action_pressed("move_left"):
-				velocity.x = (MAX_SPEED * 3)
-
-	if is_on_wall() && (Input.is_action_pressed("move_right") || Input.is_action_pressed("move_left")):
-		can_jump = true
-		dub_jumps = max_num_dub_jumps
-		if velocity.y >= 0: 
-			velocity.y = min(velocity.y + WALL_SLIDE_ACCELERATION, MAX_WALL_SLIDE_SPEED)
-		
-		else:
-			velocity.y += GRAVITY
-	elif !is_on_floor():
-		velocity.y += GRAVITY
-	
-	
-	
-	move_and_slide()
-	dash()
-		
 func dash():
-	if dashing:
-		velocity.y = 0
-	if is_on_floor():
-		currentDashAmount = dashAmount
-		
-	if Input.is_action_just_pressed("dash") and currentDashAmount > 0 and !dashing and canDash:
+	if !dashing:
+		if facingRight:
+			dashDirection = 1
+		else:
+			dashDirection = -1
+	if currentDashAmount > 0 and !dashing and canDash:
 		dashing = true
 		canDash = false
 		currentDashAmount -= 1
@@ -133,10 +162,22 @@ func dash():
 		await get_tree().create_timer(0.5).timeout
 		canDash = true
 		
-		
-
+func attack():
+	if !attacking:
+		attacking = true
+		_animated_sprite.play("attack")
 
 func _on_area_2d_body_entered(body):
-	if body.is_in_group("boundary"):
+	var collided_script = body.get("player_index")
+	if collided_script == player_index:
 		position = Vector2(0, 0)
-		print("Hit Boundary")
+		velocity = Vector2(0, 0)
+
+func _on_melee_body_entered(body):
+	if body.is_in_group("player"):
+		print("Hit Player")
+
+
+func _on_animated_sprite_2d_animation_finished():
+	if $AnimatedSprite2D.animation == "attack":
+		attacking = false

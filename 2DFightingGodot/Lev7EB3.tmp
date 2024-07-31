@@ -91,10 +91,13 @@ shape = SubResource("WorldBoundaryShape2D_iwr00")
 [node name="Player" parent="." instance=ExtResource("2_ky2sp")]
 position = Vector2(161, 59)
 scale = Vector2(1.25905, 1.25905)
+DEADZONE = 0.2
+player_index = 0
 
 [node name="Player2" parent="." instance=ExtResource("2_ky2sp")]
 position = Vector2(-360, 67)
 scale = Vector2(1.25905, 1.25905)
+DEADZONE = 0.2
 player_index = 1
 
 [connection signal="body_entered" from="Area2D" to="Player" method="_on_area_2d_body_entered"]
