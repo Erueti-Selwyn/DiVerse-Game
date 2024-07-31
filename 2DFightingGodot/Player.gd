@@ -30,9 +30,12 @@ var joy_jump_pressed = false
 
 var isHoldingGun = false
 var attacking = false
+var isHit = false
 
 #var velocity = Vector2(0, 1)
 var speed = 300
+@export var health = 100
+
 
 var direction
 var direction_input
@@ -42,10 +45,15 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @export var DEADZONE = 0.2
 @export var player_index = 0
-@onready var _animated_sprite = $AnimatedSprite2D
+@onready var _animated_sprite = $CollisionShape2D/AnimatedSprite2D
+@onready var _attack_collision = $CollisionShape2D/AnimatedSprite2D/Melee/AttackCollision
 
+func _ready():
+	_attack_collision.disabled = true
 
 func _process(_delta):
+	if health == 0:
+		queue_free()
 	if isHoldingGun:
 		if Input.is_joy_button_pressed(player_index, 2):
 			shoot()
@@ -65,10 +73,10 @@ func _process(_delta):
 		_animated_sprite.play("wall")
 
 	if velocity.x > 0:
-		_animated_sprite.flip_h = false
+		_animated_sprite.scale.x = 1
 		facingRight = true
 	elif velocity.x < 0:
-		_animated_sprite.flip_h = true
+		_animated_sprite.scale.x = -1
 		facingRight = false
 	
 	# Detects Dash Input
@@ -83,9 +91,9 @@ func _physics_process(delta):
 		direction = 0
 	else:
 		direction = (direction_input - sign(direction_input) * DEADZONE) / (1 - DEADZONE)
-	if dashing && !attacking:
+	if dashing && !attacking && !isHit:
 			velocity.x = dashSpeed * dashDirection
-	elif !attacking:
+	elif !attacking && !isHit:
 		if velocity.x > MAX_SPEED:
 			velocity.x = MAX_SPEED
 		elif velocity.x < -MAX_SPEED:
@@ -95,6 +103,8 @@ func _physics_process(delta):
 		else:
 			velocity.x = move_toward(velocity.x, 0, MAX_SPEED)
 	if attacking:
+		velocity = Vector2.ZERO
+	if isHit:
 		velocity = Vector2.ZERO
 			
 	if Input.is_action_pressed("move_down"):
@@ -164,6 +174,7 @@ func dash():
 		
 func attack():
 	if !attacking:
+		_attack_collision.disabled = false
 		attacking = true
 		_animated_sprite.play("attack")
 
@@ -175,9 +186,18 @@ func _on_area_2d_body_entered(body):
 
 func _on_melee_body_entered(body):
 	if body.is_in_group("player"):
-		print("Hit Player")
+		body.is_hit()
 
+func is_hit():
+	health -= 10
+	isHit = true
+	_animated_sprite.modulate = Color(1, 0, 0)
+	await get_tree().create_timer(0.2).timeout
+	isHit = false
+	_animated_sprite.modulate = Color(1, 1, 1)
+	
 
 func _on_animated_sprite_2d_animation_finished():
-	if $AnimatedSprite2D.animation == "attack":
+	if $CollisionShape2D/AnimatedSprite2D.animation == "attack":
+		_attack_collision.disabled = true
 		attacking = false

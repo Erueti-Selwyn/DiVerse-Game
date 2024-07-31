@@ -89,11 +89,11 @@ scale = Vector2(10, 10)
 shape = SubResource("WorldBoundaryShape2D_iwr00")
 
 [node name="Player" parent="." instance=ExtResource("2_ky2sp")]
-position = Vector2(161, 59)
+position = Vector2(165, 139)
 scale = Vector2(1.25905, 1.25905)
 
 [node name="Player2" parent="." instance=ExtResource("2_ky2sp")]
-position = Vector2(-360, 67)
+position = Vector2(-356, 147)
 scale = Vector2(1.25905, 1.25905)
 player_index = 1
 

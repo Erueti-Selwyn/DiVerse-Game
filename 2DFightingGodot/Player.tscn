@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://crjct4eacspjk" path="res://Gun/bullet.tscn" id="4_wgdru"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptv32"]
-size = Vector2(32, 75)
+size = Vector2(20, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j3agd"]
 atlas = ExtResource("2_ujwwa")
@@ -110,7 +110,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -173,44 +173,38 @@ animations = [{
 size = Vector2(33, 38)
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
+position = Vector2(0, -25)
 collision_layer = 2
 script = ExtResource("1_c8uyu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
-position = Vector2(0, 41.5)
+position = Vector2(0, -25)
+scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_ptv32")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 28)
-scale = Vector2(1.59984, 1.59984)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
+position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_fb2fc")
 animation = &"attack"
 frame_progress = 0.689458
 
-[node name="Melee" type="Area2D" parent="AnimatedSprite2D"]
-visible = false
+[node name="Melee" type="Area2D" parent="CollisionShape2D/AnimatedSprite2D"]
 position = Vector2(0, -17.5018)
 scale = Vector2(0.625063, 0.625063)
 collision_layer = 2
 collision_mask = 2
 
-[node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D/Melee"]
-offset_left = 17.0
-offset_top = 14.0
-offset_right = 50.0
-offset_bottom = 52.0
-color = Color(1, 0, 0, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/Melee"]
+[node name="AttackCollision" type="CollisionShape2D" parent="CollisionShape2D/AnimatedSprite2D/Melee"]
 position = Vector2(33.5, 33)
 shape = SubResource("RectangleShape2D_68qsj")
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(20, 45)
+position = Vector2(17, -34)
 
 [node name="Bullet" parent="." instance=ExtResource("4_wgdru")]
 visible = false
-position = Vector2(-31, 21)
+position = Vector2(17, -34)
+scale = Vector2(0.5, 0.5)
 
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="body_entered" from="AnimatedSprite2D/Melee" to="." method="_on_melee_body_entered"]
+[connection signal="animation_finished" from="CollisionShape2D/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="CollisionShape2D/AnimatedSprite2D/Melee" to="." method="_on_melee_body_entered"]
