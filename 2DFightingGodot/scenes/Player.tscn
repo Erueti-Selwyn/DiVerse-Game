@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=3 uid="uid://c1kqk2uiq3k8q"]
 
-[ext_resource type="Script" path="res://Player.gd" id="1_c8uyu"]
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_c8uyu"]
 [ext_resource type="Texture2D" uid="uid://dr0icgjach32b" path="res://assets/player animation/base player/Mexican-Vol2-Sheet.png" id="2_dp35w"]
 [ext_resource type="Texture2D" uid="uid://mkkiqqr3st34" path="res://assets/player animation/base player/Mexican-Sheet-Vol3.png" id="2_ujwwa"]
 [ext_resource type="PackedScene" uid="uid://crjct4eacspjk" path="res://Gun/bullet.tscn" id="4_wgdru"]
@@ -110,7 +110,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack",
-"speed": 15.0
+"speed": 25.0
 }, {
 "frames": [{
 "duration": 1.0,

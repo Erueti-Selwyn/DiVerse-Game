@@ -37,29 +37,57 @@ var speed = 300
 @export var health = 100
 
 
-var direction
-var direction_input
+var directionX
+var directionY
+var direction_inputX
+var direction_inputY
 var facingRight = true
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @export var DEADZONE = 0.2
 @export var player_index = 0
+var playercontroller = true
 @onready var _animated_sprite = $CollisionShape2D/AnimatedSprite2D
 @onready var _attack_collision = $CollisionShape2D/AnimatedSprite2D/Melee/AttackCollision
-
+@onready var global_script = $"/root/Global"
 func _ready():
 	_attack_collision.disabled = true
-
+	if player_index == 0:
+		print("player 1 loaded")
+		if global_script.player1Controller == true:
+			print("player 1 is contorller")
+			playercontroller = true
+		elif global_script.player1Controller == false:
+			playercontroller = false
+			print("player 1 is keyboard")
+	if player_index == 1:
+		print("player 2 loaded")
+		if global_script.player2Controller == true:
+			playercontroller = true
+			print("player 2 is controller")
+		elif global_script.player2Controller == false:
+			playercontroller = false
+			print("player 2 is keyboard")
+		
 func _process(_delta):
 	if health == 0:
 		queue_free()
-	if isHoldingGun:
-		if Input.is_joy_button_pressed(player_index, 2):
-			shoot()
+
+	if playercontroller:
+		if isHoldingGun:
+			if Input.is_joy_button_pressed(player_index, 2):
+				shoot()
+		else:
+			if Input.is_joy_button_pressed(player_index, 2):
+				attack()
 	else:
-		if Input.is_joy_button_pressed(player_index, 2):
-			attack()
+		if isHoldingGun:
+			if Input.is_action_just_pressed("shoot"):
+				shoot()
+		else:
+			if Input.is_action_just_pressed("shoot"):
+				attack()
 	if velocity == Vector2(0, 0) && !attacking:
 		_animated_sprite.play("idle")
 	if is_on_floor() && !dashing && !attacking:
@@ -80,17 +108,24 @@ func _process(_delta):
 		facingRight = false
 	
 	# Detects Dash Input
-	if Input.is_joy_button_pressed(player_index, 1):
-		dash()
+	if playercontroller:
+		if Input.is_joy_button_pressed(player_index, 1):
+			dash()
+	else:
+		if Input.is_action_just_pressed("dash"):
+			dash()
 
 func _physics_process(delta):
 	# Gets Controller Joystick Input
-	direction_input = Input.get_joy_axis(player_index, 0)
-	# Adds Deadzone
-	if abs(direction_input) < DEADZONE:
-		direction = 0
+	if playercontroller:
+		direction_inputX = Input.get_joy_axis(player_index, 0)
 	else:
-		direction = (direction_input - sign(direction_input) * DEADZONE) / (1 - DEADZONE)
+		direction_inputX = Input.get_axis("move_left", "move_right")
+	# Adds Deadzone
+	if abs(direction_inputX) < DEADZONE:
+		directionX = 0
+	else:
+		directionX = (direction_inputX - sign(direction_inputX) * DEADZONE) / (1 - DEADZONE)
 	if dashing && !attacking && !isHit:
 			velocity.x = dashSpeed * dashDirection
 	elif !attacking && !isHit:
@@ -98,39 +133,65 @@ func _physics_process(delta):
 			velocity.x = MAX_SPEED
 		elif velocity.x < -MAX_SPEED:
 			velocity.x = -MAX_SPEED
-		if direction != 0 && !dashing:
-			velocity.x = velocity.x + (ACCELERATION * direction)
+		if directionX != 0 && !dashing:
+			velocity.x = velocity.x + (ACCELERATION * directionX)
 		else:
 			velocity.x = move_toward(velocity.x, 0, MAX_SPEED)
 	if attacking:
 		velocity = Vector2.ZERO
 	if isHit:
 		velocity = Vector2.ZERO
-			
-	if Input.is_action_pressed("move_down"):
-		crouching = true
-		if is_on_floor():
-			position.y += 1
+	if playercontroller:
+		direction_inputY = Input.get_joy_axis(player_index, 1)
+		if abs(direction_inputY) < DEADZONE:
+			directionY = 0
+		else:
+			directionY = (direction_inputY - sign(direction_inputY) * DEADZONE) / (1 - DEADZONE)
+		if directionY > 0:
+			crouching = true
+			if is_on_floor():
+				position.y += 1
+		else:
+			crouching = false
 	else:
-		crouching = false
+		if Input.is_action_pressed("move_down"):
+			crouching = true
+			if is_on_floor():
+				position.y += 1
+		else:
+			crouching = false
 
 	if is_on_floor(): 
 		dub_jumps = max_num_dub_jumps
 		velocity.y = 0
-	if Input.is_joy_button_pressed(player_index, 0) && !attacking:
-		if !joy_jump_pressed:
-			joy_jump_pressed = true
-			if dub_jumps > 0: 
-				dub_jumps -= 1
-				velocity.y = -JUMP_HIGHT
-			if is_on_wall() && direction == 1:
-				velocity.x = -(MAX_SPEED * 3)
-			elif is_on_wall() && direction == -1:
-				velocity.x = (MAX_SPEED * 3)
+	if playercontroller:
+		if Input.is_joy_button_pressed(player_index, 0) && !attacking:
+			if !joy_jump_pressed:
+				joy_jump_pressed = true
+				if dub_jumps > 0: 
+					dub_jumps -= 1
+					velocity.y = -JUMP_HIGHT
+				if is_on_wall() && directionX == 1:
+					velocity.x = -(MAX_SPEED * 3)
+				elif is_on_wall() && directionX == -1:
+					velocity.x = (MAX_SPEED * 3)
+		else:
+			joy_jump_pressed = false
 	else:
-		joy_jump_pressed = false
+		if Input.is_action_just_pressed("jump") && !attacking:
+			if !joy_jump_pressed:
+				joy_jump_pressed = true
+				if dub_jumps > 0: 
+					dub_jumps -= 1
+					velocity.y = -JUMP_HIGHT
+				if is_on_wall() && directionX == 1:
+					velocity.x = -(MAX_SPEED * 3)
+				elif is_on_wall() && directionX == -1:
+					velocity.x = (MAX_SPEED * 3)
+		else:
+			joy_jump_pressed = false
 
-	if is_on_wall() && (direction == -1 || direction == 1) && !attacking:
+	if is_on_wall() && (directionX == -1 || directionX == 1) && !attacking:
 		dub_jumps = max_num_dub_jumps
 		if velocity.y >= 0: 
 			velocity.y = min(velocity.y + WALL_SLIDE_ACCELERATION, MAX_WALL_SLIDE_SPEED)

@@ -1,0 +1,79 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpp6uup1fjkuc"]
+
+[ext_resource type="Script" path="res://scripts/settings_menu.gd" id="1_rl2pc"]
+
+[node name="settings_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rl2pc")
+
+[node name="MarginContainerMenu" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 38.0
+offset_right = 106.0
+offset_bottom = 78.0
+scale = Vector2(3.03944, 3.03944)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainerMenu"]
+layout_mode = 2
+
+[node name="Menu" type="Button" parent="MarginContainerMenu/VBoxContainer"]
+layout_mode = 2
+text = "Menu"
+
+[node name="MarginContainerPlayer1" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 301.0
+offset_top = 107.0
+offset_right = 363.0
+offset_bottom = 147.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainerPlayer1"]
+layout_mode = 2
+
+[node name="Player1" type="Label" parent="MarginContainerPlayer1/VBoxContainer"]
+layout_mode = 2
+text = "Player 1
+"
+
+[node name="OptionButtonPlayer1" type="OptionButton" parent="MarginContainerPlayer1/VBoxContainer"]
+layout_mode = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "Controller"
+popup/item_0/id = 1
+popup/item_1/text = "Keyboard"
+popup/item_1/id = 0
+
+[node name="MarginContainerPlayer2" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 624.0
+offset_top = 109.0
+offset_right = 686.0
+offset_bottom = 149.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainerPlayer2"]
+layout_mode = 2
+
+[node name="Player2" type="Label" parent="MarginContainerPlayer2/VBoxContainer"]
+layout_mode = 2
+text = "Player 2
+"
+
+[node name="OptionButtonPlayer2" type="OptionButton" parent="MarginContainerPlayer2/VBoxContainer"]
+layout_mode = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "Controller"
+popup/item_0/id = 1
+popup/item_1/text = "Keyboard"
+popup/item_1/id = 0
+
+[connection signal="pressed" from="MarginContainerMenu/VBoxContainer/Menu" to="." method="_on_menu_pressed"]
+[connection signal="item_selected" from="MarginContainerPlayer1/VBoxContainer/OptionButtonPlayer1" to="." method="_on_option_button_player_1_item_selected"]
+[connection signal="item_selected" from="MarginContainerPlayer2/VBoxContainer/OptionButtonPlayer2" to="." method="_on_option_button_player_2_item_selected"]
