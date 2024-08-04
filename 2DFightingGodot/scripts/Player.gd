@@ -46,6 +46,7 @@ var facingRight = true
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @export var DEADZONE = 0.2
+@export var DEADZONEY = 0.9
 @export var player_index = 0
 var playercontroller = true
 @onready var _animated_sprite = $CollisionShape2D/AnimatedSprite2D
@@ -143,10 +144,10 @@ func _physics_process(delta):
 		velocity = Vector2.ZERO
 	if playercontroller:
 		direction_inputY = Input.get_joy_axis(player_index, 1)
-		if abs(direction_inputY) < DEADZONE:
+		if abs(direction_inputY) < DEADZONEY:
 			directionY = 0
 		else:
-			directionY = (direction_inputY - sign(direction_inputY) * DEADZONE) / (1 - DEADZONE)
+			directionY = (direction_inputY - sign(direction_inputY) * DEADZONEY) / (1 - DEADZONEY)
 		if directionY > 0:
 			crouching = true
 			if is_on_floor():
@@ -253,7 +254,7 @@ func is_hit():
 	health -= 10
 	isHit = true
 	_animated_sprite.modulate = Color(1, 0, 0)
-	await get_tree().create_timer(0.2).timeout
+	await get_tree().create_timer(0.15).timeout
 	isHit = false
 	_animated_sprite.modulate = Color(1, 1, 1)
 	
