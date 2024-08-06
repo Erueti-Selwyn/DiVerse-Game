@@ -48,6 +48,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var DEADZONE = 0.2
 @export var DEADZONEY = 0.9
 @export var player_index = 0
+var player_controller_index
 var playercontroller = true
 @onready var _animated_sprite = $CollisionShape2D/AnimatedSprite2D
 @onready var _attack_collision = $CollisionShape2D/AnimatedSprite2D/Melee/AttackCollision
@@ -55,21 +56,22 @@ var playercontroller = true
 func _ready():
 	_attack_collision.disabled = true
 	if player_index == 0:
-		print("player 1 loaded")
 		if global_script.player1Controller == true:
-			print("player 1 is contorller")
+			player_controller_index = 0
 			playercontroller = true
 		elif global_script.player1Controller == false:
 			playercontroller = false
-			print("player 1 is keyboard")
 	if player_index == 1:
-		print("player 2 loaded")
+		if global_script.player1Controller == false && global_script.player2Controller == true:
+			player_controller_index = 0
+		else:
+			player_controller_index = 1
 		if global_script.player2Controller == true:
 			playercontroller = true
-			print("player 2 is controller")
+
 		elif global_script.player2Controller == false:
 			playercontroller = false
-			print("player 2 is keyboard")
+
 		
 func _process(_delta):
 	if health == 0:
@@ -77,10 +79,10 @@ func _process(_delta):
 
 	if playercontroller:
 		if isHoldingGun:
-			if Input.is_joy_button_pressed(player_index, 2):
+			if Input.is_joy_button_pressed(player_controller_index, 2):
 				shoot()
 		else:
-			if Input.is_joy_button_pressed(player_index, 2):
+			if Input.is_joy_button_pressed(player_controller_index, 2):
 				attack()
 	else:
 		if isHoldingGun:
@@ -110,16 +112,16 @@ func _process(_delta):
 	
 	# Detects Dash Input
 	if playercontroller:
-		if Input.is_joy_button_pressed(player_index, 1):
+		if Input.is_joy_button_pressed(player_controller_index, 1):
 			dash()
 	else:
 		if Input.is_action_just_pressed("dash"):
 			dash()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# Gets Controller Joystick Input
 	if playercontroller:
-		direction_inputX = Input.get_joy_axis(player_index, 0)
+		direction_inputX = Input.get_joy_axis(player_controller_index, 0)
 	else:
 		direction_inputX = Input.get_axis("move_left", "move_right")
 	# Adds Deadzone
@@ -143,7 +145,7 @@ func _physics_process(delta):
 	if isHit:
 		velocity = Vector2.ZERO
 	if playercontroller:
-		direction_inputY = Input.get_joy_axis(player_index, 1)
+		direction_inputY = Input.get_joy_axis(player_controller_index, 1)
 		if abs(direction_inputY) < DEADZONEY:
 			directionY = 0
 		else:
@@ -166,7 +168,7 @@ func _physics_process(delta):
 		dub_jumps = max_num_dub_jumps
 		velocity.y = 0
 	if playercontroller:
-		if Input.is_joy_button_pressed(player_index, 0) && !attacking:
+		if Input.is_joy_button_pressed(player_controller_index, 0) && !attacking:
 			if !joy_jump_pressed:
 				joy_jump_pressed = true
 				if dub_jumps > 0: 
