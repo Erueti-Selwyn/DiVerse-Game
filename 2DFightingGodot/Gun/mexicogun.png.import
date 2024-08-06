@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cenrsshhy28o5"
-path="res://.godot/imported/testygun.png-8379b0293d5e18e8cab2d9d4b7847e2d.ctex"
+uid="uid://c7p3prq4fggko"
+path="res://.godot/imported/mexicogun.png-ecc0b1d5e267604e28d40d2ed5ac623a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Gun/testygun.png"
-dest_files=["res://.godot/imported/testygun.png-8379b0293d5e18e8cab2d9d4b7847e2d.ctex"]
+source_file="res://Gun/mexicogun.png"
+dest_files=["res://.godot/imported/mexicogun.png-ecc0b1d5e267604e28d40d2ed5ac623a.ctex"]
 
 [params]
 
