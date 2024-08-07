@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://4smgw32hn4oe" path="res://assets/tilemaps/ScaryDungeonTileMap.png" id="1_pko7j"]
 [ext_resource type="Texture2D" uid="uid://d0kgbntfdy0gb" path="res://assets/image (2).png" id="2_qmg0v"]
-[ext_resource type="PackedScene" uid="uid://c1kqk2uiq3k8q" path="res://scenes/Player.tscn" id="3_jjiah"]
+[ext_resource type="PackedScene" uid="uid://bdxtusi0wukv6" path="res://scenes/Player1.tscn" id="4_l5f3c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n37u8"]
 texture = ExtResource("1_pko7j")
@@ -88,14 +88,9 @@ rotation = -1.5708
 scale = Vector2(10, 10)
 shape = SubResource("WorldBoundaryShape2D_iwr00")
 
-[node name="Player" parent="." instance=ExtResource("3_jjiah")]
-position = Vector2(165, 139)
-scale = Vector2(1.25905, 1.25905)
-
-[node name="Player2" parent="." instance=ExtResource("3_jjiah")]
-position = Vector2(-356, 147)
-scale = Vector2(1.25905, 1.25905)
+[node name="CharacterBody2D3" parent="." instance=ExtResource("4_l5f3c")]
+position = Vector2(-599, 155)
 player_index = 1
 
-[connection signal="body_entered" from="Area2D" to="Player" method="_on_area_2d_body_entered"]
-[connection signal="body_entered" from="Area2D" to="Player2" method="_on_area_2d_body_entered"]
+[node name="CharacterBody2D4" parent="." instance=ExtResource("4_l5f3c")]
+position = Vector2(31, 167)
