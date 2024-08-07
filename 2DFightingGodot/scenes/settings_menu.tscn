@@ -67,6 +67,8 @@ text = "Player 2
 
 [node name="OptionButtonPlayer2" type="OptionButton" parent="MarginContainerPlayer2/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 item_count = 2
 selected = 0
 popup/item_0/text = "Controller"

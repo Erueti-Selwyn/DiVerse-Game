@@ -252,10 +252,10 @@ func _on_melee_body_entered(body):
 	if body.is_in_group("player"):
 		body.is_hit()
 
-func is_hit():
+func is_hit(dir):
 	health -= 10
 	isHit = true
-	_animated_sprite.modulate = Color(1, 0, 0)
+	_animated_sprite.modulate = Color(1, 0, 0) 
 	await get_tree().create_timer(0.15).timeout
 	isHit = false
 	_animated_sprite.modulate = Color(1, 1, 1)
