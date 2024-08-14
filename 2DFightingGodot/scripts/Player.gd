@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 const bulletPath = preload("res://Gun/bullet.tscn")
-const MAX_SPEED = 300
-const ACCELERATION = 60
+const MAX_SPEED = 600
+const ACCELERATION = 120
 const JUMP_HIGHT = 600
 const GRAVITY = 30
 const UP = Vector2(0, -1)
@@ -14,6 +14,9 @@ var can_jump = false
 var isGravity = true
 var dub_jumps = 0
 var max_num_dub_jumps = 3 
+
+var MAX_FRICTION = 300
+var FRICTION = 60
 
 var normalSpeed = 450
 var crouchSpeed = 300
@@ -35,6 +38,8 @@ var isHit = false
 #var velocity = Vector2(0, 1)
 var speed = 300
 @export var health = 100
+@export var damage = 2
+var knockback_strength = 1000
 
 
 var directionX
@@ -132,17 +137,16 @@ func _physics_process(_delta):
 	if dashing && !attacking && !isHit:
 			velocity.x = dashSpeed * dashDirection
 	elif !attacking && !isHit:
-		if velocity.x > MAX_SPEED:
-			velocity.x = MAX_SPEED
-		elif velocity.x < -MAX_SPEED:
-			velocity.x = -MAX_SPEED
 		if directionX != 0 && !dashing:
 			velocity.x = velocity.x + (ACCELERATION * directionX)
-		else:
-			velocity.x = move_toward(velocity.x, 0, MAX_SPEED)
+			
+	if velocity.x > MAX_SPEED:
+		velocity.x = move_toward(velocity.x, 0, MAX_FRICTION)
+	elif velocity.x < -MAX_SPEED:
+		velocity.x = move_toward(velocity.x, 0, MAX_FRICTION)
+	else:
+		velocity.x = move_toward(velocity.x, 0, FRICTION)
 	if attacking:
-		velocity = Vector2.ZERO
-	if isHit:
 		velocity = Vector2.ZERO
 	if playercontroller:
 		direction_inputY = Input.get_joy_axis(player_controller_index, 1)
@@ -250,10 +254,15 @@ func _on_area_2d_body_entered(body):
 
 func _on_melee_body_entered(body):
 	if body.is_in_group("player"):
-		body.is_hit()
+		body.is_hit(global_position, damage)
 
-func is_hit(dir):
-	health -= 10
+func is_hit(attacker_position, damage_done):
+	var knockback_direction = global_position - attacker_position
+	if knockback_direction.x > 0:
+		velocity.x = velocity.x + knockback_strength
+	elif knockback_direction.x < 0:
+		velocity.x = velocity.x - knockback_strength
+	health -= damage_done
 	isHit = true
 	_animated_sprite.modulate = Color(1, 0, 0) 
 	await get_tree().create_timer(0.15).timeout

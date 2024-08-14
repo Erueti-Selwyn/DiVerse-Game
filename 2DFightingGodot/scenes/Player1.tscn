@@ -8,31 +8,31 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptv32"]
 size = Vector2(20, 50)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_j3agd"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_54cni"]
 atlas = ExtResource("2_ygxmt")
 region = Rect2(0, 384, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_73mkf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxn87"]
 atlas = ExtResource("2_ygxmt")
 region = Rect2(64, 384, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jb88r"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbxyc"]
 atlas = ExtResource("2_ygxmt")
 region = Rect2(0, 448, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_arguf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6tw6"]
 atlas = ExtResource("2_ygxmt")
 region = Rect2(64, 448, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mpjl4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4milu"]
 atlas = ExtResource("2_ygxmt")
 region = Rect2(0, 512, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ag0p8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_edq1y"]
 atlas = ExtResource("2_ygxmt")
 region = Rect2(64, 512, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7v2mp"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_37k0q"]
 atlas = ExtResource("2_ygxmt")
 region = Rect2(0, 576, 64, 64)
 
@@ -88,25 +88,25 @@ region = Rect2(64, 320, 64, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_j3agd")
+"texture": SubResource("AtlasTexture_54cni")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_73mkf")
+"texture": SubResource("AtlasTexture_gxn87")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jb88r")
+"texture": SubResource("AtlasTexture_rbxyc")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_arguf")
+"texture": SubResource("AtlasTexture_j6tw6")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mpjl4")
+"texture": SubResource("AtlasTexture_4milu")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ag0p8")
+"texture": SubResource("AtlasTexture_edq1y")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7v2mp")
+"texture": SubResource("AtlasTexture_37k0q")
 }],
 "loop": false,
 "name": &"attack",
@@ -170,7 +170,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_68qsj"]
-size = Vector2(33, 38)
+size = Vector2(21.5978, 27.9972)
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
 position = Vector2(0, -25)
@@ -186,7 +186,8 @@ shape = SubResource("RectangleShape2D_ptv32")
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_fb2fc")
 animation = &"attack"
-frame_progress = 0.689458
+frame = 6
+frame_progress = 1.0
 
 [node name="Melee" type="Area2D" parent="CollisionShape2D/AnimatedSprite2D"]
 position = Vector2(0, -17.5018)
@@ -195,7 +196,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="AttackCollision" type="CollisionShape2D" parent="CollisionShape2D/AnimatedSprite2D/Melee"]
-position = Vector2(33.5, 33)
+position = Vector2(40.3959, 29.1999)
 shape = SubResource("RectangleShape2D_68qsj")
 
 [node name="Marker2D" type="Marker2D" parent="."]
