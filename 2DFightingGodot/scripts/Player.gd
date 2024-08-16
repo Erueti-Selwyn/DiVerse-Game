@@ -37,9 +37,9 @@ var isHit = false
 
 #var velocity = Vector2(0, 1)
 var speed = 300
-@export var health = 100
 @export var damage = 2
 var knockback_strength = 1000
+var knockback_health = 1
 
 
 var directionX
@@ -79,9 +79,11 @@ func _ready():
 
 		
 func _process(_delta):
-	if health == 0:
-		queue_free()
-
+	if player_index == 0:
+		global_script.player1health = knockback_health
+	elif player_index == 1:
+		global_script.player2health = knockback_health
+		
 	if playercontroller:
 		if isHoldingGun:
 			if Input.is_joy_button_pressed(player_controller_index, 2):
@@ -245,12 +247,7 @@ func attack():
 		_attack_collision.disabled = false
 		attacking = true
 		_animated_sprite.play("attack")
-
-func _on_area_2d_body_entered(body):
-	var collided_script = body.get("player_index")
-	if collided_script == player_index:
-		position = Vector2(0, 0)
-		velocity = Vector2(0, 0)
+	
 
 func _on_melee_body_entered(body):
 	if body.is_in_group("player"):
@@ -258,11 +255,11 @@ func _on_melee_body_entered(body):
 
 func is_hit(attacker_position, damage_done):
 	var knockback_direction = global_position - attacker_position
+	knockback_health = knockback_health + damage_done
 	if knockback_direction.x > 0:
-		velocity.x = velocity.x + knockback_strength
+		velocity.x = velocity.x + knockback_strength * ((knockback_health / 10) + 1) 
 	elif knockback_direction.x < 0:
-		velocity.x = velocity.x - knockback_strength
-	health -= damage_done
+		velocity.x = velocity.x - knockback_strength * ((knockback_health / 10) + 1) 
 	isHit = true
 	_animated_sprite.modulate = Color(1, 0, 0) 
 	await get_tree().create_timer(0.15).timeout
@@ -274,3 +271,10 @@ func _on_animated_sprite_2d_animation_finished():
 	if $CollisionShape2D/AnimatedSprite2D.animation == "attack":
 		_attack_collision.disabled = true
 		attacking = false
+
+
+func _on_area_2d_area_entered(area):
+	if area.is_in_group("boundary"):
+		print("boundary")
+		position = Vector2(0, 0)
+		velocity = Vector2(0, 0)
