@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dfdn4clkj55a4"]
+[gd_scene load_steps=9 format=3 uid="uid://dfdn4clkj55a4"]
 
 [ext_resource type="Texture2D" uid="uid://4smgw32hn4oe" path="res://assets/tilemaps/ScaryDungeonTileMap.png" id="1_pko7j"]
 [ext_resource type="Texture2D" uid="uid://d0kgbntfdy0gb" path="res://assets/image (2).png" id="2_qmg0v"]
+[ext_resource type="PackedScene" uid="uid://u3qy208g8d7a" path="res://scenes/hud.tscn" id="3_fsags"]
 [ext_resource type="PackedScene" uid="uid://bdxtusi0wukv6" path="res://scenes/Player1.tscn" id="4_l5f3c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n37u8"]
@@ -47,11 +48,11 @@ layer_1/tile_data = PackedInt32Array(524290, 65536, 0, 524291, 65536, 0, 524292,
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.55, 0.55)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+[node name="BackgroundCanvas" type="CanvasLayer" parent="Camera2D"]
 layer = -1
 follow_viewport_enabled = true
 
-[node name="TextureRect" type="TextureRect" parent="Camera2D/CanvasLayer"]
+[node name="BackgroundTexture" type="TextureRect" parent="Camera2D/BackgroundCanvas"]
 z_as_relative = false
 texture_filter = 1
 offset_left = -1039.0
@@ -61,28 +62,33 @@ offset_bottom = 545.0
 texture = ExtResource("2_qmg0v")
 stretch_mode = 4
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
+[node name="hud" parent="Camera2D" instance=ExtResource("3_fsags")]
+offset_top = -570.0
+offset_bottom = -570.0
+scale = Vector2(2.57322, 2.57322)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="Area2D" type="Area2D" parent="." groups=["boundary"]]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["boundary"]]
 position = Vector2(0, 900)
 scale = Vector2(10, 10)
 shape = SubResource("WorldBoundaryShape2D_ig2vd")
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D" groups=["boundary"]]
 position = Vector2(0, -900)
 rotation = 3.14159
 scale = Vector2(10, 10)
 shape = SubResource("WorldBoundaryShape2D_iwr00")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" groups=["boundary"]]
 position = Vector2(-1400, 45)
 rotation = 1.5708
 scale = Vector2(10, 10)
 shape = SubResource("WorldBoundaryShape2D_iwr00")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D" groups=["boundary"]]
 position = Vector2(1400, 45)
 rotation = -1.5708
 scale = Vector2(10, 10)

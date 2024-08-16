@@ -178,6 +178,10 @@ size = Vector2(38.3961, 27.9972)
 position = Vector2(0, -25)
 collision_layer = 2
 script = ExtResource("1_2ask5")
+damage = null
+DEADZONE = null
+DEADZONEY = null
+player_index = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
 position = Vector2(0, -25)
@@ -213,6 +217,5 @@ position = Vector2(17, -34)
 scale = Vector2(0.5, 0.5)
 
 [connection signal="area_entered" from="CollisionShape2D/Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="body_entered" from="CollisionShape2D/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="animation_finished" from="CollisionShape2D/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="CollisionShape2D/AnimatedSprite2D/Melee" to="." method="_on_melee_body_entered"]

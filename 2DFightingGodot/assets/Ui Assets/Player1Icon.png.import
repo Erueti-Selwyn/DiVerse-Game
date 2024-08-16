@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dr0icgjach32b"
-path="res://.godot/imported/Mexican-Vol2-Sheet.png-3325d5902bf7506c31bf59bb267eb5e6.ctex"
+uid="uid://c3i46n74vnk12"
+path="res://.godot/imported/Player1Icon.png-23ce7c716b59ca281c57970d115f41f1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player animation/base player/Mexican-Vol2-Sheet.png"
-dest_files=["res://.godot/imported/Mexican-Vol2-Sheet.png-3325d5902bf7506c31bf59bb267eb5e6.ctex"]
+source_file="res://assets/Ui Assets/Player1Icon.png"
+dest_files=["res://.godot/imported/Player1Icon.png-23ce7c716b59ca281c57970d115f41f1.ctex"]
 
 [params]
 
