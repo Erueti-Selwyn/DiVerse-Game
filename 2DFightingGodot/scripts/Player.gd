@@ -37,7 +37,7 @@ var isHit = false
 
 #var velocity = Vector2(0, 1)
 var speed = 300
-@export var damage = 2
+@export var damage = 10
 var knockback_strength = 1000
 var knockback_health = 1
 
@@ -148,8 +148,6 @@ func _physics_process(_delta):
 		velocity.x = move_toward(velocity.x, 0, MAX_FRICTION)
 	else:
 		velocity.x = move_toward(velocity.x, 0, FRICTION)
-	if attacking:
-		velocity = Vector2.ZERO
 	if playercontroller:
 		direction_inputY = Input.get_joy_axis(player_controller_index, 1)
 		if abs(direction_inputY) < DEADZONEY:
