@@ -112,7 +112,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack",
-"speed": 60.0
+"speed": 30.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -172,7 +172,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_68qsj"]
-size = Vector2(38.3961, 27.9972)
+size = Vector2(27.1973, 27.9972)
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
 position = Vector2(0, -25)
@@ -193,6 +193,8 @@ shape = SubResource("RectangleShape2D_03cw0")
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_fb2fc")
 animation = &"attack"
+frame = 6
+frame_progress = 1.0
 
 [node name="Melee" type="Area2D" parent="CollisionShape2D/AnimatedSprite2D"]
 position = Vector2(0, -17.5018)
@@ -201,7 +203,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="AttackCollision" type="CollisionShape2D" parent="CollisionShape2D/AnimatedSprite2D/Melee"]
-position = Vector2(42.3957, 29.1999)
+position = Vector2(36.7963, 29.1999)
 shape = SubResource("RectangleShape2D_68qsj")
 
 [node name="Marker2D" type="Marker2D" parent="."]
