@@ -26,7 +26,7 @@ layout_mode = 0
 offset_top = 40.0
 offset_right = 40.0
 offset_bottom = 63.0
-color = Color(0.133333, 0.12549, 0.203922, 1)
+color = Color(0.964706, 0.52549, 0.27451, 1)
 
 [node name="Label" type="Label" parent="Player 1"]
 layout_mode = 0
@@ -45,6 +45,7 @@ offset_bottom = 40.0
 texture = ExtResource("3_2mo61")
 
 [node name="ColorRect" type="ColorRect" parent="Player 2"]
+layout_mode = 0
 offset_top = 40.0
 offset_right = 40.0
 offset_bottom = 63.0
