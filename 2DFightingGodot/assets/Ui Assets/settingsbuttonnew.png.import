@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7e23yjfssabb"
-path="res://.godot/imported/prototypegun.png-0e907dc392051c98e76b5073ee0a6fd1.ctex"
+uid="uid://cnaxv88motqhs"
+path="res://.godot/imported/settingsbuttonnew.png-2adbbdcab42979a0fa801816694242d6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/prototypegun.png"
-dest_files=["res://.godot/imported/prototypegun.png-0e907dc392051c98e76b5073ee0a6fd1.ctex"]
+source_file="res://assets/Ui Assets/settingsbuttonnew.png"
+dest_files=["res://.godot/imported/settingsbuttonnew.png-2adbbdcab42979a0fa801816694242d6.ctex"]
 
 [params]
 

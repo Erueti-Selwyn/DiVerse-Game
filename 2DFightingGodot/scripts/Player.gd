@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 const bulletPath = preload("res://Gun/bullet.tscn")
-const MAX_SPEED = 300
-const ACCELERATION = 60
+const MAX_SPEED = 600
+const ACCELERATION = 120
 const JUMP_HIGHT = 600
 const GRAVITY = 30
 const UP = Vector2(0, -1)
@@ -14,6 +14,9 @@ var can_jump = false
 var isGravity = true
 var dub_jumps = 0
 var max_num_dub_jumps = 3 
+
+var MAX_FRICTION = 300
+var FRICTION = 60
 
 var normalSpeed = 450
 var crouchSpeed = 300
@@ -34,7 +37,9 @@ var isHit = false
 
 #var velocity = Vector2(0, 1)
 var speed = 300
-@export var health = 100
+var damage = 2
+var knockback_strength = 50
+var knockback_health = 1
 
 
 var directionX
@@ -54,6 +59,7 @@ var playercontroller = true
 @onready var _attack_collision = $CollisionShape2D/AnimatedSprite2D/Melee/AttackCollision
 @onready var global_script = $"/root/Global"
 func _ready():
+	knockback_health = 100
 	_attack_collision.disabled = true
 	if player_index == 0:
 		if global_script.player1Controller == true:
@@ -74,9 +80,18 @@ func _ready():
 
 		
 func _process(_delta):
-	if health == 0:
-		queue_free()
-
+	if Input.is_action_just_pressed("move_down"):
+		if isHoldingGun:
+			isHoldingGun = false
+		else:
+			isHoldingGun = true
+	if knockback_health < 0:
+		knockback_health = 0
+	if player_index == 0:
+		global_script.player1health = knockback_health
+	elif player_index == 1:
+		global_script.player2health = knockback_health
+		
 	if playercontroller:
 		if isHoldingGun:
 			if Input.is_joy_button_pressed(player_controller_index, 2):
@@ -129,21 +144,17 @@ func _physics_process(_delta):
 		directionX = 0
 	else:
 		directionX = (direction_inputX - sign(direction_inputX) * DEADZONE) / (1 - DEADZONE)
-	if dashing && !attacking && !isHit:
+	if dashing && !isHit:
 			velocity.x = dashSpeed * dashDirection
-	elif !attacking && !isHit:
-		if velocity.x > MAX_SPEED:
-			velocity.x = MAX_SPEED
-		elif velocity.x < -MAX_SPEED:
-			velocity.x = -MAX_SPEED
-		if directionX != 0 && !dashing:
-			velocity.x = velocity.x + (ACCELERATION * directionX)
-		else:
-			velocity.x = move_toward(velocity.x, 0, MAX_SPEED)
-	if attacking:
-		velocity = Vector2.ZERO
-	if isHit:
-		velocity = Vector2.ZERO
+	elif !isHit && directionX != 0 && !dashing:
+		velocity.x = velocity.x + (ACCELERATION * directionX)
+			
+	if velocity.x > MAX_SPEED:
+		velocity.x = move_toward(velocity.x, 0, MAX_FRICTION)
+	elif velocity.x < -MAX_SPEED:
+		velocity.x = move_toward(velocity.x, 0, MAX_FRICTION)
+	else:
+		velocity.x = move_toward(velocity.x, 0, FRICTION)
 	if playercontroller:
 		direction_inputY = Input.get_joy_axis(player_controller_index, 1)
 		if abs(direction_inputY) < DEADZONEY:
@@ -193,7 +204,10 @@ func _physics_process(_delta):
 					velocity.x = (MAX_SPEED * 3)
 		else:
 			joy_jump_pressed = false
-
+	
+	if attacking:
+		velocity.x = 0
+	
 	if is_on_wall() && (directionX == -1 || directionX == 1) && !attacking:
 		dub_jumps = max_num_dub_jumps
 		if velocity.y >= 0: 
@@ -201,7 +215,7 @@ func _physics_process(_delta):
 		
 		else:
 			velocity.y += GRAVITY
-	elif !is_on_floor() && !attacking:
+	elif !is_on_floor():
 		velocity.y += GRAVITY
 		
 	if dashing:
@@ -222,38 +236,39 @@ func shoot():
 	get_parent().add_child(bullet)
 
 func dash():
-	if !dashing:
-		if facingRight:
-			dashDirection = 1
-		else:
-			dashDirection = -1
-	if currentDashAmount > 0 and !dashing and canDash:
-		dashing = true
-		canDash = false
-		currentDashAmount -= 1
-		await get_tree().create_timer(0.1).timeout
-		dashing = false
-		await get_tree().create_timer(0.5).timeout
-		canDash = true
+	if !attacking && !isHit:
+		if !dashing:
+			if facingRight:
+				dashDirection = 1
+			else:
+				dashDirection = -1
+		if currentDashAmount > 0 and !dashing and canDash:
+			dashing = true
+			canDash = false
+			currentDashAmount -= 1
+			await get_tree().create_timer(0.1).timeout
+			dashing = false
+			await get_tree().create_timer(0.5).timeout
+			canDash = true
 		
 func attack():
-	if !attacking:
+	if !attacking && !dashing:
 		_attack_collision.disabled = false
 		attacking = true
 		_animated_sprite.play("attack")
-
-func _on_area_2d_body_entered(body):
-	var collided_script = body.get("player_index")
-	if collided_script == player_index:
-		position = Vector2(0, 0)
-		velocity = Vector2(0, 0)
+	
 
 func _on_melee_body_entered(body):
 	if body.is_in_group("player"):
-		body.is_hit(0)
+		body.is_hit(global_position, damage)
 
-func is_hit(dir):
-	health -= 10
+func is_hit(attacker_position, damage_done):
+	var knockback_direction = global_position - attacker_position
+	knockback_health = knockback_health - damage_done
+	if knockback_direction.x > 0:
+		velocity.x = velocity.x + knockback_strength * ((100 - knockback_health) + 1) 
+	elif knockback_direction.x < 0:
+		velocity.x = velocity.x - knockback_strength * ((100 - knockback_health) + 1) 
 	isHit = true
 	_animated_sprite.modulate = Color(1, 0, 0) 
 	await get_tree().create_timer(0.15).timeout
@@ -265,3 +280,10 @@ func _on_animated_sprite_2d_animation_finished():
 	if $CollisionShape2D/AnimatedSprite2D.animation == "attack":
 		_attack_collision.disabled = true
 		attacking = false
+
+
+func _on_area_2d_area_entered(area):
+	if area.is_in_group("boundary"):
+		print("boundary")
+		position = Vector2(0, 0)
+		velocity = Vector2(0, 0)
