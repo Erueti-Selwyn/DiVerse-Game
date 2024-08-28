@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5d2cnlqs3xp2"]
+[gd_scene load_steps=10 format=3 uid="uid://b5d2cnlqs3xp2"]
 
-[ext_resource type="Script" path="res://scripts/menu.gd" id="1_imw7a"]
+[ext_resource type="Texture2D" uid="uid://vmsu4igxgoq" path="res://assets/Ui Assets/TestBackground.png" id="1_di8st"]
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_umyi2"]
+[ext_resource type="Texture2D" uid="uid://wj0mjg8w83iq" path="res://assets/Ui Assets/playerbuttonnew.png" id="2_8eomo"]
+[ext_resource type="Texture2D" uid="uid://cnaxv88motqhs" path="res://assets/Ui Assets/settingsbuttonnew.png" id="3_iqcc3"]
+[ext_resource type="Texture2D" uid="uid://dwhf1gik7nnh" path="res://assets/Ui Assets/quitbuttonnew.png" id="4_d8a5c"]
+[ext_resource type="Texture2D" uid="uid://cff55l6rggsy8" path="res://assets/Ui Assets/playerbuttonhovernew.png" id="4_pkr3k"]
+[ext_resource type="Texture2D" uid="uid://dn6e8e81q41eh" path="res://assets/Ui Assets/settingsbuttonhovernew.png" id="6_dg6go"]
+[ext_resource type="Texture2D" uid="uid://bpaxm615l2eke" path="res://assets/Ui Assets/quitbuttonhovernew.png" id="8_6d1dl"]
+
+[sub_resource type="SystemFont" id="SystemFont_siums"]
+font_names = PackedStringArray("Impact")
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -9,28 +19,88 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_imw7a")
+script = ExtResource("1_umyi2")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_di8st")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 60
 
-[node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Seperator" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Play"
 
-[node name="Settings" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Settings"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 24
+theme_override_fonts/font = SubResource("SystemFont_siums")
+theme_override_font_sizes/font_size = 64
+text = "Game Title"
+horizontal_alignment = 1
 
-[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-text = "Quit"
+alignment = 1
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="Seperator2" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="Play" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(240, 120)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture_normal = ExtResource("2_8eomo")
+texture_hover = ExtResource("4_pkr3k")
+stretch_mode = 5
+
+[node name="Seperator3" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Settings" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 60)
+layout_mode = 2
+texture_normal = ExtResource("3_iqcc3")
+texture_hover = ExtResource("6_dg6go")
+stretch_mode = 5
+
+[node name="Seperator4" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Quit" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 60)
+layout_mode = 2
+texture_normal = ExtResource("4_d8a5c")
+texture_hover = ExtResource("8_6d1dl")
+stretch_mode = 5
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

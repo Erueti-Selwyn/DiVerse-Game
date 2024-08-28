@@ -1,9 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://bdxtusi0wukv6"]
+[gd_scene load_steps=27 format=3 uid="uid://bdxtusi0wukv6"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_2ask5"]
 [ext_resource type="Texture2D" uid="uid://mkkiqqr3st34" path="res://assets/player animation/base player/Mexican-Sheet-Vol3.png" id="2_ygxmt"]
 [ext_resource type="PackedScene" uid="uid://crjct4eacspjk" path="res://Gun/bullet.tscn" id="4_7bl0q"]
-[ext_resource type="Texture2D" uid="uid://c7p3prq4fggko" path="res://Gun/mexicogun.png" id="5_vwa04"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptv32"]
 size = Vector2(20, 50)
@@ -113,7 +112,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack",
-"speed": 30.0
+"speed": 25.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -173,12 +172,16 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_68qsj"]
-size = Vector2(27.1973, 27.9972)
+size = Vector2(38.3961, 27.9972)
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
 position = Vector2(0, -25)
 collision_layer = 2
 script = ExtResource("1_2ask5")
+damage = null
+DEADZONE = null
+DEADZONEY = null
+player_index = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["player"]]
 position = Vector2(0, -25)
@@ -193,9 +196,7 @@ shape = SubResource("RectangleShape2D_03cw0")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_fb2fc")
-animation = &"attack"
-frame = 6
-frame_progress = 1.0
+animation = &"wall"
 
 [node name="Melee" type="Area2D" parent="CollisionShape2D/AnimatedSprite2D"]
 position = Vector2(0, -17.5018)
@@ -204,7 +205,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="AttackCollision" type="CollisionShape2D" parent="CollisionShape2D/AnimatedSprite2D/Melee"]
-position = Vector2(36.7963, 29.1999)
+position = Vector2(42.3957, 29.1999)
 shape = SubResource("RectangleShape2D_68qsj")
 
 [node name="Marker2D" type="Marker2D" parent="."]
@@ -215,9 +216,6 @@ visible = false
 position = Vector2(17, -34)
 scale = Vector2(0.5, 0.5)
 
-
 [connection signal="area_entered" from="CollisionShape2D/Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="body_entered" from="CollisionShape2D/Area2D" to="." method="_on_area_2d_body_entered"]
-
 [connection signal="animation_finished" from="CollisionShape2D/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="CollisionShape2D/AnimatedSprite2D/Melee" to="." method="_on_melee_body_entered"]
