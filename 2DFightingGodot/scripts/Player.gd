@@ -250,7 +250,7 @@ func _on_area_2d_body_entered(body):
 
 func _on_melee_body_entered(body):
 	if body.is_in_group("player"):
-		body.is_hit()
+		body.is_hit(0)
 
 func is_hit(dir):
 	health -= 10
