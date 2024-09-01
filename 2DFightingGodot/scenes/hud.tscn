@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://u3qy208g8d7a"]
+
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1_n5evy"]
+[ext_resource type="Texture2D" uid="uid://c3i46n74vnk12" path="res://assets/Ui Assets/Player1Icon.png" id="1_pki0v"]
+[ext_resource type="LabelSettings" uid="uid://3b1b5736t5jy" path="res://assets/Ui Assets/UI_Resource.tres" id="2_ckdan"]
+[ext_resource type="Texture2D" uid="uid://csni7n4ymjquc" path="res://assets/Ui Assets/Player2Icon.png" id="3_2mo61"]
+
+[node name="hud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n5evy")
+
+[node name="Player 1" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -52.0
+offset_right = -12.0
+offset_bottom = 40.0
+texture = ExtResource("1_pki0v")
+
+[node name="ColorRect" type="ColorRect" parent="Player 1"]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 63.0
+color = Color(0.964706, 0.52549, 0.27451, 1)
+
+[node name="Label" type="Label" parent="Player 1"]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 63.0
+text = "0 %"
+label_settings = ExtResource("2_ckdan")
+horizontal_alignment = 1
+
+[node name="Player 2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 13.0
+offset_right = 53.0
+offset_bottom = 40.0
+texture = ExtResource("3_2mo61")
+
+[node name="ColorRect" type="ColorRect" parent="Player 2"]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 63.0
+color = Color(0.133333, 0.12549, 0.203922, 1)
+
+[node name="Label" type="Label" parent="Player 2"]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 63.0
+text = "0 %"
+label_settings = ExtResource("2_ckdan")
+horizontal_alignment = 1
