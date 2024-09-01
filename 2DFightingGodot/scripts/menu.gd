@@ -12,7 +12,7 @@ func _process(_delta):
 
 func _on_play_pressed():
 	if !global_script.player1Controller && !global_script.player2Controller:
-		print("Cannot Have 2 Keyboards")
+		print("Cannot Have 2 Keyboard Inputs!")
 	else:
 		get_tree().change_scene_to_file("res://scenes/Level.tscn")
 

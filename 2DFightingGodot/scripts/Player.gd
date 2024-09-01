@@ -146,7 +146,7 @@ func _physics_process(_delta):
 		directionX = (direction_inputX - sign(direction_inputX) * DEADZONE) / (1 - DEADZONE)
 	if dashing && !isHit:
 			velocity.x = dashSpeed * dashDirection
-	elif !isHit && directionX != 0 && !dashing:
+	elif !isHit && directionX != 0 && !dashing && !attacking:
 		velocity.x = velocity.x + (ACCELERATION * directionX)
 			
 	if velocity.x > MAX_SPEED:
@@ -204,9 +204,6 @@ func _physics_process(_delta):
 					velocity.x = (MAX_SPEED * 3)
 		else:
 			joy_jump_pressed = false
-	
-	if attacking:
-		velocity.x = 0
 	
 	if is_on_wall() && (directionX == -1 || directionX == 1) && !attacking:
 		dub_jumps = max_num_dub_jumps
