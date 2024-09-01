@@ -1,6 +1,10 @@
 extends CharacterBody2D
 
-const bulletPath = preload("res://Gun/bullet.tscn")
+const africanPistolSprite = preload("res://assets/guns/africanpistol.png")
+const chinesePistolSprite = preload("res://assets/guns/chinesepistol.png")
+const japanesePistolSprite = preload("res://assets/guns/japanesepistol.png")
+const polynesianPistolSprite = preload("res://assets/guns/polynesianpistol.png")
+const bulletPath = preload("res://scenes/bullet.tscn")
 const MAX_SPEED = 600
 const ACCELERATION = 120
 const JUMP_HIGHT = 600
@@ -31,9 +35,12 @@ var dashSpeed = 1700
 
 var joy_jump_pressed = false
 
+var shootCooldown = 0.3
 var isHoldingGun = false
 var attacking = false
 var isHit = false
+
+var canShoot = true
 
 #var velocity = Vector2(0, 1)
 var speed = 300
@@ -47,8 +54,6 @@ var directionY
 var direction_inputX
 var direction_inputY
 var facingRight = true
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @export var DEADZONE = 0.2
 @export var DEADZONEY = 0.9
@@ -58,6 +63,7 @@ var playercontroller = true
 @onready var _animated_sprite = $CollisionShape2D/AnimatedSprite2D
 @onready var _attack_collision = $CollisionShape2D/AnimatedSprite2D/Melee/AttackCollision
 @onready var global_script = $"/root/Global"
+@onready var gunSprite = $"CollisionShape2D/AnimatedSprite2D/Gun"
 func _ready():
 	knockback_health = 100
 	_attack_collision.disabled = true
@@ -146,7 +152,7 @@ func _physics_process(_delta):
 		directionX = (direction_inputX - sign(direction_inputX) * DEADZONE) / (1 - DEADZONE)
 	if dashing && !isHit:
 			velocity.x = dashSpeed * dashDirection
-	elif !isHit && directionX != 0 && !dashing:
+	elif !isHit && directionX != 0 && !dashing && !attacking:
 		velocity.x = velocity.x + (ACCELERATION * directionX)
 			
 	if velocity.x > MAX_SPEED:
@@ -205,9 +211,6 @@ func _physics_process(_delta):
 		else:
 			joy_jump_pressed = false
 	
-	if attacking:
-		velocity.x = 0
-	
 	if is_on_wall() && (directionX == -1 || directionX == 1) && !attacking:
 		dub_jumps = max_num_dub_jumps
 		if velocity.y >= 0: 
@@ -227,13 +230,17 @@ func _physics_process(_delta):
 	
 	
 func shoot():
-	var bullet = bulletPath.instantiate()
-	if facingRight:
-		bullet._direction(1)
-	else:
-		bullet._direction(-1)
-	bullet.global_position = $Marker2D.global_position
-	get_parent().add_child(bullet)
+	if canShoot:
+		var bullet = bulletPath.instantiate()
+		if facingRight:
+			bullet._direction(1)
+		else:
+			bullet._direction(-1)
+		bullet.global_position = $CollisionShape2D/AnimatedSprite2D/Marker2D.global_position
+		get_parent().add_child(bullet)
+		canShoot = false
+		await get_tree().create_timer(shootCooldown).timeout
+		canShoot = true
 
 func dash():
 	if !attacking && !isHit:

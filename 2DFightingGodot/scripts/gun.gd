@@ -1,7 +1,7 @@
 extends Area2D
 
 #var velocity = Vector2(0, 1)
-var speed = 1200
+var speed = 1400
 var direction = 1
 
 func _direction(dir):

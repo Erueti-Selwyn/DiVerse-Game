@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://4smgw32hn4oe" path="res://assets/tilemaps/ScaryDungeonTileMap.png" id="1_pko7j"]
 [ext_resource type="Texture2D" uid="uid://d0kgbntfdy0gb" path="res://assets/image (2).png" id="2_qmg0v"]
 [ext_resource type="PackedScene" uid="uid://u3qy208g8d7a" path="res://scenes/hud.tscn" id="3_fsags"]
-[ext_resource type="PackedScene" uid="uid://bdxtusi0wukv6" path="res://scenes/Player1.tscn" id="4_l5f3c"]
+[ext_resource type="PackedScene" uid="uid://bdxtusi0wukv6" path="res://scenes/players/Mexican.tscn" id="4_l5f3c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n37u8"]
 texture = ExtResource("1_pko7j")

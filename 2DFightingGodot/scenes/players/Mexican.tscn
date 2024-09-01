@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_2ask5"]
 [ext_resource type="Texture2D" uid="uid://mkkiqqr3st34" path="res://assets/player animation/base player/Mexican-Sheet-Vol3.png" id="2_ygxmt"]
-[ext_resource type="PackedScene" uid="uid://crjct4eacspjk" path="res://Gun/bullet.tscn" id="4_7bl0q"]
-[ext_resource type="Texture2D" uid="uid://c7p3prq4fggko" path="res://Gun/mexicogun.png" id="5_vwa04"]
+[ext_resource type="Texture2D" uid="uid://6q05k1dfertx" path="res://assets/guns/africanpistol.png" id="3_idrbn"]
+[ext_resource type="PackedScene" uid="uid://crjct4eacspjk" path="res://scenes/bullet.tscn" id="3_jh43c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptv32"]
 size = Vector2(20, 50)
@@ -193,9 +193,16 @@ shape = SubResource("RectangleShape2D_03cw0")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_fb2fc")
-animation = &"attack"
-frame = 6
-frame_progress = 1.0
+animation = &"idle"
+
+[node name="Gun" type="Sprite2D" parent="CollisionShape2D/AnimatedSprite2D"]
+position = Vector2(18.5, 1.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_idrbn")
+
+[node name="Marker2D" type="Marker2D" parent="CollisionShape2D/AnimatedSprite2D"]
+position = Vector2(29, 21.5)
+scale = Vector2(0.5, 0.5)
 
 [node name="Melee" type="Area2D" parent="CollisionShape2D/AnimatedSprite2D"]
 position = Vector2(0, -17.5018)
@@ -207,17 +214,12 @@ collision_mask = 2
 position = Vector2(36.7963, 29.1999)
 shape = SubResource("RectangleShape2D_68qsj")
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(17, -34)
-
-[node name="Bullet" parent="." instance=ExtResource("4_7bl0q")]
+[node name="Bullet" parent="." instance=ExtResource("3_jh43c")]
 visible = false
 position = Vector2(17, -34)
 scale = Vector2(0.5, 0.5)
 
-
 [connection signal="area_entered" from="CollisionShape2D/Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="CollisionShape2D/Area2D" to="." method="_on_area_2d_body_entered"]
-
 [connection signal="animation_finished" from="CollisionShape2D/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="CollisionShape2D/AnimatedSprite2D/Melee" to="." method="_on_melee_body_entered"]

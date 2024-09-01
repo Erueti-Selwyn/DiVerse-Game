@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlxl582qanxn4"
-path="res://.godot/imported/Base_Idle0.png-9fe7641101e31c02f4369719ad945b0d.ctex"
+uid="uid://cthin7n67v6gu"
+path="res://.godot/imported/polynesianpistol.png-25e5a5815fffab6c0bbf56026cafbaae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player animation/base player/base idle/Base_Idle0.png"
-dest_files=["res://.godot/imported/Base_Idle0.png-9fe7641101e31c02f4369719ad945b0d.ctex"]
+source_file="res://assets/guns/polynesianpistol.png"
+dest_files=["res://.godot/imported/polynesianpistol.png-25e5a5815fffab6c0bbf56026cafbaae.ctex"]
 
 [params]
 
