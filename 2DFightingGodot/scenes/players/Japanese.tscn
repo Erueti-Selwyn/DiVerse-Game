@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_ybu1k"]
 [ext_resource type="Texture2D" uid="uid://mkkiqqr3st34" path="res://assets/player animation/base player/Mexican-Sheet-Vol3.png" id="2_7ys8l"]
 [ext_resource type="Texture2D" uid="uid://ca5e3kagggrvs" path="res://assets/player animation/base player/japan man.aesprite-Sheet.png" id="3_16fgj"]
-[ext_resource type="PackedScene" uid="uid://crjct4eacspjk" path="res://Gun/bullet.tscn" id="4_uk8g3"]
+[ext_resource type="PackedScene" uid="uid://crjct4eacspjk" path="res://scenes/bullet.tscn" id="4_uk8g3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptv32"]
 size = Vector2(20, 50)
