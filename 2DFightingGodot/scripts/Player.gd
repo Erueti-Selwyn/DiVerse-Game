@@ -35,6 +35,7 @@ var dashSpeed = 1700
 
 var joy_jump_pressed = false
 
+var currentweapon = 0
 var shootCooldown = 0.3
 var isHoldingGun = false
 var attacking = false
@@ -45,7 +46,7 @@ var canShoot = true
 #var velocity = Vector2(0, 1)
 var speed = 300
 var damage = 2
-var knockback_strength = 50
+var knockback_strength = 150
 var knockback_health = 1
 
 
@@ -55,9 +56,12 @@ var direction_inputX
 var direction_inputY
 var facingRight = true
 
+var playerCharacter = "mexican"
+
 @export var DEADZONE = 0.2
 @export var DEADZONEY = 0.9
 @export var player_index = 0
+@export var gunDamage = 5
 var player_controller_index
 var playercontroller = true
 @onready var _animated_sprite = $CollisionShape2D/AnimatedSprite2D
@@ -83,9 +87,26 @@ func _ready():
 
 		elif global_script.player2Controller == false:
 			playercontroller = false
-
+	
+	if player_index == 0:
+		playerCharacter = global_script.globalPlayerCharacter1
+	elif player_index == 1:
+		playerCharacter = global_script.globalPlayerCharacter2
 		
 func _process(_delta):
+	if Input.is_action_just_pressed("1"):
+		if currentweapon == 4:
+			currentweapon = 1
+		else:
+			currentweapon += 1
+	if currentweapon == 1:
+		gunSprite.texture = africanPistolSprite
+	elif currentweapon == 2:
+		gunSprite.texture = chinesePistolSprite
+	elif currentweapon == 3:
+		gunSprite.texture = japanesePistolSprite
+	elif currentweapon == 4:
+		gunSprite.texture = polynesianPistolSprite
 	if Input.is_action_just_pressed("move_down"):
 		if isHoldingGun:
 			isHoldingGun = false
@@ -112,17 +133,30 @@ func _process(_delta):
 		else:
 			if Input.is_action_just_pressed("shoot"):
 				attack()
-	if velocity == Vector2(0, 0) && !attacking:
-		_animated_sprite.play("idle")
-	if is_on_floor() && !dashing && !attacking:
-		if velocity.x > 0:
-			_animated_sprite.play("walk")
-		elif velocity.x < 0:
-			_animated_sprite.play("walk")
-	if !is_on_floor() && !attacking:
-		_animated_sprite.play("jump")
-	if is_on_wall() && !is_on_floor() && !attacking:
-		_animated_sprite.play("wall")
+	if playerCharacter == 0:
+		if velocity == Vector2(0, 0) && !attacking:
+			_animated_sprite.play("mexicanidle")
+		if is_on_floor() && !dashing && !attacking:
+			if velocity.x > 0:
+				_animated_sprite.play("mexicanwalk")
+			elif velocity.x < 0:
+				_animated_sprite.play("mexicanwalk")
+		if !is_on_floor() && !attacking:
+			_animated_sprite.play("mexicanjump")
+		if is_on_wall() && !is_on_floor() && !attacking:
+			_animated_sprite.play("mexicanwall")
+	if playerCharacter == 1:
+		if velocity == Vector2(0, 0) && !attacking:
+			_animated_sprite.play("japaneseidle")
+		if is_on_floor() && !dashing && !attacking:
+			if velocity.x > 0:
+				_animated_sprite.play("japanesewalk")
+			elif velocity.x < 0:
+				_animated_sprite.play("japanesewalk")
+		if !is_on_floor() && !attacking:
+			_animated_sprite.play("japanesejump")
+		if is_on_wall() && !is_on_floor() && !attacking:
+			_animated_sprite.play("japanesewall")
 
 	if velocity.x > 0:
 		_animated_sprite.scale.x = 1
@@ -233,9 +267,9 @@ func shoot():
 	if canShoot:
 		var bullet = bulletPath.instantiate()
 		if facingRight:
-			bullet._direction(1)
+			bullet.bulletspawn(1, player_index, gunDamage)
 		else:
-			bullet._direction(-1)
+			bullet.bulletspawn(-1, player_index, gunDamage)
 		bullet.global_position = $CollisionShape2D/AnimatedSprite2D/Marker2D.global_position
 		get_parent().add_child(bullet)
 		canShoot = false
@@ -257,7 +291,7 @@ func dash():
 			dashing = false
 			await get_tree().create_timer(0.5).timeout
 			canDash = true
-		
+			
 func attack():
 	if !attacking && !dashing:
 		_attack_collision.disabled = false
@@ -273,9 +307,9 @@ func is_hit(attacker_position, damage_done):
 	var knockback_direction = global_position - attacker_position
 	knockback_health = knockback_health - damage_done
 	if knockback_direction.x > 0:
-		velocity.x = velocity.x + knockback_strength * ((100 - knockback_health) + 1) 
+		velocity.x = velocity.x + (knockback_strength * damage_done + 25 * ((100 - knockback_health) + 1))
 	elif knockback_direction.x < 0:
-		velocity.x = velocity.x - knockback_strength * ((100 - knockback_health) + 1) 
+		velocity.x = velocity.x - (knockback_strength * damage_done + 25 * ((100 - knockback_health) + 1))
 	isHit = true
 	_animated_sprite.modulate = Color(1, 0, 0) 
 	await get_tree().create_timer(0.15).timeout
@@ -294,3 +328,20 @@ func _on_area_2d_area_entered(area):
 		print("boundary")
 		position = Vector2(0, 0)
 		velocity = Vector2(0, 0)
+		
+func get_player_index():
+	return(player_index)
+
+func bullet_hit(bullet_direction, damage_done):
+	var knockback_direction = bullet_direction
+	knockback_health = knockback_health - damage_done
+	print(damage_done)
+	if knockback_direction > 0:
+		velocity.x = velocity.x + (knockback_strength * damage_done + 25 * ((100 - knockback_health) + 1))
+	elif knockback_direction < 0:
+		velocity.x = velocity.x - (knockback_strength * damage_done + 25 * ((100 - knockback_health) + 1))
+	isHit = true
+	_animated_sprite.modulate = Color(1, 0, 0) 
+	await get_tree().create_timer(0.15).timeout
+	isHit = false
+	_animated_sprite.modulate = Color(1, 1, 1)

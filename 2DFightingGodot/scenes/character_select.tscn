@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmvkiyfy67r1b"]
+[gd_scene load_steps=3 format=3 uid="uid://cmvkiyfy67r1b"]
 
+[ext_resource type="Script" path="res://scenes/character_select.gd" id="1_mqc48"]
 [ext_resource type="Texture2D" uid="uid://vmsu4igxgoq" path="res://assets/Ui Assets/TestBackground.png" id="1_n5aum"]
 
 [node name="character_select" type="Control"]
@@ -9,6 +10,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+script = ExtResource("1_mqc48")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -20,6 +24,145 @@ grow_vertical = 2
 texture = ExtResource("1_n5aum")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Exits2" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Exit
+"
+
+[node name="seperator" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 100
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Player 1"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Player 2"
+horizontal_alignment = 1
+
+[node name="seperator3" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 100
+
+[node name="Player1Character" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+item_count = 6
+selected = 0
+popup/item_0/text = "Mexican"
+popup/item_0/id = 0
+popup/item_1/text = "Japanese"
+popup/item_1/id = 1
+popup/item_2/text = "Chinese"
+popup/item_2/id = 2
+popup/item_3/text = "Samoan"
+popup/item_3/id = 3
+popup/item_4/text = "African"
+popup/item_4/id = 4
+popup/item_5/text = "Norway"
+popup/item_5/id = 5
+
+[node name="Player2Character" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+item_count = 6
+selected = 0
+popup/item_0/text = "Mexican"
+popup/item_0/id = 0
+popup/item_1/text = "Japanese"
+popup/item_1/id = 1
+popup/item_2/text = "Chinese"
+popup/item_2/id = 2
+popup/item_3/text = "Samoan"
+popup/item_3/id = 3
+popup/item_4/text = "African"
+popup/item_4/id = 5
+popup/item_5/text = "Norway"
+popup/item_5/id = 4
+
+[node name="seperator2" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 100
+
+[node name="Player1Input" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+item_count = 2
+selected = 0
+fit_to_longest_item = false
+popup/item_0/text = "Controller"
+popup/item_0/id = 0
+popup/item_1/text = "Keyboard"
+popup/item_1/id = 1
+
+[node name="Player2Input" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+item_count = 2
+selected = 0
+fit_to_longest_item = false
+popup/item_0/text = "Controller"
+popup/item_0/id = 0
+popup/item_1/text = "Keyboard"
+popup/item_1/id = 1
+
+[node name="seperator4" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+
+[node name="Start" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 30
+text = "START
+"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Exits2" to="." method="_on_exits_pressed"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/HBoxContainer/Player1Character" to="." method="_on_player_1_character_item_selected"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/HBoxContainer/Player2Character" to="." method="_on_player_2_character_item_selected"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/HBoxContainer3/Player1Input" to="." method="_on_player_1_input_item_selected"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/HBoxContainer3/Player2Input" to="." method="_on_player_2_input_item_selected"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
