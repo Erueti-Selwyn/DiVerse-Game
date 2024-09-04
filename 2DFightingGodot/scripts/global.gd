@@ -4,6 +4,8 @@ extends Node
 @export var player2Controller = true
 @export var player1health = 0
 @export var player2health = 0
+@export var globalPlayerCharacter1 = 0
+@export var globalPlayerCharacter2 = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
