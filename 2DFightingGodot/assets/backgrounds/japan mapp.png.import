@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0kgbntfdy0gb"
-path="res://.godot/imported/image (2).png-0610440b3c5c8d4154e0877e371029fd.ctex"
+uid="uid://dfioa50vtvf7l"
+path="res://.godot/imported/japan mapp.png-c8bdd20305b5c2e42235a644a0085ae8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/image (2).png"
-dest_files=["res://.godot/imported/image (2).png-0610440b3c5c8d4154e0877e371029fd.ctex"]
+source_file="res://assets/backgrounds/japan mapp.png"
+dest_files=["res://.godot/imported/japan mapp.png-c8bdd20305b5c2e42235a644a0085ae8.ctex"]
 
 [params]
 
