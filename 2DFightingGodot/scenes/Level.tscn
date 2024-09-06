@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dfdn4clkj55a4"]
 
 [ext_resource type="Texture2D" uid="uid://4smgw32hn4oe" path="res://assets/tilemaps/ScaryDungeonTileMap.png" id="1_pko7j"]
-[ext_resource type="Texture2D" uid="uid://d0kgbntfdy0gb" path="res://assets/image (2).png" id="2_qmg0v"]
+[ext_resource type="Texture2D" uid="uid://bq3600641qb0p" path="res://assets/backgrounds/Japan maps-01.png" id="2_3ox7f"]
 [ext_resource type="PackedScene" uid="uid://u3qy208g8d7a" path="res://scenes/hud.tscn" id="3_fsags"]
 [ext_resource type="PackedScene" uid="uid://bdxtusi0wukv6" path="res://scenes/players/Mexican.tscn" id="4_l5f3c"]
 
@@ -59,7 +59,8 @@ offset_left = -1039.0
 offset_top = -635.0
 offset_right = 1065.0
 offset_bottom = 545.0
-texture = ExtResource("2_qmg0v")
+texture = ExtResource("2_3ox7f")
+expand_mode = 2
 stretch_mode = 4
 
 [node name="hud" parent="Camera2D" instance=ExtResource("3_fsags")]
