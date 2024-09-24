@@ -68,6 +68,8 @@ var playercontroller = true
 @onready var _attack_collision = $CollisionShape2D/AnimatedSprite2D/Melee/AttackCollision
 @onready var global_script = $"/root/Global"
 @onready var gunSprite = $"CollisionShape2D/AnimatedSprite2D/Gun"
+@onready var playerLabel = $"Label"
+@onready var spawnLocation1 = $"/"
 func _ready():
 	knockback_health = 100
 	_attack_collision.disabled = true
@@ -92,7 +94,7 @@ func _ready():
 		playerCharacter = global_script.globalPlayerCharacter1
 	elif player_index == 1:
 		playerCharacter = global_script.globalPlayerCharacter2
-		
+	playerLabel.text = "Player: " + str(player_index)
 func _process(_delta):
 	if Input.is_action_just_pressed("1"):
 		if currentweapon == 4:
@@ -133,19 +135,7 @@ func _process(_delta):
 		else:
 			if Input.is_action_just_pressed("shoot"):
 				attack()
-	if playerCharacter == 6:
-		if velocity == Vector2(0, 0) && !attacking:
-			_animated_sprite.play("mexicanidle")
-		if is_on_floor() && !dashing && !attacking:
-			if velocity.x > 0:
-				_animated_sprite.play("mexicanwalk")
-			elif velocity.x < 0:
-				_animated_sprite.play("mexicanwalk")
-		if !is_on_floor() && !attacking:
-			_animated_sprite.play("mexicanjump")
-		if is_on_wall() && !is_on_floor() && !attacking:
-			_animated_sprite.play("mexicanwall")
-	if playerCharacter == 3:
+	if playerCharacter == 3: # Japanese
 		if velocity == Vector2(0, 0) && !attacking:
 			_animated_sprite.play("japaneseidle")
 		if is_on_floor() && !dashing && !attacking:
@@ -157,6 +147,19 @@ func _process(_delta):
 			_animated_sprite.play("japanesejump")
 		if is_on_wall() && !is_on_floor() && !attacking:
 			_animated_sprite.play("japanesewall")
+	if playerCharacter == 6: # Mexican
+		if velocity == Vector2(0, 0) && !attacking:
+			_animated_sprite.play("mexicanidle")
+		if is_on_floor() && !dashing && !attacking:
+			if velocity.x > 0:
+				_animated_sprite.play("mexicanwalk")
+			elif velocity.x < 0:
+				_animated_sprite.play("mexicanwalk")
+		if !is_on_floor() && !attacking:
+			_animated_sprite.play("mexicanjump")
+		if is_on_wall() && !is_on_floor() && !attacking:
+			_animated_sprite.play("mexicanwall")
+	
 
 	if velocity.x > 0:
 		_animated_sprite.scale.x = 1

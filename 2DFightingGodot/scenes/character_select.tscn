@@ -147,6 +147,16 @@ layout_mode = 2
 texture_normal = ExtResource("4_6yor8")
 stretch_mode = 5
 
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/AfricanButton1"]
+self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/AfricanButton1"]
 layout_mode = 1
 anchors_preset = 15
@@ -157,21 +167,21 @@ grow_vertical = 2
 texture = ExtResource("4_4oogi")
 stretch_mode = 5
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/AfricanButton1/TextureRect"]
+[node name="ChineseButton1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("5_fyk4v")
+stretch_mode = 5
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/ChineseButton1"]
 self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
-z_index = -1
+show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="ChineseButton1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-texture_normal = ExtResource("5_fyk4v")
-stretch_mode = 5
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/ChineseButton1"]
 layout_mode = 1
@@ -183,21 +193,21 @@ grow_vertical = 2
 texture = ExtResource("4_4oogi")
 stretch_mode = 5
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/ChineseButton1/TextureRect"]
+[node name="JapaneseButton1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("6_dgcfs")
+stretch_mode = 5
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/JapaneseButton1"]
 self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
-z_index = -1
+show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="JapaneseButton1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-texture_normal = ExtResource("6_dgcfs")
-stretch_mode = 5
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/JapaneseButton1"]
 layout_mode = 1
@@ -209,16 +219,6 @@ grow_vertical = 2
 texture = ExtResource("4_4oogi")
 stretch_mode = 5
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/JapaneseButton1/TextureRect"]
-self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
-z_index = -1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
@@ -228,6 +228,16 @@ custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 texture_normal = ExtResource("7_utxde")
 stretch_mode = 5
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/SamoanButton1"]
+self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/SamoanButton1"]
 layout_mode = 1
@@ -239,21 +249,21 @@ grow_vertical = 2
 texture = ExtResource("4_4oogi")
 stretch_mode = 5
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/SamoanButton1/TextureRect"]
+[node name="VikingButton1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("8_mokyo")
+stretch_mode = 5
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/VikingButton1"]
 self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
-z_index = -1
+show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="VikingButton1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-texture_normal = ExtResource("8_mokyo")
-stretch_mode = 5
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/VikingButton1"]
 layout_mode = 1
@@ -265,21 +275,21 @@ grow_vertical = 2
 texture = ExtResource("4_4oogi")
 stretch_mode = 5
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/VikingButton1/TextureRect"]
+[node name="MexicanButton1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("8_87k8w")
+stretch_mode = 5
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/MexicanButton1"]
 self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
-z_index = -1
+show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="MexicanButton1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-texture_normal = ExtResource("8_87k8w")
-stretch_mode = 5
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/MexicanButton1"]
 layout_mode = 1
@@ -290,16 +300,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_4oogi")
 stretch_mode = 5
-
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/MexicanButton1/TextureRect"]
-self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
-z_index = -1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect"]
 layout_mode = 2
@@ -316,6 +316,16 @@ texture_normal = ExtResource("6_dgcfs")
 stretch_mode = 5
 flip_h = true
 
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/JapaneseButton2"]
+self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/JapaneseButton2"]
 layout_mode = 1
 anchors_preset = 15
@@ -326,22 +336,22 @@ grow_vertical = 2
 texture = ExtResource("4_4oogi")
 stretch_mode = 5
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/JapaneseButton2/TextureRect"]
-self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
-z_index = -1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="ChineseButton2" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 texture_normal = ExtResource("5_fyk4v")
 stretch_mode = 5
 flip_h = true
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/ChineseButton2"]
+self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/ChineseButton2"]
 layout_mode = 1
@@ -353,22 +363,22 @@ grow_vertical = 2
 texture = ExtResource("4_4oogi")
 stretch_mode = 5
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/ChineseButton2/TextureRect"]
-self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
-z_index = -1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="AfricanButton2" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 texture_normal = ExtResource("4_6yor8")
 stretch_mode = 5
 flip_h = true
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/AfricanButton2"]
+self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/AfricanButton2"]
 layout_mode = 1
@@ -379,16 +389,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_4oogi")
 stretch_mode = 5
-
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/AfricanButton2/TextureRect"]
-self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
-z_index = -1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2"]
 layout_mode = 2
@@ -401,6 +401,16 @@ texture_normal = ExtResource("8_87k8w")
 stretch_mode = 5
 flip_h = true
 
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/MexicanButton2"]
+self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/MexicanButton2"]
 layout_mode = 1
 anchors_preset = 15
@@ -411,22 +421,22 @@ grow_vertical = 2
 texture = ExtResource("4_4oogi")
 stretch_mode = 5
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/MexicanButton2/TextureRect"]
-self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
-z_index = -1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="VikingButton2" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 texture_normal = ExtResource("8_mokyo")
 stretch_mode = 5
 flip_h = true
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/VikingButton2"]
+self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/VikingButton2"]
 layout_mode = 1
@@ -438,22 +448,22 @@ grow_vertical = 2
 texture = ExtResource("4_4oogi")
 stretch_mode = 5
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/VikingButton2/TextureRect"]
-self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
-z_index = -1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="SamoanButton2" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 texture_normal = ExtResource("7_utxde")
 stretch_mode = 5
 flip_h = true
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/SamoanButton2"]
+self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/SamoanButton2"]
 layout_mode = 1
@@ -464,16 +474,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_4oogi")
 stretch_mode = 5
-
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/SamoanButton2/TextureRect"]
-self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
-z_index = -1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exits2" to="." method="_on_exits_pressed"]
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/HBoxContainer3/Player1Input" to="." method="_on_player_1_input_item_selected"]
