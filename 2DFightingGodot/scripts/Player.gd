@@ -56,11 +56,11 @@ var direction_inputX
 var direction_inputY
 var facingRight = true
 
-var playerCharacter = "mexican"
+var playerCharacter = 0
 
 @export var DEADZONE = 0.2
 @export var DEADZONEY = 0.9
-@export var player_index = 0
+@export var player_index = 1
 @export var gunDamage = 5
 var player_controller_index
 var playercontroller = true
@@ -69,30 +69,29 @@ var playercontroller = true
 @onready var global_script = $"/root/Global"
 @onready var gunSprite = $"CollisionShape2D/AnimatedSprite2D/Gun"
 @onready var playerLabel = $"Label"
-@onready var spawnLocation1 = $"/"
 func _ready():
 	knockback_health = 100
 	_attack_collision.disabled = true
-	if player_index == 0:
+	if player_index == 1:
 		if global_script.player1Controller == true:
-			player_controller_index = 0
+			player_controller_index = 1
 			playercontroller = true
 		elif global_script.player1Controller == false:
 			playercontroller = false
-	if player_index == 1:
+	if player_index == 2:
 		if global_script.player1Controller == false && global_script.player2Controller == true:
-			player_controller_index = 0
-		else:
 			player_controller_index = 1
+		else:
+			player_controller_index = 2
 		if global_script.player2Controller == true:
 			playercontroller = true
 
 		elif global_script.player2Controller == false:
 			playercontroller = false
 	
-	if player_index == 0:
+	if player_index == 1:
 		playerCharacter = global_script.globalPlayerCharacter1
-	elif player_index == 1:
+	elif player_index == 2:
 		playerCharacter = global_script.globalPlayerCharacter2
 	playerLabel.text = "Player: " + str(player_index)
 func _process(_delta):
@@ -116,9 +115,9 @@ func _process(_delta):
 			isHoldingGun = true
 	if knockback_health < 0:
 		knockback_health = 0
-	if player_index == 0:
+	if player_index == 1:
 		global_script.player1health = knockback_health
-	elif player_index == 1:
+	elif player_index == 2:
 		global_script.player2health = knockback_health
 		
 	if playercontroller:

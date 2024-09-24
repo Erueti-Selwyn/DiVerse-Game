@@ -105,4 +105,10 @@ position = Vector2(-345, 63)
 
 [node name="CharacterBody2D3" parent="." instance=ExtResource("4_l5f3c")]
 position = Vector2(344, 70)
-player_index = 1
+player_index = 2
+
+[node name="SpawnLocation1" type="Marker2D" parent="."]
+position = Vector2(-330, 0)
+
+[node name="SpawnLocation2" type="Marker2D" parent="."]
+position = Vector2(330, 0)

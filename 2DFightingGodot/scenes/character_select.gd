@@ -2,7 +2,8 @@ extends Control
 
 var player1Character = 1
 var player2Character = 1
-
+var localPlayer1Controller = true
+var localPlayer2Controller = true
 @onready var global_script = $"/root/Global"
 @onready var player1InputOption = $"MarginContainer/VBoxContainer/HBoxContainer3/Player1Input"
 @onready var player2InputOption = $"MarginContainer/VBoxContainer/HBoxContainer3/Player2Input"
@@ -14,15 +15,19 @@ func _ready():
 
 func _on_player_1_input_item_selected(index):
 	if index == 0:
-		global_script.player1Controller = true
+		localPlayer1Controller = true
+		print("Player 1 Controller")
 	elif index == 1:
-		global_script.player1Controller = false
+		localPlayer1Controller = false
+		print("Player 1 Keyboard")
 
 func _on_player_2_input_item_selected(index):
 	if index == 0:
-		global_script.player2Controller = true
+		localPlayer2Controller = true
+		print("Player 2 Controller")
 	elif index == 1:
-		global_script.player1Controller = false
+		localPlayer2Controller = false
+		print("Player 2 Keyboard")
 
 
 func _on_start_pressed():
@@ -31,6 +36,8 @@ func _on_start_pressed():
 	else:
 		global_script.globalPlayerCharacter1 = player1Character
 		global_script.globalPlayerCharacter2 = player2Character
+		global_script.player1Controller = localPlayer1Controller
+		global_script.player2Controller = localPlayer2Controller
 		get_tree().change_scene_to_file("res://scenes/level.tscn")
 
 
