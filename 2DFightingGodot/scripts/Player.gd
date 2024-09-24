@@ -133,7 +133,7 @@ func _process(_delta):
 		else:
 			if Input.is_action_just_pressed("shoot"):
 				attack()
-	if playerCharacter == 0:
+	if playerCharacter == 6:
 		if velocity == Vector2(0, 0) && !attacking:
 			_animated_sprite.play("mexicanidle")
 		if is_on_floor() && !dashing && !attacking:
@@ -145,7 +145,7 @@ func _process(_delta):
 			_animated_sprite.play("mexicanjump")
 		if is_on_wall() && !is_on_floor() && !attacking:
 			_animated_sprite.play("mexicanwall")
-	if playerCharacter == 1:
+	if playerCharacter == 3:
 		if velocity == Vector2(0, 0) && !attacking:
 			_animated_sprite.play("japaneseidle")
 		if is_on_floor() && !dashing && !attacking:
