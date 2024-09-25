@@ -1,5 +1,4 @@
 extends Control
-
 @onready var global_script = $"/root/Global"
 @onready var player1label = $"Player 1/Label"
 @onready var player2label = $"Player 2/Label"
@@ -17,3 +16,5 @@ func _process(_delta):
 	localplayer2health = global_script.player2health
 	player1label.text = str(localplayer1health) + " %"
 	player2label.text = str(localplayer2health) + " %"
+
+

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgode7an46hby"
-path="res://.godot/imported/Sprite-Sheet-Base-Idle-Punch.png-cddfc262d40f5ae5e3be972cd3011a2a.ctex"
+uid="uid://d3tigoeqhnpxk"
+path="res://.godot/imported/sniper.png-47c75768c258433aa567ad609097b1a6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player animation/base player/Sprite-Sheet-Base-Idle-Punch.png"
-dest_files=["res://.godot/imported/Sprite-Sheet-Base-Idle-Punch.png-cddfc262d40f5ae5e3be972cd3011a2a.ctex"]
+source_file="res://assets/guns/sniper.png"
+dest_files=["res://.godot/imported/sniper.png-47c75768c258433aa567ad609097b1a6.ctex"]
 
 [params]
 
