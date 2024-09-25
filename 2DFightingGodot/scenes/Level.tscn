@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dfdn4clkj55a4"]
+[gd_scene load_steps=10 format=3 uid="uid://dfdn4clkj55a4"]
 
 [ext_resource type="Texture2D" uid="uid://4smgw32hn4oe" path="res://assets/tilemaps/ScaryDungeonTileMap.png" id="1_pko7j"]
 [ext_resource type="Texture2D" uid="uid://dfioa50vtvf7l" path="res://assets/backgrounds/japan mapp.png" id="2_qmg0v"]
 [ext_resource type="PackedScene" uid="uid://u3qy208g8d7a" path="res://scenes/hud.tscn" id="3_fsags"]
 [ext_resource type="PackedScene" uid="uid://bdxtusi0wukv6" path="res://scenes/players/Player.tscn" id="4_l5f3c"]
+[ext_resource type="PackedScene" uid="uid://cs015desyfdvu" path="res://scenes/pause.tscn" id="5_r7284"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n37u8"]
 texture = ExtResource("1_pko7j")
@@ -112,3 +113,15 @@ position = Vector2(-330, 0)
 
 [node name="SpawnLocation2" type="Marker2D" parent="."]
 position = Vector2(330, 0)
+
+[node name="pause" parent="." instance=ExtResource("5_r7284")]
+visible = false
+top_level = true
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+scale = Vector2(3.2836, 3.2836)
+size_flags_horizontal = 4
+size_flags_vertical = 4
