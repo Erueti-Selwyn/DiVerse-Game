@@ -1,14 +1,23 @@
-[gd_scene load_steps=10 format=3 uid="uid://cmvkiyfy67r1b"]
+[gd_scene load_steps=19 format=3 uid="uid://cmvkiyfy67r1b"]
 
 [ext_resource type="Script" path="res://scenes/character_select.gd" id="1_mqc48"]
+[ext_resource type="Texture2D" uid="uid://b61fv17f6bona" path="res://assets/Ui Assets/ControllerButtonOnFinal.png" id="3_58wrp"]
+[ext_resource type="Texture2D" uid="uid://dymc08auxf7g8" path="res://assets/Ui Assets/StartButtonFinal.png" id="3_ldw3d"]
+[ext_resource type="Texture2D" uid="uid://dpfklnkoagtqq" path="res://assets/Ui Assets/ExitButtonFinal.png" id="3_sm2qm"]
 [ext_resource type="Texture2D" uid="uid://dfioa50vtvf7l" path="res://assets/backgrounds/japan mapp.png" id="3_waiyq"]
+[ext_resource type="BitMap" uid="uid://b310tcd626bw8" path="res://assets/Ui Assets/StartButtonFinalMask.png" id="4_2fhxl"]
+[ext_resource type="BitMap" uid="uid://dg3rpwig0v4y0" path="res://assets/Ui Assets/ExitButtonFinalMask.png" id="4_3rrr0"]
 [ext_resource type="Texture2D" uid="uid://bu0tmcwcue3lr" path="res://assets/Ui Assets/Border.png" id="4_4oogi"]
 [ext_resource type="Texture2D" uid="uid://8vjoklahdf7m" path="res://assets/profiles/africa man profile.aesprite.png" id="4_6yor8"]
+[ext_resource type="BitMap" uid="uid://cvkc0xnywbigr" path="res://assets/Ui Assets/ControllerButtonFinalMask.png" id="4_w5wsp"]
 [ext_resource type="Texture2D" uid="uid://dqdw8q6yv0cdj" path="res://assets/profiles/china profile.aesprite.png" id="5_fyk4v"]
+[ext_resource type="Texture2D" uid="uid://cf4e1tbsdxtdp" path="res://assets/Ui Assets/MouseButtonOffFinal.png" id="5_o4msb"]
 [ext_resource type="Texture2D" uid="uid://cvgdd78wx13s" path="res://assets/profiles/japan man profile.aesprite.png" id="6_dgcfs"]
 [ext_resource type="Texture2D" uid="uid://cm4u3rbs87tr1" path="res://assets/profiles/samoan body profile.aesprite.png" id="7_utxde"]
 [ext_resource type="Texture2D" uid="uid://cxo7g3o333ef8" path="res://assets/profiles/Mexican-profile.png" id="8_87k8w"]
 [ext_resource type="Texture2D" uid="uid://1xu1ipgs8406" path="res://assets/profiles/viking profile.aesprite.png" id="8_mokyo"]
+[ext_resource type="BitMap" uid="uid://bagsinsgm01k8" path="res://assets/Ui Assets/BorderBackgroundMask.png" id="11_oe331"]
+[ext_resource type="Texture2D" uid="uid://b66ssj3swr2ar" path="res://assets/Ui Assets/BorderBackground.png" id="12_t4wy2"]
 
 [node name="character_select" type="Control"]
 layout_mode = 3
@@ -47,14 +56,13 @@ theme_override_constants/margin_bottom = 12
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="Exits2" type="Button" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(150, 50)
+[node name="Exit" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 75)
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 30
-text = "Exit
-"
+texture_normal = ExtResource("3_sm2qm")
+texture_click_mask = ExtResource("4_3rrr0")
+stretch_mode = 4
 
 [node name="seperator" type="Control" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
@@ -87,51 +95,57 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 600
+theme_override_constants/separation = 550
 
-[node name="Player1Input" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
-custom_minimum_size = Vector2(200, 50)
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
-item_count = 2
-selected = 0
-fit_to_longest_item = false
-popup/item_0/text = "Controller"
-popup/item_0/id = 0
-popup/item_1/text = "Keyboard"
-popup/item_1/id = 1
+theme_override_constants/separation = 10
 
-[node name="Player2Input" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
-custom_minimum_size = Vector2(200, 50)
+[node name="ControllerPlayer1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-item_count = 2
-selected = 0
-fit_to_longest_item = false
-popup/item_0/text = "Controller"
-popup/item_0/id = 0
-popup/item_1/text = "Keyboard"
-popup/item_1/id = 1
+texture_normal = ExtResource("3_58wrp")
+texture_click_mask = ExtResource("4_w5wsp")
+stretch_mode = 5
 
-[node name="seperator4" type="Control" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+[node name="KeyboardPlayer1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+texture_normal = ExtResource("5_o4msb")
+texture_click_mask = ExtResource("4_w5wsp")
+stretch_mode = 5
 
-[node name="Start" type="Button" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(150, 50)
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ControllerPlayer2" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("3_58wrp")
+texture_click_mask = ExtResource("4_w5wsp")
+stretch_mode = 5
+
+[node name="KeyboardPlayer2" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("5_o4msb")
+texture_click_mask = ExtResource("4_w5wsp")
+stretch_mode = 5
+
+[node name="Start" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 30
-text = "START
-"
-
-[node name="seperator5" type="Control" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
+texture_normal = ExtResource("3_ldw3d")
+texture_click_mask = ExtResource("4_2fhxl")
+stretch_mode = 5
 
 [node name="HBoxContainerCharacterSelect" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 self_modulate = Color(1, 0.705882, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = 550
+theme_override_constants/separation = 225
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect"]
 layout_mode = 2
@@ -142,22 +156,24 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="AfricanButton1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer"]
+self_modulate = Color(0.223529, 1, 0.415686, 1)
+clip_children = 2
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-texture_normal = ExtResource("4_6yor8")
+texture_normal = ExtResource("12_t4wy2")
+texture_click_mask = ExtResource("11_oe331")
 stretch_mode = 5
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/AfricanButton1"]
-self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
-show_behind_parent = true
+[node name="AfricanIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/AfricanButton1"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("4_6yor8")
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/AfricanButton1"]
+[node name="Border" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/AfricanButton1"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -168,13 +184,14 @@ texture = ExtResource("4_4oogi")
 stretch_mode = 5
 
 [node name="ChineseButton1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer"]
+clip_children = 2
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-texture_normal = ExtResource("5_fyk4v")
+texture_normal = ExtResource("12_t4wy2")
+texture_click_mask = ExtResource("11_oe331")
 stretch_mode = 5
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/ChineseButton1"]
-self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
+[node name="ChineseIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/ChineseButton1"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -182,8 +199,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("5_fyk4v")
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/ChineseButton1"]
+[node name="Border" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/ChineseButton1"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -194,13 +212,14 @@ texture = ExtResource("4_4oogi")
 stretch_mode = 5
 
 [node name="JapaneseButton1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer"]
+clip_children = 2
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-texture_normal = ExtResource("6_dgcfs")
+texture_normal = ExtResource("12_t4wy2")
+texture_click_mask = ExtResource("11_oe331")
 stretch_mode = 5
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/JapaneseButton1"]
-self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
+[node name="JapaneseIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/JapaneseButton1"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -208,8 +227,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("6_dgcfs")
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/JapaneseButton1"]
+[node name="Border" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/JapaneseButton1"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -224,13 +244,14 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="SamoanButton1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2"]
+clip_children = 2
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-texture_normal = ExtResource("7_utxde")
+texture_normal = ExtResource("12_t4wy2")
+texture_click_mask = ExtResource("11_oe331")
 stretch_mode = 5
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/SamoanButton1"]
-self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
+[node name="SamoanIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/SamoanButton1"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -238,8 +259,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("7_utxde")
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/SamoanButton1"]
+[node name="Border" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/SamoanButton1"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -250,13 +272,14 @@ texture = ExtResource("4_4oogi")
 stretch_mode = 5
 
 [node name="VikingButton1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2"]
+clip_children = 2
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-texture_normal = ExtResource("8_mokyo")
+texture_normal = ExtResource("12_t4wy2")
+texture_click_mask = ExtResource("11_oe331")
 stretch_mode = 5
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/VikingButton1"]
-self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
+[node name="VikingIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/VikingButton1"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -264,8 +287,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("8_mokyo")
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/VikingButton1"]
+[node name="Border" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/VikingButton1"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -276,13 +300,14 @@ texture = ExtResource("4_4oogi")
 stretch_mode = 5
 
 [node name="MexicanButton1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2"]
+clip_children = 2
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-texture_normal = ExtResource("8_87k8w")
+texture_normal = ExtResource("12_t4wy2")
+texture_click_mask = ExtResource("11_oe331")
 stretch_mode = 5
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/MexicanButton1"]
-self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
+[node name="MexicanIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/MexicanButton1"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -290,8 +315,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("8_87k8w")
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/MexicanButton1"]
+[node name="Border" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/MexicanButton1"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -300,6 +326,12 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_4oogi")
 stretch_mode = 5
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer3"]
+layout_mode = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect"]
 layout_mode = 2
@@ -310,14 +342,14 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="JapaneseButton2" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer"]
+clip_children = 2
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-texture_normal = ExtResource("6_dgcfs")
+texture_normal = ExtResource("12_t4wy2")
 stretch_mode = 5
 flip_h = true
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/JapaneseButton2"]
-self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
+[node name="JapaneseIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/JapaneseButton2"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -325,8 +357,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("6_dgcfs")
+flip_h = true
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/JapaneseButton2"]
+[node name="Border" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/JapaneseButton2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -337,14 +371,14 @@ texture = ExtResource("4_4oogi")
 stretch_mode = 5
 
 [node name="ChineseButton2" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer"]
+clip_children = 2
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-texture_normal = ExtResource("5_fyk4v")
+texture_normal = ExtResource("12_t4wy2")
 stretch_mode = 5
 flip_h = true
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/ChineseButton2"]
-self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
+[node name="ChineseIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/ChineseButton2"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -352,8 +386,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("5_fyk4v")
+flip_h = true
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/ChineseButton2"]
+[node name="Border" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/ChineseButton2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -364,14 +400,14 @@ texture = ExtResource("4_4oogi")
 stretch_mode = 5
 
 [node name="AfricanButton2" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer"]
+clip_children = 2
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-texture_normal = ExtResource("4_6yor8")
+texture_normal = ExtResource("12_t4wy2")
 stretch_mode = 5
 flip_h = true
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/AfricanButton2"]
-self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
+[node name="AfricanIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/AfricanButton2"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -379,8 +415,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("4_6yor8")
+flip_h = true
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/AfricanButton2"]
+[node name="Border" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/AfricanButton2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -395,14 +433,14 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="MexicanButton2" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2"]
+clip_children = 2
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-texture_normal = ExtResource("8_87k8w")
+texture_normal = ExtResource("12_t4wy2")
 stretch_mode = 5
 flip_h = true
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/MexicanButton2"]
-self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
+[node name="MexicanIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/MexicanButton2"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -410,8 +448,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("8_87k8w")
+flip_h = true
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/MexicanButton2"]
+[node name="Border" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/MexicanButton2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -422,14 +462,14 @@ texture = ExtResource("4_4oogi")
 stretch_mode = 5
 
 [node name="VikingButton2" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2"]
+clip_children = 2
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-texture_normal = ExtResource("8_mokyo")
+texture_normal = ExtResource("12_t4wy2")
 stretch_mode = 5
 flip_h = true
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/VikingButton2"]
-self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
+[node name="VikingIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/VikingButton2"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -437,8 +477,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("8_mokyo")
+flip_h = true
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/VikingButton2"]
+[node name="Border" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/VikingButton2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -449,14 +491,14 @@ texture = ExtResource("4_4oogi")
 stretch_mode = 5
 
 [node name="SamoanButton2" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2"]
+clip_children = 2
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-texture_normal = ExtResource("7_utxde")
+texture_normal = ExtResource("12_t4wy2")
 stretch_mode = 5
 flip_h = true
 
-[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/SamoanButton2"]
-self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
+[node name="SamoanIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/SamoanButton2"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -464,8 +506,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("7_utxde")
+flip_h = true
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/SamoanButton2"]
+[node name="Border" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/SamoanButton2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -475,9 +519,11 @@ grow_vertical = 2
 texture = ExtResource("4_4oogi")
 stretch_mode = 5
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Exits2" to="." method="_on_exits_pressed"]
-[connection signal="item_selected" from="MarginContainer/VBoxContainer/HBoxContainer3/Player1Input" to="." method="_on_player_1_input_item_selected"]
-[connection signal="item_selected" from="MarginContainer/VBoxContainer/HBoxContainer3/Player2Input" to="." method="_on_player_2_input_item_selected"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer/ControllerPlayer1" to="." method="_on_controller_player_1_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer/KeyboardPlayer1" to="." method="_on_keyboard_player_1_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2/ControllerPlayer2" to="." method="_on_controller_player_2_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2/KeyboardPlayer2" to="." method="_on_keyboard_player_2_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/AfricanButton1" to="." method="_on_african_button_1_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/ChineseButton1" to="." method="_on_chinese_button_1_pressed"]

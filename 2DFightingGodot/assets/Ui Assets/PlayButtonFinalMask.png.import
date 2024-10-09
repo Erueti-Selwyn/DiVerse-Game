@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://8bdcfev8e2a7"
+path="res://.godot/imported/PlayButtonFinalMask.png-7658a09d1db89e888a556278b743f314.res"
+
+[deps]
+
+source_file="res://assets/Ui Assets/PlayButtonFinalMask.png"
+dest_files=["res://.godot/imported/PlayButtonFinalMask.png-7658a09d1db89e888a556278b743f314.res"]
+
+[params]
+
+create_from=0
+threshold=0.5
