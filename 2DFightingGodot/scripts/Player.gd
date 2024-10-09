@@ -80,15 +80,15 @@ func _ready():
 	_attack_collision.disabled = true
 	if player_index == 1:
 		if global_script.player1Controller == true:
-			player_controller_index = 1
+			player_controller_index = 0
 			playercontroller = true
 		elif global_script.player1Controller == false:
 			playercontroller = false
 	if player_index == 2:
 		if global_script.player1Controller == false && global_script.player2Controller == true:
-			player_controller_index = 1
+			player_controller_index = 0
 		else:
-			player_controller_index = 2
+			player_controller_index = 1
 		if global_script.player2Controller == true:
 			playercontroller = true
 

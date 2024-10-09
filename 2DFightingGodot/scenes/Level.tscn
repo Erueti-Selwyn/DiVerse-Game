@@ -35,6 +35,11 @@ sources/0 = SubResource("TileSetAtlasSource_n37u8")
 
 [node name="Node2D" type="Node2D"]
 
+[node name="hud" parent="." instance=ExtResource("3_fsags")]
+offset_top = -290.0
+offset_bottom = -290.0
+scale = Vector2(0.62, 0.62)
+
 [node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
@@ -52,9 +57,6 @@ texture = ExtResource("2_qmg0v")
 expand_mode = 1
 stretch_mode = 5
 metadata/_edit_use_anchors_ = true
-
-[node name="hud" parent="TextureRect" instance=ExtResource("3_fsags")]
-layout_mode = 1
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
@@ -102,6 +104,7 @@ position = Vector2(344, 70)
 player_index = 2
 
 [node name="SpawnLocation1" type="Marker2D" parent="."]
+visible = false
 position = Vector2(-330, 0)
 
 [node name="SpawnLocation2" type="Marker2D" parent="."]

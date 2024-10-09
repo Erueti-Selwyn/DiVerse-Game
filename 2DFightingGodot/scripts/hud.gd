@@ -7,10 +7,10 @@ const vikingProfile = preload("res://assets/profiles/viking profile.aesprite.png
 const mexicnaProfile = preload("res://assets/profiles/Mexican-profile.png")
 
 @onready var global_script = $"/root/Global"
-@onready var player1label = $"VBoxContainer/HBoxContainer/Player 1/Label"
-@onready var player2label = $"VBoxContainer/HBoxContainer/Player 2/Label"
-@onready var player1Icon = $"VBoxContainer/HBoxContainer/Player 1/TextureRect"
-@onready var player2Icon = $"VBoxContainer/HBoxContainer/Player 2/TextureRect"
+@onready var player1label = $VBoxContainer/HBoxContainer/Control/HP1
+@onready var player2label = $VBoxContainer/HBoxContainer/Control2/HP2
+@onready var player1Icon = $VBoxContainer/HBoxContainer/Control/Background/Icon1
+@onready var player2Icon = $VBoxContainer/HBoxContainer/Control2/Background/Icon2
 var localplayer1health
 var localplayer2health
 
