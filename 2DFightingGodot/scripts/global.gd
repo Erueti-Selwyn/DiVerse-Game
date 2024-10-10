@@ -7,6 +7,7 @@ extends Node
 @export var globalPlayerCharacter1 = 1
 @export var globalPlayerCharacter2 = 1
 @export var isPaused = false
+@export var winningPlayer = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
