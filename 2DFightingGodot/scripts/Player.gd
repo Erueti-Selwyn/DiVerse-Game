@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@export var player_index = 1
+
 const africanPistolSprite = preload("res://assets/guns/africanpistol.png")
 const chinesePistolSprite = preload("res://assets/guns/chinesepistol.png")
 const japanesePistolSprite = preload("res://assets/guns/japanesepistol.png")
@@ -44,14 +46,15 @@ var shootCooldown = 0.3
 var isHoldingGun = false
 var attacking = false
 var isHit = false
-
+var onWall = false
 var canShoot = true
 
 #var velocity = Vector2(0, 1)
 var speed = 300
 var knockback_strength = 150
-var knockback_health = 1
-
+var knockback_health = 100
+var health = 100
+var lives = 3
 
 var directionX
 var directionY
@@ -61,9 +64,16 @@ var facingRight = true
 
 var playerCharacter = 0
 
+var africanPistolMarker = Vector2(14.429,-2.571)
+var chinesePistolMarker = Vector2(11.571, -4)
+var japanesePistolMarker = Vector2(14.429, -8.286)
+var mexicanPistolMarker = Vector2(14.429, 0.286)
+var vikingPistolMarker = Vector2(14.429, -1.143)
+var polynesianPistolMarker = Vector2(14.429, -4)
+
+
 @export var DEADZONE = 0.2
 @export var DEADZONEY = 0.9
-@export var player_index = 1
 @export var meleeDamage = 5
 @export var gunDamage = 2
 @export var rocketLauncherDamage = 10
@@ -71,12 +81,21 @@ var playerCharacter = 0
 var player_controller_index
 var playercontroller = true
 @onready var _animated_sprite = $CollisionShape2D/AnimatedSprite2D
+@onready var Gun = $CollisionShape2D/AnimatedSprite2D/Gun
 @onready var _attack_collision = $CollisionShape2D/AnimatedSprite2D/Melee/AttackCollision
 @onready var global_script = $"/root/Global"
 @onready var gunSprite = $"CollisionShape2D/AnimatedSprite2D/Gun"
 @onready var playerLabel = $"Label"
+@onready var muzzleFlashPistol = $CollisionShape2D/AnimatedSprite2D/Gun/Marker2D/MuzzleFlashPistol
+@onready var bulletMarker = $CollisionShape2D/AnimatedSprite2D/Gun/Marker2D
+@onready var walkParticle = $CollisionShape2D/AnimatedSprite2D/WalkParticle
+@onready var spawnlocation1 = $"../SpawnLocation1"
+@onready var spawnlocation2 = $"../SpawnLocation2"
+@onready var WinText = $"../TextureRect/Label"
+@onready var fallSplash = $"../fallSplashParticle"
 func _ready():
 	knockback_health = 100
+	health = 100
 	_attack_collision.disabled = true
 	if player_index == 1:
 		if global_script.player1Controller == true:
@@ -102,16 +121,22 @@ func _ready():
 	playerLabel.text = "Player: " + str(player_index)
 	if playerCharacter == 1:
 		gunSprite.texture = africanPistolSprite
+		bulletMarker.position = africanPistolMarker
 	elif playerCharacter == 2:
 		gunSprite.texture = chinesePistolSprite
+		bulletMarker.position = chinesePistolMarker
 	elif playerCharacter == 3:
 		gunSprite.texture = japanesePistolSprite
+		bulletMarker.position = japanesePistolMarker
 	elif playerCharacter == 4:
 		gunSprite.texture = polynesianPistolSprite
+		bulletMarker.position = polynesianPistolMarker
 	elif playerCharacter == 5:
 		gunSprite.texture = norwegianPistolSprite
+		bulletMarker.position = vikingPistolMarker
 	elif playerCharacter == 6:
 		gunSprite.texture = mexicanPistolSprite
+		bulletMarker.position = mexicanPistolMarker
 
 func _physics_process(_delta):
 	if global_script.isPaused == false:
@@ -136,10 +161,10 @@ func _physics_process(_delta):
 					attack()
 		else:
 			if isHoldingGun:
-				if Input.is_action_just_pressed("shoot"):
+				if Input.is_action_just_pressed("shoot") && !onWall:
 					shoot()
 			else:
-				if Input.is_action_just_pressed("shoot"):
+				if Input.is_action_just_pressed("shoot") && !onWall:
 					attack()
 		if playerCharacter == 3: # Japanese
 			if velocity == Vector2(0, 0) && !attacking:
@@ -165,7 +190,21 @@ func _physics_process(_delta):
 				_animated_sprite.play("mexicanjump")
 			if is_on_wall() && !is_on_floor() && !attacking:
 				_animated_sprite.play("mexicanwall")
-		
+		if velocity.x != 0 && is_on_floor():
+			walkParticle.emitting = true
+		else:
+			walkParticle.emitting = false
+		if attacking:
+			Gun.visible = false
+		else:
+			if onWall:
+				Gun.visible = false
+			else:
+				Gun.visible = true
+		if is_on_wall() && !is_on_floor() && !attacking:
+			onWall = true
+		else:
+			onWall = false
 
 		if velocity.x > 0:
 			_animated_sprite.scale.x = 1
@@ -173,7 +212,7 @@ func _physics_process(_delta):
 		elif velocity.x < 0:
 			_animated_sprite.scale.x = -1
 			facingRight = false
-		
+
 		# Detects Dash Input
 		if playercontroller:
 			if Input.is_joy_button_pressed(player_controller_index, 1):
@@ -246,9 +285,9 @@ func _physics_process(_delta):
 						dub_jumps -= 1
 						velocity.y = -JUMP_HIGHT
 					if is_on_wall() && directionX == 1:
-						velocity.x = -(MAX_SPEED * 3)
+						velocity.x = -(MAX_SPEED * 2)
 					elif is_on_wall() && directionX == -1:
-						velocity.x = (MAX_SPEED * 3)
+						velocity.x = (MAX_SPEED * 2)
 			else:
 				joy_jump_pressed = false
 		
@@ -272,12 +311,13 @@ func _physics_process(_delta):
 	
 func shoot():
 	if canShoot:
+		muzzleFlashPistol.emitting = true
 		var bullet = bulletPath.instantiate()
 		if facingRight:
 			bullet.bulletspawn(1, player_index, gunDamage)
 		else:
 			bullet.bulletspawn(-1, player_index, gunDamage)
-		bullet.global_position = $CollisionShape2D/AnimatedSprite2D/Marker2D.global_position
+		bullet.global_position = $CollisionShape2D/AnimatedSprite2D/Gun/Marker2D.global_position
 		get_parent().add_child(bullet)
 		canShoot = false
 		await get_tree().create_timer(shootCooldown).timeout
@@ -334,8 +374,9 @@ func _on_animated_sprite_2d_animation_finished():
 
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("boundary"):
-		position = Vector2(0, 0)
-		velocity = Vector2(0, 0)
+		fallSplash.global_position.x = global_position.x
+		fallSplash.emitting = true
+		die()
 		
 func get_player_index():
 	return(player_index)
@@ -352,3 +393,26 @@ func bullet_hit(bullet_direction, damage_done):
 	await get_tree().create_timer(0.15).timeout
 	isHit = false
 	_animated_sprite.modulate = Color(1, 1, 1)
+
+func die():
+	velocity = Vector2(0, 0)
+	knockback_health = 100
+	health = 100
+	lives -= 1
+	if lives > 0:
+		await get_tree().create_timer(1).timeout
+		if player_index == 1:
+			global_position = spawnlocation1.global_position
+		elif player_index == 2:
+			global_position = spawnlocation2.global_position
+	if lives <= 0:
+		if player_index == 1:
+			global_script.winningPlayer = 2
+		elif player_index == 2:
+			global_script.winningPlayer = 1
+		WinText.text = "Player " + str(player_index) + " Wins!"
+		WinText.visible = true
+		global_script.isPaused = true
+		await get_tree().create_timer(1.5).timeout
+		global_script.isPaused = false
+		get_tree().change_scene_to_file("res://scenes/win.tscn")

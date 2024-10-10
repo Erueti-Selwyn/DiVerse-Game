@@ -20,8 +20,8 @@ var player2color
 func _process(_delta):
 	localplayer1health = global_script.player1health
 	localplayer2health = global_script.player2health
-	player1label.text = str(localplayer1health) + " %"
-	player2label.text = str(localplayer2health) + " %"
+	player1label.text = str(localplayer1health)
+	player2label.text = str(localplayer2health)
 	
 	if global_script.globalPlayerCharacter1 == 1:
 		player1Icon.texture = africanProfile
