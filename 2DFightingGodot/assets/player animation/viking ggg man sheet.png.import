@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxj5mb54cd7mv"
-path="res://.godot/imported/viking man sheet.png-90cc4d6a9368fc853099232bd88835d3.ctex"
+uid="uid://34m03ksxcppp"
+path="res://.godot/imported/viking ggg man sheet.png-70edf5c3c76a8de827c739e1bb3d7d17.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player animation/viking man sheet.png"
-dest_files=["res://.godot/imported/viking man sheet.png-90cc4d6a9368fc853099232bd88835d3.ctex"]
+source_file="res://assets/player animation/viking ggg man sheet.png"
+dest_files=["res://.godot/imported/viking ggg man sheet.png-70edf5c3c76a8de827c739e1bb3d7d17.ctex"]
 
 [params]
 

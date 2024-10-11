@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsf0nr32xrndj"
-path="res://.godot/imported/japan man sheet.png-ae7d072ff0d7238b849f71a56496c727.ctex"
+uid="uid://pm7sy7wrafe5"
+path="res://.godot/imported/japanese man sheet.png-61d592b8e448671f208777106e258bc5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player animation/japan man sheet.png"
-dest_files=["res://.godot/imported/japan man sheet.png-ae7d072ff0d7238b849f71a56496c727.ctex"]
+source_file="res://assets/player animation/japanese man sheet.png"
+dest_files=["res://.godot/imported/japanese man sheet.png-61d592b8e448671f208777106e258bc5.ctex"]
 
 [params]
 
