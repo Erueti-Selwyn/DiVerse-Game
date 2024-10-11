@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cog48cb5by7fy"
-path="res://.godot/imported/viking.aesprite-Recovered-Recovered-Recovered-Sheet.png-777e475b241eaa0be36ba5506bb62a1a.ctex"
+uid="uid://ce8mmls6ffyuo"
+path="res://.godot/imported/china man sheet.png-33e0e8cafa0d371d11eb48329882eeec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player animation/viking.aesprite-Recovered-Recovered-Recovered-Sheet.png"
-dest_files=["res://.godot/imported/viking.aesprite-Recovered-Recovered-Recovered-Sheet.png-777e475b241eaa0be36ba5506bb62a1a.ctex"]
+source_file="res://assets/player animation/china man sheet.png"
+dest_files=["res://.godot/imported/china man sheet.png-33e0e8cafa0d371d11eb48329882eeec.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btbjjotar05te"
-path="res://.godot/imported/samoan body.aesprite-Recovered-Sheet.png-2d8294ee0602c4f25156e014ca7a8ab4.ctex"
+uid="uid://bxj5mb54cd7mv"
+path="res://.godot/imported/viking man sheet.png-90cc4d6a9368fc853099232bd88835d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player animation/samoan body.aesprite-Recovered-Sheet.png"
-dest_files=["res://.godot/imported/samoan body.aesprite-Recovered-Sheet.png-2d8294ee0602c4f25156e014ca7a8ab4.ctex"]
+source_file="res://assets/player animation/viking man sheet.png"
+dest_files=["res://.godot/imported/viking man sheet.png-90cc4d6a9368fc853099232bd88835d3.ctex"]
 
 [params]
 

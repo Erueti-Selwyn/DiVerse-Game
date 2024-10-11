@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byt7hn5k5ydar"
-path="res://.godot/imported/africa man body.aesprite-Recovered-Recovered-Sheet.png-ced70b308d47424ab7115544e0f5e985.ctex"
+uid="uid://dn01as0rfh8as"
+path="res://.godot/imported/african man sprite sheet.png-c5f04e2d0072d01fc87612a74b33b8c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player animation/africa man body.aesprite-Recovered-Recovered-Sheet.png"
-dest_files=["res://.godot/imported/africa man body.aesprite-Recovered-Recovered-Sheet.png-ced70b308d47424ab7115544e0f5e985.ctex"]
+source_file="res://assets/player animation/african man sprite sheet.png"
+dest_files=["res://.godot/imported/african man sprite sheet.png-c5f04e2d0072d01fc87612a74b33b8c1.ctex"]
 
 [params]
 

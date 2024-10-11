@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvmhhtuclkvew"
-path="res://.godot/imported/japan man.aesprite-Recovered-Sheet.png-f76c3c972a8204df33334402d0e80959.ctex"
+uid="uid://ddklm3p8cru80"
+path="res://.godot/imported/samoan man sheet.png-d823abb040cffb230c58fd9cc3e1d90e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player animation/japan man.aesprite-Recovered-Sheet.png"
-dest_files=["res://.godot/imported/japan man.aesprite-Recovered-Sheet.png-f76c3c972a8204df33334402d0e80959.ctex"]
+source_file="res://assets/player animation/samoan man sheet.png"
+dest_files=["res://.godot/imported/samoan man sheet.png-d823abb040cffb230c58fd9cc3e1d90e.ctex"]
 
 [params]
 

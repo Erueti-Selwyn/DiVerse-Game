@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlml4hq3ctj45"
-path="res://.godot/imported/china man body-Sheet.png-322aa44bedddfadbde2fc17b50418f51.ctex"
+uid="uid://cj20agpko0ln4"
+path="res://.godot/imported/mexican man sheet.png-14febe72e687e7a66935963aab90fb95.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player animation/china man body-Sheet.png"
-dest_files=["res://.godot/imported/china man body-Sheet.png-322aa44bedddfadbde2fc17b50418f51.ctex"]
+source_file="res://assets/player animation/mexican man sheet.png"
+dest_files=["res://.godot/imported/mexican man sheet.png-14febe72e687e7a66935963aab90fb95.ctex"]
 
 [params]
 

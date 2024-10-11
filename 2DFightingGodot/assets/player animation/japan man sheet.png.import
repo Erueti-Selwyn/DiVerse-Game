@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csxndritrsc75"
-path="res://.godot/imported/Mexican-Walking-Recovered-Recovered-Sheet.png-abb62b5290418e58d47c6532a465cc99.ctex"
+uid="uid://bsf0nr32xrndj"
+path="res://.godot/imported/japan man sheet.png-ae7d072ff0d7238b849f71a56496c727.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player animation/Mexican-Walking-Recovered-Recovered-Sheet.png"
-dest_files=["res://.godot/imported/Mexican-Walking-Recovered-Recovered-Sheet.png-abb62b5290418e58d47c6532a465cc99.ctex"]
+source_file="res://assets/player animation/japan man sheet.png"
+dest_files=["res://.godot/imported/japan man sheet.png-ae7d072ff0d7238b849f71a56496c727.ctex"]
 
 [params]
 
