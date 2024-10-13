@@ -5,23 +5,64 @@ const japaneseProfile = preload("res://assets/profiles/japan man profile.aesprit
 const samoanProfile = preload("res://assets/profiles/samoan body profile.aesprite.png")
 const vikingProfile = preload("res://assets/profiles/viking profile.aesprite.png")
 const mexicnaProfile = preload("res://assets/profiles/Mexican-profile.png")
-
+const heartAlive = preload("res://assets/Ui Assets/heart.png")
+const heartDead = preload("res://assets/Ui Assets/heartdead.png")
 @onready var global_script = $"/root/Global"
-@onready var player1label = $VBoxContainer/HBoxContainer/Control/HP1
-@onready var player2label = $VBoxContainer/HBoxContainer/Control2/HP2
-@onready var player1Icon = $VBoxContainer/HBoxContainer/Control/Background/Icon1
-@onready var player2Icon = $VBoxContainer/HBoxContainer/Control2/Background/Icon2
-var localplayer1health
-var localplayer2health
-
-var player1color
-var player2color
+@onready var player1Label = $VBoxContainer/HBoxContainer/Player1/HP1
+@onready var player2Label = $VBoxContainer/HBoxContainer/Player2/HP2
+@onready var player1Icon = $VBoxContainer/HBoxContainer/Player1/Background/Icon1
+@onready var player2Icon = $VBoxContainer/HBoxContainer/Player2/Background/Icon2
+@onready var player1Health1 = $VBoxContainer/HBoxContainer/Player1/TopBorder/HBoxContainer/Heart1
+@onready var player1Health2 = $VBoxContainer/HBoxContainer/Player1/TopBorder/HBoxContainer/Heart2
+@onready var player1Health3 = $VBoxContainer/HBoxContainer/Player1/TopBorder/HBoxContainer/Heart3
+@onready var player2Health1 = $VBoxContainer/HBoxContainer/Player2/TopBorder/HBoxContainer/Heart1
+@onready var player2Health2 = $VBoxContainer/HBoxContainer/Player2/TopBorder/HBoxContainer/Heart2
+@onready var player2Health3 = $VBoxContainer/HBoxContainer/Player2/TopBorder/HBoxContainer/Heart3
+var localPlayer1Health
+var localPlayer2Health
+var localPlayer1Lives
+var localPlayer2Lives
 	
 func _process(_delta):
-	localplayer1health = global_script.player1health
-	localplayer2health = global_script.player2health
-	player1label.text = str(localplayer1health)
-	player2label.text = str(localplayer2health)
+	localPlayer1Health = global_script.player1health
+	localPlayer2Health = global_script.player2health
+	localPlayer1Lives = global_script.globalPlayer1Lives
+	localPlayer2Lives = global_script.globalPlayer1Lives
+	player1Label.text = str(localPlayer1Health)
+	player2Label.text = str(localPlayer2Health)
+	if global_script.globalPlayer1Lives == 3:
+		player1Health1.texture = heartAlive
+		player1Health2.texture = heartAlive
+		player1Health3.texture = heartAlive
+	elif global_script.globalPlayer1Lives == 2:
+		player1Health1.texture = heartAlive
+		player1Health2.texture = heartAlive
+		player1Health3.texture = heartDead
+	elif global_script.globalPlayer1Lives == 1:
+		player1Health1.texture = heartAlive
+		player1Health2.texture = heartDead
+		player1Health3.texture = heartDead
+	elif global_script.globalPlayer1Lives == 0:
+		player1Health1.texture = heartDead
+		player1Health2.texture = heartDead
+		player1Health3.texture = heartDead
+		
+	if global_script.globalPlayer2Lives == 3:
+		player2Health1.texture = heartAlive
+		player2Health2.texture = heartAlive
+		player2Health3.texture = heartAlive
+	elif global_script.globalPlayer2Lives == 2:
+		player2Health1.texture = heartAlive
+		player2Health2.texture = heartAlive
+		player2Health3.texture = heartDead
+	elif global_script.globalPlayer2Lives == 1:
+		player2Health1.texture = heartAlive
+		player2Health2.texture = heartDead
+		player2Health3.texture = heartDead
+	elif global_script.globalPlayer2Lives <= 0:
+		player2Health1.texture = heartDead
+		player2Health2.texture = heartDead
+		player2Health3.texture = heartDead
 	
 	if global_script.globalPlayerCharacter1 == 1:
 		player1Icon.texture = africanProfile

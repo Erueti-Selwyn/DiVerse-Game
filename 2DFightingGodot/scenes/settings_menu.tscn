@@ -1,81 +1,151 @@
-[gd_scene load_steps=2 format=3 uid="uid://cpp6uup1fjkuc"]
+[gd_scene load_steps=13 format=3 uid="uid://cpp6uup1fjkuc"]
 
 [ext_resource type="Script" path="res://scripts/settings_menu.gd" id="1_rl2pc"]
+[ext_resource type="Texture2D" uid="uid://ynygk6nxb8h4" path="res://assets/Ui Assets/OptionsMenu.png" id="2_vdj2k"]
+[ext_resource type="Texture2D" uid="uid://b8rsvredmtuni" path="res://assets/Ui Assets/XButton.png" id="3_64plv"]
+[ext_resource type="Texture2D" uid="uid://bvhsg7yjiv5an" path="res://assets/Ui Assets/MusicIcon.png" id="4_80ga7"]
+[ext_resource type="Texture2D" uid="uid://cdol2wi56us7d" path="res://assets/Ui Assets/SoundIcon.png" id="4_158c7"]
+[ext_resource type="BitMap" uid="uid://c3agtf03h1ijs" path="res://assets/Ui Assets/XButtonMask.png" id="4_dl6bg"]
+[ext_resource type="Texture2D" uid="uid://c03jp822yjpru" path="res://assets/Ui Assets/SoundText.png" id="5_462up"]
+[ext_resource type="Texture2D" uid="uid://dkk87r25ckqnn" path="res://assets/Ui Assets/optionButtonOn.png" id="6_jm3ic"]
+[ext_resource type="Texture2D" uid="uid://bp4x2ppqotuld" path="res://assets/Ui Assets/MusicText.png" id="8_t6can"]
+[ext_resource type="BitMap" uid="uid://pycuegsjk8rc" path="res://assets/Ui Assets/optionButtonOnMask.png" id="8_ycu42"]
+[ext_resource type="Texture2D" uid="uid://csrmscy7vvng4" path="res://assets/Ui Assets/ControlsButtonFinal.png" id="11_y7fk1"]
+[ext_resource type="BitMap" uid="uid://vs18d4un3gbf" path="res://assets/Ui Assets/OptionsButtonFinalMask.png" id="12_7fmsw"]
 
 [node name="settings_menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 6.0
+offset_right = 12.0
+offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_rl2pc")
 
-[node name="MarginContainerMenu" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_left = 53.0
-offset_top = 38.0
-offset_right = 106.0
-offset_bottom = 78.0
-scale = Vector2(3.03944, 3.03944)
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -160.0
+offset_right = 160.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainerMenu"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_vdj2k")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="Menu" type="Button" parent="MarginContainerMenu/VBoxContainer"]
-layout_mode = 2
-text = "Menu"
-
-[node name="MarginContainerPlayer1" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_left = 301.0
-offset_top = 107.0
-offset_right = 363.0
-offset_bottom = 147.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainerPlayer1"]
+[node name="seperator3" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="Player1" type="Label" parent="MarginContainerPlayer1/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Player 1
-"
+alignment = 2
 
-[node name="OptionButtonPlayer1" type="OptionButton" parent="MarginContainerPlayer1/VBoxContainer"]
+[node name="ExitButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-item_count = 2
-selected = 0
-popup/item_0/text = "Controller"
-popup/item_0/id = 1
-popup/item_1/text = "Keyboard"
-popup/item_1/id = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+texture_normal = ExtResource("3_64plv")
+texture_click_mask = ExtResource("4_dl6bg")
+stretch_mode = 5
 
-[node name="MarginContainerPlayer2" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_left = 624.0
-offset_top = 109.0
-offset_right = 686.0
-offset_bottom = 149.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainerPlayer2"]
+[node name="seperator" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="Player2" type="Label" parent="MarginContainerPlayer2/VBoxContainer"]
+[node name="seperator" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-text = "Player 2
-"
 
-[node name="OptionButtonPlayer2" type="OptionButton" parent="MarginContainerPlayer2/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="seperator" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture = ExtResource("4_158c7")
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-item_count = 2
-selected = 0
-popup/item_0/text = "Controller"
-popup/item_0/id = 1
-popup/item_1/text = "Keyboard"
-popup/item_1/id = 0
+texture = ExtResource("5_462up")
+stretch_mode = 5
 
-[connection signal="pressed" from="MarginContainerMenu/VBoxContainer/Menu" to="." method="_on_menu_pressed"]
-[connection signal="item_selected" from="MarginContainerPlayer1/VBoxContainer/OptionButtonPlayer1" to="." method="_on_option_button_player_1_item_selected"]
-[connection signal="item_selected" from="MarginContainerPlayer2/VBoxContainer/OptionButtonPlayer2" to="." method="_on_option_button_player_2_item_selected"]
+[node name="seperator2" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(27.7, 0)
+layout_mode = 2
+
+[node name="SoundButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("6_jm3ic")
+texture_click_mask = ExtResource("8_ycu42")
+stretch_mode = 5
+
+[node name="seperator2" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="seperator" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture = ExtResource("4_80ga7")
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("8_t6can")
+stretch_mode = 5
+
+[node name="seperator2" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+
+[node name="MusicButton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(50, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("6_jm3ic")
+texture_click_mask = ExtResource("8_ycu42")
+stretch_mode = 5
+
+[node name="Controls" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("11_y7fk1")
+texture_click_mask = ExtResource("12_7fmsw")
+stretch_mode = 5
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer3/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/SoundButton" to="." method="_on_sound_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/MusicButton" to="." method="_on_music_button_pressed"]

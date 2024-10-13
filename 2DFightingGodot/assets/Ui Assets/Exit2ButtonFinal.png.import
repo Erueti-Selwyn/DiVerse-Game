@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ca5e3kagggrvs"
-path="res://.godot/imported/japan man.aesprite-Sheet.png-b3f18730f0b4570a1bf256cb94d155c4.ctex"
+uid="uid://h3pcrkk5c8t5"
+path="res://.godot/imported/Exit2ButtonFinal.png-9207f3ea678a8d6cd23bd7f5e6f9fd23.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player animation/base player/japan man.aesprite-Sheet.png"
-dest_files=["res://.godot/imported/japan man.aesprite-Sheet.png-b3f18730f0b4570a1bf256cb94d155c4.ctex"]
+source_file="res://assets/Ui Assets/Exit2ButtonFinal.png"
+dest_files=["res://.godot/imported/Exit2ButtonFinal.png-9207f3ea678a8d6cd23bd7f5e6f9fd23.ctex"]
 
 [params]
 

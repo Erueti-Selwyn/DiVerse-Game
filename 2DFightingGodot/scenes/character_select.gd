@@ -4,7 +4,12 @@ const controllerIconOff = preload("res://assets/Ui Assets/ControllerButtonOffFin
 const controllerIconOn = preload("res://assets/Ui Assets/ControllerButtonOnFinal.png")
 const keyboardIconOff = preload("res://assets/Ui Assets/MouseButtonOffFinal.png")
 const keyboardIconOn = preload("res://assets/Ui Assets/MouseButtonOnFinal.png")
-
+const africanMap = preload("res://assets/backgrounds/africa.png")
+const chinaMap = preload("res://assets/backgrounds/china map pixel.png")
+const japanMap = preload("res://assets/backgrounds/japan mapp.png")
+const samoanMap = preload("res://assets/backgrounds/samoa.png")
+const vikingMap = preload("res://assets/backgrounds/viking.png")
+const mexicoMap = preload("res://assets/backgrounds/mexico final map.png")
 var player1Character = 1
 var player2Character = 1
 var localPlayer1Controller = true
@@ -26,12 +31,13 @@ var localPlayer2Controller = true
 @onready var samoanButton2 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/SamoanButton2
 @onready var vikingButton2 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/VikingButton2
 @onready var mexicanButton2 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/MexicanButton2
+@onready var background = $TextureRect
 var defaultColor = Color(1, 1, 1)
 var selectedColor = Color(0.224, 1, 0.416)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print("Loaded")
+	pass
 
 func _on_start_pressed():
 	if !localPlayer1Controller && !localPlayer2Controller:
@@ -147,3 +153,28 @@ func reset_selection_2():
 	samoanButton2.self_modulate = defaultColor
 	vikingButton2.self_modulate = defaultColor
 	mexicanButton2.self_modulate = defaultColor
+
+
+func _on_africa_map_pressed():
+	global_script.mapType = 1
+	background.texture = africanMap
+
+func _on_china_map_pressed():
+	global_script.mapType = 2
+	background.texture = chinaMap
+
+func _on_japan_map_pressed():
+	global_script.mapType = 3
+	background.texture = japanMap
+
+func _on_samoa_map_pressed():
+	global_script.mapType = 4
+	background.texture = samoanMap
+
+func _on_viking_map_pressed():
+	global_script.mapType = 5
+	background.texture = vikingMap
+
+func _on_mexico_map_pressed():
+	global_script.mapType = 6
+	background.texture = mexicoMap

@@ -1,5 +1,6 @@
 extends Control
 @onready var global_script = $"/root/Global"
+@onready var settingsMenu = $TextureRect/settings_menu
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -15,7 +16,7 @@ func _on_play_pressed():
 
 
 func _on_settings_pressed():
-	get_tree().change_scene_to_file("res://scenes/settings_menu.tscn")
+	settingsMenu.visible = true
 
 
 func _on_quit_pressed():

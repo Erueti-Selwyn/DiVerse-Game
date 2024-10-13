@@ -1,11 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://dfdn4clkj55a4"]
+[gd_scene load_steps=15 format=3 uid="uid://dfdn4clkj55a4"]
 
+[ext_resource type="Script" path="res://scripts/Level.gd" id="1_7kyh2"]
 [ext_resource type="Texture2D" uid="uid://4smgw32hn4oe" path="res://assets/tilemaps/ScaryDungeonTileMap.png" id="1_pko7j"]
 [ext_resource type="Texture2D" uid="uid://dfioa50vtvf7l" path="res://assets/backgrounds/japan mapp.png" id="2_qmg0v"]
 [ext_resource type="LabelSettings" uid="uid://3b1b5736t5jy" path="res://assets/Ui Assets/UI_Resource.tres" id="3_0j4bi"]
 [ext_resource type="PackedScene" uid="uid://u3qy208g8d7a" path="res://scenes/hud.tscn" id="3_fsags"]
 [ext_resource type="PackedScene" uid="uid://bdxtusi0wukv6" path="res://scenes/players/Player.tscn" id="4_l5f3c"]
 [ext_resource type="PackedScene" uid="uid://cs015desyfdvu" path="res://scenes/pause.tscn" id="5_r7284"]
+[ext_resource type="PackedScene" uid="uid://cpp6uup1fjkuc" path="res://scenes/settings_menu.tscn" id="8_5ck7g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n37u8"]
 texture = ExtResource("1_pko7j")
@@ -42,10 +44,11 @@ point_count = 2
 colors = PackedColorArray(0.974861, 0.294661, 0.165636, 1, 0.471955, 0, 0.0732844, 1)
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_7kyh2")
 
 [node name="hud" parent="." instance=ExtResource("3_fsags")]
-offset_top = -290.0
-offset_bottom = -290.0
+offset_top = -261.0
+offset_bottom = -261.0
 scale = Vector2(0.62, 0.62)
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -55,15 +58,14 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -576.0
-offset_top = -324.0
+offset_top = -326.0
 offset_right = 576.0
-offset_bottom = 324.0
+offset_bottom = 323.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1, 1.00256)
 texture = ExtResource("2_qmg0v")
-expand_mode = 1
-stretch_mode = 5
+expand_mode = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="TextureRect"]
@@ -140,11 +142,21 @@ top_level = true
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
-scale = Vector2(3.2836, 3.2836)
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="settings_menu" parent="." instance=ExtResource("8_5ck7g")]
+visible = false
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
 
 [node name="fallSplashParticle" type="CPUParticles2D" parent="."]
 position = Vector2(0, 357)
@@ -160,5 +172,23 @@ angle_min = -720.0
 angle_max = 720.0
 scale_amount_min = 5.0
 scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_m37vw")
+color_ramp = SubResource("Gradient_x3c6u")
+
+[node name="killParticle" type="CPUParticles2D" parent="."]
+position = Vector2(0, 357)
+emitting = false
+amount = 50
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 490)
+initial_velocity_min = 122.12
+initial_velocity_max = 292.92
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_min = 3.0
+scale_amount_max = 7.0
 scale_amount_curve = SubResource("Curve_m37vw")
 color_ramp = SubResource("Gradient_x3c6u")
