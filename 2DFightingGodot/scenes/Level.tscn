@@ -1,10 +1,10 @@
+
 [gd_scene load_steps=16 format=3 uid="uid://dfdn4clkj55a4"]
 
-[ext_resource type="Script" path="res://scripts/Level.gd" id="1_7kyh2"]
 [ext_resource type="Texture2D" uid="uid://4smgw32hn4oe" path="res://assets/tilemaps/ScaryDungeonTileMap.png" id="1_pko7j"]
 [ext_resource type="Texture2D" uid="uid://dfioa50vtvf7l" path="res://assets/backgrounds/japan mapp.png" id="2_qmg0v"]
-[ext_resource type="LabelSettings" uid="uid://3b1b5736t5jy" path="res://assets/Ui Assets/UI_Resource.tres" id="3_0j4bi"]
 [ext_resource type="PackedScene" uid="uid://u3qy208g8d7a" path="res://scenes/hud.tscn" id="3_fsags"]
+
 [ext_resource type="PackedScene" uid="uid://bdxtusi0wukv6" path="res://scenes/players/Player.tscn" id="4_l5f3c"]
 [ext_resource type="PackedScene" uid="uid://cs015desyfdvu" path="res://scenes/pause.tscn" id="5_r7284"]
 [ext_resource type="PackedScene" uid="uid://cpp6uup1fjkuc" path="res://scenes/settings_menu.tscn" id="8_5ck7g"]
@@ -37,97 +37,70 @@ sources/0 = SubResource("TileSetAtlasSource_n37u8")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_iwr00"]
 
-[sub_resource type="Curve" id="Curve_m37vw"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.932584, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Gradient" id="Gradient_x3c6u"]
-colors = PackedColorArray(0.974861, 0.294661, 0.165636, 1, 0.471955, 0, 0.0732844, 1)
-
 [node name="Node2D" type="Node2D"]
-script = ExtResource("1_7kyh2")
-
-[node name="hud" parent="." instance=ExtResource("3_fsags")]
-offset_top = -261.0
-offset_bottom = -261.0
-scale = Vector2(0.62, 0.62)
-
-[node name="TextureRect" type="TextureRect" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -576.0
-offset_top = -326.0
-offset_right = 576.0
-offset_bottom = 323.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1, 1.00256)
-texture = ExtResource("2_qmg0v")
-expand_mode = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="TextureRect"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -54.5
-offset_top = -11.5
-offset_right = 54.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Player # Wins!"
-label_settings = ExtResource("3_0j4bi")
+position = Vector2(9, -45)
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
-scale = Vector2(2, 2)
+position = Vector2(-159, -159)
+scale = Vector2(2.90357, 2.906)
 tile_set = SubResource("TileSet_71nb4")
 format = 2
 layer_0/name = "Background"
 layer_1/name = "Foreground"
-layer_1/tile_data = PackedInt32Array(262134, 65536, 0, 327670, 65536, 0, 393206, 65536, 0, 262135, 65536, 0, 393207, 65536, 0, 262136, 65536, 0, 393208, 65536, 0, 262137, 65536, 0, 393209, 65536, 0, 262138, 65536, 0, 393210, 65536, 0, 262139, 65536, 0, 327675, 65536, 0, 393211, 65536, 0, 458747, 65536, 0, 262140, 65536, 0, 327676, 65536, 0, 393212, 65536, 0, 458748, 65536, 0, 524284, 65536, 0, 262141, 65536, 0, 327677, 65536, 0, 393213, 65536, 0, 458749, 65536, 0, 524285, 65536, 0, 262142, 65536, 0, 327678, 65536, 0, 393214, 65536, 0, 458750, 65536, 0, 524286, 65536, 0, 262143, 65536, 0, 327679, 65536, 0, 393215, 65536, 0, 458751, 65536, 0, 524287, 65536, 0, 196608, 65536, 0, 262144, 65536, 0, 327680, 65536, 0, 393216, 65536, 0, 458752, 65536, 0, 196609, 65536, 0, 262145, 65536, 0, 327681, 65536, 0, 393217, 65536, 0, 458753, 65536, 0, 196610, 65536, 0, 262146, 65536, 0, 327682, 65536, 0, 393218, 65536, 0, 458754, 65536, 0, 196611, 65536, 0, 262147, 65536, 0, 327683, 65536, 0, 393219, 65536, 0, 458755, 65536, 0, 196612, 65536, 0, 262148, 65536, 0, 327684, 65536, 0, 196613, 65536, 0, 262149, 65536, 0, 327685, 65536, 0, 196614, 65536, 0, 262150, 65536, 0, 327686, 65536, 0, 196615, 65536, 0, 262151, 65536, 0, 327687, 65536, 0, 196616, 65536, 0, 262152, 65536, 0, 327688, 65536, 0, 196617, 65536, 0, 262153, 65536, 0, 327689, 65536, 0, 327671, 65536, 0, 327672, 65536, 0, 327673, 65536, 0, 327674, 65536, 0, 262132, 65536, 0, 262133, 65536, 0, 327669, 65536, 0, 262154, 65536, 0, 196618, 65536, 0, 196619, 65536, 0, 393220, 65536, 0, 393221, 65536, 0, 458746, 65536, 0, -9, 65536, 1, -8, 65536, 1, -7, 65536, 1, -6, 65536, 1, -5, 65536, 1, -4, 65536, 1, -65533, 65536, 1, -65532, 65536, 1, -65531, 65536, 1, -65530, 65536, 1, -65529, 65536, 1, -65528, 65536, 1, -196610, 65536, 1, -196609, 65536, 1, -262144, 65536, 1, -262143, 65536, 1)
+layer_1/tile_data = PackedInt32Array(524290, 65536, 0, 524291, 65536, 0, 524292, 65536, 0, 524293, 65536, 0, 589816, 65536, 0, 589817, 65536, 0, 589818, 65536, 0, 589819, 65536, 0, 589820, 65536, 0, 589821, 65536, 0, 589822, 65536, 0, 589823, 65536, 0, 524288, 65536, 0, 524289, 65536, 0, 524294, 65536, 0, 524295, 65536, 0, 524296, 65536, 0, 524297, 65536, 0, 524298, 65536, 0, 524299, 65536, 0, 524300, 65536, 0, 524301, 65536, 0, 589815, 65536, 0, 589814, 65536, 0, 524302, 65536, 0, 524304, 65536, 0, 524303, 65536, 0, 589813, 65536, 0, 655348, 65536, 0, 720884, 65536, 0, 786421, 65536, 0, 851958, 65536, 0, 851959, 65536, 0, 851960, 65536, 0, 851961, 65536, 0, 851962, 65536, 0, 851963, 65536, 0, 851964, 65536, 0, 851965, 65536, 0, 851966, 65536, 0, 851967, 65536, 0, 786432, 65536, 0, 786433, 65536, 0, 655377, 65536, 0, 720912, 65536, 0, 786447, 65536, 0, 786446, 65536, 0, 786445, 65536, 0, 786444, 65536, 0, 786443, 65536, 0, 786442, 65536, 0, 786441, 65536, 0, 786440, 65536, 0, 786439, 65536, 0, 786438, 65536, 0, 786437, 65536, 0, 786436, 65536, 0, 786435, 65536, 0, 786434, 65536, 0, 720888, 65536, 1, 720889, 65536, 1, 720890, 65536, 1, 720891, 65536, 1, 720892, 65536, 1, 720893, 65536, 1, 720894, 65536, 1, 720895, 65536, 1, 655360, 65536, 1, 655361, 65536, 1, 655362, 65536, 1, 655363, 65536, 1, 655364, 65536, 1, 655365, 65536, 1, 655366, 65536, 1, 655367, 65536, 1, 655368, 65536, 1, 655369, 65536, 1, 655370, 65536, 1, 655371, 65536, 1, 655372, 65536, 1, 655373, 65536, 1, 589841, 65536, 0, 786422, 65536, 0, 720886, 65536, 0, 720885, 65536, 0, 720911, 65536, 0, 655375, 65536, 0, 655376, 65536, 0, 655350, 65536, 1, 655349, 65536, 1, 589839, 65536, 1, 655351, 65536, 1, 655352, 65536, 1, 655353, 65536, 1, 655354, 65536, 1, 655355, 65536, 1, 655356, 65536, 1, 655357, 65536, 1, 655358, 65536, 1, 655359, 65536, 1, 589824, 65536, 1, 589825, 65536, 1, 589826, 65536, 1, 589827, 65536, 1, 589828, 65536, 1, 589829, 65536, 1, 589830, 65536, 1, 589831, 65536, 1, 589832, 65536, 1, 589833, 65536, 1, 589834, 65536, 1, 589835, 65536, 1, 589836, 65536, 1, 589837, 65536, 1, 589838, 65536, 1, 786424, 65536, 1, 786425, 65536, 1, 786426, 65536, 1, 786427, 65536, 1, 786428, 65536, 1, 786429, 65536, 1, 786430, 65536, 1, 786431, 65536, 1, 720896, 65536, 1, 720897, 65536, 1, 720898, 65536, 1, 720899, 65536, 1, 720900, 65536, 1, 720901, 65536, 1, 720902, 65536, 1, 720903, 65536, 1, 720904, 65536, 1, 720905, 65536, 1, 720908, 65536, 1, 720909, 65536, 1, 720906, 65536, 1, 720907, 65536, 1, 720887, 65536, 1, 655374, 65536, 1, 720910, 65536, 0, 786423, 65536, 0, 262139, 65536, 1, 262140, 65536, 1, 262141, 65536, 1, 262142, 65536, 1, 262143, 65536, 1, 196608, 65536, 1, 196609, 65536, 1, 196610, 65536, 1, 196611, 65536, 1, 196612, 65536, 1, 196613, 65536, 1, 196614, 65536, 1, 196615, 65536, 1, 196616, 65536, 1, 196617, 65536, 1, 196618, 65536, 1, 196619, 65536, 1, 262138, 65536, 1, 589840, 65536, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.55, 0.55)
+
+[node name="BackgroundCanvas" type="CanvasLayer" parent="Camera2D"]
+layer = -1
+follow_viewport_enabled = true
+
+[node name="BackgroundTexture" type="TextureRect" parent="Camera2D/BackgroundCanvas"]
+z_as_relative = false
+texture_filter = 1
+offset_left = -1039.0
+offset_top = -635.0
+offset_right = 1065.0
+offset_bottom = 545.0
+texture = ExtResource("2_qmg0v")
+stretch_mode = 4
+
+[node name="hud" parent="Camera2D" instance=ExtResource("3_fsags")]
+offset_top = -570.0
+offset_bottom = -570.0
+scale = Vector2(2.57322, 2.57322)
 
 [node name="Area2D" type="Area2D" parent="." groups=["boundary"]]
 collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["boundary"]]
-position = Vector2(0, 515)
+position = Vector2(0, 900)
 scale = Vector2(10, 10)
 shape = SubResource("WorldBoundaryShape2D_ig2vd")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D" groups=["boundary"]]
-position = Vector2(-1.45519e-11, -600)
+position = Vector2(0, -900)
 rotation = 3.14159
 scale = Vector2(10, 10)
 shape = SubResource("WorldBoundaryShape2D_iwr00")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" groups=["boundary"]]
-position = Vector2(-796, 0)
+position = Vector2(-1400, 45)
 rotation = 1.5708
 scale = Vector2(10, 10)
 shape = SubResource("WorldBoundaryShape2D_iwr00")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D" groups=["boundary"]]
-position = Vector2(796, 0)
+position = Vector2(1400, 45)
 rotation = -1.5708
 scale = Vector2(10, 10)
 shape = SubResource("WorldBoundaryShape2D_iwr00")
 
-[node name="CharacterBody2D4" parent="." instance=ExtResource("4_l5f3c")]
-position = Vector2(-345, 63)
-
 [node name="CharacterBody2D3" parent="." instance=ExtResource("4_l5f3c")]
+
 position = Vector2(344, 70)
 player_index = 2
 

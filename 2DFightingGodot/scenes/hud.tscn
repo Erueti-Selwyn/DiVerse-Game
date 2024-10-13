@@ -1,14 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://u3qy208g8d7a"]
+[gd_scene load_steps=5 format=3 uid="uid://u3qy208g8d7a"]
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_n5evy"]
+[ext_resource type="Texture2D" uid="uid://c3i46n74vnk12" path="res://assets/Ui Assets/Player1Icon.png" id="1_pki0v"]
 [ext_resource type="LabelSettings" uid="uid://3b1b5736t5jy" path="res://assets/Ui Assets/UI_Resource.tres" id="2_ckdan"]
-[ext_resource type="Texture2D" uid="uid://bvfh0fu6f1vm2" path="res://assets/Ui Assets/topborder.png" id="2_l1uwf"]
-[ext_resource type="Texture2D" uid="uid://dxvfbpcmoa6sx" path="res://assets/Ui Assets/Bottomborder.png" id="2_oybhg"]
-[ext_resource type="FontFile" uid="uid://ccd6qond4rdjk" path="res://assets/Ui Assets/American Captain.ttf" id="3_4qgyt"]
-[ext_resource type="Texture2D" uid="uid://4gouvqjg8pwx" path="res://assets/Ui Assets/heart.png" id="3_biglh"]
-[ext_resource type="Texture2D" uid="uid://bu0tmcwcue3lr" path="res://assets/Ui Assets/Border.png" id="4_jflf5"]
-[ext_resource type="Texture2D" uid="uid://b66ssj3swr2ar" path="res://assets/Ui Assets/BorderBackground.png" id="6_2f0m1"]
-[ext_resource type="Texture2D" uid="uid://1xu1ipgs8406" path="res://assets/profiles/viking profile.aesprite.png" id="7_mnhht"]
+[ext_resource type="Texture2D" uid="uid://csni7n4ymjquc" path="res://assets/Ui Assets/Player2Icon.png" id="3_2mo61"]
 
 [node name="hud" type="Control"]
 layout_mode = 3
@@ -19,276 +14,48 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n5evy")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 15
-
-[node name="Vseperator" type="Control" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 100
-
-[node name="Player1" type="Control" parent="VBoxContainer/HBoxContainer"]
-z_index = 1
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-
-[node name="ColorRect2" type="ColorRect" parent="VBoxContainer/HBoxContainer/Player1"]
+[node name="Player 1" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -15.0
-offset_top = -40.0
-offset_right = 116.0
-offset_bottom = 5.0
-color = Color(0.501961, 0.501961, 0.501961, 1)
+offset_left = -52.0
+offset_right = -12.0
+offset_bottom = 40.0
+texture = ExtResource("1_pki0v")
 
-[node name="TopBorder" type="TextureRect" parent="VBoxContainer/HBoxContainer/Player1"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -26.0
-offset_top = -50.0
-offset_right = 26.0
-offset_bottom = -50.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_l1uwf")
-stretch_mode = 5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Player1/TopBorder"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 17.0
-offset_top = -36.0
-offset_right = -17.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="Heart1" type="TextureRect" parent="VBoxContainer/HBoxContainer/Player1/TopBorder/HBoxContainer"]
-custom_minimum_size = Vector2(36, 36)
-layout_mode = 2
-size_flags_vertical = 4
-texture = ExtResource("3_biglh")
-stretch_mode = 5
-
-[node name="Heart2" type="TextureRect" parent="VBoxContainer/HBoxContainer/Player1/TopBorder/HBoxContainer"]
-custom_minimum_size = Vector2(36, 36)
-layout_mode = 2
-size_flags_vertical = 4
-texture = ExtResource("3_biglh")
-
-[node name="Heart3" type="TextureRect" parent="VBoxContainer/HBoxContainer/Player1/TopBorder/HBoxContainer"]
-custom_minimum_size = Vector2(36, 36)
-layout_mode = 2
-size_flags_vertical = 4
-texture = ExtResource("3_biglh")
-
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer/HBoxContainer/Player1"]
+[node name="ColorRect" type="ColorRect" parent="Player 1"]
 layout_mode = 0
-offset_left = 15.0
-offset_top = 94.0
-offset_right = 87.0
-offset_bottom = 134.0
-color = Color(0.501961, 0.501961, 0.501961, 1)
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 63.0
+color = Color(0.133333, 0.12549, 0.203922, 1)
 
-[node name="BottomBorder" type="TextureRect" parent="VBoxContainer/HBoxContainer/Player1"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 66.0
-offset_bottom = 66.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_oybhg")
-stretch_mode = 5
-
-[node name="HP1" type="Label" parent="VBoxContainer/HBoxContainer/Player1"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 19.0
-offset_top = 101.0
-offset_right = -19.0
-offset_bottom = 32.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_4qgyt")
-text = "0"
+[node name="Label" type="Label" parent="Player 1"]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 63.0
+text = "0 %"
 label_settings = ExtResource("2_ckdan")
 horizontal_alignment = 1
 
-[node name="Background" type="TextureRect" parent="VBoxContainer/HBoxContainer/Player1"]
-clip_children = 2
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_2f0m1")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="Icon1" type="TextureRect" parent="VBoxContainer/HBoxContainer/Player1/Background"]
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("7_mnhht")
-
-[node name="Border" type="TextureRect" parent="VBoxContainer/HBoxContainer/Player1/Background"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_jflf5")
-stretch_mode = 5
-
-[node name="Player2" type="Control" parent="VBoxContainer/HBoxContainer"]
-z_index = 1
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-
-[node name="ColorRect2" type="ColorRect" parent="VBoxContainer/HBoxContainer/Player2"]
+[node name="Player 2" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -15.0
-offset_top = -40.0
-offset_right = 116.0
-offset_bottom = 5.0
-color = Color(0.501961, 0.501961, 0.501961, 1)
+offset_left = 13.0
+offset_right = 53.0
+offset_bottom = 40.0
+texture = ExtResource("3_2mo61")
 
-[node name="TopBorder" type="TextureRect" parent="VBoxContainer/HBoxContainer/Player2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -26.0
-offset_top = -50.0
-offset_right = 26.0
-offset_bottom = -50.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_l1uwf")
-stretch_mode = 5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Player2/TopBorder"]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 17.0
-offset_top = -36.0
-offset_right = -17.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="Heart1" type="TextureRect" parent="VBoxContainer/HBoxContainer/Player2/TopBorder/HBoxContainer"]
-custom_minimum_size = Vector2(36, 36)
-layout_mode = 2
-size_flags_vertical = 4
-texture = ExtResource("3_biglh")
-stretch_mode = 5
-
-[node name="Heart2" type="TextureRect" parent="VBoxContainer/HBoxContainer/Player2/TopBorder/HBoxContainer"]
-custom_minimum_size = Vector2(36, 36)
-layout_mode = 2
-size_flags_vertical = 4
-texture = ExtResource("3_biglh")
-
-[node name="Heart3" type="TextureRect" parent="VBoxContainer/HBoxContainer/Player2/TopBorder/HBoxContainer"]
-custom_minimum_size = Vector2(36, 36)
-layout_mode = 2
-size_flags_vertical = 4
-texture = ExtResource("3_biglh")
-
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer/HBoxContainer/Player2"]
+[node name="ColorRect" type="ColorRect" parent="Player 2"]
 layout_mode = 0
-offset_left = 15.0
-offset_top = 94.0
-offset_right = 87.0
-offset_bottom = 134.0
-color = Color(0.501961, 0.501961, 0.501961, 1)
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 63.0
+color = Color(0.133333, 0.12549, 0.203922, 1)
 
-[node name="BottomBorder" type="TextureRect" parent="VBoxContainer/HBoxContainer/Player2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 66.0
-offset_bottom = 66.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_oybhg")
-stretch_mode = 5
-
-[node name="HP2" type="Label" parent="VBoxContainer/HBoxContainer/Player2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 19.0
-offset_top = 101.0
-offset_right = -19.0
-offset_bottom = 32.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_4qgyt")
-text = "0"
+[node name="Label" type="Label" parent="Player 2"]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 63.0
+text = "0 %"
 label_settings = ExtResource("2_ckdan")
 horizontal_alignment = 1
-
-[node name="Background" type="TextureRect" parent="VBoxContainer/HBoxContainer/Player2"]
-clip_children = 2
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("6_2f0m1")
-expand_mode = 3
-stretch_mode = 5
-
-[node name="Icon2" type="TextureRect" parent="VBoxContainer/HBoxContainer/Player2/Background"]
-show_behind_parent = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("7_mnhht")
-flip_h = true
-
-[node name="Border" type="TextureRect" parent="VBoxContainer/HBoxContainer/Player2/Background"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_jflf5")
-stretch_mode = 5

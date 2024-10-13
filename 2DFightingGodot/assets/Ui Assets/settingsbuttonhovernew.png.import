@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0fg0wl3j3kop"
-path="res://.godot/imported/sniper.png-47c75768c258433aa567ad609097b1a6.ctex"
+uid="uid://dn6e8e81q41eh"
+path="res://.godot/imported/settingsbuttonhovernew.png-2263b5d09b885f9216aad58c4606ffda.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/guns/sniper.png"
-dest_files=["res://.godot/imported/sniper.png-47c75768c258433aa567ad609097b1a6.ctex"]
+source_file="res://assets/Ui Assets/settingsbuttonhovernew.png"
+dest_files=["res://.godot/imported/settingsbuttonhovernew.png-2263b5d09b885f9216aad58c4606ffda.ctex"]
 
 [params]
 

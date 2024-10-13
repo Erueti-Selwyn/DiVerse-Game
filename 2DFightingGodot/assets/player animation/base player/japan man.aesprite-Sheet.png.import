@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0fg0wl3j3kop"
-path="res://.godot/imported/sniper.png-47c75768c258433aa567ad609097b1a6.ctex"
+uid="uid://ca5e3kagggrvs"
+path="res://.godot/imported/japan man.aesprite-Sheet.png-b3f18730f0b4570a1bf256cb94d155c4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/guns/sniper.png"
-dest_files=["res://.godot/imported/sniper.png-47c75768c258433aa567ad609097b1a6.ctex"]
+source_file="res://assets/player animation/base player/japan man.aesprite-Sheet.png"
+dest_files=["res://.godot/imported/japan man.aesprite-Sheet.png-b3f18730f0b4570a1bf256cb94d155c4.ctex"]
 
 [params]
 

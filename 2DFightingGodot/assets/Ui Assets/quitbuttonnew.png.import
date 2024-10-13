@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0fg0wl3j3kop"
-path="res://.godot/imported/sniper.png-47c75768c258433aa567ad609097b1a6.ctex"
+uid="uid://dwhf1gik7nnh"
+path="res://.godot/imported/quitbuttonnew.png-023931a82b5491ee9bd83fb3cd2b456c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/guns/sniper.png"
-dest_files=["res://.godot/imported/sniper.png-47c75768c258433aa567ad609097b1a6.ctex"]
+source_file="res://assets/Ui Assets/quitbuttonnew.png"
+dest_files=["res://.godot/imported/quitbuttonnew.png-023931a82b5491ee9bd83fb3cd2b456c.ctex"]
 
 [params]
 
