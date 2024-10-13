@@ -1,0 +1,129 @@
+[gd_scene load_steps=13 format=3 uid="uid://u51lay85nrxb"]
+
+[ext_resource type="Texture2D" uid="uid://c521c5ybtmemr" path="res://assets/Ui Assets/ContorlsMenu.png" id="1_jg601"]
+[ext_resource type="Script" path="res://scripts/controls.gd" id="1_w5frj"]
+[ext_resource type="Texture2D" uid="uid://sdtk3o1ge1gh" path="res://assets/Ui Assets/controlUI/WASD.png" id="2_0xpoy"]
+[ext_resource type="Texture2D" uid="uid://c48b03f7tt1e5" path="res://assets/Ui Assets/controlUI/ArrowKeys.png" id="3_adrvb"]
+[ext_resource type="Texture2D" uid="uid://b8rsvredmtuni" path="res://assets/Ui Assets/XButton.png" id="3_go1wd"]
+[ext_resource type="Texture2D" uid="uid://ss0vitlix28e" path="res://assets/Ui Assets/controlUI/F.png" id="4_5c176"]
+[ext_resource type="Texture2D" uid="uid://b2bgfkeomlmid" path="res://assets/Ui Assets/controlUI/L.png" id="5_supyu"]
+[ext_resource type="Texture2D" uid="uid://dtkeqs0dc6wus" path="res://assets/Ui Assets/controlUI/Q.png" id="6_8qucl"]
+[ext_resource type="Texture2D" uid="uid://6ykk6bs3gvuk" path="res://assets/Ui Assets/controlUI/movementtext.png" id="6_japow"]
+[ext_resource type="Texture2D" uid="uid://rsfm7bc3he1p" path="res://assets/Ui Assets/controlUI/K.png" id="7_m02cs"]
+[ext_resource type="Texture2D" uid="uid://6fim8ndei3b2" path="res://assets/Ui Assets/controlUI/AttackText.png" id="8_xvll6"]
+[ext_resource type="Texture2D" uid="uid://by68okyrc8f7k" path="res://assets/Ui Assets/controlUI/dashtext.png" id="12_ek5yg"]
+
+[node name="controls" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w5frj")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -160.0
+offset_right = 256.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundControls" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("1_jg601")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="seperator2" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Exitbutton" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+texture_normal = ExtResource("3_go1wd")
+
+[node name="seperator" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(12, 0)
+layout_mode = 2
+
+[node name="seperator" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 2
+texture = ExtResource("2_0xpoy")
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 60)
+layout_mode = 2
+texture = ExtResource("3_adrvb")
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+texture = ExtResource("6_japow")
+stretch_mode = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("4_5c176")
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("5_supyu")
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+texture = ExtResource("8_xvll6")
+stretch_mode = 5
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("6_8qucl")
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+texture = ExtResource("7_m02cs")
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+texture = ExtResource("12_ek5yg")
+stretch_mode = 5
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer4/Exitbutton" to="." method="_on_exitbutton_pressed"]

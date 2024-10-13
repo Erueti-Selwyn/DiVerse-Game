@@ -40,14 +40,11 @@ func _ready():
 	pass
 
 func _on_start_pressed():
-	if !localPlayer1Controller && !localPlayer2Controller:
-		print("Cannot Have 2 Keyboards!")
-	else:
-		global_script.globalPlayerCharacter1 = player1Character
-		global_script.globalPlayerCharacter2 = player2Character
-		global_script.player1Controller = localPlayer1Controller
-		global_script.player2Controller = localPlayer2Controller
-		get_tree().change_scene_to_file("res://scenes/Level.tscn")
+	global_script.globalPlayerCharacter1 = player1Character
+	global_script.globalPlayerCharacter2 = player2Character
+	global_script.player1Controller = localPlayer1Controller
+	global_script.player2Controller = localPlayer2Controller
+	get_tree().change_scene_to_file("res://scenes/Level.tscn")
 
 
 func _on_african_button_1_pressed():

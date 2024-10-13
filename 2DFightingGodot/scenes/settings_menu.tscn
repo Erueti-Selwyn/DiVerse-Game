@@ -149,3 +149,4 @@ stretch_mode = 5
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer3/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/SoundButton" to="." method="_on_sound_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/MusicButton" to="." method="_on_music_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Controls" to="." method="_on_controls_pressed"]
