@@ -1,5 +1,6 @@
 extends Control
 @onready var global_script = $"/root/Global"
+@onready var settingsMenu = $"../settings_menu"
 var paused = false
 
 # Called when the node enters the scene tree for the first time.
@@ -23,10 +24,16 @@ func pauseMenu():
 		global_script.isPaused = true
 	paused = !paused
 
-func _on_resume_pressed():
+func _on_resume_button_pressed():
 	pauseMenu()
 
 
-func _on_quit_pressed():
+func _on_options_button_pressed():
+	settingsMenu.from_pause_menu()
+	settingsMenu.visible = true
+	self.hide()
+
+
+func _on_exit_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")
 	pauseMenu()

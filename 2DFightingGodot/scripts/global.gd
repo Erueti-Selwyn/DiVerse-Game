@@ -8,6 +8,12 @@ extends Node
 @export var globalPlayerCharacter2 = 1
 @export var isPaused = false
 @export var winningPlayer = 0
+@export var globalPlayer1Lives = 0
+@export var globalPlayer2Lives = 0
+@export var crateNumber = 0
+@export var mapType = 1
+@export var soundOn = true
+@export var musicOn = true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
