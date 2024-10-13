@@ -1,9 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://dfdn4clkj55a4"]
+
+[gd_scene load_steps=16 format=3 uid="uid://dfdn4clkj55a4"]
 
 [ext_resource type="Texture2D" uid="uid://4smgw32hn4oe" path="res://assets/tilemaps/ScaryDungeonTileMap.png" id="1_pko7j"]
 [ext_resource type="Texture2D" uid="uid://dfioa50vtvf7l" path="res://assets/backgrounds/japan mapp.png" id="2_qmg0v"]
 [ext_resource type="PackedScene" uid="uid://u3qy208g8d7a" path="res://scenes/hud.tscn" id="3_fsags"]
-[ext_resource type="PackedScene" uid="uid://bdxtusi0wukv6" path="res://scenes/players/Mexican.tscn" id="4_l5f3c"]
+
+[ext_resource type="PackedScene" uid="uid://bdxtusi0wukv6" path="res://scenes/players/Player.tscn" id="4_l5f3c"]
+[ext_resource type="PackedScene" uid="uid://cs015desyfdvu" path="res://scenes/pause.tscn" id="5_r7284"]
+[ext_resource type="PackedScene" uid="uid://cpp6uup1fjkuc" path="res://scenes/settings_menu.tscn" id="8_5ck7g"]
+[ext_resource type="PackedScene" uid="uid://u51lay85nrxb" path="res://scenes/controls.tscn" id="8_gcqk8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n37u8"]
 texture = ExtResource("1_pko7j")
@@ -95,8 +100,71 @@ scale = Vector2(10, 10)
 shape = SubResource("WorldBoundaryShape2D_iwr00")
 
 [node name="CharacterBody2D3" parent="." instance=ExtResource("4_l5f3c")]
-position = Vector2(-599, 155)
-player_index = 1
 
-[node name="CharacterBody2D4" parent="." instance=ExtResource("4_l5f3c")]
-position = Vector2(31, 167)
+position = Vector2(344, 70)
+player_index = 2
+
+[node name="SpawnLocation1" type="Marker2D" parent="."]
+position = Vector2(-344, 79)
+
+[node name="SpawnLocation2" type="Marker2D" parent="."]
+position = Vector2(344, 79)
+
+[node name="pause" parent="." instance=ExtResource("5_r7284")]
+visible = false
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="settings_menu" parent="." instance=ExtResource("8_5ck7g")]
+visible = false
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="controls" parent="." instance=ExtResource("8_gcqk8")]
+visible = false
+
+[node name="fallSplashParticle" type="CPUParticles2D" parent="."]
+position = Vector2(0, 357)
+emitting = false
+amount = 50
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, -1)
+spread = 17.73
+initial_velocity_min = 425.15
+initial_velocity_max = 747.47
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_min = 5.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_m37vw")
+color_ramp = SubResource("Gradient_x3c6u")
+
+[node name="killParticle" type="CPUParticles2D" parent="."]
+position = Vector2(0, 357)
+emitting = false
+amount = 50
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 490)
+initial_velocity_min = 122.12
+initial_velocity_max = 292.92
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_min = 3.0
+scale_amount_max = 7.0
+scale_amount_curve = SubResource("Curve_m37vw")
+color_ramp = SubResource("Gradient_x3c6u")
