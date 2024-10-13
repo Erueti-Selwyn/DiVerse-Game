@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dfdn4clkj55a4"]
+[gd_scene load_steps=16 format=3 uid="uid://dfdn4clkj55a4"]
 
 [ext_resource type="Script" path="res://scripts/Level.gd" id="1_7kyh2"]
 [ext_resource type="Texture2D" uid="uid://4smgw32hn4oe" path="res://assets/tilemaps/ScaryDungeonTileMap.png" id="1_pko7j"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bdxtusi0wukv6" path="res://scenes/players/Player.tscn" id="4_l5f3c"]
 [ext_resource type="PackedScene" uid="uid://cs015desyfdvu" path="res://scenes/pause.tscn" id="5_r7284"]
 [ext_resource type="PackedScene" uid="uid://cpp6uup1fjkuc" path="res://scenes/settings_menu.tscn" id="8_5ck7g"]
+[ext_resource type="PackedScene" uid="uid://u51lay85nrxb" path="res://scenes/controls.tscn" id="8_gcqk8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n37u8"]
 texture = ExtResource("1_pko7j")
@@ -138,7 +139,6 @@ position = Vector2(344, 79)
 
 [node name="pause" parent="." instance=ExtResource("5_r7284")]
 visible = false
-top_level = true
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -157,6 +157,9 @@ offset_left = 0.0
 offset_top = 0.0
 offset_right = 0.0
 offset_bottom = 0.0
+
+[node name="controls" parent="." instance=ExtResource("8_gcqk8")]
+visible = false
 
 [node name="fallSplashParticle" type="CPUParticles2D" parent="."]
 position = Vector2(0, 357)

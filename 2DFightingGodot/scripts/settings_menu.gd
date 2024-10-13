@@ -7,6 +7,7 @@ const swtichOffMask = preload("res://assets/Ui Assets/optionButtonOffMask.png")
 @onready var soundSwitch = $MarginContainer/VBoxContainer/HBoxContainer/SoundButton
 @onready var musicSwitch = $MarginContainer/VBoxContainer/HBoxContainer2/MusicButton
 @onready var pauseMenu = $"../pause"
+@onready var controlsMenu = $"../controls"
 var localSoundOn = true
 var localMusicOn = true
 var fromPauseMenu = false
@@ -50,3 +51,7 @@ func _on_exit_button_pressed():
 	
 func from_pause_menu():
 	fromPauseMenu = true
+
+
+func _on_controls_pressed():
+	controlsMenu.visible = true

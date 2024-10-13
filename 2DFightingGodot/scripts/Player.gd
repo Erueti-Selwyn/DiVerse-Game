@@ -28,8 +28,6 @@ var max_num_dub_jumps = 3
 var MAX_FRICTION = 225
 var FRICTION = 30
 
-var crouching = false
-
 var dashDirection = Vector2(0, 0)
 var dashAmount = 1
 var currentDashAmount = 0
@@ -92,7 +90,9 @@ var samoanMeleeDamage = 6
 @export var rocketLauncherDamage = 10
 @export var sniperDamage = 15
 var player_controller_index
+var player_keyboard_index
 var playercontroller = true
+var doubleKeyboard
 @onready var _animated_sprite = $CollisionShape2D/AnimatedSprite2D
 @onready var Gun = $CollisionShape2D/AnimatedSprite2D/Gun
 @onready var africanAttackCollision = $CollisionShape2D/AnimatedSprite2D/Melee/AfricanAttackCollision
@@ -123,11 +123,18 @@ func _ready():
 			playercontroller = true
 		elif global_script.player1Controller == false:
 			playercontroller = false
+			player_keyboard_index = 0
+		if global_script.player1Controller == false && global_script.player2Controller == false:
+			doubleKeyboard = true
 	if player_index == 2:
 		if global_script.player1Controller == false && global_script.player2Controller == true:
 			player_controller_index = 0
-		else:
+		elif global_script.player1Controller == true && global_script.player2Controller == false:
+			player_keyboard_index = 0
+		elif global_script.player1Controller == true && global_script.player2Controller == true:
 			player_controller_index = 1
+		elif global_script.player1Controller == false && global_script.player2Controller == false:
+			player_keyboard_index = 1
 		if global_script.player2Controller == true:
 			playercontroller = true
 
@@ -201,11 +208,19 @@ func _physics_process(_delta):
 					attack()
 		else:
 			if isHoldingGun:
-				if Input.is_action_just_pressed("shoot") && !onWall:
-					shoot()
+				if player_keyboard_index == 0:
+					if Input.is_action_just_pressed("shoot") && !onWall:
+						shoot()
+				elif player_keyboard_index == 1:
+					if Input.is_action_just_pressed("shoot2") && !onWall:
+						shoot()
 			else:
-				if Input.is_action_just_pressed("shoot") && !onWall:
-					attack()
+				if player_keyboard_index == 0:
+					if Input.is_action_just_pressed("shoot") && !onWall:
+						attack()
+				elif player_keyboard_index == 1:
+					if Input.is_action_just_pressed("shoot2") && !onWall:
+						attack()
 		if playerCharacter == 1: # African
 			if velocity == Vector2(0, 0) && !attacking:
 				_animated_sprite.play("africanidle")
@@ -316,13 +331,20 @@ func _physics_process(_delta):
 			if Input.is_joy_button_pressed(player_controller_index, 1):
 				dash()
 		else:
-			if Input.is_action_just_pressed("dash"):
-				dash()
+			if player_keyboard_index == 0:
+				if Input.is_action_just_pressed("dash"):
+					dash()
+			elif player_keyboard_index == 1:
+				if Input.is_action_just_pressed("dash2"):
+					dash()
 		# Gets Controller Joystick Input
 		if playercontroller:
 			direction_inputX = Input.get_joy_axis(player_controller_index, 0)
 		else:
-			direction_inputX = Input.get_axis("move_left", "move_right")
+			if player_keyboard_index == 0:
+				direction_inputX = Input.get_axis("move_left", "move_right")
+			elif player_keyboard_index == 1:
+				direction_inputX = Input.get_axis("move_left2", "move_right2")
 		# Adds Deadzone
 		if abs(direction_inputX) < DEADZONE:
 			directionX = 0
@@ -351,18 +373,17 @@ func _physics_process(_delta):
 			else:
 				directionY = (direction_inputY - sign(direction_inputY) * DEADZONEY) / (1 - DEADZONEY)
 			if directionY > 0:
-				crouching = true
 				if is_on_floor():
 					position.y += 1
-			else:
-				crouching = false
 		else:
-			if Input.is_action_pressed("move_down"):
-				crouching = true
-				if is_on_floor():
-					position.y += 1
-			else:
-				crouching = false
+			if player_keyboard_index == 0:
+				if Input.is_action_pressed("move_down"):
+					if is_on_floor():
+						position.y += 1
+			if player_keyboard_index == 1:
+				if Input.is_action_pressed("move_down2"):
+					if is_on_floor():
+						position.y += 1
 
 		if is_on_floor(): 
 			dub_jumps = max_num_dub_jumps
@@ -381,18 +402,46 @@ func _physics_process(_delta):
 			else:
 				joy_jump_pressed = false
 		else:
-			if Input.is_action_just_pressed("jump") && !attacking:
-				if !joy_jump_pressed:
-					joy_jump_pressed = true
-					if dub_jumps > 0: 
-						dub_jumps -= 1
-						velocity.y = -JUMP_HIGHT
-					if is_on_wall() && directionX == 1:
-						velocity.x = -(MAX_SPEED * 2)
-					elif is_on_wall() && directionX == -1:
-						velocity.x = (MAX_SPEED * 2)
-			else:
-				joy_jump_pressed = false
+			if player_keyboard_index == 0:
+				if !doubleKeyboard:
+					if Input.is_action_just_pressed("jump") && !attacking:
+						if !joy_jump_pressed:
+							joy_jump_pressed = true
+							if dub_jumps > 0: 
+								dub_jumps -= 1
+								velocity.y = -JUMP_HIGHT
+							if is_on_wall() && directionX == 1:
+								velocity.x = -(MAX_SPEED * 2)
+							elif is_on_wall() && directionX == -1:
+								velocity.x = (MAX_SPEED * 2)
+					else:
+						joy_jump_pressed = false
+				elif doubleKeyboard:
+					if Input.is_action_just_pressed("move_up") && !attacking:
+						if !joy_jump_pressed:
+							joy_jump_pressed = true
+							if dub_jumps > 0: 
+								dub_jumps -= 1
+								velocity.y = -JUMP_HIGHT
+							if is_on_wall() && directionX == 1:
+								velocity.x = -(MAX_SPEED * 2)
+							elif is_on_wall() && directionX == -1:
+								velocity.x = (MAX_SPEED * 2)
+					else:
+						joy_jump_pressed = false
+			elif player_keyboard_index == 1:
+				if Input.is_action_just_pressed("move_up2") && !attacking:
+					if !joy_jump_pressed:
+						joy_jump_pressed = true
+						if dub_jumps > 0: 
+							dub_jumps -= 1
+							velocity.y = -JUMP_HIGHT
+						if is_on_wall() && directionX == 1:
+							velocity.x = -(MAX_SPEED * 2)
+						elif is_on_wall() && directionX == -1:
+							velocity.x = (MAX_SPEED * 2)
+				else:
+					joy_jump_pressed = false
 		
 		if is_on_wall() && (directionX == -1 || directionX == 1) && !attacking:
 			dub_jumps = max_num_dub_jumps
