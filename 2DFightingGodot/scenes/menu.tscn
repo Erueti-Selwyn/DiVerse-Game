@@ -32,7 +32,10 @@ texture = ExtResource("1_di8st")
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 =======
 >>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 [node name="settings_menu" parent="TextureRect" instance=ExtResource("3_rmyff")]

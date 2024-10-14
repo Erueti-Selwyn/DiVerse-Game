@@ -36,6 +36,9 @@ func _on_option_button_player_2_item_selected(input_type):
 func _on_controls_pressed():
 	controlsMenu.visible = true
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
+=======
 >>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 =======
 >>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)

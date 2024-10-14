@@ -64,6 +64,7 @@ texture_normal = ExtResource("3_64plv")
 texture_click_mask = ExtResource("4_dl6bg")
 stretch_mode = 5
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 [node name="seperator" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(10, 0)
@@ -144,6 +145,37 @@ size_flags_vertical = 4
 texture = ExtResource("5_462up")
 stretch_mode = 5
 
+=======
+
+[node name="seperator" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="seperator" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="seperator" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture = ExtResource("4_158c7")
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_462up")
+stretch_mode = 5
+
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 [node name="seperator2" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(27.7, 0)
 layout_mode = 2
@@ -153,6 +185,9 @@ custom_minimum_size = Vector2(50, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+<<<<<<< HEAD
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
+=======
 >>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 texture_normal = ExtResource("6_jm3ic")
 texture_click_mask = ExtResource("8_ycu42")
@@ -204,6 +239,9 @@ stretch_mode = 5
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/MusicButton" to="." method="_on_music_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Controls" to="." method="_on_controls_pressed"]
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
+=======
 >>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 =======
 >>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)

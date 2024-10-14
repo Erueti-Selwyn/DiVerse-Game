@@ -1,7 +1,10 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [gd_scene load_steps=9 format=3 uid="uid://dfdn4clkj55a4"]
 =======
+=======
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 =======
 >>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 [gd_scene load_steps=16 format=3 uid="uid://dfdn4clkj55a4"]
@@ -14,8 +17,11 @@
 [ext_resource type="PackedScene" uid="uid://u3qy208g8d7a" path="res://scenes/hud.tscn" id="3_fsags"]
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [ext_resource type="PackedScene" uid="uid://bdxtusi0wukv6" path="res://scenes/players/Mexican.tscn" id="4_l5f3c"]
 =======
+=======
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 =======
 >>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 [ext_resource type="PackedScene" uid="uid://bdxtusi0wukv6" path="res://scenes/players/Player.tscn" id="4_l5f3c"]
@@ -140,6 +146,7 @@ shape = SubResource("WorldBoundaryShape2D_iwr00")
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [node name="CharacterBody2D3" parent="." instance=ExtResource("4_l5f3c")]
 position = Vector2(-599, 155)
 player_index = 1
@@ -150,6 +157,11 @@ position = Vector2(31, 167)
 [node name="CharacterBody2D4" parent="." instance=ExtResource("4_l5f3c")]
 position = Vector2(-345, 63)
 
+=======
+[node name="CharacterBody2D4" parent="." instance=ExtResource("4_l5f3c")]
+position = Vector2(-345, 63)
+
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 =======
 [node name="CharacterBody2D4" parent="." instance=ExtResource("4_l5f3c")]
 position = Vector2(-345, 63)
@@ -224,6 +236,9 @@ scale_amount_max = 7.0
 scale_amount_curve = SubResource("Curve_m37vw")
 color_ramp = SubResource("Gradient_x3c6u")
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
+=======
 >>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 =======
 >>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)

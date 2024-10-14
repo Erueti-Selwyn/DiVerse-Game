@@ -27,12 +27,17 @@ var max_num_dub_jumps = 3
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 var MAX_FRICTION = 300
 var FRICTION = 60
 
 var normalSpeed = 450
 var crouchSpeed = 300
 var crouching = false
+=======
+var MAX_FRICTION = 225
+var FRICTION = 30
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 =======
 var MAX_FRICTION = 225
 var FRICTION = 30
@@ -199,6 +204,21 @@ func _physics_process(_delta):
 	if global_script.isPaused == false && isDead == false:
 		if hasPistol:
 			isHoldingGun = true
+<<<<<<< HEAD
+=======
+		else:
+			isHoldingGun = false
+		if health <= 0:
+			die()
+			killed()
+		if playercontroller:
+			if isHoldingGun:
+				if Input.is_joy_button_pressed(player_controller_index, 2):
+					shoot()
+			else:
+				if Input.is_joy_button_pressed(player_controller_index, 2):
+					attack()
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 		else:
 			isHoldingGun = false
 		if health <= 0:
@@ -349,6 +369,9 @@ func _physics_process(_delta):
 			else:
 				Gun.visible = true
 		else:
+<<<<<<< HEAD
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
+=======
 >>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 			Gun.visible = false
 			Gun.modulate = Color(1, 1, 1, 0)
@@ -456,6 +479,9 @@ func _physics_process(_delta):
 			velocity.x = move_toward(velocity.x, 0, MAX_FRICTION)
 		elif velocity.x < -MAX_SPEED:
 			velocity.x = move_toward(velocity.x, 0, MAX_FRICTION)
+<<<<<<< HEAD
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
+=======
 >>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 		else:
 			crouching = false
@@ -477,6 +503,7 @@ func _physics_process(_delta):
 			else:
 				joy_jump_pressed = false
 <<<<<<< HEAD
+<<<<<<< HEAD
 		else:
 			joy_jump_pressed = false
 	else:
@@ -490,6 +517,8 @@ func _physics_process(_delta):
 					velocity.x = -(MAX_SPEED * 3)
 				elif is_on_wall() && directionX == -1:
 					velocity.x = (MAX_SPEED * 3)
+=======
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 		else:
 			joy_jump_pressed = false
 	

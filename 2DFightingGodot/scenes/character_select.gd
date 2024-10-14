@@ -42,6 +42,7 @@ func _ready():
 func _on_start_pressed():
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if !global_script.player1Controller && !global_script.player2Controller:
 		print("Cannot Have 2 Keyboards!")
 	else:
@@ -52,6 +53,8 @@ func _on_start_pressed():
 =======
 =======
 >>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
+=======
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 	global_script.globalPlayerCharacter1 = player1Character
 	global_script.globalPlayerCharacter2 = player2Character
 	global_script.player1Controller = localPlayer1Controller
@@ -60,8 +63,11 @@ func _on_start_pressed():
 >>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 func _on_exits_pressed():
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")
+=======
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 =======
 >>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 
