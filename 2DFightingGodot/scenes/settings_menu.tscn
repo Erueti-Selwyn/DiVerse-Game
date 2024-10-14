@@ -52,7 +52,6 @@ custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-
 layout_mode = 2
 alignment = 2
 
@@ -102,7 +101,6 @@ custom_minimum_size = Vector2(50, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-
 texture_normal = ExtResource("6_jm3ic")
 texture_click_mask = ExtResource("8_ycu42")
 stretch_mode = 5

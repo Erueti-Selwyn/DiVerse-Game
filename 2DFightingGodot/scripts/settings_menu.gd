@@ -4,8 +4,13 @@ const switchOff = preload("res://assets/Ui Assets/optionButtonOff.png")
 const swtichOnMask = preload("res://assets/Ui Assets/optionButtonOnMask.png")
 const swtichOffMask = preload("res://assets/Ui Assets/optionButtonOffMask.png")
 @onready var global_script = $"/root/Global"
-@onready var optionPlayerButton1 = $"MarginContainerPlayer1/VBoxContainer/OptionButtonPlayer1"
-@onready var optionPlayerButton2 = $"MarginContainerPlayer2/VBoxContainer/OptionButtonPlayer2"
+@onready var soundSwitch = $MarginContainer/VBoxContainer/HBoxContainer/SoundButton
+@onready var musicSwitch = $MarginContainer/VBoxContainer/HBoxContainer2/MusicButton
+@onready var pauseMenu = $"../pause"
+@onready var controlsMenu = $"../controls"
+var localSoundOn = true
+var localMusicOn = true
+var fromPauseMenu = false
 
 func _ready():
 	localSoundOn = global_script.soundOn
@@ -17,18 +22,36 @@ func _process(_delta):
 func _on_menu_pressed():
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")
 
-func _on_option_button_player_1_item_selected(input_type):
-	if input_type == 0:
-		global_script.player1Controller = true
-	elif input_type == 1:
-		global_script.player1Controller = false
+func _on_sound_button_pressed():
+	if localSoundOn:
+		soundSwitch.texture_normal = switchOff
+		soundSwitch.texture_click_mask = swtichOffMask
+		localSoundOn = false
+	elif !localSoundOn:
+		soundSwitch.texture_normal = switchOn
+		soundSwitch.texture_click_mask = swtichOnMask
+		localSoundOn = true
+
+func _on_music_button_pressed():
+	if localMusicOn:
+		musicSwitch.texture_normal = switchOff
+		musicSwitch.texture_click_mask = swtichOffMask
+		localMusicOn = false
+	elif !localMusicOn:
+		musicSwitch.texture_normal = switchOn
+		musicSwitch.texture_click_mask = swtichOnMask
+		localMusicOn = true
 
 
-func _on_option_button_player_2_item_selected(input_type):
-	if input_type == 0:
-		Global.player2Controller = true
-	elif input_type == 1:
-		Global.player2Controller = false
-    
+func _on_exit_button_pressed():
+	self.visible = false
+	if fromPauseMenu:
+		fromPauseMenu = false
+		pauseMenu.show()
+	
+func from_pause_menu():
+	fromPauseMenu = true
+
+
 func _on_controls_pressed():
 	controlsMenu.visible = true
