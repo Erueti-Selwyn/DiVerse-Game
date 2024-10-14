@@ -31,7 +31,10 @@ grow_vertical = 2
 texture = ExtResource("1_di8st")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 [node name="settings_menu" parent="TextureRect" instance=ExtResource("3_rmyff")]
 visible = false
 top_level = true

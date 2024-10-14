@@ -1,6 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 [gd_scene load_steps=9 format=3 uid="uid://dfdn4clkj55a4"]
 =======
+=======
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 [gd_scene load_steps=16 format=3 uid="uid://dfdn4clkj55a4"]
 >>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 
@@ -10,8 +13,11 @@
 [ext_resource type="LabelSettings" uid="uid://3b1b5736t5jy" path="res://assets/Ui Assets/UI_Resource.tres" id="3_0j4bi"]
 [ext_resource type="PackedScene" uid="uid://u3qy208g8d7a" path="res://scenes/hud.tscn" id="3_fsags"]
 <<<<<<< HEAD
+<<<<<<< HEAD
 [ext_resource type="PackedScene" uid="uid://bdxtusi0wukv6" path="res://scenes/players/Mexican.tscn" id="4_l5f3c"]
 =======
+=======
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 [ext_resource type="PackedScene" uid="uid://bdxtusi0wukv6" path="res://scenes/players/Player.tscn" id="4_l5f3c"]
 [ext_resource type="PackedScene" uid="uid://cs015desyfdvu" path="res://scenes/pause.tscn" id="5_r7284"]
 [ext_resource type="PackedScene" uid="uid://cpp6uup1fjkuc" path="res://scenes/settings_menu.tscn" id="8_5ck7g"]
@@ -133,6 +139,7 @@ scale = Vector2(10, 10)
 shape = SubResource("WorldBoundaryShape2D_iwr00")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 [node name="CharacterBody2D3" parent="." instance=ExtResource("4_l5f3c")]
 position = Vector2(-599, 155)
 player_index = 1
@@ -143,6 +150,11 @@ position = Vector2(31, 167)
 [node name="CharacterBody2D4" parent="." instance=ExtResource("4_l5f3c")]
 position = Vector2(-345, 63)
 
+=======
+[node name="CharacterBody2D4" parent="." instance=ExtResource("4_l5f3c")]
+position = Vector2(-345, 63)
+
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 [node name="CharacterBody2D3" parent="." instance=ExtResource("4_l5f3c")]
 position = Vector2(344, 70)
 player_index = 2
@@ -211,4 +223,7 @@ scale_amount_min = 3.0
 scale_amount_max = 7.0
 scale_amount_curve = SubResource("Curve_m37vw")
 color_ramp = SubResource("Gradient_x3c6u")
+<<<<<<< HEAD
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
+=======
 >>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)

@@ -26,12 +26,17 @@ var dub_jumps = 0
 var max_num_dub_jumps = 3 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 var MAX_FRICTION = 300
 var FRICTION = 60
 
 var normalSpeed = 450
 var crouchSpeed = 300
 var crouching = false
+=======
+var MAX_FRICTION = 225
+var FRICTION = 30
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 =======
 var MAX_FRICTION = 225
 var FRICTION = 30
@@ -200,10 +205,21 @@ func _physics_process(_delta):
 			die()
 			killed()
 		if playercontroller:
+<<<<<<< HEAD
+=======
 			if isHoldingGun:
 				if Input.is_joy_button_pressed(player_controller_index, 2):
 					shoot()
 			else:
+				if Input.is_joy_button_pressed(player_controller_index, 2):
+					attack()
+		else:
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
+			if isHoldingGun:
+				if Input.is_joy_button_pressed(player_controller_index, 2):
+					shoot()
+			else:
+<<<<<<< HEAD
 				if Input.is_joy_button_pressed(player_controller_index, 2):
 					attack()
 		else:
@@ -238,6 +254,102 @@ func _physics_process(_delta):
 			else:
 				Gun.visible = true
 		else:
+=======
+				if player_keyboard_index == 0:
+					if Input.is_action_just_pressed("shoot") && !onWall:
+						attack()
+				elif player_keyboard_index == 1:
+					if Input.is_action_just_pressed("shoot2") && !onWall:
+						attack()
+		if playerCharacter == 1: # African
+			if velocity == Vector2(0, 0) && !attacking:
+				_animated_sprite.play("africanidle")
+			if is_on_floor() && !dashing && !attacking:
+				if velocity.x > 0:
+					_animated_sprite.play("africanwalk")
+				elif velocity.x < 0:
+					_animated_sprite.play("africanwalk")
+			if !is_on_floor() && !attacking:
+				_animated_sprite.play("africanjump")
+			if is_on_wall() && !is_on_floor() && !attacking:
+				_animated_sprite.play("africanwall")
+				
+		if playerCharacter == 2: # Chinese
+			if velocity == Vector2(0, 0) && !attacking:
+				_animated_sprite.play("chinaidle")
+			if is_on_floor() && !dashing && !attacking:
+				if velocity.x > 0:
+					_animated_sprite.play("chinawalk")
+				elif velocity.x < 0:
+					_animated_sprite.play("chinawalk")
+			if !is_on_floor() && !attacking:
+				_animated_sprite.play("chinajump")
+			if is_on_wall() && !is_on_floor() && !attacking:
+				_animated_sprite.play("chinawall")
+				
+		if playerCharacter == 3: # Japanese
+			if velocity == Vector2(0, 0) && !attacking:
+				_animated_sprite.play("japaneseidle")
+			if is_on_floor() && !dashing && !attacking:
+				if velocity.x > 0:
+					_animated_sprite.play("japanesewalk")
+				elif velocity.x < 0:
+					_animated_sprite.play("japanesewalk")
+			if !is_on_floor() && !attacking:
+				_animated_sprite.play("japanesejump")
+			if is_on_wall() && !is_on_floor() && !attacking:
+				_animated_sprite.play("japanesewall")
+				
+		if playerCharacter == 4: # Samoan
+			if velocity == Vector2(0, 0) && !attacking:
+				_animated_sprite.play("samoanidle")
+			if is_on_floor() && !dashing && !attacking:
+				if velocity.x > 0:
+					_animated_sprite.play("samoanwalk")
+				elif velocity.x < 0:
+					_animated_sprite.play("samoanwalk")
+			if !is_on_floor() && !attacking:
+				_animated_sprite.play("samoanjump")
+			if is_on_wall() && !is_on_floor() && !attacking:
+				_animated_sprite.play("samoanwall")
+		
+		if playerCharacter == 5: # Viking
+			if velocity == Vector2(0, 0) && !attacking:
+				_animated_sprite.play("vikingidle")
+			if is_on_floor() && !dashing && !attacking:
+				if velocity.x > 0:
+					_animated_sprite.play("vikingwalk")
+				elif velocity.x < 0:
+					_animated_sprite.play("vikingwalk")
+			if !is_on_floor() && !attacking:
+				_animated_sprite.play("vikingjump")
+			if is_on_wall() && !is_on_floor() && !attacking:
+				_animated_sprite.play("vikingwall")
+		
+		if playerCharacter == 6: # Mexican
+			if velocity == Vector2(0, 0) && !attacking:
+				_animated_sprite.play("mexicanidle")
+			if is_on_floor() && !dashing && !attacking:
+				if velocity.x > 0:
+					_animated_sprite.play("mexicanwalk")
+				elif velocity.x < 0:
+					_animated_sprite.play("mexicanwalk")
+			if !is_on_floor() && !attacking:
+				_animated_sprite.play("mexicanjump")
+			if is_on_wall() && !is_on_floor() && !attacking:
+				_animated_sprite.play("mexicanwall")
+		if velocity.x != 0 && is_on_floor():
+			walkParticle.emitting = true
+		else:
+			walkParticle.emitting = false
+		if hasPistol:
+			Gun.modulate = Color(1, 1, 1, 1)
+			if onWall:
+				Gun.visible = false
+			else:
+				Gun.visible = true
+		else:
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 			Gun.visible = false
 			Gun.modulate = Color(1, 1, 1, 0)
 		if is_on_wall() && !is_on_floor() && !attacking:
@@ -313,12 +425,38 @@ func _physics_process(_delta):
 		elif velocity.x < -MAX_SPEED:
 			velocity.x = move_toward(velocity.x, 0, MAX_FRICTION)
 		else:
+<<<<<<< HEAD
 			crouching = false
 	else:
 		if Input.is_action_pressed("move_down"):
 			crouching = true
 			if is_on_floor():
 				position.y += 1
+=======
+			if player_keyboard_index == 0:
+				direction_inputX = Input.get_axis("move_left", "move_right")
+			elif player_keyboard_index == 1:
+				direction_inputX = Input.get_axis("move_left2", "move_right2")
+		# Adds Deadzone
+		if abs(direction_inputX) < DEADZONE:
+			directionX = 0
+		else:
+			directionX = (direction_inputX - sign(direction_inputX) * DEADZONE) / (1 - DEADZONE)
+			directionX = sign(directionX)
+			if directionX > 0:
+				facingRight = true
+			elif directionX < 0:
+				facingRight = false
+		if dashing && !isHit:
+				velocity.x = dashSpeed * dashDirection
+		elif !isHit && directionX != 0 && !dashing && !attacking:
+			velocity.x = velocity.x + (ACCELERATION * directionX)
+				
+		if velocity.x > MAX_SPEED:
+			velocity.x = move_toward(velocity.x, 0, MAX_FRICTION)
+		elif velocity.x < -MAX_SPEED:
+			velocity.x = move_toward(velocity.x, 0, MAX_FRICTION)
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 		else:
 			crouching = false
 
@@ -338,6 +476,7 @@ func _physics_process(_delta):
 						velocity.x = (MAX_SPEED * 3)
 			else:
 				joy_jump_pressed = false
+<<<<<<< HEAD
 		else:
 			joy_jump_pressed = false
 	else:
@@ -358,6 +497,49 @@ func _physics_process(_delta):
 		dub_jumps = max_num_dub_jumps
 		if velocity.y >= 0: 
 			velocity.y = min(velocity.y + WALL_SLIDE_ACCELERATION, MAX_WALL_SLIDE_SPEED)
+=======
+		else:
+			if player_keyboard_index == 0:
+				if !doubleKeyboard:
+					if Input.is_action_just_pressed("jump") && !attacking:
+						if !joy_jump_pressed:
+							joy_jump_pressed = true
+							if dub_jumps > 0: 
+								dub_jumps -= 1
+								velocity.y = -JUMP_HIGHT
+							if is_on_wall() && directionX == 1:
+								velocity.x = -(MAX_SPEED * 2)
+							elif is_on_wall() && directionX == -1:
+								velocity.x = (MAX_SPEED * 2)
+					else:
+						joy_jump_pressed = false
+				elif doubleKeyboard:
+					if Input.is_action_just_pressed("move_up") && !attacking:
+						if !joy_jump_pressed:
+							joy_jump_pressed = true
+							if dub_jumps > 0: 
+								dub_jumps -= 1
+								velocity.y = -JUMP_HIGHT
+							if is_on_wall() && directionX == 1:
+								velocity.x = -(MAX_SPEED * 2)
+							elif is_on_wall() && directionX == -1:
+								velocity.x = (MAX_SPEED * 2)
+					else:
+						joy_jump_pressed = false
+			elif player_keyboard_index == 1:
+				if Input.is_action_just_pressed("move_up2") && !attacking:
+					if !joy_jump_pressed:
+						joy_jump_pressed = true
+						if dub_jumps > 0: 
+							dub_jumps -= 1
+							velocity.y = -JUMP_HIGHT
+						if is_on_wall() && directionX == 1:
+							velocity.x = -(MAX_SPEED * 2)
+						elif is_on_wall() && directionX == -1:
+							velocity.x = (MAX_SPEED * 2)
+				else:
+					joy_jump_pressed = false
+>>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 		
 		if is_on_wall() && (directionX == -1 || directionX == 1) && !attacking:
 			dub_jumps = max_num_dub_jumps
