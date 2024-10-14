@@ -22,7 +22,6 @@ var max_num_dub_jumps = 3
 var MAX_FRICTION = 300
 var FRICTION = 60
 
-
 var dashDirection = Vector2(0, 0)
 var dashAmount = 1
 var currentDashAmount = 0

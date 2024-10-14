@@ -26,13 +26,11 @@ func _on_player_2_input_item_selected(index):
 
 
 func _on_start_pressed():
-
 	global_script.globalPlayerCharacter1 = player1Character
 	global_script.globalPlayerCharacter2 = player2Character
 	global_script.player1Controller = localPlayer1Controller
 	global_script.player2Controller = localPlayer2Controller
 	get_tree().change_scene_to_file("res://scenes/Level.tscn")
-
 
 
 func _on_african_button_1_pressed():
