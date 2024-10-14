@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://dr0msmor2imu5"
+path="res://.godot/imported/optionButtonOffMask.png-b580b2e45214a6f0262b3d6104d19b0b.res"
+
+[deps]
+
+source_file="res://assets/Ui Assets/optionButtonOffMask.png"
+dest_files=["res://.godot/imported/optionButtonOffMask.png-b580b2e45214a6f0262b3d6104d19b0b.res"]
+
+[params]
+
+create_from=1
+threshold=0.5

@@ -4,7 +4,7 @@ extends Area2D
 var speed = 1400
 var direction = 1
 var player_Index = 0
-var bullet_damage = 5
+var bullet_damage = 2
 
 func bulletspawn(dir, player, dam):
 	direction = dir
@@ -25,7 +25,6 @@ func delete():
 
 func _on_area_entered(area):
 	if area.is_in_group("player"):
-		print("Hit Player")
 		var grandparent = area.get_parent().get_parent()
 		if grandparent.has_method("get_player_index"):
 			var collided_player_index = grandparent.get_player_index()
