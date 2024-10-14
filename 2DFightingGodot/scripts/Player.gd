@@ -25,27 +25,8 @@ var isGravity = true
 var dub_jumps = 0
 var max_num_dub_jumps = 3 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-var MAX_FRICTION = 300
-var FRICTION = 60
-
-var normalSpeed = 450
-var crouchSpeed = 300
-var crouching = false
-=======
 var MAX_FRICTION = 225
 var FRICTION = 30
->>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
-=======
-var MAX_FRICTION = 225
-var FRICTION = 30
->>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
-=======
-var MAX_FRICTION = 225
-var FRICTION = 30
->>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 
 var dashDirection = Vector2(0, 0)
 var dashAmount = 1
@@ -204,8 +185,6 @@ func _physics_process(_delta):
 	if global_script.isPaused == false && isDead == false:
 		if hasPistol:
 			isHoldingGun = true
-<<<<<<< HEAD
-=======
 		else:
 			isHoldingGun = false
 		if health <= 0:
@@ -218,15 +197,12 @@ func _physics_process(_delta):
 			else:
 				if Input.is_joy_button_pressed(player_controller_index, 2):
 					attack()
->>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 		else:
 			isHoldingGun = false
 		if health <= 0:
 			die()
 			killed()
 		if playercontroller:
-<<<<<<< HEAD
-=======
 			if isHoldingGun:
 				if Input.is_joy_button_pressed(player_controller_index, 2):
 					shoot()
@@ -234,12 +210,10 @@ func _physics_process(_delta):
 				if Input.is_joy_button_pressed(player_controller_index, 2):
 					attack()
 		else:
->>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 			if isHoldingGun:
 				if Input.is_joy_button_pressed(player_controller_index, 2):
 					shoot()
 			else:
-<<<<<<< HEAD
 				if Input.is_joy_button_pressed(player_controller_index, 2):
 					attack()
 		else:
@@ -274,7 +248,6 @@ func _physics_process(_delta):
 			else:
 				Gun.visible = true
 		else:
-=======
 				if player_keyboard_index == 0:
 					if Input.is_action_just_pressed("shoot") && !onWall:
 						attack()
@@ -369,10 +342,6 @@ func _physics_process(_delta):
 			else:
 				Gun.visible = true
 		else:
-<<<<<<< HEAD
->>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
-=======
->>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 			Gun.visible = false
 			Gun.modulate = Color(1, 1, 1, 0)
 		if is_on_wall() && !is_on_floor() && !attacking:
@@ -448,14 +417,12 @@ func _physics_process(_delta):
 		elif velocity.x < -MAX_SPEED:
 			velocity.x = move_toward(velocity.x, 0, MAX_FRICTION)
 		else:
-<<<<<<< HEAD
 			crouching = false
 	else:
 		if Input.is_action_pressed("move_down"):
 			crouching = true
 			if is_on_floor():
 				position.y += 1
-=======
 			if player_keyboard_index == 0:
 				direction_inputX = Input.get_axis("move_left", "move_right")
 			elif player_keyboard_index == 1:
@@ -479,12 +446,6 @@ func _physics_process(_delta):
 			velocity.x = move_toward(velocity.x, 0, MAX_FRICTION)
 		elif velocity.x < -MAX_SPEED:
 			velocity.x = move_toward(velocity.x, 0, MAX_FRICTION)
-<<<<<<< HEAD
->>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
-=======
->>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
-		else:
-			crouching = false
 
 		if is_on_floor(): 
 			dub_jumps = max_num_dub_jumps
@@ -502,23 +463,32 @@ func _physics_process(_delta):
 						velocity.x = (MAX_SPEED * 3)
 			else:
 				joy_jump_pressed = false
-<<<<<<< HEAD
-<<<<<<< HEAD
 		else:
-			joy_jump_pressed = false
-	else:
-		if Input.is_action_just_pressed("jump") && !attacking:
-			if !joy_jump_pressed:
-				joy_jump_pressed = true
-				if dub_jumps > 0: 
-					dub_jumps -= 1
-					velocity.y = -JUMP_HIGHT
-				if is_on_wall() && directionX == 1:
-					velocity.x = -(MAX_SPEED * 3)
-				elif is_on_wall() && directionX == -1:
-					velocity.x = (MAX_SPEED * 3)
-=======
->>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
+			if player_keyboard_index == 0:
+				if Input.is_action_pressed("move_down"):
+					if is_on_floor():
+						position.y += 1
+			if player_keyboard_index == 1:
+				if Input.is_action_pressed("move_down2"):
+					if is_on_floor():
+						position.y += 1
+
+		if is_on_floor(): 
+			dub_jumps = max_num_dub_jumps
+			velocity.y = 0
+		if playercontroller:
+			if Input.is_joy_button_pressed(player_controller_index, 0) && !attacking:
+				if !joy_jump_pressed:
+					joy_jump_pressed = true
+					if dub_jumps > 0: 
+						dub_jumps -= 1
+						velocity.y = -JUMP_HIGHT
+					if is_on_wall() && directionX == 1:
+						velocity.x = -(MAX_SPEED * 3)
+					elif is_on_wall() && directionX == -1:
+						velocity.x = (MAX_SPEED * 3)
+			else:
+				joy_jump_pressed = false
 		else:
 			joy_jump_pressed = false
 	
@@ -526,7 +496,6 @@ func _physics_process(_delta):
 		dub_jumps = max_num_dub_jumps
 		if velocity.y >= 0: 
 			velocity.y = min(velocity.y + WALL_SLIDE_ACCELERATION, MAX_WALL_SLIDE_SPEED)
-=======
 		else:
 			if player_keyboard_index == 0:
 				if !doubleKeyboard:
@@ -568,7 +537,6 @@ func _physics_process(_delta):
 							velocity.x = (MAX_SPEED * 2)
 				else:
 					joy_jump_pressed = false
->>>>>>> parent of 6aaaab8 (Merge branch 'main' into Erueti)
 		
 		if is_on_wall() && (directionX == -1 || directionX == 1) && !attacking:
 			dub_jumps = max_num_dub_jumps
