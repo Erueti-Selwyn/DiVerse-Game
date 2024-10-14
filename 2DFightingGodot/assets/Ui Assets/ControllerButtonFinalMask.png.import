@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://cvkc0xnywbigr"
+path="res://.godot/imported/ControllerButtonFinalMask.png-b56b513fe53327870fef543558b9a205.res"
+
+[deps]
+
+source_file="res://assets/Ui Assets/ControllerButtonFinalMask.png"
+dest_files=["res://.godot/imported/ControllerButtonFinalMask.png-b56b513fe53327870fef543558b9a205.res"]
+
+[params]
+
+create_from=1
+threshold=0.5

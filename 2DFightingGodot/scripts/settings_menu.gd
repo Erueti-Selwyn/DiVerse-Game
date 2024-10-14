@@ -1,5 +1,8 @@
 extends Control
-
+const switchOn = preload("res://assets/Ui Assets/optionButtonOn.png")
+const switchOff = preload("res://assets/Ui Assets/optionButtonOff.png")
+const swtichOnMask = preload("res://assets/Ui Assets/optionButtonOnMask.png")
+const swtichOffMask = preload("res://assets/Ui Assets/optionButtonOffMask.png")
 @onready var global_script = $"/root/Global"
 @onready var soundSwitch = $MarginContainer/VBoxContainer/HBoxContainer/SoundButton
 @onready var musicSwitch = $MarginContainer/VBoxContainer/HBoxContainer2/MusicButton
@@ -10,16 +13,12 @@ var localMusicOn = true
 var fromPauseMenu = false
 
 func _ready():
-	print("Loaded")
-	if global_script.player1Controller == true:
-		optionPlayerButton1.select(0)
-	else:
-		optionPlayerButton1.select(1)
-	if global_script.player2Controller == true:
-		optionPlayerButton2.select(0)
-	else:
-		optionPlayerButton2.select(1)
-
+	localSoundOn = global_script.soundOn
+	localMusicOn = global_script.musicOn
+	
+func _process(_delta):
+	global_script.soundOn = localSoundOn
+	global_script.musicOn = localMusicOn
 func _on_menu_pressed():
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")
 

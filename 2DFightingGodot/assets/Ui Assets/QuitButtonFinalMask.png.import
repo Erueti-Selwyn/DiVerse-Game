@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://ds8crajepigky"
+path="res://.godot/imported/QuitButtonFinalMask.png-0076c0025b6c2f404acdf43b457099ba.res"
+
+[deps]
+
+source_file="res://assets/Ui Assets/QuitButtonFinalMask.png"
+dest_files=["res://.godot/imported/QuitButtonFinalMask.png-0076c0025b6c2f404acdf43b457099ba.res"]
+
+[params]
+
+create_from=0
+threshold=0.5
