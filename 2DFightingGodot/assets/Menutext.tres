@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://bw71wec60omvl"]
+
+[ext_resource type="FontFile" uid="uid://ccd6qond4rdjk" path="res://assets/Ui Assets/American Captain.ttf" id="1_uiiba"]
+
+[resource]
+line_spacing = 0.0
+font = ExtResource("1_uiiba")
+font_size = 20

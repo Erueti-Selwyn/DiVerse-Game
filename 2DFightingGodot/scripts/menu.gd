@@ -1,5 +1,6 @@
 extends Control
 @onready var global_script = $"/root/Global"
+@onready var settingsMenu = $TextureRect/settings_menu
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -11,14 +12,11 @@ func _process(_delta):
 
 
 func _on_play_pressed():
-	if !global_script.player1Controller && !global_script.player2Controller:
-		print("Cannot Have 2 Keyboards")
-	else:
-		get_tree().change_scene_to_file("res://scenes/Level.tscn")
+	get_tree().change_scene_to_file("res://scenes/character_select.tscn")
 
 
 func _on_settings_pressed():
-	get_tree().change_scene_to_file("res://scenes/settings_menu.tscn")
+	settingsMenu.visible = true
 
 
 func _on_quit_pressed():

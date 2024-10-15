@@ -1,4 +1,38 @@
-[gd_scene format=3 uid="uid://cmvkiyfy67r1b"]
+[gd_scene load_steps=29 format=3 uid="uid://cmvkiyfy67r1b"]
+
+[ext_resource type="Script" path="res://scenes/character_select.gd" id="1_mqc48"]
+[ext_resource type="Texture2D" uid="uid://b61fv17f6bona" path="res://assets/Ui Assets/ControllerButtonOnFinal.png" id="3_58wrp"]
+[ext_resource type="Texture2D" uid="uid://dymc08auxf7g8" path="res://assets/Ui Assets/StartButtonFinal.png" id="3_ldw3d"]
+[ext_resource type="Texture2D" uid="uid://dpfklnkoagtqq" path="res://assets/Ui Assets/ExitButtonFinal.png" id="3_sm2qm"]
+[ext_resource type="Texture2D" uid="uid://dfioa50vtvf7l" path="res://assets/backgrounds/japan mapp.png" id="3_waiyq"]
+[ext_resource type="BitMap" uid="uid://b310tcd626bw8" path="res://assets/Ui Assets/StartButtonFinalMask.png" id="4_2fhxl"]
+[ext_resource type="BitMap" uid="uid://dg3rpwig0v4y0" path="res://assets/Ui Assets/ExitButtonFinalMask.png" id="4_3rrr0"]
+[ext_resource type="Texture2D" uid="uid://bu0tmcwcue3lr" path="res://assets/Ui Assets/Border.png" id="4_4oogi"]
+[ext_resource type="Texture2D" uid="uid://8vjoklahdf7m" path="res://assets/profiles/africa man profile.aesprite.png" id="4_6yor8"]
+[ext_resource type="BitMap" uid="uid://cvkc0xnywbigr" path="res://assets/Ui Assets/ControllerButtonFinalMask.png" id="4_w5wsp"]
+[ext_resource type="Texture2D" uid="uid://dqdw8q6yv0cdj" path="res://assets/profiles/china profile.aesprite.png" id="5_fyk4v"]
+[ext_resource type="FontFile" uid="uid://ccd6qond4rdjk" path="res://assets/Ui Assets/American Captain.ttf" id="5_o0sn0"]
+[ext_resource type="Texture2D" uid="uid://cf4e1tbsdxtdp" path="res://assets/Ui Assets/MouseButtonOffFinal.png" id="5_o4msb"]
+[ext_resource type="Texture2D" uid="uid://cvgdd78wx13s" path="res://assets/profiles/japan man profile.aesprite.png" id="6_dgcfs"]
+[ext_resource type="Texture2D" uid="uid://cm4u3rbs87tr1" path="res://assets/profiles/samoan body profile.aesprite.png" id="7_utxde"]
+[ext_resource type="Texture2D" uid="uid://cxo7g3o333ef8" path="res://assets/profiles/Mexican-profile.png" id="8_87k8w"]
+[ext_resource type="Texture2D" uid="uid://1xu1ipgs8406" path="res://assets/profiles/viking profile.aesprite.png" id="8_mokyo"]
+[ext_resource type="BitMap" uid="uid://bagsinsgm01k8" path="res://assets/Ui Assets/BorderBackgroundMask.png" id="11_oe331"]
+[ext_resource type="Texture2D" uid="uid://b66ssj3swr2ar" path="res://assets/Ui Assets/BorderBackground.png" id="12_t4wy2"]
+[ext_resource type="Texture2D" uid="uid://cukveh0xyj4an" path="res://assets/backgrounds/mapborderbackground.png" id="19_t4w4h"]
+[ext_resource type="BitMap" uid="uid://hdg5clo2j3qm" path="res://assets/backgrounds/mapborderbackgroundmask.png" id="20_hwrft"]
+[ext_resource type="Texture2D" uid="uid://bx1fidd1t13cu" path="res://assets/backgrounds/mapborder.png" id="21_30ndu"]
+[ext_resource type="Texture2D" uid="uid://qaybm6e2utjo" path="res://assets/backgrounds/africa.png" id="22_uiwv1"]
+[ext_resource type="Texture2D" uid="uid://dqfjo0h1q5ne4" path="res://assets/backgrounds/china map pixel.png" id="24_hn7aa"]
+[ext_resource type="Texture2D" uid="uid://doydx1h0np131" path="res://assets/backgrounds/samoa.png" id="25_eiyin"]
+[ext_resource type="Texture2D" uid="uid://bjx5qv4yjti78" path="res://assets/backgrounds/viking.png" id="26_ejfee"]
+[ext_resource type="Texture2D" uid="uid://cqnjnlj5x7dh4" path="res://assets/backgrounds/mexico final map.png" id="27_h8vd4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8ic4r"]
+font = ExtResource("5_o0sn0")
+font_size = 50
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
 
 [node name="character_select" type="Control"]
 layout_mode = 3
@@ -7,5 +41,729 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+script = ExtResource("1_mqc48")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_waiyq")
+expand_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Exit" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 75)
+layout_mode = 2
+size_flags_horizontal = 0
+texture_normal = ExtResource("3_sm2qm")
+texture_click_mask = ExtResource("4_3rrr0")
+stretch_mode = 4
+
+[node name="seperator" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 0
+
+[node name="Player1Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(242.145, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Player 1"
+label_settings = SubResource("LabelSettings_8ic4r")
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(565, 0)
+layout_mode = 2
+
+[node name="Player2Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Player 2"
+label_settings = SubResource("LabelSettings_8ic4r")
+horizontal_alignment = 1
+
+[node name="seperator2" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 615
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ControllerPlayer1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("3_58wrp")
+texture_click_mask = ExtResource("4_w5wsp")
+stretch_mode = 5
+
+[node name="KeyboardPlayer1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("5_o4msb")
+texture_click_mask = ExtResource("4_w5wsp")
+stretch_mode = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ControllerPlayer2" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("3_58wrp")
+texture_click_mask = ExtResource("4_w5wsp")
+stretch_mode = 5
+
+[node name="KeyboardPlayer2" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("5_o4msb")
+texture_click_mask = ExtResource("4_w5wsp")
+stretch_mode = 5
+
+[node name="Start" type="TextureButton" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("3_ldw3d")
+texture_click_mask = ExtResource("4_2fhxl")
+stretch_mode = 5
+
+[node name="HBoxContainerCharacterSelect" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+self_modulate = Color(1, 0.705882, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 75
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="AfricanButton1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer"]
+self_modulate = Color(0.223529, 1, 0.415686, 1)
+clip_children = 2
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("12_t4wy2")
+texture_click_mask = ExtResource("11_oe331")
+stretch_mode = 5
+
+[node name="AfricanIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/AfricanButton1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_6yor8")
+
+[node name="Border" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/AfricanButton1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_4oogi")
+stretch_mode = 5
+
+[node name="ChineseButton1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer"]
+clip_children = 2
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("12_t4wy2")
+texture_click_mask = ExtResource("11_oe331")
+stretch_mode = 5
+
+[node name="ChineseIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/ChineseButton1"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_fyk4v")
+
+[node name="Border" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/ChineseButton1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_4oogi")
+stretch_mode = 5
+
+[node name="JapaneseButton1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer"]
+clip_children = 2
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("12_t4wy2")
+texture_click_mask = ExtResource("11_oe331")
+stretch_mode = 5
+
+[node name="JapaneseIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/JapaneseButton1"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_dgcfs")
+
+[node name="Border" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/JapaneseButton1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_4oogi")
+stretch_mode = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SamoanButton1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2"]
+clip_children = 2
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("12_t4wy2")
+texture_click_mask = ExtResource("11_oe331")
+stretch_mode = 5
+
+[node name="SamoanIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/SamoanButton1"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_utxde")
+
+[node name="Border" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/SamoanButton1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_4oogi")
+stretch_mode = 5
+
+[node name="VikingButton1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2"]
+clip_children = 2
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("12_t4wy2")
+texture_click_mask = ExtResource("11_oe331")
+stretch_mode = 5
+
+[node name="VikingIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/VikingButton1"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_mokyo")
+
+[node name="Border" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/VikingButton1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_4oogi")
+stretch_mode = 5
+
+[node name="MexicanButton1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2"]
+clip_children = 2
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("12_t4wy2")
+texture_click_mask = ExtResource("11_oe331")
+stretch_mode = 5
+
+[node name="MexicanIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/MexicanButton1"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_87k8w")
+
+[node name="Border" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/MexicanButton1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_4oogi")
+stretch_mode = 5
+
+[node name="VBoxMaps" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps"]
+custom_minimum_size = Vector2(0, 4.085)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="AfricaMap" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer"]
+clip_children = 2
+custom_minimum_size = Vector2(120, 67)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture_normal = ExtResource("19_t4w4h")
+texture_click_mask = ExtResource("20_hwrft")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer/AfricaMap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("22_uiwv1")
+expand_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer/AfricaMap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_30ndu")
+expand_mode = 2
+
+[node name="ChinaMap" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer"]
+clip_children = 2
+custom_minimum_size = Vector2(120, 67)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture_normal = ExtResource("19_t4w4h")
+texture_click_mask = ExtResource("20_hwrft")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer/ChinaMap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("24_hn7aa")
+expand_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer/ChinaMap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_30ndu")
+expand_mode = 2
+
+[node name="JapanMap" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer"]
+clip_children = 2
+custom_minimum_size = Vector2(120, 67)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture_normal = ExtResource("19_t4w4h")
+texture_click_mask = ExtResource("20_hwrft")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer/JapanMap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_waiyq")
+expand_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer/JapanMap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_30ndu")
+expand_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SamoaMap" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer2"]
+clip_children = 2
+custom_minimum_size = Vector2(120, 67)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture_normal = ExtResource("19_t4w4h")
+texture_click_mask = ExtResource("20_hwrft")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer2/SamoaMap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("25_eiyin")
+expand_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer2/SamoaMap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_30ndu")
+expand_mode = 2
+
+[node name="VikingMap" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer2"]
+clip_children = 2
+custom_minimum_size = Vector2(120, 67)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture_normal = ExtResource("19_t4w4h")
+texture_click_mask = ExtResource("20_hwrft")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer2/VikingMap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("26_ejfee")
+expand_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer2/VikingMap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_30ndu")
+expand_mode = 2
+
+[node name="MexicoMap" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer2"]
+clip_children = 2
+custom_minimum_size = Vector2(120, 67)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+texture_normal = ExtResource("19_t4w4h")
+texture_click_mask = ExtResource("20_hwrft")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer2/MexicoMap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("27_h8vd4")
+expand_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer2/MexicoMap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_30ndu")
+expand_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="JapaneseButton2" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer"]
+clip_children = 2
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("12_t4wy2")
+stretch_mode = 5
+flip_h = true
+
+[node name="JapaneseIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/JapaneseButton2"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_dgcfs")
+flip_h = true
+
+[node name="Border" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/JapaneseButton2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_4oogi")
+stretch_mode = 5
+
+[node name="ChineseButton2" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer"]
+clip_children = 2
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("12_t4wy2")
+stretch_mode = 5
+flip_h = true
+
+[node name="ChineseIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/ChineseButton2"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_fyk4v")
+flip_h = true
+
+[node name="Border" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/ChineseButton2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_4oogi")
+stretch_mode = 5
+
+[node name="AfricanButton2" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer"]
+self_modulate = Color(0.223529, 1, 0.415686, 1)
+clip_children = 2
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("12_t4wy2")
+stretch_mode = 5
+flip_h = true
+
+[node name="AfricanIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/AfricanButton2"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_6yor8")
+flip_h = true
+
+[node name="Border" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/AfricanButton2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_4oogi")
+stretch_mode = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="MexicanButton2" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2"]
+clip_children = 2
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("12_t4wy2")
+stretch_mode = 5
+flip_h = true
+
+[node name="MexicanIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/MexicanButton2"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_87k8w")
+flip_h = true
+
+[node name="Border" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/MexicanButton2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_4oogi")
+stretch_mode = 5
+
+[node name="VikingButton2" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2"]
+clip_children = 2
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("12_t4wy2")
+stretch_mode = 5
+flip_h = true
+
+[node name="VikingIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/VikingButton2"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_mokyo")
+flip_h = true
+
+[node name="Border" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/VikingButton2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_4oogi")
+stretch_mode = 5
+
+[node name="SamoanButton2" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2"]
+clip_children = 2
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+texture_normal = ExtResource("12_t4wy2")
+stretch_mode = 5
+flip_h = true
+
+[node name="SamoanIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/SamoanButton2"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_utxde")
+flip_h = true
+
+[node name="Border" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/SamoanButton2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_4oogi")
+stretch_mode = 5
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer/ControllerPlayer1" to="." method="_on_controller_player_1_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer/KeyboardPlayer1" to="." method="_on_keyboard_player_1_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2/ControllerPlayer2" to="." method="_on_controller_player_2_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2/KeyboardPlayer2" to="." method="_on_keyboard_player_2_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/AfricanButton1" to="." method="_on_african_button_1_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/ChineseButton1" to="." method="_on_chinese_button_1_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/JapaneseButton1" to="." method="_on_japanese_button_1_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/SamoanButton1" to="." method="_on_samoan_button_1_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/VikingButton1" to="." method="_on_viking_button_1_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/MexicanButton1" to="." method="_on_mexican_button_1_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer/AfricaMap" to="." method="_on_africa_map_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer/ChinaMap" to="." method="_on_china_map_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer/JapanMap" to="." method="_on_japan_map_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer2/SamoaMap" to="." method="_on_samoa_map_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer2/VikingMap" to="." method="_on_viking_map_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer2/MexicoMap" to="." method="_on_mexico_map_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/JapaneseButton2" to="." method="_on_japanese_button_2_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/ChineseButton2" to="." method="_on_chinese_button_2_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/AfricanButton2" to="." method="_on_african_button_2_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/MexicanButton2" to="." method="_on_mexican_button_2_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/VikingButton2" to="." method="_on_viking_button_2_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/SamoanButton2" to="." method="_on_samoan_button_2_pressed"]
