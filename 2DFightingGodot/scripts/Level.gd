@@ -32,7 +32,7 @@ func _physics_process(delta):
 	pass
 
 func start_timer():
-	randomTime = randi_range(5, 10)
+	randomTime = randi_range(20, 40)
 	await get_tree().create_timer(randomTime).timeout
 	create_box()
 
