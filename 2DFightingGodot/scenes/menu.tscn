@@ -1,16 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://b5d2cnlqs3xp2"]
+[gd_scene load_steps=11 format=3 uid="uid://b5d2cnlqs3xp2"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_umyi2"]
 [ext_resource type="Texture2D" uid="uid://i176pag31mql" path="res://assets/Ui Assets/space.png" id="2_3pcho"]
 [ext_resource type="Texture2D" uid="uid://bkd6felx2aldl" path="res://assets/Ui Assets/PlayButtonFinal.png" id="3_gq7yx"]
 [ext_resource type="PackedScene" uid="uid://cpp6uup1fjkuc" path="res://scenes/settings_menu.tscn" id="3_rmyff"]
-[ext_resource type="Texture2D" uid="uid://b6y03eryoo3vo" path="res://assets/Ui Assets/earth.png" id="4_ov54s"]
 [ext_resource type="BitMap" uid="uid://8bdcfev8e2a7" path="res://assets/Ui Assets/PlayButtonFinalMask.png" id="4_qrncs"]
-<<<<<<< Updated upstream
-[ext_resource type="PackedScene" uid="uid://u51lay85nrxb" path="res://scenes/controls.tscn" id="4_ri6o5"]
-=======
 [ext_resource type="Texture2D" uid="uid://bqy607tpg6l8v" path="res://assets/Ui Assets/logo diverse.aesprite.png" id="5_dupda"]
->>>>>>> Stashed changes
 [ext_resource type="Texture2D" uid="uid://c3glu1a0qt6ck" path="res://assets/Ui Assets/OptionsButtonFinal.png" id="5_yeya2"]
 [ext_resource type="BitMap" uid="uid://vs18d4un3gbf" path="res://assets/Ui Assets/OptionsButtonFinalMask.png" id="6_tq8eh"]
 [ext_resource type="Texture2D" uid="uid://or3xeqm6ytvo" path="res://assets/Ui Assets/QuitButtonFinal.png" id="7_eebs3"]
@@ -67,21 +62,6 @@ offset_left = 0.0
 offset_top = 0.0
 offset_right = 0.0
 offset_bottom = 0.0
-
-<<<<<<< Updated upstream
-[node name="controls" parent="TextureRect" instance=ExtResource("4_ri6o5")]
-visible = false
-top_level = true
-layout_mode = 1
-=======
-[node name="TextureRect" type="TextureRect" parent="TextureRect"]
-layout_mode = 0
-offset_left = 162.0
-offset_top = 132.0
-offset_right = 974.0
-offset_bottom = 944.0
-texture = ExtResource("4_ov54s")
->>>>>>> Stashed changes
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

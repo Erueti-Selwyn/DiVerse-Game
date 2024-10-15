@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-[gd_scene load_steps=16 format=3 uid="uid://dfdn4clkj55a4"]
-=======
-[gd_scene load_steps=29 format=3 uid="uid://dfdn4clkj55a4"]
->>>>>>> Stashed changes
+[gd_scene load_steps=28 format=3 uid="uid://dfdn4clkj55a4"]
 
 [ext_resource type="Script" path="res://scripts/Level.gd" id="1_7kyh2"]
 [ext_resource type="Texture2D" uid="uid://dfioa50vtvf7l" path="res://assets/backgrounds/japan mapp.png" id="2_qmg0v"]
@@ -11,13 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://bdxtusi0wukv6" path="res://scenes/players/Player.tscn" id="4_l5f3c"]
 [ext_resource type="PackedScene" uid="uid://cs015desyfdvu" path="res://scenes/pause.tscn" id="5_r7284"]
 [ext_resource type="Texture2D" uid="uid://elw0y1forc75" path="res://assets/tilemaps/THE half japan tilemap.png" id="8_2ecmd"]
-[ext_resource type="PackedScene" uid="uid://cpp6uup1fjkuc" path="res://scenes/settings_menu.tscn" id="8_5ck7g"]
-<<<<<<< Updated upstream
-[ext_resource type="PackedScene" uid="uid://u51lay85nrxb" path="res://scenes/controls.tscn" id="8_gcqk8"]
-=======
 [ext_resource type="Texture2D" uid="uid://bf7f8v4dkyd5o" path="res://assets/tilemaps/THE japan tilemap.png" id="9_8bhsn"]
 [ext_resource type="Texture2D" uid="uid://garepww1eau4" path="res://assets/tilemaps/all tilemaps FINALLL.png" id="10_5ms4v"]
->>>>>>> Stashed changes
 
 [sub_resource type="TileSet" id="TileSet_ff28r"]
 physics_layer_0/collision_layer = 1
@@ -278,16 +269,6 @@ grow_horizontal = 1
 grow_vertical = 1
 size_flags_horizontal = 4
 size_flags_vertical = 4
-
-[node name="settings_menu" parent="." instance=ExtResource("8_5ck7g")]
-visible = false
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 0.0
-offset_bottom = 0.0
-
-[node name="controls" parent="." instance=ExtResource("8_gcqk8")]
-visible = false
 
 [node name="fallSplashParticle" type="CPUParticles2D" parent="."]
 position = Vector2(0, 357)
