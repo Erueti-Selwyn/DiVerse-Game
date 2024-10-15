@@ -6,6 +6,12 @@ const samoanMap = preload("res://assets/backgrounds/samoa.png")
 const vikingMap = preload("res://assets/backgrounds/viking.png")
 const mexicoMap = preload("res://assets/backgrounds/mexico final map.png")
 const cratePath = preload("res://scenes/crate.tscn")
+@onready var africanTileMap = $Africa
+@onready var chineseTileMap = $China
+@onready var japaneseTileMap = $Japan
+@onready var samoanTileMap = $Samoa
+@onready var vikingTileMap = $Viking
+@onready var mexicoTileMap = $Mexico
 @onready var global_script = $"/root/Global"
 @onready var background = $TextureRect
 var randomTime
