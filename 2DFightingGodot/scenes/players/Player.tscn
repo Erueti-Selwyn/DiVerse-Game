@@ -427,7 +427,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"africanidle",
-"speed": 5.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -500,7 +500,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"chinaidle",
-"speed": 5.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -573,7 +573,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"japaneseidle",
-"speed": 5.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -719,7 +719,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"samoanidle",
-"speed": 5.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -792,7 +792,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"vikingidle",
-"speed": 5.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -888,9 +888,8 @@ shape = SubResource("RectangleShape2D_03cw0")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_fb2fc")
-animation = &"mexicanattack"
-frame = 3
-frame_progress = 1.0
+animation = &"africanidle"
+frame_progress = 0.914708
 
 [node name="Gun" type="Sprite2D" parent="CollisionShape2D/AnimatedSprite2D"]
 z_index = 1
