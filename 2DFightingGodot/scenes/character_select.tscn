@@ -1,10 +1,9 @@
-[gd_scene load_steps=29 format=3 uid="uid://cmvkiyfy67r1b"]
+[gd_scene load_steps=30 format=3 uid="uid://cmvkiyfy67r1b"]
 
 [ext_resource type="Script" path="res://scenes/character_select.gd" id="1_mqc48"]
 [ext_resource type="Texture2D" uid="uid://b61fv17f6bona" path="res://assets/Ui Assets/ControllerButtonOnFinal.png" id="3_58wrp"]
 [ext_resource type="Texture2D" uid="uid://dymc08auxf7g8" path="res://assets/Ui Assets/StartButtonFinal.png" id="3_ldw3d"]
 [ext_resource type="Texture2D" uid="uid://dpfklnkoagtqq" path="res://assets/Ui Assets/ExitButtonFinal.png" id="3_sm2qm"]
-[ext_resource type="Texture2D" uid="uid://dfioa50vtvf7l" path="res://assets/backgrounds/japan mapp.png" id="3_waiyq"]
 [ext_resource type="BitMap" uid="uid://b310tcd626bw8" path="res://assets/Ui Assets/StartButtonFinalMask.png" id="4_2fhxl"]
 [ext_resource type="BitMap" uid="uid://dg3rpwig0v4y0" path="res://assets/Ui Assets/ExitButtonFinalMask.png" id="4_3rrr0"]
 [ext_resource type="Texture2D" uid="uid://bu0tmcwcue3lr" path="res://assets/Ui Assets/Border.png" id="4_4oogi"]
@@ -22,11 +21,13 @@
 [ext_resource type="Texture2D" uid="uid://cukveh0xyj4an" path="res://assets/backgrounds/mapborderbackground.png" id="19_t4w4h"]
 [ext_resource type="BitMap" uid="uid://hdg5clo2j3qm" path="res://assets/backgrounds/mapborderbackgroundmask.png" id="20_hwrft"]
 [ext_resource type="Texture2D" uid="uid://bx1fidd1t13cu" path="res://assets/backgrounds/mapborder.png" id="21_30ndu"]
+[ext_resource type="Texture2D" uid="uid://c2omt6ejurckv" path="res://assets/backgrounds/backgroundButtons/africaMapLayout.png" id="22_4ynaf"]
 [ext_resource type="Texture2D" uid="uid://qaybm6e2utjo" path="res://assets/backgrounds/africa.png" id="22_uiwv1"]
-[ext_resource type="Texture2D" uid="uid://dqfjo0h1q5ne4" path="res://assets/backgrounds/china map pixel.png" id="24_hn7aa"]
-[ext_resource type="Texture2D" uid="uid://doydx1h0np131" path="res://assets/backgrounds/samoa.png" id="25_eiyin"]
-[ext_resource type="Texture2D" uid="uid://bjx5qv4yjti78" path="res://assets/backgrounds/viking.png" id="26_ejfee"]
-[ext_resource type="Texture2D" uid="uid://cqnjnlj5x7dh4" path="res://assets/backgrounds/mexico final map.png" id="27_h8vd4"]
+[ext_resource type="Texture2D" uid="uid://c3xh2tviwu65y" path="res://assets/backgrounds/backgroundButtons/ChineseMapLayout.png" id="24_qliy0"]
+[ext_resource type="Texture2D" uid="uid://bpse75iyannt7" path="res://assets/backgrounds/backgroundButtons/JapanMapLayout.png" id="25_mrxv6"]
+[ext_resource type="Texture2D" uid="uid://dw0jscrlf64ny" path="res://assets/backgrounds/backgroundButtons/samoaMapLayout.png" id="26_pp5u6"]
+[ext_resource type="Texture2D" uid="uid://ch6eqbhbb567p" path="res://assets/backgrounds/backgroundButtons/vikingMapLayout.png" id="27_mus3f"]
+[ext_resource type="Texture2D" uid="uid://mh6gt7fj674r" path="res://assets/backgrounds/backgroundButtons/mexicoMapLayout.png" id="28_edmtl"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8ic4r"]
 font = ExtResource("5_o0sn0")
@@ -379,7 +380,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("22_uiwv1")
+texture = ExtResource("22_4ynaf")
 expand_mode = 2
 
 [node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer/AfricaMap"]
@@ -411,7 +412,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("24_hn7aa")
+texture = ExtResource("24_qliy0")
 expand_mode = 2
 
 [node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer/ChinaMap"]
@@ -443,7 +444,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_waiyq")
+texture = ExtResource("25_mrxv6")
 expand_mode = 2
 
 [node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer/JapanMap"]
@@ -479,7 +480,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("25_eiyin")
+texture = ExtResource("26_pp5u6")
 expand_mode = 2
 
 [node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer2/SamoaMap"]
@@ -511,7 +512,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("26_ejfee")
+texture = ExtResource("27_mus3f")
 expand_mode = 2
 
 [node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer2/VikingMap"]
@@ -543,7 +544,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("27_h8vd4")
+texture = ExtResource("28_edmtl")
 expand_mode = 2
 
 [node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer2/MexicoMap"]

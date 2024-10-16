@@ -32,4 +32,3 @@ func _on_area_entered(area):
 				if grandparent.has_method("bullet_hit"):
 					grandparent.bullet_hit(direction, bullet_damage)
 					queue_free()
-		

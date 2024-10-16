@@ -77,12 +77,12 @@ var mexicanAttackTime = 0.06
 var samoanAttackTime = 0.1
 var vikingAttackTime = 0.34
 var meleeDamage
-var africanMeleeDamage = 6
-var chineseMeleeDamage = 7
-var japaneseMeleeDamage = 6
-var mexicanMeleeDamage = 5
-var vikingMeleeDamage = 9
-var samoanMeleeDamage = 6
+var africanMeleeDamage = 12
+var chineseMeleeDamage = 14
+var japaneseMeleeDamage = 12
+var mexicanMeleeDamage = 10
+var vikingMeleeDamage = 18
+var samoanMeleeDamage = 12
 
 @export var DEADZONE = 0.2
 @export var DEADZONEY = 0.9
@@ -107,9 +107,21 @@ var doubleKeyboard
 @onready var muzzleFlashPistol = $CollisionShape2D/AnimatedSprite2D/Gun/Marker2D/MuzzleFlashPistol
 @onready var bulletMarker = $CollisionShape2D/AnimatedSprite2D/Gun/Marker2D
 @onready var walkParticle = $CollisionShape2D/AnimatedSprite2D/WalkParticle
-@onready var spawnlocation1 = $"../SpawnLocation1"
-@onready var spawnlocation2 = $"../SpawnLocation2"
-@onready var WinText = $"../TextureRect/Label"
+@onready var spawnlocation1
+@onready var spawnlocation2
+@onready var spawnLocationAfrica1 = $"../SpawnLocationAfrica1"
+@onready var spawnLocationAfrica2 = $"../SpawnLocationAfrica2"
+@onready var spawnLocationChina1 = $"../SpawnLocationChina1"
+@onready var spawnLocationChina2 = $"../SpawnLocationChina2"
+@onready var spawnLocationJapan1 = $"../SpawnLocationJapan1"
+@onready var spawnLocationJapan2 = $"../SpawnLocationJapan2"
+@onready var spawnLocationSamoa1 = $"../SpawnLocationSamoa1"
+@onready var spawnLocationSamoa2 = $"../SpawnLocationSamoa2"
+@onready var spawnLocationMexico1 = $"../SpawnLocationMexico1"
+@onready var spawnLocationMexico2 = $"../SpawnLocationMexico2"
+@onready var spawnLocationViking1 = $"../SpawnLocationViking1"
+@onready var spawnLocationViking2 = $"../SpawnLocationViking2"
+@onready var WinText = $"../WinText"
 @onready var fallParticle = $"../fallSplashParticle"
 @onready var killParticle = $"../killParticle"
 var _attack_collision
@@ -118,8 +130,32 @@ func _ready():
 	health = 100
 	isDead = false
 	if player_index == 1:
+		if global_script.mapType == 1:
+			spawnlocation1 = spawnLocationAfrica1
+		if global_script.mapType == 2:
+			spawnlocation1 = spawnLocationChina1
+		if global_script.mapType == 3:
+			spawnlocation1 = spawnLocationJapan1
+		if global_script.mapType == 4:
+			spawnlocation1 = spawnLocationSamoa1
+		if global_script.mapType == 5:
+			spawnlocation1 = spawnLocationViking1
+		if global_script.mapType == 6:
+			spawnlocation1 = spawnLocationMexico1
 		global_position = spawnlocation1.global_position
 	elif player_index == 2:
+		if global_script.mapType == 1:
+			spawnlocation2 = spawnLocationAfrica2
+		if global_script.mapType == 2:
+			spawnlocation2 = spawnLocationChina2
+		if global_script.mapType == 3:
+			spawnlocation2 = spawnLocationJapan2
+		if global_script.mapType == 4:
+			spawnlocation2 = spawnLocationSamoa2
+		if global_script.mapType == 5:
+			spawnlocation2 = spawnLocationViking2
+		if global_script.mapType == 6:
+			spawnlocation2 = spawnLocationMexico2
 		global_position = spawnlocation2.global_position
 	if player_index == 1:
 		if global_script.player1Controller == true:
@@ -541,7 +577,8 @@ func is_hit(attacker_position, damage_done):
 
 func _on_animated_sprite_2d_animation_finished():
 	if (_animated_sprite.animation == "africanattack" or _animated_sprite.animation == "chinaattack" or _animated_sprite.animation == "japaneseattack" or _animated_sprite.animation == "samoanattack" or _animated_sprite.animation == "vikingattack" or _animated_sprite.animation == "mexicanattack"):
-		gunSprite.show()
+		if isHoldingGun:
+			gunSprite.show()
 		_attack_collision.disabled = true
 		attacking = false
 
@@ -589,7 +626,7 @@ func die():
 			global_script.winningPlayer = 2
 		elif player_index == 2:
 			global_script.winningPlayer = 1
-		WinText.text = "Player " + str(player_index) + " Wins!"
+		WinText.text = "Player " + str(global_script.winningPlayer) + " Wins!"
 		WinText.visible = true
 		await get_tree().create_timer(0.1).timeout
 		global_script.isPaused = true
