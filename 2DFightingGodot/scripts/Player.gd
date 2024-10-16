@@ -118,6 +118,10 @@ func _ready():
 	health = 100
 	isDead = false
 	if player_index == 1:
+		global_position = spawnlocation1.global_position
+	elif player_index == 2:
+		global_position = spawnlocation2.global_position
+	if player_index == 1:
 		if global_script.player1Controller == true:
 			player_controller_index = 0
 			playercontroller = true
@@ -404,7 +408,7 @@ func _physics_process(_delta):
 		else:
 			if player_keyboard_index == 0:
 				if !doubleKeyboard:
-					if Input.is_action_just_pressed("jump") && !attacking:
+					if (Input.is_action_just_pressed("jump") || Input.is_action_just_pressed("move_up")) && !attacking:
 						if !joy_jump_pressed:
 							joy_jump_pressed = true
 							if dub_jumps > 0: 
