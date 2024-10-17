@@ -464,7 +464,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"africanwalk",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -537,7 +537,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"chinawalk",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -610,7 +610,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"japanesewalk",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -756,7 +756,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"samoanwalk",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -829,7 +829,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"vikingwalk",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -888,11 +888,10 @@ shape = SubResource("RectangleShape2D_03cw0")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CollisionShape2D"]
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_fb2fc")
-animation = &"africanidle"
-frame_progress = 0.914708
+animation = &"vikingwalk"
+frame_progress = 0.802549
 
 [node name="Gun" type="Sprite2D" parent="CollisionShape2D/AnimatedSprite2D"]
-z_index = 1
 position = Vector2(18.5, 1.5)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("8_gkmlg")

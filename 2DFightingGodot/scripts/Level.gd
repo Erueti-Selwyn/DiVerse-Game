@@ -19,16 +19,28 @@ var randomTime
 func _ready():
 	if global_script.mapType == 1:
 		background.texture = africanMap
+		africanTileMap.global_position.y = 0
+		africanTileMap.visible = true
 	elif global_script.mapType == 2:
 		background.texture = chinaMap
+		chineseTileMap.global_position.y = 0
+		chineseTileMap.visible = true
 	elif global_script.mapType == 3:
 		background.texture = japanMap
+		japaneseTileMap.global_position.y = 0
+		japaneseTileMap.visible = true
 	elif global_script.mapType == 4:
 		background.texture = samoanMap
+		samoanTileMap.global_position.y = 0
+		samoanTileMap.visible = true
 	elif global_script.mapType == 5:
 		background.texture = vikingMap
+		vikingTileMap.global_position.y = 0
+		vikingTileMap.visible = true
 	elif global_script.mapType == 6:
 		background.texture = mexicoMap
+		mexicoTileMap.global_position.y = 0
+		mexicoTileMap.visible = true
 	await get_tree().create_timer(randi_range(1, 2)).timeout
 	create_box()
 
@@ -38,7 +50,7 @@ func _physics_process(delta):
 	pass
 
 func start_timer():
-	randomTime = randi_range(20, 40)
+	randomTime = randi_range(8, 20)
 	await get_tree().create_timer(randomTime).timeout
 	create_box()
 
