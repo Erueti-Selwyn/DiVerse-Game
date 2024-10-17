@@ -83,10 +83,10 @@ var japaneseMeleeDamage = 12
 var mexicanMeleeDamage = 10
 var vikingMeleeDamage = 18
 var samoanMeleeDamage = 12
-
+var meleeHasHit = false
 @export var DEADZONE = 0.2
 @export var DEADZONEY = 0.9
-@export var gunDamage = 2
+@export var gunDamage = 6
 @export var rocketLauncherDamage = 10
 @export var sniperDamage = 15
 var player_controller_index
@@ -557,17 +557,19 @@ func time_to_attack():
 	_attack_collision.disabled = false
 
 func _on_melee_body_entered(body):
-	if body.is_in_group("player"):
+	if body.is_in_group("player") && !meleeHasHit:
 		body.is_hit(global_position, meleeDamage)
+		meleeHasHit = true
+		
 
 func is_hit(attacker_position, damage_done):
 	if !isDead && !isHit:
 		var knockback_direction = global_position - attacker_position
 		health = health - damage_done
 		if knockback_direction.x > 0:
-			velocity.x = velocity.x + (knockback_strength * damage_done + 25 * ((100 - health) + 1))
+			velocity.x = velocity.x + (knockback_strength * damage_done + 20 * ((100 - health) + 1))
 		elif knockback_direction.x < 0:
-			velocity.x = velocity.x - (knockback_strength * damage_done + 25 * ((100 - health) + 1))
+			velocity.x = velocity.x - (knockback_strength * damage_done + 20 * ((100 - health) + 1))
 		isHit = true
 		_animated_sprite.modulate = Color(1, 0, 0) 
 		await get_tree().create_timer(0.15).timeout
@@ -579,6 +581,7 @@ func _on_animated_sprite_2d_animation_finished():
 	if (_animated_sprite.animation == "africanattack" or _animated_sprite.animation == "chinaattack" or _animated_sprite.animation == "japaneseattack" or _animated_sprite.animation == "samoanattack" or _animated_sprite.animation == "vikingattack" or _animated_sprite.animation == "mexicanattack"):
 		if isHoldingGun:
 			gunSprite.show()
+		meleeHasHit = false
 		_attack_collision.disabled = true
 		attacking = false
 
