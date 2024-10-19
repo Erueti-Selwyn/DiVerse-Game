@@ -34,3 +34,8 @@ func _on_area_entered(area):
 				if grandparent.has_method("bullet_hit"):
 					grandparent.bullet_hit(direction, bullet_damage, gunType)
 					queue_free()
+
+
+func _on_body_entered(body):
+	if body.is_in_group("tilemap"):
+		queue_free()
