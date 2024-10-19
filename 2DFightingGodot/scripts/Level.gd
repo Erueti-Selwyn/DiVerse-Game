@@ -1,4 +1,5 @@
 extends Node2D
+# Assets
 const africanMap = preload("res://assets/backgrounds/africa.png")
 const chinaMap = preload("res://assets/backgrounds/china map pixel.png")
 const japanMap = preload("res://assets/backgrounds/japan mapp.png")
@@ -6,15 +7,17 @@ const samoanMap = preload("res://assets/backgrounds/samoa.png")
 const vikingMap = preload("res://assets/backgrounds/viking.png")
 const mexicoMap = preload("res://assets/backgrounds/mexico final map.png")
 const cratePath = preload("res://scenes/crate.tscn")
+# Nodes
+@onready var global_script = $"/root/Global"
 @onready var africanTileMap = $Africa
 @onready var chineseTileMap = $China
 @onready var japaneseTileMap = $Japan
 @onready var samoanTileMap = $Samoa
 @onready var vikingTileMap = $Viking
 @onready var mexicoTileMap = $Mexico
-@onready var global_script = $"/root/Global"
 @onready var background = $TextureRect
-var randomTime
+# Variables
+var randomTime : int
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	global_script.crateNumber = 0
@@ -47,7 +50,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(_delta):
 	pass
 
 func start_timer():

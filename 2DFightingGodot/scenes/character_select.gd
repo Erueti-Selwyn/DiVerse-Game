@@ -1,5 +1,5 @@
 extends Control
-
+# Assets
 const controllerIconOff = preload("res://assets/Ui Assets/ControllerButtonOffFinal.png")
 const controllerIconOn = preload("res://assets/Ui Assets/ControllerButtonOnFinal.png")
 const keyboardIconOff = preload("res://assets/Ui Assets/MouseButtonOffFinal.png")
@@ -10,10 +10,7 @@ const japanMap = preload("res://assets/backgrounds/japan mapp.png")
 const samoanMap = preload("res://assets/backgrounds/samoa.png")
 const vikingMap = preload("res://assets/backgrounds/viking.png")
 const mexicoMap = preload("res://assets/backgrounds/mexico final map.png")
-var player1Character = 1
-var player2Character = 1
-var localPlayer1Controller = true
-var localPlayer2Controller = true
+# Nodes
 @onready var global_script = $"/root/Global"
 @onready var keyboardPlayer1Button = $MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer/KeyboardPlayer1
 @onready var controllerPlayer1Button = $MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer/ControllerPlayer1
@@ -32,6 +29,11 @@ var localPlayer2Controller = true
 @onready var vikingButton2 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/VikingButton2
 @onready var mexicanButton2 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/MexicanButton2
 @onready var background = $TextureRect
+# Variables
+var player1Character : int = 1
+var player2Character : int = 1
+var localPlayer1Controller : bool = true
+var localPlayer2Controller : bool = true
 var defaultColor = Color(1, 1, 1)
 var selectedColor = Color(0.224, 1, 0.416)
 

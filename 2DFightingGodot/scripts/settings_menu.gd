@@ -1,16 +1,19 @@
 extends Control
+# Assets
 const switchOn = preload("res://assets/Ui Assets/optionButtonOn.png")
 const switchOff = preload("res://assets/Ui Assets/optionButtonOff.png")
 const swtichOnMask = preload("res://assets/Ui Assets/optionButtonOnMask.png")
 const swtichOffMask = preload("res://assets/Ui Assets/optionButtonOffMask.png")
+# Nodes
 @onready var global_script = $"/root/Global"
 @onready var soundSwitch = $MarginContainer/VBoxContainer/HBoxContainer/SoundButton
 @onready var musicSwitch = $MarginContainer/VBoxContainer/HBoxContainer2/MusicButton
 @onready var pauseMenu = $"../pause"
 @onready var controlsMenu = $"../controls"
-var localSoundOn = true
-var localMusicOn = true
-var fromPauseMenu = false
+# Variables
+var localSoundOn : bool = true
+var localMusicOn : bool = true
+var fromPauseMenu : bool = false
 
 func _ready():
 	localSoundOn = global_script.soundOn

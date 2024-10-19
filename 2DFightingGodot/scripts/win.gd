@@ -1,10 +1,12 @@
 extends Node
+# Assets
 const africanBackground = preload("res://assets/backgrounds/africa.png")
 const chineseBackground = preload("res://assets/backgrounds/china map pixel.png")
 const japaneseBackground = preload("res://assets/backgrounds/japan mapp.png")
 const samoanBackground = preload("res://assets/backgrounds/samoa.png")
 const vikingBackground = preload("res://assets/backgrounds/viking.png")
 const mexicanBackground = preload("res://assets/backgrounds/mexico final map.png")
+# Nodes
 @onready var global_script = $"/root/Global"
 @onready var background = $background
 @onready var winnerTitle = $HBoxContainer/VBoxContainer/Label
