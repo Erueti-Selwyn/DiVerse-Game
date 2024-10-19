@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cj20agpko0ln4" path="res://assets/player animation/mexican man sheet.png" id="6_bly08"]
 [ext_resource type="Texture2D" uid="uid://ddklm3p8cru80" path="res://assets/player animation/samoan man sheet.png" id="7_shb45"]
 [ext_resource type="Texture2D" uid="uid://34m03ksxcppp" path="res://assets/player animation/viking ggg man sheet.png" id="8_3gvp3"]
-[ext_resource type="Texture2D" uid="uid://bu00b1ih040xv" path="res://assets/guns/japanesepistol.png" id="8_gkmlg"]
+[ext_resource type="Texture2D" uid="uid://d3tigoeqhnpxk" path="res://assets/guns/sniper.png" id="8_vcxg8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptv32"]
 size = Vector2(20, 50)
@@ -894,10 +894,10 @@ frame_progress = 0.802549
 [node name="Gun" type="Sprite2D" parent="CollisionShape2D/AnimatedSprite2D"]
 position = Vector2(18.5, 1.5)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("8_gkmlg")
+texture = ExtResource("8_vcxg8")
 
 [node name="Marker2D" type="Marker2D" parent="CollisionShape2D/AnimatedSprite2D/Gun"]
-position = Vector2(14.4286, -4)
+position = Vector2(27.2857, -2.57143)
 
 [node name="MuzzleFlashPistol" type="CPUParticles2D" parent="CollisionShape2D/AnimatedSprite2D/Gun/Marker2D"]
 emitting = false

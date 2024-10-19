@@ -5,11 +5,13 @@ var speed = 1400
 var direction = 1
 var player_Index = 0
 var bullet_damage = 2
+var gunType = 1
 
-func bulletspawn(dir, player, dam):
+func bulletspawn(dir, player, dam, type):
 	direction = dir
 	player_Index = player
 	bullet_damage = dam
+	gunType = type
 
 func _physics_process(delta):
 	move_local_x(speed * delta * direction)
@@ -30,5 +32,5 @@ func _on_area_entered(area):
 			var collided_player_index = grandparent.get_player_index()
 			if player_Index != collided_player_index:
 				if grandparent.has_method("bullet_hit"):
-					grandparent.bullet_hit(direction, bullet_damage)
+					grandparent.bullet_hit(direction, bullet_damage, gunType)
 					queue_free()
