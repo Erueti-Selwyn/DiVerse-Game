@@ -39,17 +39,21 @@ var joy_jump_pressed = false
 
 var currentweapon = 0
 var shootCooldown = 0.15
-var isHoldingGun = false
+var sniperCooldown = 3
 var attacking = false
 var isHit = false
 var onWall = false
 var canShoot = true
-var hasPistol = false
+var hasGun = false
+var gunType
 var totalBullets = 12
+var totalSniperBullets = 5
 var bulletsLeft = 0
 #var velocity = Vector2(0, 1)
 var speed = 300
-var knockback_strength = 150
+var melee_knockback_strength = 100
+var gun_knockback_strength = 150
+var sniper_knockback_strength = 50
 var health = 100
 var lives = 3
 var isDead = false
@@ -68,6 +72,7 @@ var japanesePistolMarker = Vector2(14.429, -8.286)
 var mexicanPistolMarker = Vector2(14.429, 0.286)
 var vikingPistolMarker = Vector2(14.429, -1.143)
 var polynesianPistolMarker = Vector2(14.429, -4)
+var sniperMarker = Vector2(27.286, -2.571)
 
 var attackTime
 var africanAttackTime = 0.09
@@ -87,12 +92,13 @@ var meleeHasHit = false
 @export var DEADZONE = 0.2
 @export var DEADZONEY = 0.9
 @export var gunDamage = 6
-@export var rocketLauncherDamage = 10
-@export var sniperDamage = 15
+@export var rocketLauncherDamage = 50
+@export var sniperDamage = 30
 var player_controller_index
 var player_keyboard_index
 var playercontroller = true
 var doubleKeyboard
+var normalPistolTexture
 @onready var _animated_sprite = $CollisionShape2D/AnimatedSprite2D
 @onready var Gun = $CollisionShape2D/AnimatedSprite2D/Gun
 @onready var africanAttackCollision = $CollisionShape2D/AnimatedSprite2D/Melee/AfricanAttackCollision
@@ -188,42 +194,48 @@ func _ready():
 	playerLabel.text = "Player: " + str(player_index)
 	if playerCharacter == 1:
 		gunSprite.texture = africanPistolSprite
+		normalPistolTexture = africanPistolSprite
 		bulletMarker.position = africanPistolMarker
 		_attack_collision = africanAttackCollision
 		attackTime = africanAttackTime
 		meleeDamage = africanMeleeDamage
 	elif playerCharacter == 2:
 		gunSprite.texture = chinesePistolSprite
+		normalPistolTexture = chinesePistolSprite
 		bulletMarker.position = chinesePistolMarker
 		_attack_collision = chineseAttackCollision
 		attackTime = chineseAttackTime
 		meleeDamage = chineseMeleeDamage
 	elif playerCharacter == 3:
 		gunSprite.texture = japanesePistolSprite
+		normalPistolTexture = japanesePistolSprite
 		bulletMarker.position = japanesePistolMarker
 		_attack_collision = japaneseAttackCollision
 		attackTime = japaneseAttackTime
 		meleeDamage = japaneseMeleeDamage
 	elif playerCharacter == 4:
 		gunSprite.texture = polynesianPistolSprite
+		normalPistolTexture = polynesianPistolSprite
 		bulletMarker.position = polynesianPistolMarker
 		_attack_collision = samoanAttackCollision
 		attackTime = samoanAttackTime
 		meleeDamage = samoanMeleeDamage
 	elif playerCharacter == 5:
 		gunSprite.texture = norwegianPistolSprite
+		normalPistolTexture = norwegianPistolSprite
 		bulletMarker.position = vikingPistolMarker
 		_attack_collision = vikingAttackCollision
 		attackTime = vikingAttackTime
 		meleeDamage = vikingMeleeDamage
 	elif playerCharacter == 6:
 		gunSprite.texture = mexicanPistolSprite
+		normalPistolTexture = mexicanPistolSprite
 		bulletMarker.position = mexicanPistolMarker
 		_attack_collision = mexicanAttackCollision
 		attackTime = mexicanAttackTime
 		meleeDamage = mexicanMeleeDamage
 	_attack_collision.disabled = true
-	hasPistol = false
+	hasGun = false
 func _physics_process(_delta):
 	if player_index == 1:
 		global_script.player1health = health
@@ -232,22 +244,15 @@ func _physics_process(_delta):
 		global_script.player2health = health
 		global_script.globalPlayer2Lives = lives
 	if global_script.isPaused == false && isDead == false:
-		if hasPistol:
-			isHoldingGun = true
-		else:
-			isHoldingGun = false
-		if health <= 0:
-			die()
-			killed()
 		if playercontroller:
-			if isHoldingGun:
+			if hasGun:
 				if Input.is_joy_button_pressed(player_controller_index, 2):
 					shoot()
 			else:
 				if Input.is_joy_button_pressed(player_controller_index, 2):
 					attack()
 		else:
-			if isHoldingGun:
+			if hasGun:
 				if player_keyboard_index == 0:
 					if Input.is_action_just_pressed("shoot") && !onWall:
 						shoot()
@@ -342,7 +347,7 @@ func _physics_process(_delta):
 			walkParticle.emitting = true
 		else:
 			walkParticle.emitting = false
-		if hasPistol:
+		if hasGun:
 			Gun.modulate = Color(1, 1, 1, 1)
 			if onWall:
 				Gun.visible = false
@@ -502,16 +507,22 @@ func _physics_process(_delta):
 	
 	
 func shoot():
-	if canShoot && bulletsLeft > 0 && isHoldingGun:
+	if canShoot && bulletsLeft > 0 && hasGun:
 		bulletsLeft -= 1
 		if bulletsLeft <= 0:
-			hasPistol = false
+			hasGun = false
 		muzzleFlashPistol.emitting = true
 		var bullet = bulletPath.instantiate()
-		if facingRight:
-			bullet.bulletspawn(1, player_index, gunDamage)
-		else:
-			bullet.bulletspawn(-1, player_index, gunDamage)
+		if gunType == 1:
+			if facingRight:
+				bullet.bulletspawn(1, player_index, gunDamage, gunType)
+			else:
+				bullet.bulletspawn(-1, player_index, gunDamage, gunType)
+		if gunType == 2:
+			if facingRight:
+				bullet.bulletspawn(1, player_index, sniperDamage, gunType)
+			else:
+				bullet.bulletspawn(-1, player_index, sniperDamage, gunType)
 		bullet.global_position = $CollisionShape2D/AnimatedSprite2D/Gun/Marker2D.global_position
 		get_parent().add_child(bullet)
 		canShoot = false
@@ -566,10 +577,14 @@ func is_hit(attacker_position, damage_done):
 	if !isDead && !isHit:
 		var knockback_direction = global_position - attacker_position
 		health = health - damage_done
+		if health <= 0:
+			die()
+			killParticle.global_position = global_position
+			killParticle.emitting = true
 		if knockback_direction.x > 0:
-			velocity.x = velocity.x + (knockback_strength * damage_done + 20 * ((100 - health) + 1))
+			velocity.x = velocity.x + (melee_knockback_strength * damage_done + 30 * ((100 - health) + 1))
 		elif knockback_direction.x < 0:
-			velocity.x = velocity.x - (knockback_strength * damage_done + 20 * ((100 - health) + 1))
+			velocity.x = velocity.x - (melee_knockback_strength * damage_done + 30 * ((100 - health) + 1))
 		isHit = true
 		_animated_sprite.modulate = Color(1, 0, 0) 
 		await get_tree().create_timer(0.15).timeout
@@ -579,7 +594,7 @@ func is_hit(attacker_position, damage_done):
 
 func _on_animated_sprite_2d_animation_finished():
 	if (_animated_sprite.animation == "africanattack" or _animated_sprite.animation == "chinaattack" or _animated_sprite.animation == "japaneseattack" or _animated_sprite.animation == "samoanattack" or _animated_sprite.animation == "vikingattack" or _animated_sprite.animation == "mexicanattack"):
-		if isHoldingGun:
+		if hasGun:
 			gunSprite.show()
 		meleeHasHit = false
 		_attack_collision.disabled = true
@@ -595,14 +610,24 @@ func _on_area_2d_area_entered(area):
 func get_player_index():
 	return(player_index)
 
-func bullet_hit(bullet_direction, damage_done):
+func bullet_hit(bullet_direction, damage_done, hitGunType):
 	if !isDead && !isHit:
 		var knockback_direction = bullet_direction
 		health = health - damage_done
-		if knockback_direction > 0:
-			velocity.x = velocity.x + (knockback_strength * damage_done + 30 * ((100 - health) + 1))
-		elif knockback_direction < 0:
-			velocity.x = velocity.x - (knockback_strength * damage_done + 30 * ((100 - health) + 1))
+		if health <= 0:
+			die()
+			killParticle.global_position = global_position
+			killParticle.emitting = true
+		if hitGunType == 1:
+			if knockback_direction > 0:
+				velocity.x = velocity.x + (gun_knockback_strength * damage_done + 30 * ((100 - health) + 1))
+			elif knockback_direction < 0:
+				velocity.x = velocity.x - (gun_knockback_strength * damage_done + 30 * ((100 - health) + 1))
+		if hitGunType == 2:
+			if knockback_direction > 0:
+				velocity.x = velocity.x + (sniper_knockback_strength * damage_done + 30 * ((100 - health) + 1))
+			elif knockback_direction < 0:
+				velocity.x = velocity.x - (sniper_knockback_strength * damage_done + 30 * ((100 - health) + 1))
 		isHit = true
 		_animated_sprite.modulate = Color(1, 0, 0) 
 		await get_tree().create_timer(0.15).timeout
@@ -624,6 +649,7 @@ func die():
 		await get_tree().create_timer(1).timeout
 		isDead = false
 		self.visible = true
+		velocity = Vector2(0, 0)
 	if lives <= 0:
 		if player_index == 1:
 			global_script.winningPlayer = 2
@@ -637,12 +663,15 @@ func die():
 		global_script.isPaused = false
 		get_tree().change_scene_to_file("res://scenes/win.tscn")
 
-func killed():
-	killParticle.global_position = global_position
-	killParticle.emitting = true
-
 func collect_item(itemType):
 	global_script.crateNumber -= 1
+	gunType = itemType
 	if itemType == 1:
-		hasPistol = true
+		hasGun = true
+		gunSprite.texture = normalPistolTexture
 		bulletsLeft = totalBullets
+	elif itemType == 2:
+		hasGun = true
+		gunSprite.texture = sniperSprite
+		bulletMarker.position = sniperMarker
+		bulletsLeft = totalSniperBullets
