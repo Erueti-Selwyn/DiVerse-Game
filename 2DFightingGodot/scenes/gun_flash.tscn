@@ -14,18 +14,16 @@ colors = PackedColorArray(0.545339, 0.220781, 0.227032, 1, 0.977319, 0.449738, 0
 script = ExtResource("1_qup7r")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-position = Vector2(-1, 0)
-emitting = false
+show_behind_parent = true
 amount = 16
 lifetime = 0.2
 explosiveness = 1.0
 spread = 180.0
 gravity = Vector2(0, 0)
-initial_velocity_min = 40.0
-initial_velocity_max = 50.0
+initial_velocity_min = 60.21
+initial_velocity_max = 110.71
 angle_min = -705.5
 angle_max = 720.0
-scale_amount_min = 2.0
 scale_amount_max = 4.0
 scale_amount_curve = SubResource("Curve_os72y")
 color_ramp = SubResource("Gradient_e36co")

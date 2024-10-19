@@ -17,6 +17,7 @@ const cratePath = preload("res://scenes/crate.tscn")
 var randomTime
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	global_script.crateNumber = 0
 	if global_script.mapType == 1:
 		background.texture = africanMap
 		africanTileMap.global_position.y = 0
