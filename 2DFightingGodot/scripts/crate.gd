@@ -1,4 +1,5 @@
 extends CharacterBody2D
+# Nodes
 @onready var global_script = $"/root/Global"
 @onready var sniperTexture = $sniper
 @onready var pistolTexture = $pistol
@@ -8,11 +9,11 @@ extends CharacterBody2D
 @onready var crateCollision2 = $crateCollision2
 @onready var largeCrateCollision = $Area2D/largeCrateCollision
 @onready var largeCrateCollision2 = $largeCrateCollision2
-var randomint
-var gunType
+# Variables
+var randomint : int
+var gunType : int
 func _ready():
 	randomint = randi_range(1, 2)
-	print(randomint)
 	if randomint == 2:
 		largeCrateCollision.disabled = false
 		crateCollision.disabled = true
@@ -30,7 +31,7 @@ func _ready():
 		crate.visible = true
 		gunType = 1
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not is_on_floor():
 		velocity.y = 200
 	move_and_slide()

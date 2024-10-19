@@ -1,19 +1,19 @@
 extends Node
-
-@export var player1Controller = true
-@export var player2Controller = true
-@export var player1health = 0
-@export var player2health = 0
-@export var globalPlayerCharacter1 = 1
-@export var globalPlayerCharacter2 = 1
-@export var isPaused = false
-@export var winningPlayer = 0
-@export var globalPlayer1Lives = 0
-@export var globalPlayer2Lives = 0
+# Global Variables
+@export var player1Controller : bool = true
+@export var player2Controller : bool = true
+@export var player1health : int = 0
+@export var player2health : int= 0
+@export var globalPlayerCharacter1 : int = 1
+@export var globalPlayerCharacter2 : int = 1
+@export var isPaused : bool = false
+@export var winningPlayer : int = 0
+@export var globalPlayer1Lives : int = 0
+@export var globalPlayer2Lives : int= 0
 @export var crateNumber = 0
-@export var mapType = 1
-@export var soundOn = true
-@export var musicOn = true
+@export var mapType : int= 1
+@export var soundOn : bool = true
+@export var musicOn : bool = true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -23,14 +23,14 @@ func _ready():
 func _process(_delta):
 	pass
 
-func display_damage_number(value, position):
+func display_damage_number(value : int, position : Vector2):
 	var number = Label.new()
 	number.global_position = position
 	number.text = str(value)
 	number.z_index= 5
 	number.label_settings = LabelSettings.new()
 	
-	var color = "#FFF"
+	var color = Color(1, 1, 1)
 	number.label_settings.font_color = color
 	number.label_settings.font_size = 18
 	number.label_settings.outline_color = "#000"
@@ -43,9 +43,8 @@ func display_damage_number(value, position):
 	
 	var tween = get_tree().create_tween()
 	tween.set_parallel(true)
-	#tween.tween_property(number, "position:y", number.position.y - 24, 0.25).set_ease(Tween.EASE_OUT)
 	tween.tween_property(number, "position:y", number.position.y + 20, 0.5).set_ease(Tween.EASE_IN)
 	tween.tween_property(number, "scale", Vector2.ZERO, 0.5).set_ease(Tween.EASE_IN)
-	
+	tween.tween_property(number, "modulate", Color(1, 0, 0), 0.5).set_ease(Tween.EASE_IN)
 	await tween.finished
 	number.queue_free()

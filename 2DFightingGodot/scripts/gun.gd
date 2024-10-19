@@ -1,13 +1,13 @@
 extends Area2D
 
-#var velocity = Vector2(0, 1)
-var speed = 1400
-var direction = 1
-var player_Index = 0
-var bullet_damage = 2
-var gunType = 1
+# Variables
+var speed : int = 1400
+var direction : int
+var player_Index : int
+var bullet_damage : int
+var gunType : int = 1
 
-func bulletspawn(dir, player, dam, type):
+func bulletspawn(dir : int, player : int, dam : int, type : int):
 	direction = dir
 	player_Index = player
 	bullet_damage = dam

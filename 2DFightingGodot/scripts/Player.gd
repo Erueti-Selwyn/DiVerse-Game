@@ -1,107 +1,18 @@
 extends CharacterBody2D
 
-@export var player_index = 1
-
+@export var playerIndex = 1
+# Assets
 const africanPistolSprite = preload("res://assets/guns/africanpistol.png")
 const chinesePistolSprite = preload("res://assets/guns/chinesepistol.png")
 const japanesePistolSprite = preload("res://assets/guns/japanesepistol.png")
 const mexicanPistolSprite = preload("res://assets/guns/mexicanpistol.png")
-const norwegianPistolSprite = preload("res://assets/guns/norwegianpistol.png")
-const polynesianPistolSprite = preload("res://assets/guns/polynesianpistol.png")
+const vikingPistolSprite = preload("res://assets/guns/norwegianpistol.png")
+const samoanPistolSprite = preload("res://assets/guns/polynesianpistol.png")
 const rocketLauncherSprite = preload("res://assets/guns/rocketlauncher.png")
 const sniperSprite = preload("res://assets/guns/sniper.png")
 const bulletPath = preload("res://scenes/bullet.tscn")
-const MAX_SPEED = 450
-const ACCELERATION = 120
-const JUMP_HIGHT = 600
-const GRAVITY = 30
-const UP = Vector2(0, -1)
-const WALL_SLIDE_ACCELERATION = 10
-const MAX_WALL_SLIDE_SPEED = 40
-
-var jump_was_pressed = false
-var can_jump = false
-var isGravity = true
-var dub_jumps = 0
-var max_num_dub_jumps = 3 
-
-var MAX_FRICTION = 225
-var FRICTION = 30
-
-var dashDirection = Vector2(0, 0)
-var dashAmount = 1
-var currentDashAmount = 0
-var canDash = true
-var dashing = false
-var dashSpeed = 1250
-
-var joy_jump_pressed = false
-var joy_shoot_pressed = false
-
-var currentweapon = 0
-var shootCooldown
-var pistolCooldown = 0.15
-var sniperCooldown = 0.7
-var attacking = false
-var isHit = false
-var onWall = false
-var canShoot = true
-var hasGun = false
-var gunType
-var totalBullets = 12
-var totalSniperBullets = 5
-var bulletsLeft = 0
-#var velocity = Vector2(0, 1)
-var speed = 300
-var melee_knockback_strength = 75
-var gun_knockback_strength = 150
-var sniper_knockback_strength = 50
-var health = 100
-var lives = 3
-var isDead = false
-
-var directionX
-var directionY
-var direction_inputX
-var direction_inputY
-var facingRight = true
-
-var playerCharacter = 0
-
-var africanPistolMarker = Vector2(14.429,-2.571)
-var chinesePistolMarker = Vector2(11.571, -4)
-var japanesePistolMarker = Vector2(14.429, -8.286)
-var mexicanPistolMarker = Vector2(14.429, 0.286)
-var vikingPistolMarker = Vector2(14.429, -1.143)
-var polynesianPistolMarker = Vector2(14.429, -4)
-var sniperMarker = Vector2(27.286, -2.571)
-
-var attackTime
-var africanAttackTime = 0.09
-var chineseAttackTime = 0.1
-var japaneseAttackTime = 0.125
-var mexicanAttackTime = 0
-var samoanAttackTime = 0.1
-var vikingAttackTime = 0.34
-var meleeDamage
-var africanMeleeDamage = 12
-var chineseMeleeDamage = 14
-var japaneseMeleeDamage = 12
-var mexicanMeleeDamage = 10
-var vikingMeleeDamage = 18
-var samoanMeleeDamage = 12
-var meleeHasHit = false
-@export var DEADZONE = 0.2
-@export var DEADZONEY = 0.9
-@export var gunDamage = 6
-@export var rocketLauncherDamage = 50
-@export var sniperDamage = 30
-var player_controller_index
-var player_keyboard_index
-var playercontroller = true
-var doubleKeyboard
-var normalPistolTexture
-var normalPistolMarker
+# Nodes
+@onready var global_script = $"/root/Global"
 @onready var _animated_sprite = $CollisionShape2D/AnimatedSprite2D
 @onready var Gun = $CollisionShape2D/AnimatedSprite2D/Gun
 @onready var africanAttackCollision = $CollisionShape2D/AnimatedSprite2D/Melee/AfricanAttackCollision
@@ -110,7 +21,6 @@ var normalPistolMarker
 @onready var mexicanAttackCollision = $CollisionShape2D/AnimatedSprite2D/Melee/MexicanAttackCollision
 @onready var samoanAttackCollision = $CollisionShape2D/AnimatedSprite2D/Melee/SamoanAttackCollision
 @onready var vikingAttackCollision = $CollisionShape2D/AnimatedSprite2D/Melee/VikingAttackCollision
-@onready var global_script = $"/root/Global"
 @onready var gunSprite = $"CollisionShape2D/AnimatedSprite2D/Gun"
 @onready var playerLabel = $"Label"
 @onready var muzzleFlash = $CollisionShape2D/AnimatedSprite2D/Gun/Marker2D/MuzzleFlashPistol
@@ -134,240 +44,211 @@ var normalPistolMarker
 @onready var fallParticle = $"../fallSplashParticle"
 @onready var killParticle = $"../killParticle"
 @onready var damageNumberOrigin = $CollisionShape2D/AnimatedSprite2D/DamageNumberOrigin
+# Movement Variables
+const maxSpeed : int= 450
+const acceleration : int = 120
+const maxFriction : int = 225
+const friction : int = 30
+const jumpHeight : int = 600
+const gravity : int = 30
+const maxDoubleJumps : int = 3 
+const wallSlideAcceleration : int = 10
+const maxWallSlideSpeed : int = 40
+var onWall : bool = false
+var doubleJumps : int = 0
+var dashDirection : float = 0
+var dashAmount : int = 1
+var currentDashAmount : int = 0
+var canDash : bool= true
+var dashing : bool= false
+var dashSpeed : int = 1250
+# Input Variables
+var joyJumpPressed : bool = false
+var joyShootPressed : bool = false
+var directionX : float
+var directionY : float
+var directionInputX : float
+var directionInputY : float
+const deadzone : float = 0.2
+const deadzoneY : float = 0.9
+var facingRight : bool = true
+# Gun Variables
+var shootCooldown : float
+const pistolCooldown : float = 0.15
+const sniperCooldown : float = 0.7
+var canShoot : bool = true
+var hasGun : bool = false
+var gunType : int
+const totalBullets : int = 12
+const totalSniperBullets : int = 5
+var bulletsLeft : int = 0
+const gunDamage : int = 6
+const rocketLauncherDamage : int = 50
+const sniperDamage : int = 30
+const africanPistolMarker = Vector2(14.429,-2.571)
+const chinesePistolMarker = Vector2(11.571, -4)
+const japanesePistolMarker = Vector2(14.429, -8.286)
+const mexicanPistolMarker = Vector2(14.429, 0.286)
+const vikingPistolMarker = Vector2(14.429, -1.143)
+const samoanPistolMarker = Vector2(14.429, -4)
+const sniperMarker = Vector2(27.286, -2.571)
+var normalPistolTexture
+var normalPistolMarker
+
+# Attacking Variables
+const meleeKnockbackStrength : int = 75
+const gunKnockbackStrength : int = 150
+const sniperKnockbackStrength : int= 50
+var attackTime : float
+const africanAttackTime : float = 0.09
+const chineseAttackTime : float = 0.1
+const japaneseAttackTime : float = 0.125
+const mexicanAttackTime : float = 0
+const samoanAttackTime : float = 0.1
+const vikingAttackTime : float = 0.34
+var meleeDamage : int
+const africanMeleeDamage : int = 12
+const chineseMeleeDamage : int = 14
+const japaneseMeleeDamage : int = 12
+const mexicanMeleeDamage : int = 10
+const vikingMeleeDamage : int = 18
+const samoanMeleeDamage : int = 12
+var meleeHasHit : bool = false
+var attacking : bool = false
+var isHit : bool = false
+var health : int = 100
+var lives : int = 3
+var isDead : bool = false
 var _attack_collision
+
+# Identification Variables
+var playerCharacter : int = 0
+var playerControllerIndex : int
+var playerKeyboardIndex : int
+var playercontroller : bool
+var doubleKeyboard : bool
+# Dictionaries
+@onready var spawnLocations1 : Dictionary = {
+	1 : spawnLocationAfrica1,
+	2 : spawnLocationChina1,
+	3 : spawnLocationJapan1,
+	4 : spawnLocationSamoa1,
+	5 : spawnLocationViking1,
+	6 : spawnLocationMexico1,
+	}
+@onready var spawnLocations2 : Dictionary = {
+	1 : spawnLocationAfrica2,
+	2 : spawnLocationChina2,
+	3 : spawnLocationJapan2,
+	4 : spawnLocationSamoa2,
+	5 : spawnLocationViking2,
+	6 : spawnLocationMexico2,
+	}
+@onready var pistolTextures : Dictionary = {
+	1 : africanPistolSprite,
+	2 : chinesePistolSprite,
+	3 : japanesePistolSprite,
+	4 : samoanPistolSprite,
+	5 : vikingPistolSprite,
+	6 : mexicanPistolSprite,
+	}
+@onready var pistolMarkers : Dictionary = {
+	1 : africanPistolMarker,
+	2 : chinesePistolMarker,
+	3 : japanesePistolMarker,
+	4 : samoanPistolMarker,
+	5 : vikingPistolMarker,
+	6 : mexicanPistolMarker,
+	}
+@onready var attackCollisions : Dictionary = {
+	1 : africanAttackCollision,
+	2 : chineseAttackCollision,
+	3 : japaneseAttackCollision,
+	4 : samoanAttackCollision,
+	5 : vikingAttackCollision,
+	6 : mexicanAttackCollision,
+	}
+@onready var attackTimes : Dictionary = {
+	1 : africanAttackTime,
+	2 : chineseAttackTime,
+	3 : japaneseAttackTime,
+	4 : samoanAttackTime,
+	5 : vikingAttackTime,
+	6 : mexicanAttackTime,
+	}
+@onready var meleeDamages : Dictionary = {
+	1 : africanMeleeDamage,
+	2 : chineseMeleeDamage,
+	3 : japaneseMeleeDamage,
+	4 : samoanMeleeDamage,
+	5 : vikingMeleeDamage,
+	6 : mexicanMeleeDamage,
+	}
+var animation_map : Dictionary = {
+	1: {"idle": "africanidle", "walk": "africanwalk", "jump": "africanjump", "wall": "africanwall"},
+	2: {"idle": "chinaidle", "walk": "chinawalk", "jump": "chinajump", "wall": "chinawall"},
+	3: {"idle": "japaneseidle", "walk": "japanesewalk", "jump": "japanesejump", "wall": "japanesewall"},
+	4: {"idle": "samoanidle", "walk": "samoanwalk", "jump": "samoanjump", "wall": "samoanwall"},
+	5: {"idle": "vikingidle", "walk": "vikingwalk", "jump": "vikingjump", "wall": "vikingwall"},
+	6: {"idle": "mexicanidle", "walk": "mexicanwalk", "jump": "mexicanjump", "wall": "mexicanwall"},
+}
 func _ready():
-	shootCooldown = pistolCooldown
-	health = 100
-	isDead = false
-	hasGun = false
-	# Sets Spawn Location for Player 1
-	if player_index == 1:
-		if global_script.mapType == 1:
-			spawnlocation1 = spawnLocationAfrica1
-		if global_script.mapType == 2:
-			spawnlocation1 = spawnLocationChina1
-		if global_script.mapType == 3:
-			spawnlocation1 = spawnLocationJapan1
-		if global_script.mapType == 4:
-			spawnlocation1 = spawnLocationSamoa1
-		if global_script.mapType == 5:
-			spawnlocation1 = spawnLocationViking1
-		if global_script.mapType == 6:
-			spawnlocation1 = spawnLocationMexico1
-		global_position = spawnlocation1.global_position
-	# Sets Spawn Location for Player 2
-	elif player_index == 2:
-		if global_script.mapType == 1:
-			spawnlocation2 = spawnLocationAfrica2
-		if global_script.mapType == 2:
-			spawnlocation2 = spawnLocationChina2
-		if global_script.mapType == 3:
-			spawnlocation2 = spawnLocationJapan2
-		if global_script.mapType == 4:
-			spawnlocation2 = spawnLocationSamoa2
-		if global_script.mapType == 5:
-			spawnlocation2 = spawnLocationViking2
-		if global_script.mapType == 6:
-			spawnlocation2 = spawnLocationMexico2
-		global_position = spawnlocation2.global_position
-	# Assigning Player Controller / Keyboard Inputs
-	if player_index == 1:
-		if global_script.player1Controller == true:
-			player_controller_index = 0
-			playercontroller = true
-		elif global_script.player1Controller == false:
-			playercontroller = false
-			player_keyboard_index = 0
-		if global_script.player1Controller == false && global_script.player2Controller == false:
-			doubleKeyboard = true
-	if player_index == 2:
-		if global_script.player1Controller == false && global_script.player2Controller == true:
-			player_controller_index = 0
-		elif global_script.player1Controller == true && global_script.player2Controller == false:
-			player_keyboard_index = 0
-		elif global_script.player1Controller == true && global_script.player2Controller == true:
-			player_controller_index = 1
-		elif global_script.player1Controller == false && global_script.player2Controller == false:
-			player_keyboard_index = 1
-		if global_script.player2Controller == true:
-			playercontroller = true
-		elif global_script.player2Controller == false:
-			playercontroller = false
-	# Sets the Players to chosen Characters
-	if player_index == 1:
-		playerCharacter = global_script.globalPlayerCharacter1
-	elif player_index == 2:
-		playerCharacter = global_script.globalPlayerCharacter2
-	playerLabel.text = "Player: " + str(player_index)
-	# Sets Different Variables for each character
-	if playerCharacter == 1:
-		gunSprite.texture = africanPistolSprite
-		normalPistolTexture = africanPistolSprite
-		normalPistolMarker = africanPistolMarker
-		bulletMarker.position = africanPistolMarker
-		_attack_collision = africanAttackCollision
-		attackTime = africanAttackTime
-		meleeDamage = africanMeleeDamage
-	elif playerCharacter == 2:
-		gunSprite.texture = chinesePistolSprite
-		normalPistolTexture = chinesePistolSprite
-		normalPistolMarker = chinesePistolMarker
-		bulletMarker.position = chinesePistolMarker
-		_attack_collision = chineseAttackCollision
-		attackTime = chineseAttackTime
-		meleeDamage = chineseMeleeDamage
-	elif playerCharacter == 3:
-		gunSprite.texture = japanesePistolSprite
-		normalPistolTexture = japanesePistolSprite
-		normalPistolMarker = japanesePistolMarker
-		bulletMarker.position = japanesePistolMarker
-		_attack_collision = japaneseAttackCollision
-		attackTime = japaneseAttackTime
-		meleeDamage = japaneseMeleeDamage
-	elif playerCharacter == 4:
-		gunSprite.texture = polynesianPistolSprite
-		normalPistolTexture = polynesianPistolSprite
-		normalPistolMarker = polynesianPistolMarker
-		bulletMarker.position = polynesianPistolMarker
-		_attack_collision = samoanAttackCollision
-		attackTime = samoanAttackTime
-		meleeDamage = samoanMeleeDamage
-	elif playerCharacter == 5:
-		gunSprite.texture = norwegianPistolSprite
-		normalPistolTexture = norwegianPistolSprite
-		normalPistolMarker = vikingPistolMarker
-		bulletMarker.position = vikingPistolMarker
-		_attack_collision = vikingAttackCollision
-		attackTime = vikingAttackTime
-		meleeDamage = vikingMeleeDamage
-	elif playerCharacter == 6:
-		gunSprite.texture = mexicanPistolSprite
-		normalPistolTexture = mexicanPistolSprite
-		normalPistolMarker = mexicanPistolMarker
-		bulletMarker.position = mexicanPistolMarker
-		_attack_collision = mexicanAttackCollision
-		attackTime = mexicanAttackTime
-		meleeDamage = mexicanMeleeDamage
-	_attack_collision.disabled = true
+	apply_player_variables()
+
 func _physics_process(_delta):
 	# Assigns Global Script Variables
-	if player_index == 1:
+	if playerIndex == 1:
 		global_script.player1health = health
 		global_script.globalPlayer1Lives = lives
-	elif player_index == 2:
+	elif playerIndex == 2:
 		global_script.player2health = health
 		global_script.globalPlayer2Lives = lives
 	# Pauses all Movement when Paused / Dead
 	if global_script.isPaused == false && isDead == false:
 		# Applies Character Animation
-		if playerCharacter == 1: # African
-			if velocity == Vector2(0, 0) && !attacking:
-				_animated_sprite.play("africanidle")
-			if is_on_floor() && !dashing && !attacking:
-				if velocity.x > 0:
-					_animated_sprite.play("africanwalk")
-				elif velocity.x < 0:
-					_animated_sprite.play("africanwalk")
-			if !is_on_floor() && !attacking:
-				_animated_sprite.play("africanjump")
-			if is_on_wall() && !is_on_floor() && !attacking:
-				_animated_sprite.play("africanwall")
-				
-		if playerCharacter == 2: # Chinese
-			if velocity == Vector2(0, 0) && !attacking:
-				_animated_sprite.play("chinaidle")
-			if is_on_floor() && !dashing && !attacking:
-				if velocity.x > 0:
-					_animated_sprite.play("chinawalk")
-				elif velocity.x < 0:
-					_animated_sprite.play("chinawalk")
-			if !is_on_floor() && !attacking:
-				_animated_sprite.play("chinajump")
-			if is_on_wall() && !is_on_floor() && !attacking:
-				_animated_sprite.play("chinawall")
-				
-		if playerCharacter == 3: # Japanese
-			if velocity == Vector2(0, 0) && !attacking:
-				_animated_sprite.play("japaneseidle")
-			if is_on_floor() && !dashing && !attacking:
-				if velocity.x > 0:
-					_animated_sprite.play("japanesewalk")
-				elif velocity.x < 0:
-					_animated_sprite.play("japanesewalk")
-			if !is_on_floor() && !attacking:
-				_animated_sprite.play("japanesejump")
-			if is_on_wall() && !is_on_floor() && !attacking:
-				_animated_sprite.play("japanesewall")
-				
-		if playerCharacter == 4: # Samoan
-			if velocity == Vector2(0, 0) && !attacking:
-				_animated_sprite.play("samoanidle")
-			if is_on_floor() && !dashing && !attacking:
-				if velocity.x > 0:
-					_animated_sprite.play("samoanwalk")
-				elif velocity.x < 0:
-					_animated_sprite.play("samoanwalk")
-			if !is_on_floor() && !attacking:
-				_animated_sprite.play("samoanjump")
-			if is_on_wall() && !is_on_floor() && !attacking:
-				_animated_sprite.play("samoanwall")
-		
-		if playerCharacter == 5: # Viking
-			if velocity == Vector2(0, 0) && !attacking:
-				_animated_sprite.play("vikingidle")
-			if is_on_floor() && !dashing && !attacking:
-				if velocity.x > 0:
-					_animated_sprite.play("vikingwalk")
-				elif velocity.x < 0:
-					_animated_sprite.play("vikingwalk")
-			if !is_on_floor() && !attacking:
-				_animated_sprite.play("vikingjump")
-			if is_on_wall() && !is_on_floor() && !attacking:
-				_animated_sprite.play("vikingwall")
-		
-		if playerCharacter == 6: # Mexican
-			if velocity == Vector2(0, 0) && !attacking:
-				_animated_sprite.play("mexicanidle")
-			if is_on_floor() && !dashing && !attacking:
-				if velocity.x > 0:
-					_animated_sprite.play("mexicanwalk")
-				elif velocity.x < 0:
-					_animated_sprite.play("mexicanwalk")
-			if !is_on_floor() && !attacking:
-				_animated_sprite.play("mexicanjump")
-			if is_on_wall() && !is_on_floor() && !attacking:
-				_animated_sprite.play("mexicanwall")
+		var anims = animation_map.get(playerCharacter, null)
+		if velocity == Vector2(0, 0) && !attacking:
+			_animated_sprite.play(anims["idle"])
+		if is_on_floor() && !dashing && !attacking:
+			if velocity.x > 0:
+				_animated_sprite.play(anims["walk"])
+			elif velocity.x < 0:
+				_animated_sprite.play(anims["walk"])
+		if !is_on_floor() && !attacking:
+			_animated_sprite.play(anims["jump"])
+		if is_on_wall() && !is_on_floor() && !attacking:
+			_animated_sprite.play(anims["wall"])
 		# Checking if is Controller and Shoot
 		if playercontroller:
 			if hasGun:
-				if Input.is_joy_button_pressed(player_controller_index, 2) && !onWall:
-					if !joy_shoot_pressed:
-						joy_shoot_pressed = true
+				if Input.is_joy_button_pressed(playerControllerIndex, JOY_BUTTON_X) && !onWall:
+					if !joyShootPressed:
+						joyShootPressed = true
 						shoot()
 				else:
-					joy_shoot_pressed = false
+					joyShootPressed = false
 			else:
-				if Input.is_joy_button_pressed(player_controller_index, 2) && !onWall:
-					if !joy_shoot_pressed:
-						joy_shoot_pressed = true
+				if Input.is_joy_button_pressed(playerControllerIndex, JOY_BUTTON_X) && !onWall:
+					if !joyShootPressed:
+						joyShootPressed = true
 						attack()
 				else:
-					joy_shoot_pressed = false
+					joyShootPressed = false
 		else:
 			if hasGun:
 				# Changes Keyboard Input Depending on Keyboard Index
-				if player_keyboard_index == 0:
+				if playerKeyboardIndex == 0:
 					if Input.is_action_just_pressed("shoot") && !onWall:
 							shoot()
-				elif player_keyboard_index == 1:
+				elif playerKeyboardIndex == 1:
 					if Input.is_action_just_pressed("shoot2") && !onWall:
 						shoot()
 			else:
 				# Changes Keyboard Input Depending on Keyboard Index
-				if player_keyboard_index == 0:
+				if playerKeyboardIndex == 0:
 					if Input.is_action_just_pressed("shoot") && !onWall:
 						attack()
-				elif player_keyboard_index == 1:
+				elif playerKeyboardIndex == 1:
 					if Input.is_action_just_pressed("shoot2") && !onWall:
 						attack()
 		# Adds Walking Particle
@@ -395,29 +276,29 @@ func _physics_process(_delta):
 
 		# Detects Dash Input
 		if playercontroller:
-			if Input.is_joy_button_pressed(player_controller_index, 1):
+			if Input.is_joy_button_pressed(playerControllerIndex, JOY_BUTTON_B ):
 				dash()
 		else:
-			if player_keyboard_index == 0:
+			if playerKeyboardIndex == 0:
 				if Input.is_action_just_pressed("dash"):
 					dash()
-			elif player_keyboard_index == 1:
+			elif playerKeyboardIndex == 1:
 				if Input.is_action_just_pressed("dash2"):
 					dash()
 		# Gets Controller Joystick Input or Keyboard Input
 		if playercontroller:
-			direction_inputX = Input.get_joy_axis(player_controller_index, 0)
+			directionInputX = Input.get_joy_axis(playerControllerIndex, JOY_AXIS_LEFT_X)
 		else:
 			# Changes Input based on Keyboard Index
-			if player_keyboard_index == 0:
-				direction_inputX = Input.get_axis("move_left", "move_right")
-			elif player_keyboard_index == 1:
-				direction_inputX = Input.get_axis("move_left2", "move_right2")
+			if playerKeyboardIndex == 0:
+				directionInputX = Input.get_axis("move_left", "move_right")
+			elif playerKeyboardIndex == 1:
+				directionInputX = Input.get_axis("move_left2", "move_right2")
 		# Adds Deadzone for Controller Joystick Input
-		if abs(direction_inputX) < DEADZONE:
+		if abs(directionInputX) < deadzone:
 			directionX = 0
 		else:
-			directionX = (direction_inputX - sign(direction_inputX) * DEADZONE) / (1 - DEADZONE)
+			directionX = (directionInputX - sign(directionInputX) * deadzone) / (1 - deadzone)
 			directionX = sign(directionX)
 			# Changes Facing Direction based on Movement Input
 			if directionX > 0:
@@ -429,106 +310,74 @@ func _physics_process(_delta):
 				velocity.x = dashSpeed * dashDirection
 		# Adds Movement and Acceleration
 		elif !isHit && directionX != 0 && !dashing && !attacking:
-			velocity.x = velocity.x + (ACCELERATION * directionX)
+			velocity.x = velocity.x + (acceleration * directionX)
 		# Limits Max Speed
-		if velocity.x > MAX_SPEED:
-			velocity.x = move_toward(velocity.x, 0, MAX_FRICTION)
-		elif velocity.x < -MAX_SPEED:
-			velocity.x = move_toward(velocity.x, 0, MAX_FRICTION)
+		if velocity.x > maxSpeed:
+			velocity.x = move_toward(velocity.x, 0, maxFriction)
+		elif velocity.x < -maxSpeed:
+			velocity.x = move_toward(velocity.x, 0, maxFriction)
 		else:
-			velocity.x = move_toward(velocity.x, 0, FRICTION)
+			velocity.x = move_toward(velocity.x, 0, friction)
 		# Detects if Player is Holding Down, to Move through One Way Platforms
 		if playercontroller:
-			direction_inputY = Input.get_joy_axis(player_controller_index, 1)
-			if abs(direction_inputY) < DEADZONEY:
+			directionInputY = Input.get_joy_axis(playerControllerIndex, JOY_AXIS_LEFT_Y)
+			if abs(directionInputY) < deadzoneY:
 				directionY = 0
 			else:
-				directionY = (direction_inputY - sign(direction_inputY) * DEADZONEY) / (1 - DEADZONEY)
+				directionY = (directionInputY - sign(directionInputY) * deadzoneY) / (1 - deadzoneY)
 			if directionY > 0:
 				if is_on_floor():
 					position.y += 1
 		else:
-			if player_keyboard_index == 0:
+			if playerKeyboardIndex == 0:
 				if Input.is_action_pressed("move_down"):
 					if is_on_floor():
 						position.y += 1
-			if player_keyboard_index == 1:
+			if playerKeyboardIndex == 1:
 				if Input.is_action_pressed("move_down2"):
 					if is_on_floor():
 						position.y += 1
 		# Reset Jumps and Velocity
 		if is_on_floor(): 
-			dub_jumps = max_num_dub_jumps
+			doubleJumps = maxDoubleJumps
 			velocity.y = 0
 		if playercontroller:
 			# Adds Jump button for Controller
-			if Input.is_joy_button_pressed(player_controller_index, 0) && !attacking:
-				if !joy_jump_pressed:
-					joy_jump_pressed = true
-					if dub_jumps > 0: 
-						dub_jumps -= 1
-						velocity.y = -JUMP_HIGHT
-					if is_on_wall() && directionX == 1:
-						velocity.x = -(MAX_SPEED * 3)
-					elif is_on_wall() && directionX == -1:
-						velocity.x = (MAX_SPEED * 3)
+			if Input.is_joy_button_pressed(playerControllerIndex, JOY_BUTTON_A) && !attacking:
+				jump()
 			else:
-				joy_jump_pressed = false
+				joyJumpPressed = false
 		else:
 			# Player 1 Keyboard Jump Input
-			if player_keyboard_index == 0:
+			if playerKeyboardIndex == 0:
 				if !doubleKeyboard:
 					# Adds Jump Button for Single Keyboard
 					if (Input.is_action_just_pressed("jump") || Input.is_action_just_pressed("move_up")) && !attacking:
-						if !joy_jump_pressed:
-							joy_jump_pressed = true
-							if dub_jumps > 0: 
-								dub_jumps -= 1
-								velocity.y = -JUMP_HIGHT
-							if is_on_wall() && directionX == 1:
-								velocity.x = -(MAX_SPEED * 2)
-							elif is_on_wall() && directionX == -1:
-								velocity.x = (MAX_SPEED * 2)
+						jump()
 					else:
-						joy_jump_pressed = false
+						joyJumpPressed = false
 				elif doubleKeyboard:
 					# Adds Jump Button for Double Keyboard
 					if Input.is_action_just_pressed("move_up") && !attacking:
-						if !joy_jump_pressed:
-							joy_jump_pressed = true
-							if dub_jumps > 0: 
-								dub_jumps -= 1
-								velocity.y = -JUMP_HIGHT
-							if is_on_wall() && directionX == 1:
-								velocity.x = -(MAX_SPEED * 2)
-							elif is_on_wall() && directionX == -1:
-								velocity.x = (MAX_SPEED * 2)
+						jump()
 					else:
-						joy_jump_pressed = false
-			elif player_keyboard_index == 1:
+						joyJumpPressed = false
+			elif playerKeyboardIndex == 1:
 				# Player 1 Keyboard Jump Input
 				if Input.is_action_just_pressed("move_up2") && !attacking:
-					if !joy_jump_pressed:
-						joy_jump_pressed = true
-						if dub_jumps > 0: 
-							dub_jumps -= 1
-							velocity.y = -JUMP_HIGHT
-						if is_on_wall() && directionX == 1:
-							velocity.x = -(MAX_SPEED * 2)
-						elif is_on_wall() && directionX == -1:
-							velocity.x = (MAX_SPEED * 2)
+					jump()
 				else:
-					joy_jump_pressed = false
+					joyJumpPressed = false
 		# Wall Climbing
 		if is_on_wall() && (directionX == -1 || directionX == 1) && !attacking:
-			dub_jumps = max_num_dub_jumps
+			doubleJumps = maxDoubleJumps
 			if velocity.y >= 0: 
-				velocity.y = min(velocity.y + WALL_SLIDE_ACCELERATION, MAX_WALL_SLIDE_SPEED)
+				velocity.y = min(velocity.y + wallSlideAcceleration, maxWallSlideSpeed)
 			else:
-				velocity.y += GRAVITY
+				velocity.y += gravity
 		# Adds Gravity
 		elif !is_on_floor():
-			velocity.y += GRAVITY
+			velocity.y += gravity
 		# Removes Y Velocity When Dashing
 		if dashing:
 			velocity.y = 0
@@ -537,7 +386,64 @@ func _physics_process(_delta):
 			currentDashAmount = dashAmount
 		
 		move_and_slide()
-	
+func apply_player_variables():
+	if playerIndex == 1: # Assigns Player 1 Controller / Keyboard
+		playercontroller = global_script.player1Controller
+		if global_script.player1Controller:
+			playerControllerIndex = 0
+		elif !global_script.player1Controller:
+			playerKeyboardIndex = 0
+	if !global_script.player1Controller && !global_script.player2Controller:
+		doubleKeyboard = true
+	if playerIndex == 2: # Assigns Player 2 Controller / Keyboard
+		if global_script.player1Controller && global_script.player2Controller:
+			playerControllerIndex = 1
+		elif global_script.player1Controller:
+			playerKeyboardIndex = 0
+		elif global_script.player2Controller:
+			playerControllerIndex  = 0
+		else:
+			playerKeyboardIndex = 1
+		playercontroller = global_script.player2Controller
+	playerLabel.text = "Player: " + str(playerIndex)
+	# Sets Different Variables for each character
+	if playerIndex == 1:
+		playerCharacter = global_script.globalPlayerCharacter1
+		spawnlocation1 = spawnLocations1[global_script.mapType]
+		global_position = spawnlocation1.global_position
+		gunSprite.texture = pistolTextures[global_script.globalPlayerCharacter1]
+		normalPistolTexture = pistolTextures[global_script.globalPlayerCharacter1]
+		normalPistolMarker = pistolMarkers[global_script.globalPlayerCharacter1]
+		bulletMarker.position = pistolMarkers[global_script.globalPlayerCharacter1]
+		_attack_collision = attackCollisions[global_script.globalPlayerCharacter1]
+		attackTime = attackTimes[global_script.globalPlayerCharacter1]
+		meleeDamage = meleeDamages[global_script.globalPlayerCharacter1]
+	if playerIndex == 2:
+		playerCharacter = global_script.globalPlayerCharacter2
+		spawnlocation2 = spawnLocations2[global_script.mapType]
+		global_position = spawnlocation2.global_position
+		gunSprite.texture = pistolTextures[global_script.globalPlayerCharacter2]
+		normalPistolTexture = pistolTextures[global_script.globalPlayerCharacter2]
+		normalPistolMarker = pistolMarkers[global_script.globalPlayerCharacter2]
+		bulletMarker.position = pistolMarkers[global_script.globalPlayerCharacter2]
+		_attack_collision = attackCollisions[global_script.globalPlayerCharacter2]
+		attackTime = attackTimes[global_script.globalPlayerCharacter2]
+		meleeDamage = meleeDamages[global_script.globalPlayerCharacter2]
+	_attack_collision.disabled = true
+	isDead = false
+	hasGun = false
+	shootCooldown = pistolCooldown
+	health = 100
+func jump():
+	if !joyJumpPressed:
+		joyJumpPressed = true
+		if doubleJumps > 0: 
+			doubleJumps -= 1
+			velocity.y = -jumpHeight
+		if is_on_wall() && directionX == 1:
+			velocity.x = -(maxSpeed * 3)
+		elif is_on_wall() && directionX == -1:
+			velocity.x = (maxSpeed * 3)
 	
 func shoot(): 
 	if canShoot && bulletsLeft > 0 && hasGun && !attacking:
@@ -552,14 +458,14 @@ func shoot():
 		# Changes Bullet Variable Based on Gun Type
 		if gunType == 1:
 			if facingRight:
-				bullet.bulletspawn(1, player_index, gunDamage, gunType)
+				bullet.bulletspawn(1, playerIndex, gunDamage, gunType)
 			else:
-				bullet.bulletspawn(-1, player_index, gunDamage, gunType)
+				bullet.bulletspawn(-1, playerIndex, gunDamage, gunType)
 		if gunType == 2:
 			if facingRight:
-				bullet.bulletspawn(1, player_index, sniperDamage, gunType)
+				bullet.bulletspawn(1, playerIndex, sniperDamage, gunType)
 			else:
-				bullet.bulletspawn(-1, player_index, sniperDamage, gunType)
+				bullet.bulletspawn(-1, playerIndex, sniperDamage, gunType)
 		# Moves Bullet to Marker
 		bullet.global_position = bulletMarker.global_position
 		# Adds Bullet to Parent
@@ -624,13 +530,13 @@ func _on_melee_body_entered(body):
 		meleeHasHit = true
 		
 
-func is_hit(attackerFacingRight, damage_done):
+func is_hit(attackerFacingRight : bool, damageDone : int):
 	# Checks if Can be Hit
 	if !isDead && !isHit:
 		# Creates Damage Number
-		global_script.display_damage_number(damage_done, damageNumberOrigin.global_position)
+		global_script.display_damage_number(damageDone, damageNumberOrigin.global_position)
 		# Health takes Damage
-		health = health - damage_done
+		health -= damageDone
 		# Checks if Health is 0
 		if health <= 0:
 			# Emmits Death Particles
@@ -638,11 +544,13 @@ func is_hit(attackerFacingRight, damage_done):
 			killParticle.emitting = true
 			die()
 		else:
-			# Adds Knockback Based on Attacker Direction
+			var knockbackDirection : int
 			if attackerFacingRight:
-				velocity.x = velocity.x + (melee_knockback_strength * damage_done + 20 * pow((100 - health), 1.1))
+				knockbackDirection = 1
 			elif !attackerFacingRight:
-				velocity.x = velocity.x - (melee_knockback_strength * damage_done + 20 * pow((100 - health), 1.1))
+				knockbackDirection = -1
+			# Adds Knockback
+			take_knockback(damageDone, knockbackDirection, meleeKnockbackStrength)
 			isHit = true
 			_animated_sprite.modulate = Color(1, 0, 0) 
 			# Creates Hit Timer
@@ -669,17 +577,18 @@ func _on_area_2d_area_entered(area):
 		
 func get_player_index():
 	# Returns Player Index
-	return(player_index)
+	return(playerIndex)
 
-func bullet_hit(bullet_direction, damage_done, hitGunType):
+func bullet_hit(bulletDirection : int, damageDone : int, hitGunType : int):
 	# When Hit by Bullet
 	if !isDead && !isHit:
 		# Sets Knockback Direction
-		var knockback_direction = bullet_direction
+		var knockbackDirection : int = bulletDirection
 		# Creates Damage Number
-		global_script.display_damage_number(damage_done, damageNumberOrigin.global_position)
+		
+		global_script.display_damage_number(damageDone, damageNumberOrigin.global_position)
 		# Health takes Damage
-		health = health - damage_done
+		health -= damageDone
 		# Checks if Dead
 		if health <= 0:
 			killParticle.global_position = global_position
@@ -688,21 +597,21 @@ func bullet_hit(bullet_direction, damage_done, hitGunType):
 		else:
 			# Adds Knockback for Pistol
 			if hitGunType == 1:
-				if knockback_direction > 0:
-					velocity.x = velocity.x + (gun_knockback_strength * damage_done + 20 * pow((100 - health), 1.1))
-				elif knockback_direction < 0:
-					velocity.x = velocity.x - (gun_knockback_strength * damage_done + 20 * pow((100 - health), 1.1))
+				take_knockback(damageDone, knockbackDirection, gunKnockbackStrength)
 			# Adds Knockback for Sniper
 			if hitGunType == 2:
-				if knockback_direction > 0:
-					velocity.x = velocity.x + (sniper_knockback_strength * damage_done + 20 * pow((100 - health), 1.1))
-				elif knockback_direction < 0:
-					velocity.x = velocity.x - (sniper_knockback_strength * damage_done + 20 * pow((100 - health), 1.1))
+				take_knockback(damageDone, knockbackDirection, sniperKnockbackStrength)
 		isHit = true
 		_animated_sprite.modulate = Color(1, 0, 0) 
 		await get_tree().create_timer(0.15).timeout
 		isHit = false
 		_animated_sprite.modulate = Color(1, 1, 1)
+
+func take_knockback(damageDone : int, direction : int, knockbackStrength : int):
+	if direction > 0:
+		velocity.x += (knockbackStrength * damageDone + 20 * pow((100 - health), 1.1))
+	elif direction < 0:
+		velocity.x -= (knockbackStrength * damageDone + 20 * pow((100 - health), 1.1))
 
 func die():
 	isDead = true
@@ -710,10 +619,10 @@ func die():
 	health = 100
 	lives -= 1
 	if lives > 0:
-		if player_index == 1:
+		if playerIndex == 1:
 			global_position = spawnlocation1.global_position
 			velocity = Vector2(0, 0)
-		elif player_index == 2:
+		elif playerIndex == 2:
 			global_position = spawnlocation2.global_position
 			velocity = Vector2(0, 0)
 		await get_tree().create_timer(1).timeout
@@ -721,9 +630,9 @@ func die():
 		self.visible = true
 		velocity = Vector2(0, 0)
 	if lives <= 0:
-		if player_index == 1:
+		if playerIndex == 1:
 			global_script.winningPlayer = 2
-		elif player_index == 2:
+		elif playerIndex == 2:
 			global_script.winningPlayer = 1
 		WinText.text = "Player " + str(global_script.winningPlayer) + " Wins!"
 		WinText.visible = true
@@ -733,7 +642,7 @@ func die():
 		global_script.isPaused = false
 		get_tree().change_scene_to_file("res://scenes/win.tscn")
 
-func collect_item(itemType):
+func collect_item(itemType : int):
 	global_script.crateNumber -= 1
 	gunType = itemType
 	if itemType == 1:

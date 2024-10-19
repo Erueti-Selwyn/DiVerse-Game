@@ -1,4 +1,5 @@
 extends Control
+# Assets
 const africanProfile = preload("res://assets/profiles/africa man profile.aesprite.png")
 const chineseProfile = preload("res://assets/profiles/china profile.aesprite.png")
 const japaneseProfile = preload("res://assets/profiles/japan man profile.aesprite.png")
@@ -7,6 +8,7 @@ const vikingProfile = preload("res://assets/profiles/viking profile.aesprite.png
 const mexicnaProfile = preload("res://assets/profiles/Mexican-profile.png")
 const heartAlive = preload("res://assets/Ui Assets/heart.png")
 const heartDead = preload("res://assets/Ui Assets/heartdead.png")
+# Nodes
 @onready var global_script = $"/root/Global"
 @onready var player1Label = $VBoxContainer/HBoxContainer/Player1/HP1
 @onready var player2Label = $VBoxContainer/HBoxContainer/Player2/HP2
@@ -18,10 +20,11 @@ const heartDead = preload("res://assets/Ui Assets/heartdead.png")
 @onready var player2Health1 = $VBoxContainer/HBoxContainer/Player2/TopBorder/HBoxContainer/Heart1
 @onready var player2Health2 = $VBoxContainer/HBoxContainer/Player2/TopBorder/HBoxContainer/Heart2
 @onready var player2Health3 = $VBoxContainer/HBoxContainer/Player2/TopBorder/HBoxContainer/Heart3
-var localPlayer1Health
-var localPlayer2Health
-var localPlayer1Lives
-var localPlayer2Lives
+# Variables
+var localPlayer1Health : int
+var localPlayer2Health : int
+var localPlayer1Lives : int
+var localPlayer2Lives : int
 	
 func _process(_delta):
 	localPlayer1Health = global_script.player1health
