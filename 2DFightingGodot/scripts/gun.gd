@@ -1,5 +1,5 @@
 extends Area2D
-
+@onready var global_script = $"/root/Global"
 # Variables
 var speed : int = 1400
 var direction : int
@@ -14,8 +14,9 @@ func bulletspawn(dir : int, player : int, dam : int, type : int):
 	gunType = type
 
 func _physics_process(delta):
-	move_local_x(speed * delta * direction)
-	delete()
+	if !global_script.isPaused:
+		move_local_x(speed * delta * direction)
+		delete()
 	#var move_vector = velocity.normalized() * speed * delta
 	
 

@@ -10,6 +10,7 @@ const mexicanBackground = preload("res://assets/backgrounds/mexico final map.png
 @onready var global_script = $"/root/Global"
 @onready var background = $background
 @onready var winnerTitle = $HBoxContainer/VBoxContainer/Label
+@onready var menuButton = $MenuButton
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	winnerTitle.text = "Player "  + str(global_script.winningPlayer) + " Wins!"
@@ -28,9 +29,11 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 
 func _on_menu_button_pressed():
+	global_script.button_jump(menuButton)
+	await get_tree().create_timer(0.05).timeout
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")

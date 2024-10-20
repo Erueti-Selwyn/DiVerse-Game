@@ -51,6 +51,7 @@ const maxFriction : int = 225
 const friction : int = 30
 const jumpHeight : int = 600
 const gravity : int = 30
+const maxGravity : int = 1000
 const maxDoubleJumps : int = 3 
 const wallSlideAcceleration : int = 10
 const maxWallSlideSpeed : int = 40
@@ -185,12 +186,12 @@ var doubleKeyboard : bool
 	6 : mexicanMeleeDamage,
 	}
 var animation_map : Dictionary = {
-	1: {"idle": "africanidle", "walk": "africanwalk", "jump": "africanjump", "wall": "africanwall"},
-	2: {"idle": "chinaidle", "walk": "chinawalk", "jump": "chinajump", "wall": "chinawall"},
-	3: {"idle": "japaneseidle", "walk": "japanesewalk", "jump": "japanesejump", "wall": "japanesewall"},
-	4: {"idle": "samoanidle", "walk": "samoanwalk", "jump": "samoanjump", "wall": "samoanwall"},
-	5: {"idle": "vikingidle", "walk": "vikingwalk", "jump": "vikingjump", "wall": "vikingwall"},
-	6: {"idle": "mexicanidle", "walk": "mexicanwalk", "jump": "mexicanjump", "wall": "mexicanwall"},
+	1: {"idle": "africanIdle", "walk": "africanWalk", "jump": "africanJump", "wall": "africanWall", "attack": "africanAttack"},
+	2: {"idle": "chinaIdle", "walk": "chinaWalk", "jump": "chinaJump", "wall": "chinaWall", "attack": "chinaAttack"},
+	3: {"idle": "japaneseIdle", "walk": "japaneseWalk", "jump": "japaneseJump", "wall": "japaneseWall", "attack": "japaneseAttack"},
+	4: {"idle": "samoanIdle", "walk": "samoanWalk", "jump": "samoanJump", "wall": "samoanWall", "attack": "samoanAttack"},
+	5: {"idle": "vikingIdle", "walk": "vikingWalk", "jump": "vikingJump", "wall": "vikingWall", "attack": "vikingAttack"},
+	6: {"idle": "mexicanIdle", "walk": "mexicanWalk", "jump": "mexicanJump", "wall": "mexicanWall", "attack": "mexicanAttack"},
 }
 func _ready():
 	apply_player_variables()
@@ -203,6 +204,8 @@ func _physics_process(_delta):
 	elif playerIndex == 2:
 		global_script.player2health = health
 		global_script.globalPlayer2Lives = lives
+	if global_script.isPaused:
+		_animated_sprite.stop()
 	# Pauses all Movement when Paused / Dead
 	if global_script.isPaused == false && isDead == false:
 		# Applies Character Animation
@@ -375,9 +378,13 @@ func _physics_process(_delta):
 				velocity.y = min(velocity.y + wallSlideAcceleration, maxWallSlideSpeed)
 			else:
 				velocity.y += gravity
+				if velocity.y > maxGravity:
+					velocity.y = maxGravity
 		# Adds Gravity
 		elif !is_on_floor():
 			velocity.y += gravity
+			if velocity.y > maxGravity:
+				velocity.y = maxGravity
 		# Removes Y Velocity When Dashing
 		if dashing:
 			velocity.y = 0
@@ -504,18 +511,8 @@ func attack():
 		time_to_attack()
 		attacking = true
 		# Attack Animation
-		if playerCharacter == 1:
-			_animated_sprite.play("africanattack")
-		if playerCharacter == 2:
-			_animated_sprite.play("chinaattack")
-		if playerCharacter == 3:
-			_animated_sprite.play("japaneseattack")
-		if playerCharacter == 4:
-			_animated_sprite.play("samoanattack")
-		if playerCharacter == 5:
-			_animated_sprite.play("vikingattack")
-		if playerCharacter == 6:
-			_animated_sprite.play("mexicanattack")
+		var anims = animation_map.get(playerCharacter, null)
+		_animated_sprite.play(anims["attack"])
 	
 func time_to_attack():
 	# Time for Attack to Activate
@@ -560,7 +557,7 @@ func is_hit(attackerFacingRight : bool, damageDone : int):
 	
 
 func _on_animated_sprite_2d_animation_finished():
-	if (_animated_sprite.animation == "africanattack" or _animated_sprite.animation == "chinaattack" or _animated_sprite.animation == "japaneseattack" or _animated_sprite.animation == "samoanattack" or _animated_sprite.animation == "vikingattack" or _animated_sprite.animation == "mexicanattack"):
+	if (_animated_sprite.animation == "africanAttack" or _animated_sprite.animation == "chinaAttack" or _animated_sprite.animation == "japaneseAttack" or _animated_sprite.animation == "samoanAttack" or _animated_sprite.animation == "vikingAttack" or _animated_sprite.animation == "mexicanAttack"):
 		# Starts when Attack Finishes
 		meleeHasHit = false
 		_attack_collision.disabled = true

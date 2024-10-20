@@ -48,3 +48,10 @@ func display_damage_number(value : int, position : Vector2):
 	tween.tween_property(number, "modulate", Color(1, 0, 0), 0.5).set_ease(Tween.EASE_IN)
 	await tween.finished
 	number.queue_free()
+
+func button_jump(button):
+	button.pivot_offset = Vector2(button.size / 2)
+	var tween = get_tree().create_tween()
+	tween.set_parallel(false)
+	tween.tween_property(button, "scale", Vector2(1.05, 1.05), 0.05).set_ease(Tween.EASE_IN)
+	tween.tween_property(button, "scale", Vector2(1, 1), 0.05).set_ease(Tween.EASE_IN)

@@ -130,4 +130,4 @@ script = ExtResource("1_orxgp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_xs1s5")
-animation = &"vikingIdle"
+animation = &"africanIdle"
