@@ -10,6 +10,8 @@ const swtichOffMask = preload("res://assets/Ui Assets/optionButtonOffMask.png")
 @onready var musicSwitch = $MarginContainer/VBoxContainer/HBoxContainer2/MusicButton
 @onready var pauseMenu = $"../pause"
 @onready var controlsMenu = $"../controls"
+@onready var exitButton = $MarginContainer/VBoxContainer/HBoxContainer3/ExitButton
+@onready var controlsButton = $MarginContainer/VBoxContainer/Controls
 # Variables
 var localSoundOn : bool = true
 var localMusicOn : bool = true
@@ -26,6 +28,7 @@ func _on_menu_pressed():
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")
 
 func _on_sound_button_pressed():
+	global_script.button_jump(soundSwitch)
 	if localSoundOn:
 		soundSwitch.texture_normal = switchOff
 		soundSwitch.texture_click_mask = swtichOffMask
@@ -36,6 +39,7 @@ func _on_sound_button_pressed():
 		localSoundOn = true
 
 func _on_music_button_pressed():
+	global_script.button_jump(musicSwitch)
 	if localMusicOn:
 		musicSwitch.texture_normal = switchOff
 		musicSwitch.texture_click_mask = swtichOffMask
@@ -47,6 +51,8 @@ func _on_music_button_pressed():
 
 
 func _on_exit_button_pressed():
+	global_script.button_jump(exitButton)
+	await get_tree().create_timer(0.05).timeout
 	self.visible = false
 	if fromPauseMenu:
 		fromPauseMenu = false
@@ -57,4 +63,6 @@ func from_pause_menu():
 
 
 func _on_controls_pressed():
+	global_script.button_jump(controlsButton)
+	await get_tree().create_timer(0.05).timeout
 	controlsMenu.visible = true

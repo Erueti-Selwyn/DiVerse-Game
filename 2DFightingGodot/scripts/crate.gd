@@ -32,9 +32,10 @@ func _ready():
 		gunType = 1
 	
 func _physics_process(_delta):
-	if not is_on_floor():
-		velocity.y = 200
-	move_and_slide()
+	if !global_script.isPaused:
+		if not is_on_floor():
+			velocity.y = 200
+		move_and_slide()
 
 
 func _on_area_2d_area_entered(area):
