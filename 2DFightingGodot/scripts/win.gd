@@ -36,4 +36,4 @@ func _process(_delta):
 func _on_menu_button_pressed():
 	global_script.button_jump(menuButton)
 	await get_tree().create_timer(0.05).timeout
-	get_tree().change_scene_to_file("res://scenes/menu.tscn")
+	global_script.menu_scene()

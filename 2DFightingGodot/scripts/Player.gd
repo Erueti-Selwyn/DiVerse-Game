@@ -637,7 +637,7 @@ func die():
 		global_script.isPaused = true
 		await get_tree().create_timer(1.5).timeout
 		global_script.isPaused = false
-		get_tree().change_scene_to_file("res://scenes/win.tscn")
+		global_script.win_scene()
 
 func collect_item(itemType : int):
 	global_script.crateNumber -= 1

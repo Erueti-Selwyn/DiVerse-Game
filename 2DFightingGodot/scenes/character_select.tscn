@@ -1,6 +1,6 @@
 [gd_scene load_steps=31 format=3 uid="uid://cmvkiyfy67r1b"]
 
-[ext_resource type="Script" path="res://scenes/character_select.gd" id="1_mqc48"]
+[ext_resource type="Script" path="res://scripts/character_select.gd" id="1_20887"]
 [ext_resource type="PackedScene" uid="uid://cl4xclfw8h4ql" path="res://scenes/player_idle.tscn" id="3_0if2g"]
 [ext_resource type="Texture2D" uid="uid://b61fv17f6bona" path="res://assets/Ui Assets/ControllerButtonOnFinal.png" id="3_58wrp"]
 [ext_resource type="Texture2D" uid="uid://dymc08auxf7g8" path="res://assets/Ui Assets/StartButtonFinal.png" id="3_ldw3d"]
@@ -45,7 +45,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-script = ExtResource("1_mqc48")
+script = ExtResource("1_20887")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 self_modulate = Color(1, 1, 1, 0.588235)

@@ -58,7 +58,7 @@ func _on_start_pressed():
 	global_script.globalPlayerCharacter2 = player2Character
 	global_script.player1Controller = localPlayer1Controller
 	global_script.player2Controller = localPlayer2Controller
-	get_tree().change_scene_to_file("res://scenes/Level.tscn")
+	global_script.level_scene()
 
 
 func _on_african_button_1_pressed():
@@ -166,7 +166,7 @@ func _on_keyboard_player_2_pressed():
 func _on_exit_pressed():
 	global_script.button_jump(exitButton)
 	await get_tree().create_timer(0.05).timeout
-	get_tree().change_scene_to_file("res://scenes/menu.tscn")
+	global_script.menu_scene()
 	
 func reset_selection_1():
 	africanButton1.self_modulate = defaultColor
