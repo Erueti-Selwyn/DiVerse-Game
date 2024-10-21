@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b5d2cnlqs3xp2"]
+[gd_scene load_steps=15 format=3 uid="uid://b5d2cnlqs3xp2"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_umyi2"]
 [ext_resource type="Texture2D" uid="uid://chr2iivqiov0q" path="res://assets/Ui Assets/SpaceBackground.png" id="2_cxsuk"]
@@ -13,6 +13,7 @@
 [ext_resource type="BitMap" uid="uid://vs18d4un3gbf" path="res://assets/Ui Assets/OptionsButtonFinalMask.png" id="6_tq8eh"]
 [ext_resource type="Texture2D" uid="uid://or3xeqm6ytvo" path="res://assets/Ui Assets/QuitButtonFinal.png" id="7_eebs3"]
 [ext_resource type="BitMap" uid="uid://ds8crajepigky" path="res://assets/Ui Assets/QuitButtonFinalMask.png" id="8_g8pja"]
+[ext_resource type="PackedScene" uid="uid://b5ygr33bjsn0v" path="res://scenes/menu_audio_player.tscn" id="14_seb8t"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -146,6 +147,8 @@ layout_mode = 2
 texture_normal = ExtResource("7_eebs3")
 texture_click_mask = ExtResource("8_g8pja")
 stretch_mode = 5
+
+[node name="MenuAudioPlayer" parent="." instance=ExtResource("14_seb8t")]
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]

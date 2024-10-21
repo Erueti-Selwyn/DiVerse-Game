@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dfdn4clkj55a4"]
+[gd_scene load_steps=30 format=3 uid="uid://dfdn4clkj55a4"]
 
 [ext_resource type="Script" path="res://scripts/Level.gd" id="1_7kyh2"]
 [ext_resource type="Texture2D" uid="uid://dfioa50vtvf7l" path="res://assets/backgrounds/japan mapp.png" id="2_qmg0v"]
@@ -11,6 +11,11 @@
 [ext_resource type="Texture2D" uid="uid://garepww1eau4" path="res://assets/tilemaps/all tilemaps FINALLL.png" id="10_5ms4v"]
 [ext_resource type="PackedScene" uid="uid://cpp6uup1fjkuc" path="res://scenes/settings_menu.tscn" id="10_ick1o"]
 [ext_resource type="PackedScene" uid="uid://u51lay85nrxb" path="res://scenes/controls.tscn" id="11_r7jrn"]
+
+[sub_resource type="Environment" id="Environment_3ss6f"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5atln"]
 texture = ExtResource("10_5ms4v")
@@ -273,10 +278,13 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.932584, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_x3c6u"]
-colors = PackedColorArray(0.974861, 0.294661, 0.165636, 1, 0.471955, 0, 0.0732844, 1)
+colors = PackedColorArray(2.925, 0.295, 0.166, 1, 1.416, 0, 0.073, 1)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_7kyh2")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3ss6f")
 
 [node name="hud" parent="." instance=ExtResource("3_fsags")]
 offset_top = -261.0
@@ -501,3 +509,29 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
+
+[node name="DashAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[node name="DeathAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[node name="HitMarkerAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[node name="JumpAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[node name="LandingAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[node name="PistolBulletAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+volume_db = -15.0
+
+[node name="SniperBulletAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+volume_db = -15.0
+
+[node name="WalkingAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[node name="WeaponPickupAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[node name="WeaponSwingAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[node name="MusicAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+volume_db = -10.0
+autoplay = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cmvkiyfy67r1b"]
+[gd_scene load_steps=32 format=3 uid="uid://cmvkiyfy67r1b"]
 
 [ext_resource type="Script" path="res://scripts/character_select.gd" id="1_20887"]
 [ext_resource type="PackedScene" uid="uid://cl4xclfw8h4ql" path="res://scenes/player_idle.tscn" id="3_0if2g"]
@@ -29,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://dw0jscrlf64ny" path="res://assets/backgrounds/backgroundButtons/samoaMapLayout.png" id="26_pp5u6"]
 [ext_resource type="Texture2D" uid="uid://ch6eqbhbb567p" path="res://assets/backgrounds/backgroundButtons/vikingMapLayout.png" id="27_mus3f"]
 [ext_resource type="Texture2D" uid="uid://mh6gt7fj674r" path="res://assets/backgrounds/backgroundButtons/mexicoMapLayout.png" id="28_edmtl"]
+[ext_resource type="PackedScene" uid="uid://b5ygr33bjsn0v" path="res://scenes/menu_audio_player.tscn" id="30_ukdqw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8ic4r"]
 font = ExtResource("5_o0sn0")
@@ -755,6 +756,8 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_4oogi")
 stretch_mode = 5
+
+[node name="MenuAudioPlayer" parent="." instance=ExtResource("30_ukdqw")]
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer/ControllerPlayer1" to="." method="_on_controller_player_1_pressed"]

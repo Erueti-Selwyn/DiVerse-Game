@@ -12,6 +12,7 @@ const vikingMap = preload("res://assets/backgrounds/viking.png")
 const mexicoMap = preload("res://assets/backgrounds/mexico final map.png")
 # Nodes
 @onready var global_script = $"/root/Global"
+@onready var globalMenuAudioPlayer = $MenuAudioPlayer
 @onready var startButton = $MarginContainer/VBoxContainer/Start
 @onready var exitButton = $MarginContainer/VBoxContainer/Exit
 @onready var keyboardPlayer1Button = $MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer/KeyboardPlayer1
@@ -58,6 +59,7 @@ func _on_start_pressed():
 	global_script.globalPlayerCharacter2 = player2Character
 	global_script.player1Controller = localPlayer1Controller
 	global_script.player2Controller = localPlayer2Controller
+	globalMenuAudioPlayer.stop_menu_music()
 	global_script.level_scene()
 
 

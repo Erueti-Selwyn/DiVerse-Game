@@ -11,6 +11,17 @@ const samoanPistolSprite = preload("res://assets/guns/polynesianpistol.png")
 const rocketLauncherSprite = preload("res://assets/guns/rocketlauncher.png")
 const sniperSprite = preload("res://assets/guns/sniper.png")
 const bulletPath = preload("res://scenes/bullet.tscn")
+const dashSound = preload("res://assets/audio/sfx/dash.mp3")
+const deathSound = preload("res://assets/audio/sfx/death.mp3")
+const hitMarkerSound = preload("res://assets/audio/sfx/hit marker.mp3")
+const jumpingSound = preload("res://assets/audio/sfx/jumping.mp3")
+const landingSound = preload("res://assets/audio/sfx/landing.mp3")
+const pistolBulletSound = preload("res://assets/audio/sfx/pistol bullet.mp3")
+const sniperBulletSound = preload("res://assets/audio/sfx/sniper bullet.mp3")
+const walkingSound = preload("res://assets/audio/sfx/walking.mp3")
+const weaponPickupSound = preload("res://assets/audio/sfx/weapon pickup.mp3")
+const weaponSwing = preload("res://assets/audio/sfx/weapon swing.mp3")
+
 # Nodes
 @onready var global_script = $"/root/Global"
 @onready var _animated_sprite = $CollisionShape2D/AnimatedSprite2D
@@ -44,6 +55,17 @@ const bulletPath = preload("res://scenes/bullet.tscn")
 @onready var fallParticle = $"../fallSplashParticle"
 @onready var killParticle = $"../killParticle"
 @onready var damageNumberOrigin = $CollisionShape2D/AnimatedSprite2D/DamageNumberOrigin
+@onready var dashAudioPlayer = $"../DashAudioPlayer"
+@onready var deathAudioPlayer = $"../DeathAudioPlayer"
+@onready var hitMarkerAudioPlayer = $"../HitMarkerAudioPlayer"
+@onready var jumpAudioPlayer = $"../JumpAudioPlayer"
+@onready var landingAudioPlayer = $"../LandingAudioPlayer"
+@onready var pistolBulletAudioPlayer = $"../PistolBulletAudioPlayer"
+@onready var sniperBulletAudioPlayer = $"../SniperBulletAudioPlayer"
+@onready var walkingAudioPlayer = $"../WalkingAudioPlayer"
+@onready var weaponPickupAudioPlayer = $"../WeaponPickupAudioPlayer"
+@onready var weaponSwingAudioPlayer = $"../WeaponSwingAudioPlayer"
+
 # Movement Variables
 const maxSpeed : int= 450
 const acceleration : int = 120
@@ -194,6 +216,16 @@ var animation_map : Dictionary = {
 	6: {"idle": "mexicanIdle", "walk": "mexicanWalk", "jump": "mexicanJump", "wall": "mexicanWall", "attack": "mexicanAttack"},
 }
 func _ready():
+	dashAudioPlayer.stream = dashSound
+	deathAudioPlayer.stream = deathSound
+	hitMarkerAudioPlayer.stream = hitMarkerSound
+	jumpAudioPlayer.stream = jumpingSound
+	landingAudioPlayer.stream = landingSound
+	pistolBulletAudioPlayer.stream = pistolBulletSound
+	sniperBulletAudioPlayer.stream = sniperBulletSound
+	walkingAudioPlayer.stream = walkingSound
+	weaponPickupAudioPlayer.stream = weaponPickupSound
+	weaponSwingAudioPlayer.stream = weaponSwing
 	apply_player_variables()
 
 func _physics_process(_delta):
@@ -443,6 +475,7 @@ func apply_player_variables():
 	health = 100
 func jump():
 	if !joyJumpPressed:
+		jumpAudioPlayer.play()
 		joyJumpPressed = true
 		if doubleJumps > 0: 
 			doubleJumps -= 1
@@ -464,11 +497,13 @@ func shoot():
 		var bullet = bulletPath.instantiate()
 		# Changes Bullet Variable Based on Gun Type
 		if gunType == 1:
+			pistolBulletAudioPlayer.play()
 			if facingRight:
 				bullet.bulletspawn(1, playerIndex, gunDamage, gunType)
 			else:
 				bullet.bulletspawn(-1, playerIndex, gunDamage, gunType)
 		if gunType == 2:
+			sniperBulletAudioPlayer.play()
 			if facingRight:
 				bullet.bulletspawn(1, playerIndex, sniperDamage, gunType)
 			else:
@@ -494,6 +529,7 @@ func dash():
 				dashDirection = -1
 		# Checks if Dash is Avalible
 		if currentDashAmount > 0 and !dashing and canDash:
+			dashAudioPlayer.play()
 			dashing = true
 			canDash = false
 			currentDashAmount -= 1
@@ -507,6 +543,7 @@ func dash():
 func attack():
 	# Checks if Can Attack
 	if !attacking && !dashing:
+		weaponSwingAudioPlayer.play()
 		# Attack Delay
 		time_to_attack()
 		attacking = true
@@ -530,6 +567,7 @@ func _on_melee_body_entered(body):
 func is_hit(attackerFacingRight : bool, damageDone : int):
 	# Checks if Can be Hit
 	if !isDead && !isHit:
+		hitMarkerAudioPlayer.play()
 		# Creates Damage Number
 		global_script.display_damage_number(damageDone, damageNumberOrigin.global_position)
 		# Health takes Damage
@@ -549,11 +587,11 @@ func is_hit(attackerFacingRight : bool, damageDone : int):
 			# Adds Knockback
 			take_knockback(damageDone, knockbackDirection, meleeKnockbackStrength)
 			isHit = true
-			_animated_sprite.modulate = Color(1, 0, 0) 
+			_animated_sprite.self_modulate = Color(1, 0, 0) 
 			# Creates Hit Timer
 			await get_tree().create_timer(0.15).timeout
 			isHit = false
-			_animated_sprite.modulate = Color(1, 1, 1)
+			_animated_sprite.self_modulate = Color(1, 1, 1)
 	
 
 func _on_animated_sprite_2d_animation_finished():
@@ -579,6 +617,7 @@ func get_player_index():
 func bullet_hit(bulletDirection : int, damageDone : int, hitGunType : int):
 	# When Hit by Bullet
 	if !isDead && !isHit:
+		hitMarkerAudioPlayer.play()
 		# Sets Knockback Direction
 		var knockbackDirection : int = bulletDirection
 		# Creates Damage Number
@@ -599,10 +638,10 @@ func bullet_hit(bulletDirection : int, damageDone : int, hitGunType : int):
 			if hitGunType == 2:
 				take_knockback(damageDone, knockbackDirection, sniperKnockbackStrength)
 		isHit = true
-		_animated_sprite.modulate = Color(1, 0, 0) 
+		_animated_sprite.self_modulate = Color(1, 0, 0) 
 		await get_tree().create_timer(0.15).timeout
 		isHit = false
-		_animated_sprite.modulate = Color(1, 1, 1)
+		_animated_sprite.self_modulate = Color(1, 1, 1)
 
 func take_knockback(damageDone : int, direction : int, knockbackStrength : int):
 	if direction > 0:
@@ -611,6 +650,9 @@ func take_knockback(damageDone : int, direction : int, knockbackStrength : int):
 		velocity.x -= (knockbackStrength * damageDone + 20 * pow((100 - health), 1.1))
 
 func die():
+	deathAudioPlayer.play()
+	gunType = 0
+	hasGun = false
 	isDead = true
 	self.visible = false
 	health = 100
@@ -640,6 +682,7 @@ func die():
 		global_script.win_scene()
 
 func collect_item(itemType : int):
+	weaponPickupAudioPlayer.play()
 	global_script.crateNumber -= 1
 	gunType = itemType
 	if itemType == 1:

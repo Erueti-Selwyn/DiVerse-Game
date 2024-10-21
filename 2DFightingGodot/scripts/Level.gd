@@ -7,6 +7,7 @@ const samoanMap = preload("res://assets/backgrounds/samoa.png")
 const vikingMap = preload("res://assets/backgrounds/viking.png")
 const mexicoMap = preload("res://assets/backgrounds/mexico final map.png")
 const cratePath = preload("res://scenes/crate.tscn")
+const africaMusic = preload("res://assets/audio/music/africa.mp3")
 # Nodes
 @onready var global_script = $"/root/Global"
 @onready var africanTileMap = $Africa
@@ -16,12 +17,15 @@ const cratePath = preload("res://scenes/crate.tscn")
 @onready var vikingTileMap = $Viking
 @onready var mexicoTileMap = $Mexico
 @onready var background = $TextureRect
+@onready var mapAudioPlayer = $MusicAudioPlayer
 # Variables
 var randomTime : int
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	global_script.crateNumber = 0
 	if global_script.mapType == 1:
+		mapAudioPlayer.stream = africaMusic
+		mapAudioPlayer.play()
 		background.texture = africanMap
 		africanTileMap.global_position.y = 0
 		africanTileMap.visible = true

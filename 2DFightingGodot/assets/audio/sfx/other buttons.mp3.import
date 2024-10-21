@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dqtiyb8ykkfp"
+path="res://.godot/imported/other buttons.mp3-38f6d129dc5df39a42d3aaa7089dc9be.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/sfx/other buttons.mp3"
+dest_files=["res://.godot/imported/other buttons.mp3-38f6d129dc5df39a42d3aaa7089dc9be.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
