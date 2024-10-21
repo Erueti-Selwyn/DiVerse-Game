@@ -12,7 +12,7 @@ const vikingMap = preload("res://assets/backgrounds/viking.png")
 const mexicoMap = preload("res://assets/backgrounds/mexico final map.png")
 # Nodes
 @onready var global_script = $"/root/Global"
-@onready var globalMenuAudioPlayer = $MenuAudioPlayer
+@onready var globalMenuAudioPlayer = $"/root/MenuAudioPlayer"
 @onready var startButton = $MarginContainer/VBoxContainer/Start
 @onready var exitButton = $MarginContainer/VBoxContainer/Exit
 @onready var keyboardPlayer1Button = $MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer/KeyboardPlayer1

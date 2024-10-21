@@ -11,16 +11,6 @@ const samoanPistolSprite = preload("res://assets/guns/polynesianpistol.png")
 const rocketLauncherSprite = preload("res://assets/guns/rocketlauncher.png")
 const sniperSprite = preload("res://assets/guns/sniper.png")
 const bulletPath = preload("res://scenes/bullet.tscn")
-const dashSound = preload("res://assets/audio/sfx/dash.mp3")
-const deathSound = preload("res://assets/audio/sfx/death.mp3")
-const hitMarkerSound = preload("res://assets/audio/sfx/hit marker.mp3")
-const jumpingSound = preload("res://assets/audio/sfx/jumping.mp3")
-const landingSound = preload("res://assets/audio/sfx/landing.mp3")
-const pistolBulletSound = preload("res://assets/audio/sfx/pistol bullet.mp3")
-const sniperBulletSound = preload("res://assets/audio/sfx/sniper bullet.mp3")
-const walkingSound = preload("res://assets/audio/sfx/walking.mp3")
-const weaponPickupSound = preload("res://assets/audio/sfx/weapon pickup.mp3")
-const weaponSwing = preload("res://assets/audio/sfx/weapon swing.mp3")
 
 # Nodes
 @onready var global_script = $"/root/Global"
@@ -55,16 +45,16 @@ const weaponSwing = preload("res://assets/audio/sfx/weapon swing.mp3")
 @onready var fallParticle = $"../fallSplashParticle"
 @onready var killParticle = $"../killParticle"
 @onready var damageNumberOrigin = $CollisionShape2D/AnimatedSprite2D/DamageNumberOrigin
-@onready var dashAudioPlayer = $"../DashAudioPlayer"
-@onready var deathAudioPlayer = $"../DeathAudioPlayer"
-@onready var hitMarkerAudioPlayer = $"../HitMarkerAudioPlayer"
-@onready var jumpAudioPlayer = $"../JumpAudioPlayer"
-@onready var landingAudioPlayer = $"../LandingAudioPlayer"
-@onready var pistolBulletAudioPlayer = $"../PistolBulletAudioPlayer"
-@onready var sniperBulletAudioPlayer = $"../SniperBulletAudioPlayer"
-@onready var walkingAudioPlayer = $"../WalkingAudioPlayer"
-@onready var weaponPickupAudioPlayer = $"../WeaponPickupAudioPlayer"
-@onready var weaponSwingAudioPlayer = $"../WeaponSwingAudioPlayer"
+@onready var dashAudioPlayer = $"DashAudioPlayer"
+@onready var deathAudioPlayer = $"DeathAudioPlayer"
+@onready var hitMarkerAudioPlayer = $"HitMarkerAudioPlayer"
+@onready var jumpAudioPlayer = $"JumpAudioPlayer"
+@onready var landingAudioPlayer = $LandingAudioPlayer
+@onready var pistolBulletAudioPlayer = $"PistolBulletAudioPlayer"
+@onready var sniperBulletAudioPlayer = $"SniperBulletAudioPlayer"
+@onready var walkingAudioPlayer = $"WalkingAudioPlayer"
+@onready var weaponPickupAudioPlayer = $"WeaponPickupAudioPlayer"
+@onready var weaponSwingAudioPlayer = $"WeaponSwingAudioPlayer"
 
 # Movement Variables
 const maxSpeed : int= 450
@@ -85,6 +75,7 @@ var currentDashAmount : int = 0
 var canDash : bool= true
 var dashing : bool= false
 var dashSpeed : int = 1250
+var wasFalling : bool = false
 # Input Variables
 var joyJumpPressed : bool = false
 var joyShootPressed : bool = false
@@ -215,17 +206,15 @@ var animation_map : Dictionary = {
 	5: {"idle": "vikingIdle", "walk": "vikingWalk", "jump": "vikingJump", "wall": "vikingWall", "attack": "vikingAttack"},
 	6: {"idle": "mexicanIdle", "walk": "mexicanWalk", "jump": "mexicanJump", "wall": "mexicanWall", "attack": "mexicanAttack"},
 }
+var weaponSwingPitch : Dictionary = {
+	1 : 1,
+	2 : 1,
+	3 : 1,
+	4 : 0.7,
+	5 : 0.2,
+	6 : 1.2,
+}
 func _ready():
-	dashAudioPlayer.stream = dashSound
-	deathAudioPlayer.stream = deathSound
-	hitMarkerAudioPlayer.stream = hitMarkerSound
-	jumpAudioPlayer.stream = jumpingSound
-	landingAudioPlayer.stream = landingSound
-	pistolBulletAudioPlayer.stream = pistolBulletSound
-	sniperBulletAudioPlayer.stream = sniperBulletSound
-	walkingAudioPlayer.stream = walkingSound
-	weaponPickupAudioPlayer.stream = weaponPickupSound
-	weaponSwingAudioPlayer.stream = weaponSwing
 	apply_player_variables()
 
 func _physics_process(_delta):
@@ -253,6 +242,11 @@ func _physics_process(_delta):
 			_animated_sprite.play(anims["jump"])
 		if is_on_wall() && !is_on_floor() && !attacking:
 			_animated_sprite.play(anims["wall"])
+		if velocity.x != 0 && is_on_floor():
+			if !walkingAudioPlayer.playing:
+					walkingAudioPlayer.play()
+		else:
+			walkingAudioPlayer.stop()
 		# Checking if is Controller and Shoot
 		if playercontroller:
 			if hasGun:
@@ -373,7 +367,13 @@ func _physics_process(_delta):
 					if is_on_floor():
 						position.y += 1
 		# Reset Jumps and Velocity
+		
+		if velocity.y > 300:
+			wasFalling = true
 		if is_on_floor(): 
+			if wasFalling:
+				landingAudioPlayer.play()
+				wasFalling = false
 			doubleJumps = maxDoubleJumps
 			velocity.y = 0
 		if playercontroller:
@@ -447,6 +447,7 @@ func apply_player_variables():
 	playerLabel.text = "Player: " + str(playerIndex)
 	# Sets Different Variables for each character
 	if playerIndex == 1:
+		weaponSwingAudioPlayer.pitch_scale = weaponSwingPitch[global_script.globalPlayerCharacter1]
 		playerCharacter = global_script.globalPlayerCharacter1
 		spawnlocation1 = spawnLocations1[global_script.mapType]
 		global_position = spawnlocation1.global_position
@@ -458,6 +459,7 @@ func apply_player_variables():
 		attackTime = attackTimes[global_script.globalPlayerCharacter1]
 		meleeDamage = meleeDamages[global_script.globalPlayerCharacter1]
 	if playerIndex == 2:
+		weaponSwingAudioPlayer.pitch_scale = weaponSwingPitch[global_script.globalPlayerCharacter2]
 		playerCharacter = global_script.globalPlayerCharacter2
 		spawnlocation2 = spawnLocations2[global_script.mapType]
 		global_position = spawnlocation2.global_position
@@ -475,14 +477,16 @@ func apply_player_variables():
 	health = 100
 func jump():
 	if !joyJumpPressed:
-		jumpAudioPlayer.play()
 		joyJumpPressed = true
 		if doubleJumps > 0: 
+			jumpAudioPlayer.play()
 			doubleJumps -= 1
 			velocity.y = -jumpHeight
 		if is_on_wall() && directionX == 1:
+			jumpAudioPlayer.play()
 			velocity.x = -(maxSpeed * 3)
 		elif is_on_wall() && directionX == -1:
+			jumpAudioPlayer.play()
 			velocity.x = (maxSpeed * 3)
 	
 func shoot(): 

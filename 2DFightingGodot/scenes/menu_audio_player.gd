@@ -1,17 +1,17 @@
 extends AudioStreamPlayer2D
 const menuMusic = preload("res://assets/audio/music/menu music.mp3")
-@export var playMenuMusic : bool = false
 var playingMenuMusic : bool = false
 func _ready():
 	self.stream = menuMusic
-func _process(_delta):
-	if playMenuMusic && !playingMenuMusic:
+	self.stream.loop = true
+	if not self.playing:
 		playingMenuMusic = true
-		self.play()
-	elif !playMenuMusic:
-		playingMenuMusic = false
-		self.stop()
+		play_menu_music()
 func play_menu_music():
-	playMenuMusic = true
+	self.play()
+	playingMenuMusic = true
 func stop_menu_music():
-	playMenuMusic = false
+	self.stop()
+	playingMenuMusic = false
+func is_menu_music_playing():
+	return(playingMenuMusic)

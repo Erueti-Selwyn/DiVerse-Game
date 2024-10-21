@@ -1,14 +1,16 @@
 extends Control
 # Nodes
 @onready var global_script = $"/root/Global"
-@onready var globalMenuAudioPlayer = $MenuAudioPlayer
+@onready var globalMenuAudioPlayer = $"/root/MenuAudioPlayer"
 @onready var settingsMenu = $"settings_menu"
 @onready var playButton = $MarginContainer/HBoxContainer/VBoxContainer/Play
 @onready var settingsButton = $MarginContainer/HBoxContainer/VBoxContainer/Settings
 @onready var quitButton = $MarginContainer/HBoxContainer/VBoxContainer/Quit
+@onready var clickAudioPlayer = $ClickAudioPlayer
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	globalMenuAudioPlayer.play_menu_music()
+	if !globalMenuAudioPlayer.is_menu_music_playing():
+		globalMenuAudioPlayer.play_menu_music()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

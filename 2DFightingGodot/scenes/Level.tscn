@@ -510,28 +510,7 @@ anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="DashAudioPlayer" type="AudioStreamPlayer2D" parent="."]
-
-[node name="DeathAudioPlayer" type="AudioStreamPlayer2D" parent="."]
-
-[node name="HitMarkerAudioPlayer" type="AudioStreamPlayer2D" parent="."]
-
-[node name="JumpAudioPlayer" type="AudioStreamPlayer2D" parent="."]
-
-[node name="LandingAudioPlayer" type="AudioStreamPlayer2D" parent="."]
-
-[node name="PistolBulletAudioPlayer" type="AudioStreamPlayer2D" parent="."]
-volume_db = -15.0
-
-[node name="SniperBulletAudioPlayer" type="AudioStreamPlayer2D" parent="."]
-volume_db = -15.0
-
-[node name="WalkingAudioPlayer" type="AudioStreamPlayer2D" parent="."]
-
-[node name="WeaponPickupAudioPlayer" type="AudioStreamPlayer2D" parent="."]
-
-[node name="WeaponSwingAudioPlayer" type="AudioStreamPlayer2D" parent="."]
-
 [node name="MusicAudioPlayer" type="AudioStreamPlayer2D" parent="."]
 volume_db = -10.0
 autoplay = true
+max_polyphony = 10

@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=3 uid="uid://bdxtusi0wukv6"]
+[gd_scene load_steps=127 format=3 uid="uid://bdxtusi0wukv6"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_2ask5"]
 [ext_resource type="Texture2D" uid="uid://dn01as0rfh8as" path="res://assets/player animation/african man sprite sheet.png" id="2_kvk4k"]
@@ -8,6 +8,16 @@
 [ext_resource type="Texture2D" uid="uid://ddklm3p8cru80" path="res://assets/player animation/samoan man sheet.png" id="7_shb45"]
 [ext_resource type="Texture2D" uid="uid://34m03ksxcppp" path="res://assets/player animation/viking ggg man sheet.png" id="8_3gvp3"]
 [ext_resource type="Texture2D" uid="uid://d3tigoeqhnpxk" path="res://assets/guns/sniper.png" id="8_vcxg8"]
+[ext_resource type="AudioStream" uid="uid://cn1t6qseduhae" path="res://assets/audio/sfx/sniper bullet.mp3" id="9_3bseh"]
+[ext_resource type="AudioStream" uid="uid://bpdyob46143l4" path="res://assets/audio/sfx/dash.mp3" id="9_23ddt"]
+[ext_resource type="AudioStream" uid="uid://ck1aluafxsoo0" path="res://assets/audio/sfx/death.mp3" id="10_17hb2"]
+[ext_resource type="AudioStream" uid="uid://bomgd3jrmibs1" path="res://assets/audio/sfx/hit marker.mp3" id="11_74wov"]
+[ext_resource type="AudioStream" uid="uid://dgpyjynlmkspn" path="res://assets/audio/sfx/jumping.mp3" id="12_fvwqn"]
+[ext_resource type="AudioStream" uid="uid://3du5t3t1pd0i" path="res://assets/audio/sfx/pistol bullet.mp3" id="13_3d5i6"]
+[ext_resource type="AudioStream" uid="uid://c6sdgodgmbkpe" path="res://assets/audio/sfx/landing.mp3" id="13_12qt3"]
+[ext_resource type="AudioStream" uid="uid://d3kg6o7vj3m5k" path="res://assets/audio/sfx/walking.mp3" id="15_ay3oe"]
+[ext_resource type="AudioStream" uid="uid://ddf0no3b30r43" path="res://assets/audio/sfx/weapon pickup.mp3" id="16_rb5oj"]
+[ext_resource type="AudioStream" uid="uid://c481ekfqgn7cx" path="res://assets/audio/sfx/weapon swing.mp3" id="17_x3yky"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptv32"]
 size = Vector2(20, 50)
@@ -848,22 +858,22 @@ point_count = 2
 colors = PackedColorArray(3, 0, 0, 1, 0.973069, 0.696689, 0.517969, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s1ghe"]
-size = Vector2(18.2143, 42.8572)
+size = Vector2(19.2857, 42.8572)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5wom7"]
-size = Vector2(18.5715, 45.7143)
+size = Vector2(20.7143, 45.7143)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p65qq"]
-size = Vector2(22.8572, 43.5715)
+size = Vector2(28.5714, 43.5715)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dmheb"]
 size = Vector2(17.1429, 43.5715)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8cdx8"]
-size = Vector2(17.8572, 45.7144)
+size = Vector2(18.5714, 45.7144)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yhvyg"]
-size = Vector2(26.4286, 53.5715)
+size = Vector2(28.5714, 53.5715)
 
 [sub_resource type="Curve" id="Curve_6csp3"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -922,19 +932,19 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="AfricanAttackCollision" type="CollisionShape2D" parent="CollisionShape2D/AnimatedSprite2D/Melee"]
-position = Vector2(20.8928, 23.4304)
+position = Vector2(20.3571, 23.4304)
 scale = Vector2(0.999999, 0.999999)
 shape = SubResource("RectangleShape2D_s1ghe")
 disabled = true
 
 [node name="ChineseAttackCollision" type="CollisionShape2D" parent="CollisionShape2D/AnimatedSprite2D/Melee"]
-position = Vector2(22.1428, 23.4304)
+position = Vector2(21.0714, 23.4304)
 scale = Vector2(0.999999, 0.999999)
 shape = SubResource("RectangleShape2D_5wom7")
 disabled = true
 
 [node name="JapaneseAttackCollision" type="CollisionShape2D" parent="CollisionShape2D/AnimatedSprite2D/Melee"]
-position = Vector2(27.8571, 18.7875)
+position = Vector2(25, 18.7875)
 scale = Vector2(0.999998, 0.999998)
 shape = SubResource("RectangleShape2D_p65qq")
 disabled = true
@@ -946,13 +956,13 @@ shape = SubResource("RectangleShape2D_dmheb")
 disabled = true
 
 [node name="SamoanAttackCollision" type="CollisionShape2D" parent="CollisionShape2D/AnimatedSprite2D/Melee"]
-position = Vector2(20.3571, 22.7161)
+position = Vector2(20, 22.7161)
 scale = Vector2(0.999998, 0.999998)
 shape = SubResource("RectangleShape2D_8cdx8")
 disabled = true
 
 [node name="VikingAttackCollision" type="CollisionShape2D" parent="CollisionShape2D/AnimatedSprite2D/Melee"]
-position = Vector2(26.0714, 22.3589)
+position = Vector2(25, 22.3589)
 scale = Vector2(0.999998, 0.999998)
 shape = SubResource("RectangleShape2D_yhvyg")
 disabled = true
@@ -988,6 +998,57 @@ offset_bottom = -80.0
 text = "Player : #"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="DashAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_23ddt")
+volume_db = 15.0
+max_polyphony = 10
+
+[node name="DeathAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_17hb2")
+volume_db = 10.0
+max_polyphony = 10
+
+[node name="HitMarkerAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_74wov")
+volume_db = 10.0
+max_polyphony = 10
+
+[node name="JumpAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_fvwqn")
+volume_db = 10.0
+max_polyphony = 10
+
+[node name="LandingAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_12qt3")
+volume_db = 17.0
+max_polyphony = 10
+
+[node name="PistolBulletAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_3d5i6")
+volume_db = 7.0
+max_polyphony = 10
+
+[node name="SniperBulletAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_3bseh")
+volume_db = 15.0
+max_polyphony = 10
+
+[node name="WalkingAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_ay3oe")
+volume_db = 5.0
+pitch_scale = 1.1
+max_polyphony = 10
+
+[node name="WeaponPickupAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_rb5oj")
+volume_db = 10.0
+max_polyphony = 10
+
+[node name="WeaponSwingAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_x3yky")
+volume_db = 10.0
+max_polyphony = 10
 
 [connection signal="area_entered" from="CollisionShape2D/Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="animation_finished" from="CollisionShape2D/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
