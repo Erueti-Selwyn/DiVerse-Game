@@ -20,6 +20,8 @@ const africaMusic = preload("res://assets/audio/music/africa.mp3")
 @onready var mapAudioPlayer = $MusicAudioPlayer
 # Variables
 var randomTime : int
+var timeLeft : int
+var paused : bool
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	global_script.crateNumber = 0
@@ -55,12 +57,27 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
-	pass
+	if paused:
+		if !global_script.isPaused:
+			decrease_timer()
+			paused = false
 
 func start_timer():
 	randomTime = randi_range(6, 13)
-	await get_tree().create_timer(randomTime).timeout
-	create_box()
+	timeLeft = randomTime
+	decrease_timer()
+
+func decrease_timer():
+	if timeLeft > 0:
+		if !global_script.isPaused:
+			await get_tree().create_timer(1).timeout
+			timeLeft -= 1
+			decrease_timer()
+		else:
+			paused = true
+	else:
+		create_box()
+	
 
 func create_box():
 	if global_script.crateNumber < 2:

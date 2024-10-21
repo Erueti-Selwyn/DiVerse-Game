@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 Global="*res://scripts/global.gd"
 MenuAudioPlayer="res://scenes/menu_audio_player.tscn"
+PlayButtonAudioPlayer="res://scenes/play_button_audio_player.tscn"
+ClickAudioPlayer="res://scenes/click_audio_player.tscn"
 
 [display]
 

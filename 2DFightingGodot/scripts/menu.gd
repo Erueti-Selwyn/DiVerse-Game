@@ -2,6 +2,7 @@ extends Control
 # Nodes
 @onready var global_script = $"/root/Global"
 @onready var globalMenuAudioPlayer = $"/root/MenuAudioPlayer"
+@onready var globalClickAudioPlayer = $"/root/ClickAudioPlayer"
 @onready var settingsMenu = $"settings_menu"
 @onready var playButton = $MarginContainer/HBoxContainer/VBoxContainer/Play
 @onready var settingsButton = $MarginContainer/HBoxContainer/VBoxContainer/Settings
@@ -19,18 +20,21 @@ func _process(_delta):
 
 
 func _on_play_pressed():
+	clickAudioPlayer.play()
 	global_script.button_jump(playButton)
+	globalClickAudioPlayer.click_button_effect()
 	await get_tree().create_timer(0.05).timeout
 	global_script.character_select_scene()
 
 
 func _on_settings_pressed():
+	clickAudioPlayer.play()
 	global_script.button_jump(settingsButton)
-	await get_tree().create_timer(0.05).timeout
-	settingsMenu.visible = true
+	settingsMenu.open_settings_menu()
 
 
 func _on_quit_pressed():
+	clickAudioPlayer.play()
 	global_script.button_jump(quitButton)
 	await get_tree().create_timer(0.05).timeout
 	get_tree().quit()

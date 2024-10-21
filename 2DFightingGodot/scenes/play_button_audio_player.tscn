@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbotafwe321w6"]
+
+[ext_resource type="AudioStream" uid="uid://batbj207wfijt" path="res://assets/audio/sfx/menusfx/green button.mp3" id="1_vpwvj"]
+[ext_resource type="Script" path="res://scripts/play_button_audio_player.gd" id="2_h108x"]
+
+[node name="PlayButtonAudioPlayer" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_vpwvj")
+script = ExtResource("2_h108x")
