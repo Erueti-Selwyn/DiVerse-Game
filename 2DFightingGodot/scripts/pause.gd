@@ -1,6 +1,7 @@
 extends Control
 # Nodes
 @onready var global_script = $"/root/Global"
+@onready var globalClickAudioPlayer = $"/root/ClickAudioPlayer"
 @onready var settingsMenu = $"../settings_menu"
 @onready var resumeButton = $MarginContainer/VBoxContainer/ResumeButton
 @onready var optionsButton = $MarginContainer/VBoxContainer/OptionsButton

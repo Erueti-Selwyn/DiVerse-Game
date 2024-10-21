@@ -27,7 +27,8 @@ func _ready():
 	global_script.crateNumber = 0
 	if global_script.mapType == 1:
 		mapAudioPlayer.stream = africaMusic
-		mapAudioPlayer.play()
+		if global_script.musicOn:
+			mapAudioPlayer.play()
 		background.texture = africanMap
 		africanTileMap.global_position.y = 0
 		africanTileMap.visible = true

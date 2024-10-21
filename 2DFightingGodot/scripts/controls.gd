@@ -1,5 +1,6 @@
 extends Control
 @onready var global_script = $"/root/Global"
+@onready var globalClickAudioPlayer = $"/root/ClickAudioPlayer"
 @onready var exitButton = $MarginContainer/VBoxContainer/HBoxContainer4/Exitbutton
 @onready var clickAudioPlayer = $"../ClickAudioPlayer"
 # Called when the node enters the scene tree for the first time.
@@ -14,7 +15,7 @@ func _process(_delta):
 
 func _on_exitbutton_pressed():
 	global_script.button_jump(exitButton)
-	clickAudioPlayer.play()
+	globalClickAudioPlayer.click_button_effect()
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "scale", Vector2(0.1, 0.1), 0.1).set_ease(Tween.EASE_IN)
 	await tween.finished

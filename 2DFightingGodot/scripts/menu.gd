@@ -10,8 +10,9 @@ extends Control
 @onready var clickAudioPlayer = $ClickAudioPlayer
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if !globalMenuAudioPlayer.is_menu_music_playing():
-		globalMenuAudioPlayer.play_menu_music()
+	if global_script.musicOn:
+		if !globalMenuAudioPlayer.is_menu_music_playing():
+			globalMenuAudioPlayer.play_menu_music()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -20,7 +21,7 @@ func _process(_delta):
 
 
 func _on_play_pressed():
-	clickAudioPlayer.play()
+	globalClickAudioPlayer.click_button_effect()
 	global_script.button_jump(playButton)
 	globalClickAudioPlayer.click_button_effect()
 	await get_tree().create_timer(0.05).timeout
@@ -28,13 +29,13 @@ func _on_play_pressed():
 
 
 func _on_settings_pressed():
-	clickAudioPlayer.play()
+	globalClickAudioPlayer.click_button_effect()
 	global_script.button_jump(settingsButton)
 	settingsMenu.open_settings_menu()
 
 
 func _on_quit_pressed():
-	clickAudioPlayer.play()
+	globalClickAudioPlayer.click_button_effect()
 	global_script.button_jump(quitButton)
 	await get_tree().create_timer(0.05).timeout
 	get_tree().quit()
