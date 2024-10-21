@@ -577,13 +577,13 @@ func _on_melee_body_entered(body):
 	# Melee Hit Detection
 	if body.is_in_group("player") && !meleeHasHit:
 		# Sends Attacker Location and Melee Damage
-		body.is_hit(facingRight, meleeDamage)
+		body.is_hit(facingRight, meleeDamage, playerIndex)
 		meleeHasHit = true
 		
 
-func is_hit(attackerFacingRight : bool, damageDone : int):
+func is_hit(attackerFacingRight : bool, damageDone : int, attackerPlayerIndex : int):
 	# Checks if Can be Hit
-	if !isDead && !isHit:
+	if !isDead && !isHit && playerIndex != attackerPlayerIndex:
 		if global_script.soundOn:
 			hitMarkerAudioPlayer.play()
 		# Creates Damage Number
