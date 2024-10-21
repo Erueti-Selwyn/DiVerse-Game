@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cn1t6qseduhae"
+path="res://.godot/imported/sniper bullet.mp3-9e1e5190e9ea5feaf3ab66c43fe1e35e.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/sfx/sniper bullet.mp3"
+dest_files=["res://.godot/imported/sniper bullet.mp3-9e1e5190e9ea5feaf3ab66c43fe1e35e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

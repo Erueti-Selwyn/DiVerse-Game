@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b5d2cnlqs3xp2"]
+[gd_scene load_steps=15 format=3 uid="uid://b5d2cnlqs3xp2"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_umyi2"]
 [ext_resource type="Texture2D" uid="uid://chr2iivqiov0q" path="res://assets/Ui Assets/SpaceBackground.png" id="2_cxsuk"]
@@ -13,6 +13,7 @@
 [ext_resource type="BitMap" uid="uid://vs18d4un3gbf" path="res://assets/Ui Assets/OptionsButtonFinalMask.png" id="6_tq8eh"]
 [ext_resource type="Texture2D" uid="uid://or3xeqm6ytvo" path="res://assets/Ui Assets/QuitButtonFinal.png" id="7_eebs3"]
 [ext_resource type="BitMap" uid="uid://ds8crajepigky" path="res://assets/Ui Assets/QuitButtonFinalMask.png" id="8_g8pja"]
+[ext_resource type="AudioStream" uid="uid://dpx11a2vnx8cb" path="res://assets/audio/sfx/menusfx/buttonclick.mp3" id="14_1bphx"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -146,6 +147,25 @@ layout_mode = 2
 texture_normal = ExtResource("7_eebs3")
 texture_click_mask = ExtResource("8_g8pja")
 stretch_mode = 5
+
+[node name="ClickAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_1bphx")
+max_polyphony = 10
+
+[node name="PauseHighlight" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -326.0
+offset_right = -576.0
+offset_bottom = -326.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]

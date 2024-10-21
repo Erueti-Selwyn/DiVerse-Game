@@ -1,10 +1,13 @@
 extends Control
 # Nodes
 @onready var global_script = $"/root/Global"
+@onready var globalClickAudioPlayer = $"/root/ClickAudioPlayer"
 @onready var settingsMenu = $"../settings_menu"
 @onready var resumeButton = $MarginContainer/VBoxContainer/ResumeButton
 @onready var optionsButton = $MarginContainer/VBoxContainer/OptionsButton
 @onready var exitButton = $MarginContainer/VBoxContainer/ExitButton
+@onready var pauseHighlight = $"../PauseHighlight"
+@onready var level = $".."
 # Variables
 var paused = false
 
@@ -21,9 +24,11 @@ func _process(_delta):
 func pauseMenu():
 	if paused:
 		self.hide()
+		pauseHighlight.visible = false
 		global_script.isPaused = false
 	else:
 		self.show()
+		pauseHighlight.visible = true
 		global_script.isPaused = true
 	paused = !paused
 
@@ -35,10 +40,8 @@ func _on_resume_button_pressed():
 
 func _on_options_button_pressed():
 	global_script.button_jump(optionsButton)
-	await get_tree().create_timer(0.05).timeout
 	settingsMenu.from_pause_menu()
-	settingsMenu.visible = true
-	self.hide()
+	settingsMenu.open_settings_menu()
 
 
 func _on_exit_button_pressed():

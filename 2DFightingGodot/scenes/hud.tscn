@@ -37,7 +37,6 @@ size_flags_horizontal = 4
 theme_override_constants/separation = 100
 
 [node name="Player1" type="Control" parent="VBoxContainer/HBoxContainer"]
-z_index = 1
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 
@@ -165,7 +164,6 @@ texture = ExtResource("4_jflf5")
 stretch_mode = 5
 
 [node name="Player2" type="Control" parent="VBoxContainer/HBoxContainer"]
-z_index = 1
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 

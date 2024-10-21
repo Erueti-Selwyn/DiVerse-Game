@@ -11,6 +11,7 @@ const samoanPistolSprite = preload("res://assets/guns/polynesianpistol.png")
 const rocketLauncherSprite = preload("res://assets/guns/rocketlauncher.png")
 const sniperSprite = preload("res://assets/guns/sniper.png")
 const bulletPath = preload("res://scenes/bullet.tscn")
+
 # Nodes
 @onready var global_script = $"/root/Global"
 @onready var _animated_sprite = $CollisionShape2D/AnimatedSprite2D
@@ -44,9 +45,21 @@ const bulletPath = preload("res://scenes/bullet.tscn")
 @onready var fallParticle = $"../fallSplashParticle"
 @onready var killParticle = $"../killParticle"
 @onready var damageNumberOrigin = $CollisionShape2D/AnimatedSprite2D/DamageNumberOrigin
+@onready var dashAudioPlayer = $"DashAudioPlayer"
+@onready var deathAudioPlayer = $"DeathAudioPlayer"
+@onready var hitMarkerAudioPlayer = $"HitMarkerAudioPlayer"
+@onready var jumpAudioPlayer = $"JumpAudioPlayer"
+@onready var landingAudioPlayer = $LandingAudioPlayer
+@onready var pistolBulletAudioPlayer = $"PistolBulletAudioPlayer"
+@onready var sniperBulletAudioPlayer = $"SniperBulletAudioPlayer"
+@onready var walkingAudioPlayer = $"WalkingAudioPlayer"
+@onready var weaponPickupAudioPlayer = $"WeaponPickupAudioPlayer"
+@onready var weaponSwingAudioPlayer = $"WeaponSwingAudioPlayer"
+
 # Movement Variables
 const maxSpeed : int= 450
 const acceleration : int = 120
+const attackingAcceleration : int = 60
 const maxFriction : int = 225
 const friction : int = 30
 const jumpHeight : int = 600
@@ -63,6 +76,7 @@ var currentDashAmount : int = 0
 var canDash : bool= true
 var dashing : bool= false
 var dashSpeed : int = 1250
+var wasFalling : bool = false
 # Input Variables
 var joyJumpPressed : bool = false
 var joyShootPressed : bool = false
@@ -193,6 +207,14 @@ var animation_map : Dictionary = {
 	5: {"idle": "vikingIdle", "walk": "vikingWalk", "jump": "vikingJump", "wall": "vikingWall", "attack": "vikingAttack"},
 	6: {"idle": "mexicanIdle", "walk": "mexicanWalk", "jump": "mexicanJump", "wall": "mexicanWall", "attack": "mexicanAttack"},
 }
+var weaponSwingPitch : Dictionary = {
+	1 : 1,
+	2 : 1,
+	3 : 1,
+	4 : 0.7,
+	5 : 0.2,
+	6 : 1.2,
+}
 func _ready():
 	apply_player_variables()
 
@@ -221,6 +243,12 @@ func _physics_process(_delta):
 			_animated_sprite.play(anims["jump"])
 		if is_on_wall() && !is_on_floor() && !attacking:
 			_animated_sprite.play(anims["wall"])
+		if velocity.x != 0 && is_on_floor():
+			if !walkingAudioPlayer.playing:
+				if global_script.soundOn:
+					walkingAudioPlayer.play()
+		else:
+			walkingAudioPlayer.stop()
 		# Checking if is Controller and Shoot
 		if playercontroller:
 			if hasGun:
@@ -312,8 +340,11 @@ func _physics_process(_delta):
 		if dashing && !isHit:
 				velocity.x = dashSpeed * dashDirection
 		# Adds Movement and Acceleration
-		elif !isHit && directionX != 0 && !dashing && !attacking:
-			velocity.x = velocity.x + (acceleration * directionX)
+		elif !isHit && directionX != 0 && !dashing:
+			if attacking:
+				velocity.x = velocity.x + (attackingAcceleration * directionX)
+			else:
+				velocity.x = velocity.x + (acceleration * directionX)
 		# Limits Max Speed
 		if velocity.x > maxSpeed:
 			velocity.x = move_toward(velocity.x, 0, maxFriction)
@@ -341,7 +372,14 @@ func _physics_process(_delta):
 					if is_on_floor():
 						position.y += 1
 		# Reset Jumps and Velocity
+		
+		if velocity.y > 300:
+			wasFalling = true
 		if is_on_floor(): 
+			if wasFalling:
+				if global_script.soundOn:
+					landingAudioPlayer.play()
+				wasFalling = false
 			doubleJumps = maxDoubleJumps
 			velocity.y = 0
 		if playercontroller:
@@ -415,6 +453,7 @@ func apply_player_variables():
 	playerLabel.text = "Player: " + str(playerIndex)
 	# Sets Different Variables for each character
 	if playerIndex == 1:
+		weaponSwingAudioPlayer.pitch_scale = weaponSwingPitch[global_script.globalPlayerCharacter1]
 		playerCharacter = global_script.globalPlayerCharacter1
 		spawnlocation1 = spawnLocations1[global_script.mapType]
 		global_position = spawnlocation1.global_position
@@ -426,6 +465,7 @@ func apply_player_variables():
 		attackTime = attackTimes[global_script.globalPlayerCharacter1]
 		meleeDamage = meleeDamages[global_script.globalPlayerCharacter1]
 	if playerIndex == 2:
+		weaponSwingAudioPlayer.pitch_scale = weaponSwingPitch[global_script.globalPlayerCharacter2]
 		playerCharacter = global_script.globalPlayerCharacter2
 		spawnlocation2 = spawnLocations2[global_script.mapType]
 		global_position = spawnlocation2.global_position
@@ -445,11 +485,17 @@ func jump():
 	if !joyJumpPressed:
 		joyJumpPressed = true
 		if doubleJumps > 0: 
+			if global_script.soundOn:
+				jumpAudioPlayer.play()
 			doubleJumps -= 1
 			velocity.y = -jumpHeight
 		if is_on_wall() && directionX == 1:
+			if global_script.soundOn:
+				jumpAudioPlayer.play()
 			velocity.x = -(maxSpeed * 3)
 		elif is_on_wall() && directionX == -1:
+			if global_script.soundOn:
+				jumpAudioPlayer.play()
 			velocity.x = (maxSpeed * 3)
 	
 func shoot(): 
@@ -464,11 +510,15 @@ func shoot():
 		var bullet = bulletPath.instantiate()
 		# Changes Bullet Variable Based on Gun Type
 		if gunType == 1:
+			if global_script.soundOn:
+				pistolBulletAudioPlayer.play()
 			if facingRight:
 				bullet.bulletspawn(1, playerIndex, gunDamage, gunType)
 			else:
 				bullet.bulletspawn(-1, playerIndex, gunDamage, gunType)
 		if gunType == 2:
+			if global_script.soundOn:
+				sniperBulletAudioPlayer.play()
 			if facingRight:
 				bullet.bulletspawn(1, playerIndex, sniperDamage, gunType)
 			else:
@@ -494,6 +544,8 @@ func dash():
 				dashDirection = -1
 		# Checks if Dash is Avalible
 		if currentDashAmount > 0 and !dashing and canDash:
+			if global_script.soundOn:
+				dashAudioPlayer.play()
 			dashing = true
 			canDash = false
 			currentDashAmount -= 1
@@ -507,6 +559,8 @@ func dash():
 func attack():
 	# Checks if Can Attack
 	if !attacking && !dashing:
+		if global_script.soundOn:
+			weaponSwingAudioPlayer.play()
 		# Attack Delay
 		time_to_attack()
 		attacking = true
@@ -530,6 +584,8 @@ func _on_melee_body_entered(body):
 func is_hit(attackerFacingRight : bool, damageDone : int):
 	# Checks if Can be Hit
 	if !isDead && !isHit:
+		if global_script.soundOn:
+			hitMarkerAudioPlayer.play()
 		# Creates Damage Number
 		global_script.display_damage_number(damageDone, damageNumberOrigin.global_position)
 		# Health takes Damage
@@ -549,11 +605,11 @@ func is_hit(attackerFacingRight : bool, damageDone : int):
 			# Adds Knockback
 			take_knockback(damageDone, knockbackDirection, meleeKnockbackStrength)
 			isHit = true
-			_animated_sprite.modulate = Color(1, 0, 0) 
+			_animated_sprite.self_modulate = Color(1, 0, 0) 
 			# Creates Hit Timer
 			await get_tree().create_timer(0.15).timeout
 			isHit = false
-			_animated_sprite.modulate = Color(1, 1, 1)
+			_animated_sprite.self_modulate = Color(1, 1, 1)
 	
 
 func _on_animated_sprite_2d_animation_finished():
@@ -579,6 +635,8 @@ func get_player_index():
 func bullet_hit(bulletDirection : int, damageDone : int, hitGunType : int):
 	# When Hit by Bullet
 	if !isDead && !isHit:
+		if global_script.soundOn:
+			hitMarkerAudioPlayer.play()
 		# Sets Knockback Direction
 		var knockbackDirection : int = bulletDirection
 		# Creates Damage Number
@@ -599,10 +657,10 @@ func bullet_hit(bulletDirection : int, damageDone : int, hitGunType : int):
 			if hitGunType == 2:
 				take_knockback(damageDone, knockbackDirection, sniperKnockbackStrength)
 		isHit = true
-		_animated_sprite.modulate = Color(1, 0, 0) 
+		_animated_sprite.self_modulate = Color(1, 0, 0) 
 		await get_tree().create_timer(0.15).timeout
 		isHit = false
-		_animated_sprite.modulate = Color(1, 1, 1)
+		_animated_sprite.self_modulate = Color(1, 1, 1)
 
 func take_knockback(damageDone : int, direction : int, knockbackStrength : int):
 	if direction > 0:
@@ -611,6 +669,10 @@ func take_knockback(damageDone : int, direction : int, knockbackStrength : int):
 		velocity.x -= (knockbackStrength * damageDone + 20 * pow((100 - health), 1.1))
 
 func die():
+	if global_script.soundOn:
+		deathAudioPlayer.play()
+	gunType = 0
+	hasGun = false
 	isDead = true
 	self.visible = false
 	health = 100
@@ -637,9 +699,11 @@ func die():
 		global_script.isPaused = true
 		await get_tree().create_timer(1.5).timeout
 		global_script.isPaused = false
-		get_tree().change_scene_to_file("res://scenes/win.tscn")
+		global_script.win_scene()
 
 func collect_item(itemType : int):
+	if global_script.soundOn:
+		weaponPickupAudioPlayer.play()
 	global_script.crateNumber -= 1
 	gunType = itemType
 	if itemType == 1:

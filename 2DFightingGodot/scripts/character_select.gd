@@ -12,6 +12,11 @@ const vikingMap = preload("res://assets/backgrounds/viking.png")
 const mexicoMap = preload("res://assets/backgrounds/mexico final map.png")
 # Nodes
 @onready var global_script = $"/root/Global"
+@onready var globalClickAudioPlayer = $"/root/ClickAudioPlayer"
+@onready var globalMenuAudioPlayer = $"/root/MenuAudioPlayer"
+@onready var globalPlayAudioPlayer = $"/root/PlayButtonAudioPlayer"
+@onready var clickAudioPlayer = $ClickAudioPlayer
+@onready var playAudioPlayer = $PlayAudioPlayer
 @onready var startButton = $MarginContainer/VBoxContainer/Start
 @onready var exitButton = $MarginContainer/VBoxContainer/Exit
 @onready var keyboardPlayer1Button = $MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer/KeyboardPlayer1
@@ -53,15 +58,18 @@ func _process(_delta):
 	global_script.globalPlayerCharacter2 = player2Character
 func _on_start_pressed():
 	global_script.button_jump(startButton)
+	globalPlayAudioPlayer.play_button_effect()
 	await get_tree().create_timer(0.05).timeout
 	global_script.globalPlayerCharacter1 = player1Character
 	global_script.globalPlayerCharacter2 = player2Character
 	global_script.player1Controller = localPlayer1Controller
 	global_script.player2Controller = localPlayer2Controller
-	get_tree().change_scene_to_file("res://scenes/Level.tscn")
+	globalMenuAudioPlayer.stop_menu_music()
+	global_script.level_scene()
 
 
 func _on_african_button_1_pressed():
+	globalClickAudioPlayer.click_button_effect()
 	player1Character = 1
 	reset_selection_1()
 	africanButton1.self_modulate = selectedColor
@@ -69,66 +77,77 @@ func _on_african_button_1_pressed():
 
 
 func _on_chinese_button_1_pressed():
+	globalClickAudioPlayer.click_button_effect()
 	player1Character = 2
 	reset_selection_1()
 	chineseButton1.self_modulate = selectedColor
 	global_script.button_jump(chineseButton1)
 
 func _on_japanese_button_1_pressed():
+	globalClickAudioPlayer.click_button_effect()
 	player1Character = 3
 	reset_selection_1()
 	japaneseButton1.self_modulate = selectedColor
 	global_script.button_jump(japaneseButton1)
 
 func _on_samoan_button_1_pressed():
+	globalClickAudioPlayer.click_button_effect()
 	player1Character = 4
 	reset_selection_1()
 	samoanButton1.self_modulate = selectedColor
 	global_script.button_jump(samoanButton1)
 
 func _on_viking_button_1_pressed():
+	globalClickAudioPlayer.click_button_effect()
 	player1Character = 5
 	reset_selection_1()
 	vikingButton1.self_modulate = selectedColor
 	global_script.button_jump(vikingButton1)
 
 func _on_mexican_button_1_pressed():
+	globalClickAudioPlayer.click_button_effect()
 	player1Character = 6
 	reset_selection_1()
 	mexicanButton1.self_modulate = selectedColor
 	global_script.button_jump(mexicanButton1)
 
 func _on_african_button_2_pressed():
+	globalClickAudioPlayer.click_button_effect()
 	player2Character = 1
 	reset_selection_2()
 	africanButton2.self_modulate = selectedColor
 	global_script.button_jump(africanButton2)
 
 func _on_chinese_button_2_pressed():
+	globalClickAudioPlayer.click_button_effect()
 	player2Character = 2
 	reset_selection_2()
 	chineseButton2.self_modulate = selectedColor
 	global_script.button_jump(chineseButton2)
 
 func _on_japanese_button_2_pressed():
+	globalClickAudioPlayer.click_button_effect()
 	player2Character = 3
 	reset_selection_2()
 	japaneseButton2.self_modulate = selectedColor
 	global_script.button_jump(japaneseButton2)
 
 func _on_samoan_button_2_pressed():
+	globalClickAudioPlayer.click_button_effect()
 	player2Character = 4
 	reset_selection_2()
 	samoanButton2.self_modulate = selectedColor
 	global_script.button_jump(samoanButton2)
 
 func _on_viking_button_2_pressed():
+	globalClickAudioPlayer.click_button_effect()
 	player2Character = 5
 	reset_selection_2()
 	vikingButton2.self_modulate = selectedColor
 	global_script.button_jump(vikingButton2)
 
 func _on_mexican_button_2_pressed():
+	globalClickAudioPlayer.click_button_effect()
 	player2Character = 6
 	reset_selection_2()
 	mexicanButton2.self_modulate = selectedColor
@@ -136,6 +155,7 @@ func _on_mexican_button_2_pressed():
 
 
 func _on_controller_player_1_pressed():
+	globalClickAudioPlayer.click_button_effect()
 	localPlayer1Controller = true
 	controllerPlayer1Button.texture_normal = controllerIconOn
 	keyboardPlayer1Button.texture_normal = keyboardIconOff
@@ -143,6 +163,7 @@ func _on_controller_player_1_pressed():
 
 
 func _on_keyboard_player_1_pressed():
+	globalClickAudioPlayer.click_button_effect()
 	localPlayer1Controller = false
 	controllerPlayer1Button.texture_normal = controllerIconOff
 	keyboardPlayer1Button.texture_normal = keyboardIconOn
@@ -150,6 +171,7 @@ func _on_keyboard_player_1_pressed():
 
 
 func _on_controller_player_2_pressed():
+	globalClickAudioPlayer.click_button_effect()
 	localPlayer2Controller = true
 	controllerPlayer2Button.texture_normal = controllerIconOn
 	keyboardPlayer2Button.texture_normal = keyboardIconOff
@@ -157,6 +179,7 @@ func _on_controller_player_2_pressed():
 
 
 func _on_keyboard_player_2_pressed():
+	globalClickAudioPlayer.click_button_effect()
 	localPlayer2Controller = false
 	controllerPlayer2Button.texture_normal = controllerIconOff
 	keyboardPlayer2Button.texture_normal = keyboardIconOn
@@ -164,9 +187,10 @@ func _on_keyboard_player_2_pressed():
 
 
 func _on_exit_pressed():
+	globalClickAudioPlayer.click_button_effect()
 	global_script.button_jump(exitButton)
 	await get_tree().create_timer(0.05).timeout
-	get_tree().change_scene_to_file("res://scenes/menu.tscn")
+	global_script.menu_scene()
 	
 func reset_selection_1():
 	africanButton1.self_modulate = defaultColor
@@ -185,31 +209,37 @@ func reset_selection_2():
 
 
 func _on_africa_map_pressed():
+	globalClickAudioPlayer.click_button_effect()
 	global_script.mapType = 1
 	background.texture = africanMap
 	global_script.button_jump(africanMapButton)
 
 func _on_china_map_pressed():
+	globalClickAudioPlayer.click_button_effect()
 	global_script.mapType = 2
 	background.texture = chinaMap
 	global_script.button_jump(chineseMapButton)
 
 func _on_japan_map_pressed():
+	globalClickAudioPlayer.click_button_effect()
 	global_script.mapType = 3
 	background.texture = japanMap
 	global_script.button_jump(japaneseMapButton)
 
 func _on_samoa_map_pressed():
+	globalClickAudioPlayer.click_button_effect()
 	global_script.mapType = 4
 	background.texture = samoanMap
 	global_script.button_jump(samoanMapButton)
 
 func _on_viking_map_pressed():
+	globalClickAudioPlayer.click_button_effect()
 	global_script.mapType = 5
 	background.texture = vikingMap
 	global_script.button_jump(vikingMapButton)
 
 func _on_mexico_map_pressed():
+	globalClickAudioPlayer.click_button_effect()
 	global_script.mapType = 6
 	background.texture = mexicoMap
 	global_script.button_jump(mexicanMapButton)

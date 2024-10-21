@@ -1,4 +1,7 @@
 extends Node
+# Preload Large Scnee to Reduce Lag
+var characterSelectScene = preload("res://scenes/character_select.tscn")
+var levelScnee = preload("res://scenes/Level.tscn")
 # Global Variables
 @export var player1Controller : bool = true
 @export var player2Controller : bool = true
@@ -55,3 +58,12 @@ func button_jump(button):
 	tween.set_parallel(false)
 	tween.tween_property(button, "scale", Vector2(1.05, 1.05), 0.05).set_ease(Tween.EASE_IN)
 	tween.tween_property(button, "scale", Vector2(1, 1), 0.05).set_ease(Tween.EASE_IN)
+
+func menu_scene():
+	get_tree().change_scene_to_file("res://scenes/menu.tscn")
+func character_select_scene():
+	get_tree().change_scene_to_packed(characterSelectScene)
+func level_scene():
+	get_tree().change_scene_to_packed(levelScnee)
+func win_scene():
+	get_tree().change_scene_to_file("res://scenes/win.tscn")

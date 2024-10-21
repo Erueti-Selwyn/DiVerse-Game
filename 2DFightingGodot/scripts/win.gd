@@ -8,11 +8,15 @@ const vikingBackground = preload("res://assets/backgrounds/viking.png")
 const mexicanBackground = preload("res://assets/backgrounds/mexico final map.png")
 # Nodes
 @onready var global_script = $"/root/Global"
+@onready var globalClickAudioPlayer = $"/root/ClickAudioPlayer"
+@onready var winAudioPlayer = $WinAudioPlayer
 @onready var background = $background
 @onready var winnerTitle = $HBoxContainer/VBoxContainer/Label
 @onready var menuButton = $MenuButton
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if global_script.soundOn:
+		winAudioPlayer.play()
 	winnerTitle.text = "Player "  + str(global_script.winningPlayer) + " Wins!"
 	if global_script.mapType == 1:
 		background.texture = africanBackground
@@ -36,4 +40,4 @@ func _process(_delta):
 func _on_menu_button_pressed():
 	global_script.button_jump(menuButton)
 	await get_tree().create_timer(0.05).timeout
-	get_tree().change_scene_to_file("res://scenes/menu.tscn")
+	global_script.menu_scene()

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cnhtqr0iifhu1"]
 
-[ext_resource type="Script" path="res://scenes/gun_flash.gd" id="1_qup7r"]
+[ext_resource type="Script" path="res://scripts/gun_flash.gd" id="1_qup7r"]
 
 [sub_resource type="Curve" id="Curve_os72y"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.803371, 0), 0.0, 0.0, 0, 0]

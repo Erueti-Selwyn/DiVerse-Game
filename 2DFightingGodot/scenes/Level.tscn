@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dfdn4clkj55a4"]
+[gd_scene load_steps=31 format=3 uid="uid://dfdn4clkj55a4"]
 
 [ext_resource type="Script" path="res://scripts/Level.gd" id="1_7kyh2"]
 [ext_resource type="Texture2D" uid="uid://dfioa50vtvf7l" path="res://assets/backgrounds/japan mapp.png" id="2_qmg0v"]
@@ -11,6 +11,12 @@
 [ext_resource type="Texture2D" uid="uid://garepww1eau4" path="res://assets/tilemaps/all tilemaps FINALLL.png" id="10_5ms4v"]
 [ext_resource type="PackedScene" uid="uid://cpp6uup1fjkuc" path="res://scenes/settings_menu.tscn" id="10_ick1o"]
 [ext_resource type="PackedScene" uid="uid://u51lay85nrxb" path="res://scenes/controls.tscn" id="11_r7jrn"]
+[ext_resource type="AudioStream" uid="uid://dpx11a2vnx8cb" path="res://assets/audio/sfx/menusfx/buttonclick.mp3" id="12_ggfvu"]
+
+[sub_resource type="Environment" id="Environment_3ss6f"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5atln"]
 texture = ExtResource("10_5ms4v")
@@ -273,15 +279,35 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.932584, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_x3c6u"]
-colors = PackedColorArray(0.974861, 0.294661, 0.165636, 1, 0.471955, 0, 0.0732844, 1)
+colors = PackedColorArray(2.925, 0.295, 0.166, 1, 1.416, 0, 0.073, 1)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_7kyh2")
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3ss6f")
+
 [node name="hud" parent="." instance=ExtResource("3_fsags")]
+top_level = true
 offset_top = -261.0
-offset_bottom = -261.0
+offset_right = -1152.0
+offset_bottom = -909.0
 scale = Vector2(0.62, 0.62)
+
+[node name="PauseHighlight" type="ColorRect" parent="."]
+visible = false
+top_level = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -326.0
+offset_right = -576.0
+offset_bottom = -326.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.0980392)
+metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="."]
 self_modulate = Color(1, 1, 1, 0.588235)
@@ -501,3 +527,12 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
+
+[node name="MusicAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+volume_db = -10.0
+autoplay = true
+max_polyphony = 10
+
+[node name="ClickAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_ggfvu")
+max_polyphony = 10

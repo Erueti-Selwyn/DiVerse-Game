@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3ne5hwcewtn3"]
+
+[ext_resource type="AudioStream" uid="uid://dpx11a2vnx8cb" path="res://assets/audio/sfx/menusfx/buttonclick.mp3" id="1_lbxff"]
+[ext_resource type="Script" path="res://scripts/click_audio_player.gd" id="2_teo8i"]
+
+[node name="ClickAudioPlayer" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_lbxff")
+script = ExtResource("2_teo8i")

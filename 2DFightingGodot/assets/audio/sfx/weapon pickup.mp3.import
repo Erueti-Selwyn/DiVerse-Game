@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ddf0no3b30r43"
+path="res://.godot/imported/weapon pickup.mp3-bff46ca89a7dca550e2608e8a07eccf2.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/sfx/weapon pickup.mp3"
+dest_files=["res://.godot/imported/weapon pickup.mp3-bff46ca89a7dca550e2608e8a07eccf2.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
