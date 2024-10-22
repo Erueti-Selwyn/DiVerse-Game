@@ -8,6 +8,11 @@ const vikingMap = preload("res://assets/backgrounds/viking.png")
 const mexicoMap = preload("res://assets/backgrounds/mexico final map.png")
 const cratePath = preload("res://scenes/crate.tscn")
 const africaMusic = preload("res://assets/audio/music/africa.mp3")
+const chinaMusic = preload("res://assets/audio/music/china map music.mp3")
+const japanMusic = preload("res://assets/audio/music/japanese map music.mp3")
+const mexicoMusic = preload("res://assets/audio/music/mexico map music.mp3")
+const samoaMusic = preload("res://assets/audio/music/samoa map music.mp3")
+const vikingMusic = preload("res://assets/audio/music/viking map music.mp3")
 # Nodes
 @onready var global_script = $"/root/Global"
 @onready var africanTileMap = $Africa
@@ -27,31 +32,37 @@ func _ready():
 	global_script.crateNumber = 0
 	if global_script.mapType == 1:
 		mapAudioPlayer.stream = africaMusic
-		if global_script.musicOn:
-			mapAudioPlayer.play()
 		background.texture = africanMap
 		africanTileMap.global_position.y = 0
 		africanTileMap.visible = true
 	elif global_script.mapType == 2:
+		mapAudioPlayer.stream = chinaMusic
 		background.texture = chinaMap
 		chineseTileMap.global_position.y = 0
 		chineseTileMap.visible = true
 	elif global_script.mapType == 3:
+		mapAudioPlayer.stream = japanMusic
 		background.texture = japanMap
 		japaneseTileMap.global_position.y = 0
 		japaneseTileMap.visible = true
 	elif global_script.mapType == 4:
+		mapAudioPlayer.stream = samoaMusic
 		background.texture = samoanMap
 		samoanTileMap.global_position.y = 0
 		samoanTileMap.visible = true
 	elif global_script.mapType == 5:
+		mapAudioPlayer.stream = vikingMusic
 		background.texture = vikingMap
 		vikingTileMap.global_position.y = 0
 		vikingTileMap.visible = true
 	elif global_script.mapType == 6:
+		mapAudioPlayer.stream = mexicoMusic
 		background.texture = mexicoMap
 		mexicoTileMap.global_position.y = 0
 		mexicoTileMap.visible = true
+	if global_script.musicOn:
+			mapAudioPlayer.stream.loop = true
+			mapAudioPlayer.play()
 	await get_tree().create_timer(randi_range(1, 2)).timeout
 	create_box()
 
