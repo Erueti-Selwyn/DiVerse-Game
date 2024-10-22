@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bfmodagmcpxbh"
+path="res://.godot/imported/mexico map music.mp3-bac0ead08932bc9453d61e192cc0698d.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/music/mexico map music.mp3"
+dest_files=["res://.godot/imported/mexico map music.mp3-bac0ead08932bc9453d61e192cc0698d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
