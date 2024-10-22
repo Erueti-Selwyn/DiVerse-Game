@@ -517,7 +517,6 @@ grow_horizontal = 1
 grow_vertical = 1
 
 [node name="MusicAudioPlayer" type="AudioStreamPlayer2D" parent="."]
-volume_db = -10.0
 autoplay = true
 max_polyphony = 10
 
