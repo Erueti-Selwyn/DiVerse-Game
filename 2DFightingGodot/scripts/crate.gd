@@ -13,8 +13,8 @@ extends CharacterBody2D
 var randomint : int
 var gunType : int
 func _ready():
-	randomint = randi_range(1, 2)
-	if randomint == 2:
+	randomint = randi_range(1, 10)
+	if randomint == 1:
 		largeCrateCollision.disabled = false
 		crateCollision.disabled = true
 		largeCrateCollision2.disabled = false
