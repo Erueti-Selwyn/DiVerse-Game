@@ -8,6 +8,7 @@ const SWITCH_OFF_MASK = preload("res://assets/Ui Assets/optionButtonOffMask.png"
 @onready var global_script = $"/root/Global"
 @onready var global_click_audio_player = $"/root/ClickAudioPlayer"
 @onready var global_menu_audio_player = $"/root/MenuAudioPlayer"
+@onready var global_map_audio_player = $"/root/MapMusicAudioPlayer"
 @onready var sound_switch = $MarginContainer/VBoxContainer/HBoxContainer/SoundButton
 @onready var music_switch = $MarginContainer/VBoxContainer/HBoxContainer2/MusicButton
 @onready var pause_menu = $"../pause"
@@ -54,12 +55,13 @@ func _on_music_button_pressed():
 		music_switch.texture_click_mask = SWITCH_OFF_MASK
 		global_script.music_on = false
 		global_menu_audio_player.stop_menu_music()
+		global_map_audio_player.stop_map_music()
 	elif !global_script.music_on:
 		music_switch.texture_normal = SWITCH_ON
 		music_switch.texture_click_mask = SWITCH_ON_MASK
 		global_script.music_on = true
 		global_menu_audio_player.play_menu_music()
-
+		global_map_audio_player.play_map_music()
 
 func _on_exit_button_pressed():
 	global_script.button_jump(exit_button)

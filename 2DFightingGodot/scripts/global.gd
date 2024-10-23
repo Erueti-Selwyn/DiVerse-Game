@@ -18,6 +18,7 @@ var level_scene = preload("res://scenes/Level.tscn")
 @export var sound_on : bool = true
 @export var music_on : bool = true
 @export var is_on_menu : bool = true
+@export var is_on_level : bool = false
 
 
 func display_damage_number(value : int, position : Vector2):
