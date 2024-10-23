@@ -16,53 +16,48 @@ const SWITCH_OFF_MASK = preload("res://assets/Ui Assets/optionButtonOffMask.png"
 @onready var controls_button = $MarginContainer/VBoxContainer/Controls
 @onready var click_audio_player = $"../ClickAudioPlayer"
 # Variables
-var local_sound_on : bool = true
-var local_music_on : bool = true
 var from_pause_menu : bool = false
 
 func _ready():
 	self.pivot_offset = Vector2(self.size / 2)
-	local_sound_on = global_script.sound_on
-	local_music_on = global_script.music_on
-	if local_music_on:
+	if global_script.music_on:
 		music_switch.texture_normal = SWITCH_ON
-	elif !local_music_on:
+	elif !global_script.music_on:
 		music_switch.texture_normal = SWITCH_OFF
-	if local_sound_on:
+	if global_script.sound_on:
 		sound_switch.texture_normal = SWITCH_ON
-	elif !local_sound_on:
+	elif !global_script.sound_on:
 		sound_switch.texture_normal = SWITCH_OFF
 	
 func _process(_delta):
-	global_script.sound_on = local_sound_on
-	global_script.music_on = local_music_on
+	pass
 func _on_menu_pressed():
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")
 
 func _on_sound_button_pressed():
 	global_click_audio_player.click_button_effect()
 	global_script.button_jump(sound_switch)
-	if local_sound_on:
+	if global_script.sound_on:
 		sound_switch.texture_normal = SWITCH_OFF
 		sound_switch.texture_click_mask = SWITCH_OFF_MASK
-		local_sound_on = false
-	elif !local_sound_on:
+		global_script.sound_on = false
+	elif !global_script.sound_on:
 		sound_switch.texture_normal = SWITCH_ON
 		sound_switch.texture_click_mask = SWITCH_ON_MASK
-		local_sound_on = true
+		global_script.sound_on = true
 
 func _on_music_button_pressed():
 	global_click_audio_player.click_button_effect()
 	global_script.button_jump(music_switch)
-	if local_music_on:
+	if global_script.music_on:
 		music_switch.texture_normal = SWITCH_OFF
 		music_switch.texture_click_mask = SWITCH_OFF_MASK
-		local_music_on = false
+		global_script.music_on = false
 		global_menu_audio_player.stop_menu_music()
-	elif !local_music_on:
+	elif !global_script.music_on:
 		music_switch.texture_normal = SWITCH_ON
 		music_switch.texture_click_mask = SWITCH_ON_MASK
-		local_music_on = true
+		global_script.music_on = true
 		global_menu_audio_player.play_menu_music()
 
 

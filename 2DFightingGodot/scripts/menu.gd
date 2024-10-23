@@ -12,6 +12,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	global_script.is_on_menu = true
 	if global_script.music_on:
 		if !global_menu_audio_player.is_menu_music_playing():
 			global_menu_audio_player.play_menu_music()

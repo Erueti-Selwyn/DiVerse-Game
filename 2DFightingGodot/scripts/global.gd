@@ -3,8 +3,8 @@ extends Node
 var character_select_scene = preload("res://scenes/character_select.tscn")
 var level_scene = preload("res://scenes/Level.tscn")
 # Global Variables
-@export var player_1_controller : bool = true
-@export var player_2_controller : bool = true
+@export var player_1_controller : bool = false
+@export var player_2_controller : bool = false
 @export var player_1_health : int = 0
 @export var player_2_health : int= 0
 @export var global_player_character_1 : int = 1
@@ -17,6 +17,7 @@ var level_scene = preload("res://scenes/Level.tscn")
 @export var map_type : int= 1
 @export var sound_on : bool = true
 @export var music_on : bool = true
+@export var is_on_menu : bool = true
 
 
 func display_damage_number(value : int, position : Vector2):

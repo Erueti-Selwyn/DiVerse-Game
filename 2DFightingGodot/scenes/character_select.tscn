@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://scripts/character_select.gd" id="1_20887"]
 [ext_resource type="PackedScene" uid="uid://cl4xclfw8h4ql" path="res://scenes/player_idle.tscn" id="3_0if2g"]
-[ext_resource type="Texture2D" uid="uid://b61fv17f6bona" path="res://assets/Ui Assets/ControllerButtonOnFinal.png" id="3_58wrp"]
 [ext_resource type="Texture2D" uid="uid://dymc08auxf7g8" path="res://assets/Ui Assets/StartButtonFinal.png" id="3_ldw3d"]
 [ext_resource type="Texture2D" uid="uid://dpfklnkoagtqq" path="res://assets/Ui Assets/ExitButtonFinal.png" id="3_sm2qm"]
 [ext_resource type="BitMap" uid="uid://b310tcd626bw8" path="res://assets/Ui Assets/StartButtonFinalMask.png" id="4_2fhxl"]
@@ -12,11 +11,12 @@
 [ext_resource type="BitMap" uid="uid://cvkc0xnywbigr" path="res://assets/Ui Assets/ControllerButtonFinalMask.png" id="4_w5wsp"]
 [ext_resource type="Texture2D" uid="uid://dqdw8q6yv0cdj" path="res://assets/profiles/china profile.aesprite.png" id="5_fyk4v"]
 [ext_resource type="FontFile" uid="uid://ccd6qond4rdjk" path="res://assets/Ui Assets/American Captain.ttf" id="5_o0sn0"]
-[ext_resource type="Texture2D" uid="uid://cf4e1tbsdxtdp" path="res://assets/Ui Assets/MouseButtonOffFinal.png" id="5_o4msb"]
 [ext_resource type="Texture2D" uid="uid://cvgdd78wx13s" path="res://assets/profiles/japan man profile.aesprite.png" id="6_dgcfs"]
+[ext_resource type="Texture2D" uid="uid://cv74i8vu82vei" path="res://assets/Ui Assets/ControllerButtonOffFinal.png" id="7_be0tv"]
 [ext_resource type="Texture2D" uid="uid://cm4u3rbs87tr1" path="res://assets/profiles/samoan body profile.aesprite.png" id="7_utxde"]
 [ext_resource type="Texture2D" uid="uid://cxo7g3o333ef8" path="res://assets/profiles/Mexican-profile.png" id="8_87k8w"]
 [ext_resource type="Texture2D" uid="uid://1xu1ipgs8406" path="res://assets/profiles/viking profile.aesprite.png" id="8_mokyo"]
+[ext_resource type="Texture2D" uid="uid://chxb8w5slc3yo" path="res://assets/Ui Assets/MouseButtonOnFinal.png" id="9_lwx4u"]
 [ext_resource type="BitMap" uid="uid://bagsinsgm01k8" path="res://assets/Ui Assets/BorderBackgroundMask.png" id="11_oe331"]
 [ext_resource type="Texture2D" uid="uid://b66ssj3swr2ar" path="res://assets/Ui Assets/BorderBackground.png" id="12_t4wy2"]
 [ext_resource type="Texture2D" uid="uid://cukveh0xyj4an" path="res://assets/backgrounds/mapborderbackground.png" id="19_t4w4h"]
@@ -140,14 +140,14 @@ theme_override_constants/separation = 10
 [node name="ControllerPlayer1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-texture_normal = ExtResource("3_58wrp")
+texture_normal = ExtResource("7_be0tv")
 texture_click_mask = ExtResource("4_w5wsp")
 stretch_mode = 5
 
 [node name="KeyboardPlayer1" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-texture_normal = ExtResource("5_o4msb")
+texture_normal = ExtResource("9_lwx4u")
 texture_click_mask = ExtResource("4_w5wsp")
 stretch_mode = 5
 
@@ -158,14 +158,14 @@ theme_override_constants/separation = 10
 [node name="ControllerPlayer2" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-texture_normal = ExtResource("3_58wrp")
+texture_normal = ExtResource("7_be0tv")
 texture_click_mask = ExtResource("4_w5wsp")
 stretch_mode = 5
 
 [node name="KeyboardPlayer2" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2"]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-texture_normal = ExtResource("5_o4msb")
+texture_normal = ExtResource("9_lwx4u")
 texture_click_mask = ExtResource("4_w5wsp")
 stretch_mode = 5
 

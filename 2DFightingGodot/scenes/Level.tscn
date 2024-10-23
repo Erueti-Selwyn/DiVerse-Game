@@ -387,13 +387,13 @@ scale = Vector2(10, 10)
 shape = SubResource("WorldBoundaryShape2D_iwr00")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" groups=["boundary"]]
-position = Vector2(-796, 0)
+position = Vector2(-1000, 0)
 rotation = 1.5708
 scale = Vector2(10, 10)
 shape = SubResource("WorldBoundaryShape2D_iwr00")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D" groups=["boundary"]]
-position = Vector2(796, 0)
+position = Vector2(1000, 0)
 rotation = -1.5708
 scale = Vector2(10, 10)
 shape = SubResource("WorldBoundaryShape2D_iwr00")

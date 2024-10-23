@@ -45,8 +45,8 @@ const MEXICO_MAP = preload("res://assets/backgrounds/mexico final map.png")
 # Variables
 var player_1_character : int = 1
 var player_2_character : int = 1
-var local_player_1_controller : bool = true
-var local_player_2_controller : bool = true
+var local_player_1_controller : bool = false
+var local_player_2_controller : bool = false
 var default_color = Color(1, 1, 1)
 var selected_color = Color(0.224, 1, 0.416)
 
