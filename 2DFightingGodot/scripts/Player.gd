@@ -59,7 +59,7 @@ const bulletPath = preload("res://scenes/bullet.tscn")
 # Movement Variables
 const maxSpeed : int= 450
 const acceleration : int = 120
-const attackingAcceleration : int = 60
+const attackingAcceleration : int = 45
 const maxFriction : int = 225
 const friction : int = 30
 const jumpHeight : int = 550
