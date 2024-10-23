@@ -1,11 +1,11 @@
 extends Node2D
 @onready var global_script = $"/root/Global"
-@onready var _animated_sprite = $AnimatedSprite2D
+@onready var animated_sprite = $AnimatedSprite2D
 @export var winner : bool = false
-@export var characterSelect : bool
-@export var player1 : bool = false
+@export var character_select : bool
+@export var is_player_1 : bool = false
 
-var animation_map : Dictionary = {
+var animation_map_dict : Dictionary = {
 	1 : "africanIdle",
 	2 : "chinaIdle",
 	3 : "japaneseIdle",
@@ -16,20 +16,20 @@ var animation_map : Dictionary = {
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if winner:
-		if global_script.winningPlayer == 1:
-			_animated_sprite.play(animation_map[global_script.globalPlayerCharacter1])
-		if global_script.winningPlayer == 2:
-			_animated_sprite.play(animation_map[global_script.globalPlayerCharacter2])
+		if global_script.winning_player == 1:
+			animated_sprite.play(animation_map_dict[global_script.global_player_character_1])
+		if global_script.winning_player == 2:
+			animated_sprite.play(animation_map_dict[global_script.global_player_character_2])
 	elif !winner:
-		if global_script.winningPlayer == 2:
-			_animated_sprite.play(animation_map[global_script.globalPlayerCharacter1])
-		if global_script.winningPlayer == 1:
-			_animated_sprite.play(animation_map[global_script.globalPlayerCharacter2])
+		if global_script.winning_player == 2:
+			animated_sprite.play(animation_map_dict[global_script.global_player_character_1])
+		if global_script.winning_player == 1:
+			animated_sprite.play(animation_map_dict[global_script.global_player_character_2])
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if characterSelect:
-		if player1:
-			_animated_sprite.play(animation_map[global_script.globalPlayerCharacter1])
+	if character_select:
+		if is_player_1:
+			animated_sprite.play(animation_map_dict[global_script.global_player_character_1])
 		else:
-			_animated_sprite.play(animation_map[global_script.globalPlayerCharacter2])
+			animated_sprite.play(animation_map_dict[global_script.global_player_character_2])

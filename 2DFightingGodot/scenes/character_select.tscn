@@ -63,13 +63,13 @@ expand_mode = 2
 [node name="player_idle" parent="TextureRect" instance=ExtResource("3_0if2g")]
 position = Vector2(365, 335)
 scale = Vector2(8, 8)
-characterSelect = true
-player1 = true
+character_select = true
+is_player_1 = true
 
 [node name="player_idle2" parent="TextureRect" instance=ExtResource("3_0if2g")]
 position = Vector2(787, 335)
 scale = Vector2(-8, 8)
-characterSelect = true
+character_select = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
