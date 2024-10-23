@@ -1,25 +1,18 @@
 extends Control
 @onready var global_script = $"/root/Global"
-@onready var globalClickAudioPlayer = $"/root/ClickAudioPlayer"
-@onready var exitButton = $MarginContainer/VBoxContainer/HBoxContainer4/Exitbutton
-@onready var clickAudioPlayer = $"../ClickAudioPlayer"
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
+@onready var global_click_audio_player = $"/root/ClickAudioPlayer"
+@onready var exit_button = $MarginContainer/VBoxContainer/HBoxContainer4/Exitbutton
 
 
 func _on_exitbutton_pressed():
-	global_script.button_jump(exitButton)
-	globalClickAudioPlayer.click_button_effect()
+	global_script.button_jump(exit_button)
+	global_click_audio_player.click_button_effect()
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "scale", Vector2(0.1, 0.1), 0.1).set_ease(Tween.EASE_IN)
 	await tween.finished
 	self.visible = false
+
+
 func open_menu():
 	self.pivot_offset = Vector2(self.size / 2)
 	scale = Vector2(0.1, 0.1)

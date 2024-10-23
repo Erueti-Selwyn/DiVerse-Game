@@ -1,74 +1,69 @@
 extends Control
 # Assets
-const switchOn = preload("res://assets/Ui Assets/optionButtonOn.png")
-const switchOff = preload("res://assets/Ui Assets/optionButtonOff.png")
-const swtichOnMask = preload("res://assets/Ui Assets/optionButtonOnMask.png")
-const swtichOffMask = preload("res://assets/Ui Assets/optionButtonOffMask.png")
+const SWITCH_ON = preload("res://assets/Ui Assets/optionButtonOn.png")
+const SWITCH_OFF = preload("res://assets/Ui Assets/optionButtonOff.png")
+const SWITCH_ON_MASK = preload("res://assets/Ui Assets/optionButtonOnMask.png")
+const SWITCH_OFF_MASK = preload("res://assets/Ui Assets/optionButtonOffMask.png")
 # Nodes
 @onready var global_script = $"/root/Global"
-@onready var globalClickAudioPlayer = $"/root/ClickAudioPlayer"
-@onready var globalMenuAudioPlayer = $"/root/MenuAudioPlayer"
-@onready var soundSwitch = $MarginContainer/VBoxContainer/HBoxContainer/SoundButton
-@onready var musicSwitch = $MarginContainer/VBoxContainer/HBoxContainer2/MusicButton
-@onready var pauseMenu = $"../pause"
-@onready var controlsMenu = $"../controls"
-@onready var exitButton = $MarginContainer/VBoxContainer/HBoxContainer3/ExitButton
-@onready var controlsButton = $MarginContainer/VBoxContainer/Controls
-@onready var clickAudioPlayer = $"../ClickAudioPlayer"
+@onready var global_click_audio_player = $"/root/ClickAudioPlayer"
+@onready var global_menu_audio_player = $"/root/MenuAudioPlayer"
+@onready var sound_switch = $MarginContainer/VBoxContainer/HBoxContainer/SoundButton
+@onready var music_switch = $MarginContainer/VBoxContainer/HBoxContainer2/MusicButton
+@onready var pause_menu = $"../pause"
+@onready var controls_menu = $"../controls"
+@onready var exit_button = $MarginContainer/VBoxContainer/HBoxContainer3/ExitButton
+@onready var controls_button = $MarginContainer/VBoxContainer/Controls
+@onready var click_audio_player = $"../ClickAudioPlayer"
 # Variables
-var localSoundOn : bool = true
-var localMusicOn : bool = true
-var fromPauseMenu : bool = false
+var from_pause_menu : bool = false
 
 func _ready():
 	self.pivot_offset = Vector2(self.size / 2)
-	localSoundOn = global_script.soundOn
-	localMusicOn = global_script.musicOn
-	if localMusicOn:
-		musicSwitch.texture_normal = switchOn
-	elif !localMusicOn:
-		musicSwitch.texture_normal = switchOff
-	if localSoundOn:
-		soundSwitch.texture_normal = switchOn
-	elif !localSoundOn:
-		soundSwitch.texture_normal = switchOff
+	if global_script.music_on:
+		music_switch.texture_normal = SWITCH_ON
+	elif !global_script.music_on:
+		music_switch.texture_normal = SWITCH_OFF
+	if global_script.sound_on:
+		sound_switch.texture_normal = SWITCH_ON
+	elif !global_script.sound_on:
+		sound_switch.texture_normal = SWITCH_OFF
 	
 func _process(_delta):
-	global_script.soundOn = localSoundOn
-	global_script.musicOn = localMusicOn
+	pass
 func _on_menu_pressed():
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")
 
 func _on_sound_button_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	global_script.button_jump(soundSwitch)
-	if localSoundOn:
-		soundSwitch.texture_normal = switchOff
-		soundSwitch.texture_click_mask = swtichOffMask
-		localSoundOn = false
-	elif !localSoundOn:
-		soundSwitch.texture_normal = switchOn
-		soundSwitch.texture_click_mask = swtichOnMask
-		localSoundOn = true
+	global_click_audio_player.click_button_effect()
+	global_script.button_jump(sound_switch)
+	if global_script.sound_on:
+		sound_switch.texture_normal = SWITCH_OFF
+		sound_switch.texture_click_mask = SWITCH_OFF_MASK
+		global_script.sound_on = false
+	elif !global_script.sound_on:
+		sound_switch.texture_normal = SWITCH_ON
+		sound_switch.texture_click_mask = SWITCH_ON_MASK
+		global_script.sound_on = true
 
 func _on_music_button_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	global_script.button_jump(musicSwitch)
-	if localMusicOn:
-		musicSwitch.texture_normal = switchOff
-		musicSwitch.texture_click_mask = swtichOffMask
-		localMusicOn = false
-		globalMenuAudioPlayer.stop_menu_music()
-	elif !localMusicOn:
-		musicSwitch.texture_normal = switchOn
-		musicSwitch.texture_click_mask = swtichOnMask
-		localMusicOn = true
-		globalMenuAudioPlayer.play_menu_music()
+	global_click_audio_player.click_button_effect()
+	global_script.button_jump(music_switch)
+	if global_script.music_on:
+		music_switch.texture_normal = SWITCH_OFF
+		music_switch.texture_click_mask = SWITCH_OFF_MASK
+		global_script.music_on = false
+		global_menu_audio_player.stop_menu_music()
+	elif !global_script.music_on:
+		music_switch.texture_normal = SWITCH_ON
+		music_switch.texture_click_mask = SWITCH_ON_MASK
+		global_script.music_on = true
+		global_menu_audio_player.play_menu_music()
 
 
 func _on_exit_button_pressed():
-	global_script.button_jump(exitButton)
-	globalClickAudioPlayer.click_button_effect()
+	global_script.button_jump(exit_button)
+	global_click_audio_player.click_button_effect()
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "scale", Vector2(0.1, 0.1), 0.1).set_ease(Tween.EASE_IN)
 	await tween.finished
@@ -80,11 +75,11 @@ func open_settings_menu():
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "scale", Vector2(1, 1), 0.1).set_ease(Tween.EASE_OUT)
 	
-func from_pause_menu():
-	fromPauseMenu = true
+func is_from_pause_menu():
+	from_pause_menu = true
 
 
 func _on_controls_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	global_script.button_jump(controlsButton)
-	controlsMenu.open_menu()
+	global_click_audio_player.click_button_effect()
+	global_script.button_jump(controls_button)
+	controls_menu.open_menu()

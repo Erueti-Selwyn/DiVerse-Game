@@ -1,245 +1,263 @@
 extends Control
 # Assets
-const controllerIconOff = preload("res://assets/Ui Assets/ControllerButtonOffFinal.png")
-const controllerIconOn = preload("res://assets/Ui Assets/ControllerButtonOnFinal.png")
-const keyboardIconOff = preload("res://assets/Ui Assets/MouseButtonOffFinal.png")
-const keyboardIconOn = preload("res://assets/Ui Assets/MouseButtonOnFinal.png")
-const africanMap = preload("res://assets/backgrounds/africa.png")
-const chinaMap = preload("res://assets/backgrounds/china map pixel.png")
-const japanMap = preload("res://assets/backgrounds/japan mapp.png")
-const samoanMap = preload("res://assets/backgrounds/samoa.png")
-const vikingMap = preload("res://assets/backgrounds/viking.png")
-const mexicoMap = preload("res://assets/backgrounds/mexico final map.png")
+const CONTROLLER_ICON_OFF = preload("res://assets/Ui Assets/ControllerButtonOffFinal.png")
+const CONTROLLER_ICON_ON = preload("res://assets/Ui Assets/ControllerButtonOnFinal.png")
+const KEYBOARD_ICON_OFF = preload("res://assets/Ui Assets/MouseButtonOffFinal.png")
+const KEYBOARD_ICON_ON = preload("res://assets/Ui Assets/MouseButtonOnFinal.png")
+const AFRICA_MAP = preload("res://assets/backgrounds/africa.png")
+const CHINA_MAP = preload("res://assets/backgrounds/china map pixel.png")
+const JAPAN_MAP = preload("res://assets/backgrounds/japan mapp.png")
+const SAMOA_MAP = preload("res://assets/backgrounds/samoa.png")
+const VIKING_MAP = preload("res://assets/backgrounds/viking.png")
+const MEXICO_MAP = preload("res://assets/backgrounds/mexico final map.png")
 # Nodes
 @onready var global_script = $"/root/Global"
-@onready var globalClickAudioPlayer = $"/root/ClickAudioPlayer"
-@onready var globalMenuAudioPlayer = $"/root/MenuAudioPlayer"
-@onready var globalPlayAudioPlayer = $"/root/PlayButtonAudioPlayer"
-@onready var clickAudioPlayer = $ClickAudioPlayer
-@onready var playAudioPlayer = $PlayAudioPlayer
-@onready var startButton = $MarginContainer/VBoxContainer/Start
-@onready var exitButton = $MarginContainer/VBoxContainer/Exit
-@onready var keyboardPlayer1Button = $MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer/KeyboardPlayer1
-@onready var controllerPlayer1Button = $MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer/ControllerPlayer1
-@onready var keyboardPlayer2Button = $MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2/KeyboardPlayer2
-@onready var controllerPlayer2Button = $MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2/ControllerPlayer2
-@onready var africanButton1 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/AfricanButton1
-@onready var chineseButton1 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/ChineseButton1
-@onready var japaneseButton1 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/JapaneseButton1
-@onready var samoanButton1 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/SamoanButton1
-@onready var vikingButton1 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/VikingButton1
-@onready var mexicanButton1 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/MexicanButton1
-@onready var africanButton2 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/AfricanButton2
-@onready var chineseButton2 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/ChineseButton2
-@onready var japaneseButton2 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/JapaneseButton2
-@onready var samoanButton2 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/SamoanButton2
-@onready var vikingButton2 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/VikingButton2
-@onready var mexicanButton2 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/MexicanButton2
-@onready var africanMapButton = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer/AfricaMap
-@onready var chineseMapButton = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer/ChinaMap
-@onready var japaneseMapButton = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer/JapanMap
-@onready var samoanMapButton = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer2/SamoaMap
-@onready var vikingMapButton = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer2/VikingMap
-@onready var mexicanMapButton = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer2/MexicoMap
+@onready var global_click_audio_player = $"/root/ClickAudioPlayer"
+@onready var global_menu_audio_player = $"/root/MenuAudioPlayer"
+@onready var global_play_audio_player = $"/root/PlayButtonAudioPlayer"
+@onready var click_audio_player = $ClickAudioPlayer
+@onready var play_audio_player = $PlayAudioPlayer
+@onready var start_button = $MarginContainer/VBoxContainer/Start
+@onready var exit_button = $MarginContainer/VBoxContainer/Exit
+@onready var keyboard_player_1_button = $MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer/KeyboardPlayer1
+@onready var controller_player_1_button = $MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer/ControllerPlayer1
+@onready var keyboard_player_2_button = $MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2/KeyboardPlayer2
+@onready var controller_player_2_button = $MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2/ControllerPlayer2
+@onready var african_button_1 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/AfricanButton1
+@onready var chinese_button_1 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/ChineseButton1
+@onready var japanese_button_1 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer/JapaneseButton1
+@onready var samoan_button_1 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/SamoanButton1
+@onready var viking_button_1 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/VikingButton1
+@onready var mexican_button_1 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer/HBoxContainer2/MexicanButton1
+@onready var african_button_2 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/AfricanButton2
+@onready var chinese_button_2 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/ChineseButton2
+@onready var japanese_button_2 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer/JapaneseButton2
+@onready var samoan_button_2 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/SamoanButton2
+@onready var viking_button_2 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/VikingButton2
+@onready var mexican_button_2 = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxContainer2/HBoxContainer2/MexicanButton2
+@onready var african_map_button = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer/AfricaMap
+@onready var chinese_map_button = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer/ChinaMap
+@onready var japanese_map_button = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer/JapanMap
+@onready var samoan_map_button = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer2/SamoaMap
+@onready var viking_map_button = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer2/VikingMap
+@onready var mexican_map_button = $MarginContainer/VBoxContainer/HBoxContainerCharacterSelect/VBoxMaps/HBoxContainer2/MexicoMap
 @onready var background = $TextureRect
 # Variables
-var player1Character : int = 1
-var player2Character : int = 1
-var localPlayer1Controller : bool = true
-var localPlayer2Controller : bool = true
-var defaultColor = Color(1, 1, 1)
-var selectedColor = Color(0.224, 1, 0.416)
+var player_1_character : int = 1
+var player_2_character : int = 1
+var local_player_1_controller : bool = false
+var local_player_2_controller : bool = false
+var default_color = Color(1, 1, 1)
+var selected_color = Color(0.224, 1, 0.416)
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
+
 func _process(_delta):
-	global_script.globalPlayerCharacter1 = player1Character
-	global_script.globalPlayerCharacter2 = player2Character
+	global_script.global_player_character_1 = player_1_character
+	global_script.global_player_character_2 = player_2_character
+
+
 func _on_start_pressed():
-	global_script.button_jump(startButton)
-	globalPlayAudioPlayer.play_button_effect()
+	global_script.button_jump(start_button)
+	global_play_audio_player.play_button_effect()
 	await get_tree().create_timer(0.05).timeout
-	global_script.globalPlayerCharacter1 = player1Character
-	global_script.globalPlayerCharacter2 = player2Character
-	global_script.player1Controller = localPlayer1Controller
-	global_script.player2Controller = localPlayer2Controller
-	globalMenuAudioPlayer.stop_menu_music()
-	global_script.level_scene()
+	global_script.global_player_character_1 = player_1_character
+	global_script.global_player_character_2 = player_2_character
+	global_script.player_1_controller = local_player_1_controller
+	global_script.player_2_controller = local_player_2_controller
+	global_menu_audio_player.stop_menu_music()
+	global_script.load_level_scene()
 
 
 func _on_african_button_1_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	player1Character = 1
+	global_click_audio_player.click_button_effect()
+	player_1_character = 1
 	reset_selection_1()
-	africanButton1.self_modulate = selectedColor
-	global_script.button_jump(africanButton1)
+	african_button_1.self_modulate = selected_color
+	global_script.button_jump(african_button_1)
 
 
 func _on_chinese_button_1_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	player1Character = 2
+	global_click_audio_player.click_button_effect()
+	player_1_character = 2
 	reset_selection_1()
-	chineseButton1.self_modulate = selectedColor
-	global_script.button_jump(chineseButton1)
+	chinese_button_1.self_modulate = selected_color
+	global_script.button_jump(chinese_button_1)
+
 
 func _on_japanese_button_1_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	player1Character = 3
+	global_click_audio_player.click_button_effect()
+	player_1_character = 3
 	reset_selection_1()
-	japaneseButton1.self_modulate = selectedColor
-	global_script.button_jump(japaneseButton1)
+	japanese_button_1.self_modulate = selected_color
+	global_script.button_jump(japanese_button_1)
+
 
 func _on_samoan_button_1_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	player1Character = 4
+	global_click_audio_player.click_button_effect()
+	player_1_character = 4
 	reset_selection_1()
-	samoanButton1.self_modulate = selectedColor
-	global_script.button_jump(samoanButton1)
+	samoan_button_1.self_modulate = selected_color
+	global_script.button_jump(samoan_button_1)
+
 
 func _on_viking_button_1_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	player1Character = 5
+	global_click_audio_player.click_button_effect()
+	player_1_character = 5
 	reset_selection_1()
-	vikingButton1.self_modulate = selectedColor
-	global_script.button_jump(vikingButton1)
+	viking_button_1.self_modulate = selected_color
+	global_script.button_jump(viking_button_1)
+
 
 func _on_mexican_button_1_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	player1Character = 6
+	global_click_audio_player.click_button_effect()
+	player_1_character = 6
 	reset_selection_1()
-	mexicanButton1.self_modulate = selectedColor
-	global_script.button_jump(mexicanButton1)
+	mexican_button_1.self_modulate = selected_color
+	global_script.button_jump(mexican_button_1)
+
 
 func _on_african_button_2_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	player2Character = 1
+	global_click_audio_player.click_button_effect()
+	player_2_character = 1
 	reset_selection_2()
-	africanButton2.self_modulate = selectedColor
-	global_script.button_jump(africanButton2)
+	african_button_2.self_modulate = selected_color
+	global_script.button_jump(african_button_2)
+
 
 func _on_chinese_button_2_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	player2Character = 2
+	global_click_audio_player.click_button_effect()
+	player_2_character = 2
 	reset_selection_2()
-	chineseButton2.self_modulate = selectedColor
-	global_script.button_jump(chineseButton2)
+	chinese_button_2.self_modulate = selected_color
+	global_script.button_jump(chinese_button_2)
+
 
 func _on_japanese_button_2_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	player2Character = 3
+	global_click_audio_player.click_button_effect()
+	player_2_character = 3
 	reset_selection_2()
-	japaneseButton2.self_modulate = selectedColor
-	global_script.button_jump(japaneseButton2)
+	japanese_button_2.self_modulate = selected_color
+	global_script.button_jump(japanese_button_2)
+
 
 func _on_samoan_button_2_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	player2Character = 4
+	global_click_audio_player.click_button_effect()
+	player_2_character = 4
 	reset_selection_2()
-	samoanButton2.self_modulate = selectedColor
-	global_script.button_jump(samoanButton2)
+	samoan_button_2.self_modulate = selected_color
+	global_script.button_jump(samoan_button_2)
+
 
 func _on_viking_button_2_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	player2Character = 5
+	global_click_audio_player.click_button_effect()
+	player_2_character = 5
 	reset_selection_2()
-	vikingButton2.self_modulate = selectedColor
-	global_script.button_jump(vikingButton2)
+	viking_button_2.self_modulate = selected_color
+	global_script.button_jump(viking_button_2)
+
 
 func _on_mexican_button_2_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	player2Character = 6
+	global_click_audio_player.click_button_effect()
+	player_2_character = 6
 	reset_selection_2()
-	mexicanButton2.self_modulate = selectedColor
-	global_script.button_jump(mexicanButton2)
+	mexican_button_2.self_modulate = selected_color
+	global_script.button_jump(mexican_button_2)
 
 
 func _on_controller_player_1_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	localPlayer1Controller = true
-	controllerPlayer1Button.texture_normal = controllerIconOn
-	keyboardPlayer1Button.texture_normal = keyboardIconOff
-	global_script.button_jump(controllerPlayer1Button)
+	global_click_audio_player.click_button_effect()
+	local_player_1_controller = true
+	controller_player_1_button.texture_normal = CONTROLLER_ICON_ON
+	keyboard_player_1_button.texture_normal = KEYBOARD_ICON_OFF
+	global_script.button_jump(controller_player_1_button)
 
 
 func _on_keyboard_player_1_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	localPlayer1Controller = false
-	controllerPlayer1Button.texture_normal = controllerIconOff
-	keyboardPlayer1Button.texture_normal = keyboardIconOn
-	global_script.button_jump(keyboardPlayer1Button)
+	global_click_audio_player.click_button_effect()
+	local_player_1_controller = false
+	controller_player_1_button.texture_normal = CONTROLLER_ICON_OFF
+	keyboard_player_1_button.texture_normal = KEYBOARD_ICON_ON
+	global_script.button_jump(keyboard_player_1_button)
 
 
 func _on_controller_player_2_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	localPlayer2Controller = true
-	controllerPlayer2Button.texture_normal = controllerIconOn
-	keyboardPlayer2Button.texture_normal = keyboardIconOff
-	global_script.button_jump(controllerPlayer2Button)
+	global_click_audio_player.click_button_effect()
+	local_player_2_controller = true
+	controller_player_2_button.texture_normal = CONTROLLER_ICON_ON
+	keyboard_player_2_button.texture_normal = KEYBOARD_ICON_OFF
+	global_script.button_jump(controller_player_2_button)
 
 
 func _on_keyboard_player_2_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	localPlayer2Controller = false
-	controllerPlayer2Button.texture_normal = controllerIconOff
-	keyboardPlayer2Button.texture_normal = keyboardIconOn
-	global_script.button_jump(keyboardPlayer2Button)
+	global_click_audio_player.click_button_effect()
+	local_player_2_controller = false
+	controller_player_2_button.texture_normal = CONTROLLER_ICON_OFF
+	keyboard_player_2_button.texture_normal = KEYBOARD_ICON_ON
+	global_script.button_jump(keyboard_player_2_button)
 
 
 func _on_exit_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	global_script.button_jump(exitButton)
+	global_click_audio_player.click_button_effect()
+	global_script.button_jump(exit_button)
 	await get_tree().create_timer(0.05).timeout
-	global_script.menu_scene()
-	
+	global_script.load_menu_scene()
+
+
 func reset_selection_1():
-	africanButton1.self_modulate = defaultColor
-	chineseButton1.self_modulate = defaultColor
-	japaneseButton1.self_modulate = defaultColor
-	samoanButton1.self_modulate = defaultColor
-	vikingButton1.self_modulate = defaultColor
-	mexicanButton1.self_modulate = defaultColor
+	african_button_1.self_modulate = default_color
+	chinese_button_1.self_modulate = default_color
+	japanese_button_1.self_modulate = default_color
+	samoan_button_1.self_modulate = default_color
+	viking_button_1.self_modulate = default_color
+	mexican_button_1.self_modulate = default_color
+
+
 func reset_selection_2():
-	africanButton2.self_modulate = defaultColor
-	chineseButton2.self_modulate = defaultColor
-	japaneseButton2.self_modulate = defaultColor
-	samoanButton2.self_modulate = defaultColor
-	vikingButton2.self_modulate = defaultColor
-	mexicanButton2.self_modulate = defaultColor
+	african_button_2.self_modulate = default_color
+	chinese_button_2.self_modulate = default_color
+	japanese_button_2.self_modulate = default_color
+	samoan_button_2.self_modulate = default_color
+	viking_button_2.self_modulate = default_color
+	mexican_button_2.self_modulate = default_color
 
 
 func _on_africa_map_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	global_script.mapType = 1
-	background.texture = africanMap
-	global_script.button_jump(africanMapButton)
+	global_click_audio_player.click_button_effect()
+	global_script.map_type = 1
+	background.texture = AFRICA_MAP
+	global_script.button_jump(african_map_button)
+
 
 func _on_china_map_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	global_script.mapType = 2
-	background.texture = chinaMap
-	global_script.button_jump(chineseMapButton)
+	global_click_audio_player.click_button_effect()
+	global_script.map_type = 2
+	background.texture = CHINA_MAP
+	global_script.button_jump(chinese_map_button)
+
 
 func _on_japan_map_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	global_script.mapType = 3
-	background.texture = japanMap
-	global_script.button_jump(japaneseMapButton)
+	global_click_audio_player.click_button_effect()
+	global_script.map_type = 3
+	background.texture = JAPAN_MAP
+	global_script.button_jump(japanese_map_button)
+
 
 func _on_samoa_map_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	global_script.mapType = 4
-	background.texture = samoanMap
-	global_script.button_jump(samoanMapButton)
+	global_click_audio_player.click_button_effect()
+	global_script.map_type = 4
+	background.texture = SAMOA_MAP
+	global_script.button_jump(samoan_map_button)
+
 
 func _on_viking_map_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	global_script.mapType = 5
-	background.texture = vikingMap
-	global_script.button_jump(vikingMapButton)
+	global_click_audio_player.click_button_effect()
+	global_script.map_type = 5
+	background.texture = VIKING_MAP
+	global_script.button_jump(viking_map_button)
+
 
 func _on_mexico_map_pressed():
-	globalClickAudioPlayer.click_button_effect()
-	global_script.mapType = 6
-	background.texture = mexicoMap
-	global_script.button_jump(mexicanMapButton)
+	global_click_audio_player.click_button_effect()
+	global_script.map_type = 6
+	background.texture = MEXICO_MAP
+	global_script.button_jump(mexican_map_button)

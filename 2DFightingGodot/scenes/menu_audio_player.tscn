@@ -3,5 +3,4 @@
 [ext_resource type="Script" path="res://scripts/menu_audio_player.gd" id="1_655yb"]
 
 [node name="MenuAudioPlayer" type="AudioStreamPlayer2D"]
-volume_db = -2.0
 script = ExtResource("1_655yb")
