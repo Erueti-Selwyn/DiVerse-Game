@@ -23,12 +23,13 @@ var time_left : int
 var paused : bool
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
+	# Sets variables.
 	global_script.is_on_level = true
 	global_script.is_on_menu = false
 	global_map_audio_player.play_map_music()
 	global_script.crate_number = 0
+	# Sets background image.
 	if global_script.map_type == 1:
 		background.texture = AFRICA_MAP
 		african_tile_map.global_position.y = 0
@@ -53,11 +54,22 @@ func _ready():
 		background.texture = MEXICO_MAP
 		mexico_tile_map.global_position.y = 0
 		mexico_tile_map.visible = true
+	# Creates first box.
 	await get_tree().create_timer(randi_range(1, 2)).timeout
 	create_box()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func create_box():
+	# Checks if can create box.
+	if global_script.crate_number < 2:
+		var crate = CRATE_PATH.instantiate()
+		# Moves box to random x position on map
+		crate.global_position = Vector2(randi_range(-350, 350), -360)
+		global_script.crate_number += 1
+		add_child(crate)
+	start_timer()
+
+
 func _physics_process(_delta):
 	if paused:
 		if !global_script.is_paused:
@@ -66,12 +78,14 @@ func _physics_process(_delta):
 
 
 func start_timer():
+	# Generates random timer
 	random_time = randi_range(6, 13)
 	time_left = random_time
 	decrease_timer()
 
 
 func decrease_timer():
+	# Decreases timer 1 per second.
 	if time_left > 0:
 		if !global_script.is_paused:
 			await get_tree().create_timer(1).timeout
@@ -81,12 +95,3 @@ func decrease_timer():
 			paused = true
 	else:
 		create_box()
-
-
-func create_box():
-	if global_script.crate_number < 2:
-		var crate = CRATE_PATH.instantiate()
-		crate.global_position = Vector2(randi_range(-350, 350), -360)
-		global_script.crate_number += 1
-		add_child(crate)
-	start_timer()

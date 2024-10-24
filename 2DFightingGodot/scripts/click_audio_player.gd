@@ -3,5 +3,6 @@ extends AudioStreamPlayer2D
 
 
 func click_button_effect():
+	# Plays menu sound.
 	if global_script.sound_on:
 		self.play()

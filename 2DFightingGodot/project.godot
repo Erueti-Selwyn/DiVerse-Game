@@ -22,6 +22,7 @@ MenuAudioPlayer="res://scenes/menu_audio_player.tscn"
 PlayButtonAudioPlayer="res://scenes/play_button_audio_player.tscn"
 ClickAudioPlayer="res://scenes/click_audio_player.tscn"
 MapMusicAudioPlayer="res://scenes/map_music_audio_player.tscn"
+WinAudioPlayer="res://scenes/win_audio_player.tscn"
 
 [display]
 
