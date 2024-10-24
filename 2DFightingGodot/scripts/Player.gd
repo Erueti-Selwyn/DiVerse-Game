@@ -13,6 +13,7 @@ const BULLET_PATH = preload("res://scenes/bullet.tscn")
 
 # Nodes
 @onready var global_script = $"/root/Global"
+@onready var global_win_audio_player : AudioStreamPlayer2D = $"/root/WinAudioPlayer"
 @onready var animated_sprite : AnimatedSprite2D = $CollisionShape2D/AnimatedSprite2D
 @onready var gun : Sprite2D = $CollisionShape2D/AnimatedSprite2D/Gun
 @onready var african_attack_collision : CollisionShape2D = $CollisionShape2D/AnimatedSprite2D/Melee/AfricanAttackCollision
@@ -847,6 +848,7 @@ func die():
 			global_script.winning_player = 1
 		win_text.text = "Player " + str(global_script.winning_player) + " Wins!"
 		win_text.visible = true
+		global_win_audio_player.play()
 		await get_tree().create_timer(0.1).timeout
 		global_script.is_paused = true
 		await get_tree().create_timer(1.5).timeout

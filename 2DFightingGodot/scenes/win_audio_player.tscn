@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2ff4w6khle15"]
+
+[ext_resource type="AudioStream" uid="uid://85utbyfnyfp7" path="res://assets/audio/sfx/menusfx/victory.mp3" id="1_i11cu"]
+
+[node name="WinAudioPlayer" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_i11cu")

@@ -9,14 +9,11 @@ const mexican_background = preload("res://assets/backgrounds/mexico final map.pn
 # Nodes
 @onready var global_script = $"/root/Global"
 @onready var global_click_audio_player = $"/root/ClickAudioPlayer"
-@onready var win_audio_player = $WinAudioPlayer
 @onready var background = $background
 @onready var winner_title = $HBoxContainer/VBoxContainer/Label
 @onready var menu_button = $MenuButton
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if global_script.sound_on:
-		win_audio_player.play()
 	winner_title.text = "Player "  + str(global_script.winning_player) + " Wins!"
 	if global_script.map_type == 1:
 		background.texture = african_background
