@@ -487,13 +487,16 @@ func _physics_process(_delta):
 				else:
 					jump_pressed = false
 		# Wall climbing.
+		# Checks if on wall
 		if (
 			is_on_wall() 
 			and (direction_x == -1 or direction_x == 1) 
 			and not attacking
 		):
+			# Resets jumps
 			double_jumps = MAX_DOUBLE_JUMPS
 			if velocity.y >= 0: 
+				# Adds jump velocity
 				velocity.y = min(velocity.y + WALL_SLIDE_ACCELERATION, MAX_WALL_SLIDE_SPEED)
 			else:
 				velocity.y += GRAVITY

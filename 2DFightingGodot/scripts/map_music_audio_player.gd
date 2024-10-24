@@ -15,8 +15,7 @@ const VIKING_MUSIC = preload("res://assets/audio/music/viking map music.mp3")
 	6 : MEXICO_MUSIC,
 	}
 func _ready():
-	self.stream = map_musics_dict[global_script.map_type]
-	self.stream.loop = true
+	
 	play_map_music()
 func play_map_music():
 	if (
@@ -24,6 +23,8 @@ func play_map_music():
 		and global_script.is_on_level
 		and not self.playing
 	):
+		self.stream = map_musics_dict[global_script.map_type]
+		self.stream.loop = true
 		self.play()
 
 

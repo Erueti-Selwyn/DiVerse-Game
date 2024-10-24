@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://b8rsvredmtuni" path="res://assets/Ui Assets/XButton.png" id="3_go1wd"]
 [ext_resource type="Texture2D" uid="uid://ss0vitlix28e" path="res://assets/Ui Assets/controlUI/F.png" id="4_5c176"]
 [ext_resource type="Texture2D" uid="uid://b2bgfkeomlmid" path="res://assets/Ui Assets/controlUI/L.png" id="5_supyu"]
-[ext_resource type="Texture2D" uid="uid://dtkeqs0dc6wus" path="res://assets/Ui Assets/controlUI/Q.png" id="6_8qucl"]
 [ext_resource type="Texture2D" uid="uid://ddsjwisu6sq8e" path="res://assets/Ui Assets/controlUI/XControllerButton.png" id="6_fglld"]
 [ext_resource type="Texture2D" uid="uid://deqwtepqksb1" path="res://assets/Ui Assets/movementtext.png" id="6_y8wrj"]
 [ext_resource type="Texture2D" uid="uid://rsfm7bc3he1p" path="res://assets/Ui Assets/controlUI/K.png" id="7_m02cs"]
@@ -15,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://6fim8ndei3b2" path="res://assets/Ui Assets/controlUI/AttackText.png" id="8_xvll6"]
 [ext_resource type="Texture2D" uid="uid://cbbvodmk3uud" path="res://assets/Ui Assets/controlUI/SquareControllerButton.png" id="11_26i4u"]
 [ext_resource type="Texture2D" uid="uid://by68okyrc8f7k" path="res://assets/Ui Assets/controlUI/dashtext.png" id="12_ek5yg"]
+[ext_resource type="Texture2D" uid="uid://cmvb5mhqr7nvu" path="res://assets/Ui Assets/controlUI/G.png" id="13_6nsg6"]
 [ext_resource type="Texture2D" uid="uid://w05tudcgvooy" path="res://assets/Ui Assets/controlUI/CircleControllerButton.png" id="15_2nc5u"]
 
 [node name="controls" type="Control"]
@@ -118,7 +118,7 @@ stretch_mode = 5
 [node name="TextureRect3" type="TextureRect" parent="MarginContainer/VBoxContainer/attack"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-texture = ExtResource("5_supyu")
+texture = ExtResource("7_m02cs")
 stretch_mode = 5
 
 [node name="TextureRect4" type="TextureRect" parent="MarginContainer/VBoxContainer/attack"]
@@ -144,13 +144,13 @@ alignment = 1
 [node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/dash"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-texture = ExtResource("6_8qucl")
+texture = ExtResource("13_6nsg6")
 stretch_mode = 5
 
 [node name="TextureRect3" type="TextureRect" parent="MarginContainer/VBoxContainer/dash"]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
-texture = ExtResource("7_m02cs")
+texture = ExtResource("5_supyu")
 stretch_mode = 5
 
 [node name="TextureRect4" type="TextureRect" parent="MarginContainer/VBoxContainer/dash"]
