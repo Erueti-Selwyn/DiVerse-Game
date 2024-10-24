@@ -12,13 +12,13 @@ extends Control
 var paused = false
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if Input.is_action_just_pressed("pause"):
 		toggle_pause_menu()
 
 
 func toggle_pause_menu():
+	# Toggles game pause state.
 	if paused:
 		self.hide()
 		pause_highlight.visible = false
@@ -38,7 +38,6 @@ func _on_resume_button_pressed():
 
 func _on_options_button_pressed():
 	global_script.button_jump(options_button)
-	settings_menu.is_from_pause_menu()
 	settings_menu.open_settings_menu()
 
 

@@ -8,10 +8,8 @@ extends Control
 @onready var play_button = $MarginContainer/HBoxContainer/VBoxContainer/Play
 @onready var settings_button = $MarginContainer/HBoxContainer/VBoxContainer/Settings
 @onready var quit_button = $MarginContainer/HBoxContainer/VBoxContainer/Quit
-@onready var click_audio_player = $ClickAudioPlayer
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	global_script.is_on_level = false
 	global_script.is_on_menu = true

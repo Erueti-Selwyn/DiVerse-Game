@@ -22,19 +22,21 @@ var level_scene = preload("res://scenes/Level.tscn")
 
 
 func display_damage_number(value : int, position : Vector2):
+	# Makes label for damage number.
 	var number = Label.new()
 	number.global_position = position
 	number.text = str(value)
 	number.z_index= 5
+	# Makes new label settings for text.
 	number.label_settings = LabelSettings.new()
-	var color = Color(1, 1, 1)
-	number.label_settings.font_color = color
+	number.label_settings.font_color = Color(1, 1, 1)
 	number.label_settings.font_size = 18
 	number.label_settings.outline_color = "#000"
 	number.label_settings.outline_size = 1
 	call_deferred("add_child", number)
 	await number.resized
 	number.pivot_offset = Vector2(number.size / 2)
+	# Adds animation to text.
 	var tween = get_tree().create_tween()
 	tween.set_parallel(true)
 	tween.tween_property(number, "position:y", number.position.y + 20, 0.5).set_ease(Tween.EASE_IN)
@@ -45,6 +47,7 @@ func display_damage_number(value : int, position : Vector2):
 
 
 func button_jump(button):
+	# Adds jump animation for menu buttons.
 	button.pivot_offset = Vector2(button.size / 2)
 	var tween = get_tree().create_tween()
 	tween.set_parallel(false)

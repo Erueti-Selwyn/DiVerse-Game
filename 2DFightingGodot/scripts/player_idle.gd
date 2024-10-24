@@ -1,10 +1,12 @@
 extends Node2D
+# Nodes
 @onready var global_script = $"/root/Global"
 @onready var animated_sprite = $AnimatedSprite2D
+# Variables
 @export var winner : bool = false
 @export var character_select : bool
 @export var is_player_1 : bool = false
-
+# Dictionary
 var animation_map_dict : Dictionary = {
 	1 : "africanIdle",
 	2 : "chinaIdle",
@@ -13,8 +15,10 @@ var animation_map_dict : Dictionary = {
 	5 : "vikingIdle",
 	6 : "mexicanIdle",
 }
-# Called when the node enters the scene tree for the first time.
+
+
 func _ready():
+	# If is on winner menu.
 	if winner:
 		if global_script.winning_player == 1:
 			animated_sprite.play(animation_map_dict[global_script.global_player_character_1])
@@ -26,8 +30,9 @@ func _ready():
 		if global_script.winning_player == 1:
 			animated_sprite.play(animation_map_dict[global_script.global_player_character_2])
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(_delta):
+	# If on character select menu.
 	if character_select:
 		if is_player_1:
 			animated_sprite.play(animation_map_dict[global_script.global_player_character_1])

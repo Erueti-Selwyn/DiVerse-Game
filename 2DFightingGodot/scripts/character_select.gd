@@ -52,14 +52,15 @@ var selected_color = Color(0.224, 1, 0.416)
 
 
 func _process(_delta):
+	# Updates global player characters.
 	global_script.global_player_character_1 = player_1_character
 	global_script.global_player_character_2 = player_2_character
 
 
 func _on_start_pressed():
+	# Opens Level Scene
 	global_script.button_jump(start_button)
 	global_play_audio_player.play_button_effect()
-	await get_tree().create_timer(0.05).timeout
 	global_script.global_player_character_1 = player_1_character
 	global_script.global_player_character_2 = player_2_character
 	global_script.player_1_controller = local_player_1_controller

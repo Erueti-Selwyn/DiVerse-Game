@@ -12,9 +12,12 @@ const mexican_background = preload("res://assets/backgrounds/mexico final map.pn
 @onready var background = $background
 @onready var winner_title = $HBoxContainer/VBoxContainer/Label
 @onready var menu_button = $MenuButton
-# Called when the node enters the scene tree for the first time.
+
+
 func _ready():
+	# Displays winner text.
 	winner_title.text = "Player "  + str(global_script.winning_player) + " Wins!"
+	# Changes background to map of game.
 	if global_script.map_type == 1:
 		background.texture = african_background
 	elif global_script.map_type == 2:
@@ -27,11 +30,6 @@ func _ready():
 		background.texture = viking_background
 	elif global_script.map_type == 6:
 		background.texture = mexican_background
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
 
 
 func _on_menu_button_pressed():

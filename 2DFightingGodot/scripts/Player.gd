@@ -652,6 +652,7 @@ func dash():
 	if (
 		not attacking 
 		and not is_hit
+		and not on_wall
 	):
 		if not dashing:
 			# Sets dash direction.

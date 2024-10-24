@@ -16,11 +16,11 @@ const SWITCH_OFF_MASK = preload("res://assets/Ui Assets/optionButtonOffMask.png"
 @onready var exit_button = $MarginContainer/VBoxContainer/HBoxContainer3/ExitButton
 @onready var controls_button = $MarginContainer/VBoxContainer/Controls
 @onready var click_audio_player = $"../ClickAudioPlayer"
-# Variables
-var from_pause_menu : bool = false
+
 
 func _ready():
 	self.pivot_offset = Vector2(self.size / 2)
+	# Sets textures based on previous settings.
 	if global_script.music_on:
 		music_switch.texture_normal = SWITCH_ON
 	elif !global_script.music_on:
@@ -29,15 +29,16 @@ func _ready():
 		sound_switch.texture_normal = SWITCH_ON
 	elif !global_script.sound_on:
 		sound_switch.texture_normal = SWITCH_OFF
-	
-func _process(_delta):
-	pass
+
+
 func _on_menu_pressed():
 	get_tree().change_scene_to_file("res://scenes/menu.tscn")
+
 
 func _on_sound_button_pressed():
 	global_click_audio_player.click_button_effect()
 	global_script.button_jump(sound_switch)
+	# Toggles sound on or off.
 	if global_script.sound_on:
 		sound_switch.texture_normal = SWITCH_OFF
 		sound_switch.texture_click_mask = SWITCH_OFF_MASK
@@ -47,9 +48,11 @@ func _on_sound_button_pressed():
 		sound_switch.texture_click_mask = SWITCH_ON_MASK
 		global_script.sound_on = true
 
+
 func _on_music_button_pressed():
 	global_click_audio_player.click_button_effect()
 	global_script.button_jump(music_switch)
+	# Toggles music on or off.
 	if global_script.music_on:
 		music_switch.texture_normal = SWITCH_OFF
 		music_switch.texture_click_mask = SWITCH_OFF_MASK
@@ -63,22 +66,23 @@ func _on_music_button_pressed():
 		global_menu_audio_player.play_menu_music()
 		global_map_audio_player.play_map_music()
 
+
 func _on_exit_button_pressed():
 	global_script.button_jump(exit_button)
 	global_click_audio_player.click_button_effect()
+	# Starts animation of closing settings menu.
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "scale", Vector2(0.1, 0.1), 0.1).set_ease(Tween.EASE_IN)
 	await tween.finished
 	self.visible = false
-	
+
+
 func open_settings_menu():
+	# Starts animation of opening settings menu.
 	scale = Vector2(0.1, 0.1)
 	self.visible = true
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "scale", Vector2(1, 1), 0.1).set_ease(Tween.EASE_OUT)
-	
-func is_from_pause_menu():
-	from_pause_menu = true
 
 
 func _on_controls_pressed():

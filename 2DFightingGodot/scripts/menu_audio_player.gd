@@ -1,5 +1,7 @@
 extends AudioStreamPlayer2D
+# Music Assets
 const MENU_MUSIC = preload("res://assets/audio/music/menu music.mp3")
+# Global Script
 @onready var global_script = $"/root/Global"
 
 
